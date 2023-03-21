@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="guideline_size">16dp</dimen>
+    <dimen name="vertical_min_margin">8dp</dimen>
+    <dimen name="vertical_max_margin">24dp</dimen>
+    <dimen name="horizontal_min_margin">8dp</dimen>
+    <dimen name="horizontal_margin">16dp</dimen>
+</resources>

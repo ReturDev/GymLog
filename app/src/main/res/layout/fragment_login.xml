@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.welcome.login.LoginFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/signGuidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/guideline_size" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/signGuidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/guideline_size" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/signGuidelineBegin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/guideline_size" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/signGuidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/guideline_size" />
+
+    <TextView
+        android:id="@+id/tvLoginTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_title"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toStartOf="@+id/signGuidelineEnd"
+        app:layout_constraintStart_toStartOf="@+id/signGuidelineBegin"
+        app:layout_constraintTop_toTopOf="@+id/signGuidelineTop" />
+
+    <LinearLayout
+        android:id="@+id/fieldsLoginContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/dividerLayout"
+        app:layout_constraintEnd_toStartOf="@+id/signGuidelineEnd"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/signGuidelineBegin"
+        app:layout_constraintTop_toBottomOf="@+id/tvLoginTitle"
+        app:layout_constraintVertical_chainStyle="spread">
+
+        <EditText
+            android:id="@+id/etEmailLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/vertical_min_margin"
+            android:ems="10"
+            android:hint="@string/email_text"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/etPasswordLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/vertical_min_margin"
+            android:ems="10"
+            android:hint="@string/password_text"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/tvPasswordForgotten"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/vertical_max_margin"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:text="@string/password_forgotten"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="@string/login_action" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/dividerLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/btnsLoginContainer"
+        app:layout_constraintEnd_toStartOf="@+id/signGuidelineEnd"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/signGuidelineBegin"
+        app:layout_constraintTop_toBottomOf="@+id/fieldsLoginContainer">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="12dp"
+            android:background="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/white"
+            android:paddingStart="4dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="4dp"
+            android:text="@string/dividerText" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/btnsLoginContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/tvLoginQuestionAccount"
+        app:layout_constraintEnd_toStartOf="@+id/signGuidelineEnd"
+        app:layout_constraintStart_toStartOf="@+id/signGuidelineBegin"
+        app:layout_constraintTop_toBottomOf="@+id/dividerLayout">
+
+        <Button
+            android:id="@+id/btnLoginGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login_google_btn" />
+
+        <Button
+            android:id="@+id/btnLoginAnonymous"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login_anonymous" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvLoginQuestionAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_without_account"
+        app:layout_constraintBottom_toTopOf="@+id/signGuidelineBottom"
+        app:layout_constraintEnd_toStartOf="@+id/tvSignUp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@+id/signGuidelineBegin" />
+
+    <TextView
+        android:id="@+id/tvSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontal_min_margin"
+        android:text="@string/sign_up_action"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvLoginQuestionAccount"
+        app:layout_constraintEnd_toStartOf="@+id/signGuidelineEnd"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tvLoginQuestionAccount" />
+
+    <ProgressBar
+        android:id="@+id/pbLoginLoading"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/signGuidelineBottom"
+        app:layout_constraintEnd_toStartOf="@+id/signGuidelineEnd"
+        app:layout_constraintStart_toStartOf="@+id/signGuidelineBegin"
+        app:layout_constraintTop_toTopOf="@+id/signGuidelineTop" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

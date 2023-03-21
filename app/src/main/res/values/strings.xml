@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">GymLog</string>
+    <string name="login_google_btn">Continua con Google</string>
+    <string name="login_email_btn">Continua con correo</string>
+    <string name="login_anonymous">Continua como anónimo</string>
+    <string name="login_title">Inicio de Sesión</string>
+    <string name="login_without_account">¿Aún no tienes cuenta?</string>
+    <string name="login_action">Iniciar Sesión</string>
+    <string name="sign_up_action">Registrarse</string>
+    <string name="sign_up_title">Registro</string>
+    <string name="email_text">Correo</string>
+    <string name="password_text">Contraseña</string>
+    <string name="password_forgotten">¿Has olvidado la contraseña?</string>
+    <string name="dividerText">o</string>
+    <string name="firebase_error_generic">Se ha producido un error. Inténtelo más tarde.</string>
+    <string name="firebase_error_weak_password">Contraseña muy débil. Introduce al menos 6 caracteres.</string>
+    <string name="firebase_error_wrong_password">La contraseña es erronea o ese usuario no tiene contraseña.</string>
+    <string name="firebase_error_invalid_email_format">Introduce un correo válido</string>
+    <string name="firebase_error_email_in_use">Ya existe un usuario con ese correo.</string>
+    <string name="error_login_user_not_found">No existe un usuario con ese correo.</string>
+    <string name="log_out">Cerrar sesión</string>
+
+</resources>

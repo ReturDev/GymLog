@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "54302931135",
+    "project_id": "gymlo-509f0",
+    "storage_bucket": "gymlo-509f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:54302931135:android:492c50bebcee1d72222e0a",
+        "android_client_info": {
+          "package_name": "com.sergio.gymlog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "54302931135-fkj388r9mjbbs27ght6nejd2aci5ssnh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPhveICGmE2H46e_T8HQ2Kbz8YEAYeXT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "54302931135-fkj388r9mjbbs27ght6nejd2aci5ssnh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
