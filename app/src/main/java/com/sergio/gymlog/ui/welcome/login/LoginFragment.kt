@@ -18,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.sergio.gymlog.R
 import com.sergio.gymlog.databinding.FragmentLoginBinding
 import com.sergio.gymlog.ui.main.MainActivity
+import com.sergio.gymlog.util.extension.buttonActivationOnTextChanged
 import com.sergio.gymlog.util.extension.toast
 import com.sergio.gymlog.util.helper.LoginAndSignUpHelper
 import dagger.hilt.android.AndroidEntryPoint
@@ -73,8 +74,8 @@ class LoginFragment : Fragment() {
             signInWithGoogle()
         }
 
-        binding.etEmailLogin.addTextChangedListener(loginAndSignUpHelper.enableButtonListener(binding.etEmailLogin,binding.etPasswordLogin,binding.btnLogin))
-        binding.etPasswordLogin.addTextChangedListener(loginAndSignUpHelper.enableButtonListener(binding.etPasswordLogin,binding.etEmailLogin, binding.btnLogin))
+        binding.etEmailLogin.buttonActivationOnTextChanged(binding.btnLogin, binding.etPasswordLogin)
+        binding.etPasswordLogin.buttonActivationOnTextChanged(binding.btnLogin, binding.etEmailLogin)
     }
 
 

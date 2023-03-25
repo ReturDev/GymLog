@@ -19,5 +19,13 @@
     <string name="firebase_error_email_in_use">Ya existe un usuario con ese correo.</string>
     <string name="error_login_user_not_found">No existe un usuario con ese correo.</string>
     <string name="log_out">Cerrar sesión</string>
+    <string name="home_bottom_menu">Incio</string>
+    <string name="training_bottom_menu">Entrenamiento</string>
+    <string name="training_record_bottom_menu">Historial</string>
+    <string name="user_bottom_menu">Usuario</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="modify_daily_training_btn">Modificar entrenamiento diario</string>
+    <string name="add_daily_training">Añade un entrenamiento para hoy</string>
 
 </resources>

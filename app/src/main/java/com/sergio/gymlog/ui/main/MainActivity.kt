@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.sergio.gymlog.data.authentication.FirebaseAuthenticationRepository
+import com.sergio.gymlog.data.authentication.FirebaseAuthenticationService
 import com.sergio.gymlog.databinding.ActivityMainBinding
 import com.sergio.gymlog.ui.welcome.WelcomeActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     @Inject
-    lateinit var firebaseAuthenticationRepository : FirebaseAuthenticationRepository
+    lateinit var firebaseAuthenticationRepository : FirebaseAuthenticationService
 
 
 }

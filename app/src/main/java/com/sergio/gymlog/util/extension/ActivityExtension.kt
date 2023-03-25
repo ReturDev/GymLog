@@ -5,6 +5,6 @@ import android.widget.Toast
 
 fun Activity.toast(text : String, length : Int = Toast.LENGTH_SHORT){
 
-    Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+    Toast.makeText(this, text, length).show()
 
 }
