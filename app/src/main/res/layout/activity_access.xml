@@ -5,7 +5,7 @@
     android:id="@+id/welcomeRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.welcome.WelcomeActivity">
+    tools:context=".ui.access.AccessActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/welcomeFragmentContainer"
@@ -18,5 +18,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_welcome" />
+
+    <ProgressBar
+        android:id="@+id/pbAccesLoading"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/welcomeFragmentContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/welcomeFragmentContainer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

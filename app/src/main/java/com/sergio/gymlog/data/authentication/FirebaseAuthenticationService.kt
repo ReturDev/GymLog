@@ -2,14 +2,13 @@ package com.sergio.gymlog.data.authentication
 
 
 
-import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.sergio.gymlog.User
+import com.sergio.gymlog.data.model.User
 import com.sergio.gymlog.data.model.FirebaseResource
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -18,8 +17,9 @@ import javax.inject.Singleton
 
 @Singleton
 class FirebaseAuthenticationService @Inject constructor(
-    private  val firebaseAuth: FirebaseAuth,
-    private val googleSignInClient: GoogleSignInClient
+    private val firebaseAuth: FirebaseAuth,
+    private val googleSignInClient: GoogleSignInClient,
+    private val userData : User
     ) : FirebaseAuthentication {
 
 
@@ -29,31 +29,20 @@ class FirebaseAuthenticationService @Inject constructor(
 
     }
 
-    override fun getUserData(): User? {
+    override fun getUserData(): User {
 
+        return firebaseAuth.currentUser!!.let { it ->
 
-        var user : User? = null
+            userData.apply {
 
-        firebaseAuth.currentUser?.let {
-            it.providerData.forEach { y ->
-                Log.e("Provider", y.displayName + y.providerId)
+                id = it.uid
+                email = it.email ?: ""
+                username = it.displayName ?: ""
+                verifiedEmail = it.isEmailVerified
+                photo = it.photoUrl
             }
 
-            Log.e("Provider2", it.providerId)
-
-            user = User(
-
-                id = it.uid,
-                email = it.email,
-                username = it.displayName,
-                verifiedEmail = it.isEmailVerified,
-                photo = it.photoUrl
-
-            )
-
         }
-
-        return user
 
     }
 
@@ -93,7 +82,6 @@ class FirebaseAuthenticationService @Inject constructor(
            val account = task.result
            val credential = GoogleAuthProvider.getCredential(account.idToken, null)
            firebaseAuth.signInWithCredential(credential)
-
            FirebaseResource.Success(task.result)
 
        }else{

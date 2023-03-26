@@ -1,41 +1,46 @@
 package com.sergio.gymlog.data.firestore
 
 import android.net.Uri
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.sergio.gymlog.Exercise
-import com.sergio.gymlog.Training
-import com.sergio.gymlog.User
+import com.google.firebase.firestore.ktx.toObject
+import com.sergio.gymlog.data.model.Exercise
+import com.sergio.gymlog.data.model.Training
+import com.sergio.gymlog.data.model.User
 import com.sergio.gymlog.data.model.FirebaseResource
 import com.sergio.gymlog.util.helper.CloudFirestoreConstants
-import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.tasks.await
 import java.io.File
 import java.net.URI
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class CloudFirestoreService @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
-    private val db : FirebaseFirestore
+    private val db : FirebaseFirestore,
+    private val userData : User
 ) : CloudFirestore {
     override suspend fun createNewUser(user: User): FirebaseResource<Void> {
 
-        val userMap = hashMapOf(
-            CloudFirestoreConstants.USERNAME_TAG to user.username,
-            CloudFirestoreConstants.EMAIL_TAG to user.email,
-            CloudFirestoreConstants.PHOTO_URL_TAG to user.photo,
-            CloudFirestoreConstants.WEIGHT_TAG to user.weight,
-            CloudFirestoreConstants.DAILY_TRAINING_TAG to user.dailyTraining,
-            CloudFirestoreConstants.REPETITIONS_TAG to user.repetitions,
-            CloudFirestoreConstants.SETS_TAG to user.sets
-        )
+        user.dailyTraining = User.DailyTraining(date = Date(), training = Training("Training", exercises = emptyList()))
+
+//        val userMap = hashMapOf(
+//            CloudFirestoreConstants.USERNAME_TAG to user.username,
+//            CloudFirestoreConstants.EMAIL_TAG to user.email,
+//            CloudFirestoreConstants.PHOTO_URL_TAG to user.photo,
+//            CloudFirestoreConstants.WEIGHT_TAG to user.weight,
+//            CloudFirestoreConstants.DAILY_TRAINING_TAG to user.dailyTraining,
+//            CloudFirestoreConstants.REPETITIONS_TAG to user.repetitions,
+//            CloudFirestoreConstants.SETS_TAG to user.sets
+//        )
 
         return try {
 
             val res = db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG).document(user.id)
-                .set(userMap).await()
+                .set(user).await()
 
             FirebaseResource.Success(res)
 
@@ -46,20 +51,26 @@ class CloudFirestoreService @Inject constructor(
         }
     }
 
-    override suspend fun getUserInfo(userUID: String): FirebaseResource<User> {
+    override suspend fun getUserInfo(userUID: String): FirebaseResource<Boolean> {
         return try {
 
-            val data = db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG).document(userUID).get().await().data
+            val data = db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG).document(userUID).get().await()
+            data!!.let {d ->  val user = d.toObject<User>()!!
 
-            val user = data!!.let { d -> User(
-                id = userUID,
-                username = d[CloudFirestoreConstants.USERNAME_TAG].toString(),
-                email = d[CloudFirestoreConstants.EMAIL_TAG].toString(),
-                photo = Uri.fromFile(File(d[CloudFirestoreConstants.PHOTO_URL_TAG].toString()))
-                )
+                userData.apply {
+                    this.id = userUID
+                    this.username= user.username
+                    this.email = user.email
+                    this.photo = user.photo
+                    this.weight = user.weight
+                    this.dailyTraining = user.dailyTraining
+                    this.repetitions = user.repetitions
+                    this.sets = user.sets
+
+                }
             }
 
-            FirebaseResource.Success(user)
+            FirebaseResource.Success(true)
 
         }catch (e : Exception){
 
@@ -87,10 +98,6 @@ class CloudFirestoreService @Inject constructor(
 
     override suspend fun updateDailyTraining(training: Training) {
 
-    }
-
-    override suspend fun existDailyTraining(): Boolean {
-        return false
     }
 
     override suspend fun setExercise(exercise: Exercise) {

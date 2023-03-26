@@ -1,4 +1,4 @@
-package com.sergio.gymlog
+package com.sergio.gymlog.data.model
 
 data class TrainingRecord(
 

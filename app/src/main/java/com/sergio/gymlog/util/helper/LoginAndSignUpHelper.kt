@@ -1,15 +1,21 @@
 package com.sergio.gymlog.util.helper
 
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuthException
+import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.FirebaseResource
-import com.sergio.gymlog.ui.welcome.UserAccesUiState
+import com.sergio.gymlog.ui.access.AccessUiState
 import com.sergio.gymlog.util.extension.getErrorMessage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class LoginAndSignUpHelper {
+@Singleton
+class LoginAndSignUpHelper @Inject constructor(){
 
-    suspend fun acces(accesMethod : suspend () -> FirebaseResource<Any>, uiState : MutableStateFlow<UserAccesUiState>){
+    suspend fun access(accessMethod : suspend () -> FirebaseResource<Any>, uiState : MutableStateFlow<AccessUiState>){
 
         uiState.update { currentState ->
 
@@ -21,18 +27,25 @@ class LoginAndSignUpHelper {
 
         }
 
-        val resource = accesMethod()
+        val resource = accessMethod()
 
         if (resource is FirebaseResource.Failure){
 
-            resource.exception as FirebaseAuthException
-            userLoginError(resource.exception.getErrorMessage(), uiState)
+            if (resource.exception is FirebaseAuthException){
+
+                userLoginError(resource.exception.getErrorMessage(), uiState)
+
+            }else if (resource.exception is FirebaseNetworkException || resource.exception is ApiException) {
+
+                userLoginError(R.string.firebase_error_network, uiState)
+
+            }
 
         }
 
     }
 
-    private fun userLoginError(errorResource : Int, uiState : MutableStateFlow<UserAccesUiState>){
+    private fun userLoginError(errorResource : Int, uiState : MutableStateFlow<AccessUiState>){
 
         uiState.update { currentState ->
 
@@ -47,7 +60,7 @@ class LoginAndSignUpHelper {
 
     }
 
-    fun errorMessageShown(uiState : MutableStateFlow<UserAccesUiState>){
+    fun errorMessageShown(uiState : MutableStateFlow<AccessUiState>){
 
         uiState.update { currentState ->
 

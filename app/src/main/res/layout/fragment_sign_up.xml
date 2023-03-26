@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.welcome.signup.SignUpFragment">
+    tools:context=".ui.access.signup.SignUpFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/signGuidelineTop"
@@ -142,16 +142,5 @@
         app:layout_constraintEnd_toStartOf="@+id/signGuidelineEnd"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tvSignUpQuestionAccount" />
-
-    <ProgressBar
-        android:id="@+id/pbSignUpLoading"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/signGuidelineBottom"
-        app:layout_constraintEnd_toStartOf="@+id/signGuidelineEnd"
-        app:layout_constraintStart_toStartOf="@+id/signGuidelineBegin"
-        app:layout_constraintTop_toTopOf="@+id/signGuidelineTop" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

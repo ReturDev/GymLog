@@ -1,4 +1,4 @@
-package com.sergio.gymlog.ui.welcome.signup
+package com.sergio.gymlog.ui.access.signup
 
 import android.app.Activity
 import android.os.Bundle
@@ -7,26 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.sergio.gymlog.R
-import com.sergio.gymlog.databinding.FragmentLoginBinding
 import com.sergio.gymlog.databinding.FragmentSignUpBinding
-import com.sergio.gymlog.util.extension.toast
+import com.sergio.gymlog.ui.access.AccessViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
+    private val accesViewModel : AccessViewModel by activityViewModels()
     private lateinit var binding : FragmentSignUpBinding
-    private val signUpViewModel by viewModels<SignUpViewModel>()
 
     @Inject
     lateinit var googleSignInClient: GoogleSignInClient
@@ -45,7 +40,6 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
-        setCollector()
 
     }
 
@@ -62,47 +56,12 @@ class SignUpFragment : Fragment() {
             val userText = binding.etEmailLogin.text.toString()
             val passwordText = binding.etPasswordLogin.text.toString()
 
-            signUpViewModel.signUpWithEmailAndPassword(userText, passwordText)
+            accesViewModel.signUpWithEmailAndPassword(userText, passwordText)
 
         }
 
         binding.btnSignUpGoogle.setOnClickListener {
             signUpWithGoogle()
-        }
-
-    }
-
-
-
-    private fun setCollector(){
-
-        lifecycleScope.launch {
-
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-
-                signUpViewModel.uiState.collect{currentState ->
-
-                    if (currentState.loading){
-
-                        binding.pbSignUpLoading.visibility = View.VISIBLE
-
-                    }else{
-
-                        binding.pbSignUpLoading.visibility = View.GONE
-
-                    }
-
-                    if (currentState.errorResource != null){
-
-                        requireActivity().toast(getString(currentState.errorResource))
-                        signUpViewModel.errorMessageShown()
-
-                    }
-
-                }
-
-            }
-
         }
 
     }
@@ -117,7 +76,7 @@ class SignUpFragment : Fragment() {
         if (result.resultCode == Activity.RESULT_OK){
 
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-            signUpViewModel.signUpWithGoogle(task)
+            accesViewModel.signUpWithGoogle(task)
 
         }
 

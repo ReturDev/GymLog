@@ -5,7 +5,7 @@
     android:id="@+id/loginRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.welcome.login.LoginFragment">
+    tools:context=".ui.access.login.LoginFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/signGuidelineBottom"
@@ -106,7 +106,10 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_margin="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
             android:background="@android:color/black" />
 
         <TextView
@@ -166,18 +169,5 @@
         app:layout_constraintEnd_toStartOf="@+id/signGuidelineEnd"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tvLoginQuestionAccount" />
-
-    <ProgressBar
-        android:id="@+id/pbLoginLoading"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/signGuidelineBottom"
-        app:layout_constraintEnd_toStartOf="@+id/signGuidelineEnd"
-        app:layout_constraintStart_toStartOf="@+id/signGuidelineBegin"
-        app:layout_constraintTop_toTopOf="@+id/signGuidelineTop" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

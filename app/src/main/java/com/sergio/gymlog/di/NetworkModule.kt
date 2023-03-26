@@ -9,6 +9,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sergio.gymlog.R
+import com.sergio.gymlog.data.model.User
+import com.sergio.gymlog.util.helper.CloudFirestoreHelper
 import com.sergio.gymlog.util.helper.LoginAndSignUpHelper
 import dagger.Module
 import dagger.Provides
@@ -48,10 +50,5 @@ object NetworkModule {
         return GoogleSignIn.getClient(context, googleSignInOptions)
     }
 
-    @Provides
-    @Singleton
-    fun provideLoginAndSignUpHelper() : LoginAndSignUpHelper{
-        return LoginAndSignUpHelper()
-    }
 
 }
