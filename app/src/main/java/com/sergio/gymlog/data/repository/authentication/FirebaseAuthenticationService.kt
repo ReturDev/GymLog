@@ -1,4 +1,4 @@
-package com.sergio.gymlog.data.authentication
+package com.sergio.gymlog.data.repository.authentication
 
 
 
@@ -18,8 +18,7 @@ import javax.inject.Singleton
 @Singleton
 class FirebaseAuthenticationService @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
-    private val googleSignInClient: GoogleSignInClient,
-    private val userData : User
+    private val googleSignInClient: GoogleSignInClient
     ) : FirebaseAuthentication {
 
 
@@ -31,16 +30,15 @@ class FirebaseAuthenticationService @Inject constructor(
 
     override fun getUserData(): User {
 
-        return firebaseAuth.currentUser!!.let { it ->
+        return firebaseAuth.currentUser!!.let {
 
-            userData.apply {
-
-                id = it.uid
-                email = it.email ?: ""
-                username = it.displayName ?: ""
-                verifiedEmail = it.isEmailVerified
-                photo = it.photoUrl
-            }
+            User(
+                id = it.uid,
+                email = it.email ?: "",
+                username = it.displayName ?: "",
+                verifiedEmail = it.isEmailVerified,
+                photo = it.photoUrl.toString()
+            )
 
         }
 

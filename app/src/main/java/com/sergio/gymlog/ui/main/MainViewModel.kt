@@ -1,25 +1,20 @@
 package com.sergio.gymlog.ui.main
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestoreException
-import com.sergio.gymlog.data.model.User
-import com.sergio.gymlog.data.authentication.FirebaseAuthenticationService
-import com.sergio.gymlog.data.firestore.CloudFirestoreService
-import com.sergio.gymlog.data.model.FirebaseResource
-import com.sergio.gymlog.data.model.Training
+import com.sergio.gymlog.data.repository.authentication.FirebaseAuthenticationService
+import com.sergio.gymlog.data.repository.user.UserDataRepository
 import com.sergio.gymlog.util.extension.getErrorMessage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val cloudFirestoreService: CloudFirestoreService,
-    private val firebaseAuthenticationService: FirebaseAuthenticationService
+    private val firebaseAuthenticationService: FirebaseAuthenticationService,
+    private val userRepository: UserDataRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(MainUiState())
@@ -27,97 +22,33 @@ class MainViewModel @Inject constructor(
 
     suspend fun manageUserData(){
 
-        val user = firebaseAuthenticationService.getUserData()
+        try {
 
-        if (cloudFirestoreService.existUser(user.id)){
+            userRepository.manageUserData()
 
-            getUserData(user.id)
+            _uiState.update { currentState ->
 
-        }else{
+                currentState.copy(
 
-            createUserData(user)
+                    loading = false
 
-        }
+                )
 
-    }
+            }
 
-    private suspend fun createUserData(user: User){
+        }catch (fbe : FirebaseFirestoreException){
 
-        viewModelScope.launch {
+            _uiState.update { currentState ->
 
-            when(val resource = cloudFirestoreService.createNewUser(user)){
-                is FirebaseResource.Failure ->{
+                currentState.copy(
 
-                    _uiState.update { currentState ->
+                    errorResource = fbe.getErrorMessage()
 
-                        currentState.copy(
+                )
 
-                            errorResource = (resource.exception as FirebaseFirestoreException).getErrorMessage()
-
-                        )
-
-                    }
-
-
-                }
-                is FirebaseResource.Success -> {
-
-                    _uiState.update { currentState ->
-
-                        currentState.copy(
-
-                            loading = false
-
-                        )
-
-                    }
-
-                }
             }
 
         }
 
     }
-
-    private suspend fun getUserData(uid : String){
-
-        viewModelScope.launch {
-
-            when(val resource = cloudFirestoreService.getUserInfo(uid)){
-                is FirebaseResource.Failure ->{
-
-                    _uiState.update { currentState ->
-
-                        currentState.copy(
-
-                            errorResource = (resource.exception as FirebaseFirestoreException).getErrorMessage()
-
-                        )
-
-                    }
-
-
-                }
-                is FirebaseResource.Success -> {
-
-                    _uiState.update { currentState ->
-
-                        currentState.copy(
-
-                            loading = false
-
-                        )
-
-                    }
-                }
-            }
-        }
-    }
-
-    fun logout(){
-
-        firebaseAuthenticationService.logout()
-
-    }
-
 }

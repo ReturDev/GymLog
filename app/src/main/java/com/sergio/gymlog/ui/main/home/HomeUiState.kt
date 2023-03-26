@@ -4,7 +4,7 @@ import com.sergio.gymlog.data.model.User
 
 data class HomeUiState(
 
-    val dailyTraining : Boolean = false
-
+    val refresh : Boolean = true,
+    val dailyTraining : User.DailyTraining? = null
 
 )

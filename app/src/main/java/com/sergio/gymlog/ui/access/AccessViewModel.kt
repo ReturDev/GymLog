@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.tasks.Task
-import com.sergio.gymlog.data.authentication.FirebaseAuthenticationService
-import com.sergio.gymlog.data.firestore.CloudFirestoreService
+import com.sergio.gymlog.data.repository.authentication.FirebaseAuthenticationService
+import com.sergio.gymlog.data.repository.firestore.CloudFirestoreService
 import com.sergio.gymlog.data.model.FirebaseResource
 import com.sergio.gymlog.util.helper.LoginAndSignUpHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,8 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AccessViewModel @Inject constructor(
     private val firebaseRepository: FirebaseAuthenticationService,
-    private val loginAndSignUpHelper : LoginAndSignUpHelper,
-    private val cloudFirestoreService: CloudFirestoreService
+    private val loginAndSignUpHelper : LoginAndSignUpHelper
 ) : ViewModel(){
 
     private val _uiState : MutableStateFlow<AccessUiState> = MutableStateFlow(AccessUiState())

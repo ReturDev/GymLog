@@ -1,4 +1,4 @@
-package com.sergio.gymlog.data.firestore
+package com.sergio.gymlog.data.repository.firestore
 
 import com.sergio.gymlog.data.model.Exercise
 import com.sergio.gymlog.data.model.Training
@@ -9,9 +9,9 @@ import javax.inject.Inject
 
 interface CloudFirestore {
 
-    suspend fun createNewUser(user : User): FirebaseResource<Void>
+    suspend fun createNewUser(user : User)
 
-    suspend fun getUserInfo(userUID: String): FirebaseResource<Boolean>
+    suspend fun getUserInfo(userUID: String): User
 
     suspend fun existUser(userUID : String) : Boolean
 
@@ -21,14 +21,13 @@ interface CloudFirestore {
 
     suspend fun updateUserWeight(weight : Int)
 
-    suspend fun updateDailyTraining(training : Training)
+    suspend fun updateDailyTraining(userUID: String, training: User.DailyTraining?)
 
     suspend fun setExercise(exercise : Exercise)
 
     suspend fun setRecord(record : Training)
 
     suspend fun setTraining(training : Training)
-
 
 
 }

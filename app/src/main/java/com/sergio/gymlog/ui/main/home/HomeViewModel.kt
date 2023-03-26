@@ -1,11 +1,11 @@
 package com.sergio.gymlog.ui.main.home
 
-import android.service.autofill.UserData
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sergio.gymlog.data.firestore.CloudFirestoreService
+import com.sergio.gymlog.data.repository.firestore.CloudFirestoreService
 import com.sergio.gymlog.data.model.User
+import com.sergio.gymlog.data.repository.user.UserDataRepository
 import com.sergio.gymlog.util.helper.CloudFirestoreHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -15,50 +15,67 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
 
-    private val cloudFirestoreService: CloudFirestoreService,
+    private val userDataRepository: UserDataRepository,
     private val cloudFirestoreHelper: CloudFirestoreHelper,
-    userData: User
 
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState get() = _uiState.asStateFlow()
-    private val userDataFlow = MutableStateFlow(userData)
 
     init {
-        checkUserDataChange()
+        observeUserDataChanges()
     }
-    private fun checkUserDataChange(){
+    private fun observeUserDataChanges(){
 
-       viewModelScope.launch {
-
-           userDataFlow.collect{
-
-               if (it.id != ""){
-                   checkDailyTraining(it)
-               }
-
-           }
-
-       }
-
-    }
-
-    private fun checkDailyTraining(userData : User) {
         viewModelScope.launch {
+
+            userDataRepository.userDataState.collect{userDataState ->
+
+                if (userDataState.userData != null){
+
+                    _uiState.update { currentState ->
+
+                        currentState.copy(
+                            dailyTraining = userDataState.userData.dailyTraining,
+                            refresh = true
+                        )
+                    }
+                }
+
+            }
+        }
+    }
+
+    fun removeDailyTraining(){
+
+        viewModelScope.launch {
+
+            userDataRepository.removeDailyTraining()
 
             _uiState.update { currentState ->
 
-                Log.e("FechaBD" , userData.toString() )
-
                 currentState.copy(
 
-                    dailyTraining = userData.dailyTraining?.date?.let { d -> cloudFirestoreHelper.isOnTimeDailyTraining(d)} ?: false
+                    dailyTraining = null,
+                    refresh = true
 
                 )
-
             }
 
         }
+
     }
+
+    fun refreshed(){
+
+        _uiState.update { currentState ->
+
+            currentState.copy(
+                refresh = true
+            )
+        }
+
+    }
+
 }

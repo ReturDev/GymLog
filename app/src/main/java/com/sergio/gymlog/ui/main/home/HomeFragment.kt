@@ -46,33 +46,36 @@ class HomeFragment : Fragment() {
 
                 homeViewModel.uiState.collect{currentState ->
 
-                    if (currentState.dailyTraining){
+                    if (currentState.refresh){
 
-                        binding.trainingNotSelectedLayout.visibility = View.GONE
-                        binding.trainingSelectedLayout.visibility = View.VISIBLE
+                        if (currentState.dailyTraining != null){
 
-                    }else{
+                            binding.trainingNotSelectedLayout.visibility = View.GONE
+                            binding.trainingSelectedLayout.visibility = View.VISIBLE
 
-                        binding.trainingNotSelectedLayout.visibility = View.VISIBLE
-                        binding.trainingSelectedLayout.visibility = View.GONE
-                        binding.trainingName.text = "Entrenamiento"
+                        }else{
+
+                            binding.trainingNotSelectedLayout.visibility = View.VISIBLE
+                            binding.trainingSelectedLayout.visibility = View.GONE
+                            binding.trainingName.text = "Entrenamiento"
+
+                        }
+
+                        homeViewModel.refreshed()
 
                     }
 
-
                 }
 
-
             }
-
 
         }
     }
 
     private fun setListeners() {
         binding.btnCompleteTraining.setOnClickListener {  }
-        binding.btnRemoveTraining.setOnClickListener {  }
-        binding.btnModifyTaining.setOnClickListener {  }
+        binding.btnRemoveTraining.setOnClickListener { homeViewModel.removeDailyTraining() }
+        binding.btnModifyTaining.setOnClickListener { homeViewModel.removeDailyTraining()  }
         binding.trainingNotSelectedLayout.setOnClickListener {  }
     }
 
