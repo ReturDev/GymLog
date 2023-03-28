@@ -10,13 +10,14 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.sergio.gymlog.R
-import com.sergio.gymlog.data.model.User
 import com.sergio.gymlog.databinding.ActivityMainBinding
 import com.sergio.gymlog.util.extension.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -30,10 +31,22 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //https://developer.android.com/guide/navigation/navigation-ui?hl=es-419
+        configNavBottomMenu()
+
         lifecycleScope.launch {
             mainViewModel.manageUserData()
         }
         setCollector()
+
+    }
+
+    private fun configNavBottomMenu(){
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        binding.bottomNavigationView.setupWithNavController(navController)
 
     }
 
@@ -47,12 +60,12 @@ class MainActivity : AppCompatActivity() {
                     if (currentState.loading){
 
                         binding.pbMainLoading.visibility = View.VISIBLE
-                        binding.fragmentNavMain.visibility = View.GONE
+                        binding.navHostFragment.visibility = View.GONE
 
                     }else {
 
                         binding.pbMainLoading.visibility = View.GONE
-                        binding.fragmentNavMain.visibility = View.VISIBLE
+                        binding.navHostFragment.visibility = View.VISIBLE
 
                     }
 

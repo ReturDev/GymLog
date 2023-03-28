@@ -1,15 +1,14 @@
 package com.sergio.gymlog.ui.main.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sergio.gymlog.data.repository.firestore.CloudFirestoreService
-import com.sergio.gymlog.data.model.User
+import com.sergio.gymlog.data.model.UserInfo
 import com.sergio.gymlog.data.repository.user.UserDataRepository
 import com.sergio.gymlog.util.helper.CloudFirestoreHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel
@@ -49,19 +48,51 @@ class HomeViewModel @Inject constructor(
 
     fun removeDailyTraining(){
 
-        viewModelScope.launch {
+        try {
 
-            userDataRepository.removeDailyTraining()
+            viewModelScope.launch {
 
-            _uiState.update { currentState ->
+                userDataRepository.removeDailyTraining()
 
-                currentState.copy(
+                _uiState.update { currentState ->
 
-                    dailyTraining = null,
-                    refresh = true
+                    currentState.copy(
 
-                )
+                        dailyTraining = null,
+                        refresh = true
+
+                    )
+                }
+
             }
+
+        }catch (e : Exception){
+
+        }
+
+    }
+
+    fun addDailyTraining(){
+
+        try {
+
+            viewModelScope.launch {
+
+                userDataRepository.setDailyTraining(UserInfo.DailyTraining(Date()))
+
+                _uiState.update { currentState ->
+
+                    currentState.copy(
+
+                        dailyTraining = userDataRepository.userDataState.value.userData!!.dailyTraining,
+                        refresh = true
+
+                    )
+                }
+
+            }
+
+        }catch (e : Exception){
 
         }
 

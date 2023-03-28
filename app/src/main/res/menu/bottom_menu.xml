@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="@string/home_bottom_menu" />
-    <item android:title="@string/training_bottom_menu" />
-    <item android:title="@string/training_record_bottom_menu" />
-    <item android:title="@string/user_bottom_menu" />
+    <item
+        android:id="@+id/homeFragment"
+        android:title="@string/home_bottom_menu" />
+    <item
+        android:id="@+id/trainingFragment"
+        android:title="@string/training_bottom_menu" />
+    <item
+        android:id="@+id/recordFragment"
+        android:title="@string/training_record_bottom_menu" />
+    <item
+        android:id="@+id/userFragment"
+        android:title="@string/user_bottom_menu" />
 </menu>

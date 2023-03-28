@@ -5,7 +5,7 @@ import com.google.firebase.firestore.Exclude
 import java.util.*
 
 
-data class User constructor(
+data class UserInfo constructor(
 
     @Exclude @JvmField var id : String = "",
     var email : String = "",

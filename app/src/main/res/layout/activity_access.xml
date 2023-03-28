@@ -7,16 +7,46 @@
     android:layout_height="match_parent"
     tools:context=".ui.access.AccessActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineAccessTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/vertical_margin_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineAccessBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/vertical_margin_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineAccessBegin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/horizontal_margin_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineAccessEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/horizontal_margin_guideline" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/welcomeFragmentContainer"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineAccessBottom"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineAccessEnd"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelineAccessBegin"
+        app:layout_constraintTop_toTopOf="@+id/guidelineAccessTop"
+        app:layout_constraintVertical_bias="0.0"
         app:navGraph="@navigation/nav_welcome" />
 
     <ProgressBar
@@ -28,8 +58,8 @@
         android:scaleY="1.5"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/welcomeFragmentContainer"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/welcomeFragmentContainer" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

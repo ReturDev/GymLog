@@ -9,10 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.sergio.gymlog.R
-import com.sergio.gymlog.data.model.User
 import com.sergio.gymlog.databinding.FragmentHomeBinding
-import com.sergio.gymlog.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -75,8 +74,11 @@ class HomeFragment : Fragment() {
     private fun setListeners() {
         binding.btnCompleteTraining.setOnClickListener {  }
         binding.btnRemoveTraining.setOnClickListener { homeViewModel.removeDailyTraining() }
-        binding.btnModifyTaining.setOnClickListener { homeViewModel.removeDailyTraining()  }
+        binding.btnModifyTaining.setOnClickListener { findNavController().navigate(R.id.action_global_modifyDailyTrainingFragment)  }
         binding.trainingNotSelectedLayout.setOnClickListener {  }
+
+
+
     }
 
 

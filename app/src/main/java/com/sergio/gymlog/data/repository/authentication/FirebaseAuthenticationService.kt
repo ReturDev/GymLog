@@ -8,7 +8,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.sergio.gymlog.data.model.User
+import com.sergio.gymlog.data.model.UserInfo
 import com.sergio.gymlog.data.model.FirebaseResource
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -28,11 +28,11 @@ class FirebaseAuthenticationService @Inject constructor(
 
     }
 
-    override fun getUserData(): User {
+    override fun getUserData(): UserInfo {
 
         return firebaseAuth.currentUser!!.let {
 
-            User(
+            UserInfo(
                 id = it.uid,
                 email = it.email ?: "",
                 username = it.displayName ?: "",

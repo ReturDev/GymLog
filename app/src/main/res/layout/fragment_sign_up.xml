@@ -7,43 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.access.signup.SignUpFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/signGuidelineTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="@dimen/guideline_size" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/signGuidelineEnd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/guideline_size" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/signGuidelineBegin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/guideline_size" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/signGuidelineBottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="@dimen/guideline_size" />
-
     <TextView
         android:id="@+id/tvSignUpTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_up_title"
         android:textSize="34sp"
-        app:layout_constraintEnd_toStartOf="@+id/signGuidelineEnd"
-        app:layout_constraintStart_toStartOf="@+id/signGuidelineBegin"
-        app:layout_constraintTop_toTopOf="@+id/signGuidelineTop" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/fieldsSignUpContainer"
@@ -51,9 +23,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/dividerLayout1"
-        app:layout_constraintEnd_toStartOf="@+id/signGuidelineEnd"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/signGuidelineBegin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSignUpTitle"
         app:layout_constraintVertical_bias="0.5"
         app:layout_constraintVertical_chainStyle="spread">
@@ -88,15 +59,17 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/btnSignUpGoogle"
-        app:layout_constraintEnd_toStartOf="@+id/signGuidelineEnd"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/signGuidelineBegin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fieldsSignUpContainer">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_margin="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
             android:background="@android:color/black" />
 
         <TextView
@@ -118,8 +91,8 @@
         android:layout_height="wrap_content"
         android:text="@string/login_google_btn"
         app:layout_constraintBottom_toTopOf="@+id/tvSignUpQuestionAccount"
-        app:layout_constraintEnd_toStartOf="@+id/signGuidelineEnd"
-        app:layout_constraintStart_toStartOf="@+id/signGuidelineBegin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dividerLayout1" />
 
     <TextView
@@ -127,10 +100,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_without_account"
-        app:layout_constraintBottom_toTopOf="@+id/signGuidelineBottom"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvLogin"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@+id/signGuidelineBegin" />
+        app:layout_constraintStart_toStartOf="@+id/btnSignUpGoogle" />
 
     <TextView
         android:id="@+id/tvLogin"
@@ -139,7 +112,7 @@
         android:layout_marginStart="@dimen/horizontal_min_margin"
         android:text="@string/login_action"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvSignUpQuestionAccount"
-        app:layout_constraintEnd_toStartOf="@+id/signGuidelineEnd"
+        app:layout_constraintEnd_toEndOf="@+id/btnSignUpGoogle"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tvSignUpQuestionAccount" />
 

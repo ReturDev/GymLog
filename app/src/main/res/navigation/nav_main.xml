@@ -9,5 +9,35 @@
         android:id="@+id/homeFragment"
         android:name="com.sergio.gymlog.ui.main.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_trainingFragment"
+            app:destination="@id/trainingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_recordFragment"
+            app:destination="@id/recordFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_userFragment"
+            app:destination="@id/userFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/trainingFragment"
+        android:name="com.sergio.gymlog.ui.main.training.TrainingFragment"
+        android:label="fragment_training"
+        tools:layout="@layout/fragment_training" />
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.sergio.gymlog.ui.main.user.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" />
+    <fragment
+        android:id="@+id/recordFragment"
+        android:name="com.sergio.gymlog.ui.main.record.RecordFragment"
+        android:label="fragment_record"
+        tools:layout="@layout/fragment_record" />
+    <fragment
+        android:id="@+id/modifyDailyTrainingFragment"
+        android:name="com.sergio.gymlog.ui.main.training.dailytraining.ModifyDailyTrainingFragment"
+        android:label="fragment_modify_daily_training"
+        tools:layout="@layout/fragment_modify_daily_training" /><action android:id="@+id/action_global_modifyDailyTrainingFragment" app:destination="@id/modifyDailyTrainingFragment"/>
 </navigation>

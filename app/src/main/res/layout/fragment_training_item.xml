@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/trainingCard"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_margin="@dimen/margin_card">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvTrainingName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontal_min_margin"
+            android:layout_marginTop="@dimen/vertical_min_margin"
+            android:layout_marginEnd="@dimen/horizontal_min_margin"
+            android:maxLines="2"
+            android:textAlignment="center"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTrainginDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontal_margin"
+            android:layout_marginEnd="@dimen/horizontal_margin"
+            app:layout_constraintBottom_toTopOf="@+id/tvMucularGroups"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTrainingName" />
+
+        <TextView
+            android:id="@+id/tvExercisesNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/vertical_min_margin"
+            android:text="@string/number_of_exercises"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tvTrainginDescription"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/tvTrainginDescription"
+            app:layout_constraintTop_toBottomOf="@+id/tvMucularGroups" />
+
+        <TextView
+            android:id="@+id/tvMuscularLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/muscular_groups"
+            app:layout_constraintBottom_toBottomOf="@+id/tvMucularGroups"
+            app:layout_constraintEnd_toStartOf="@+id/tvMucularGroups"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/tvTrainginDescription"
+            app:layout_constraintTop_toTopOf="@+id/tvMucularGroups" />
+
+        <TextView
+            android:id="@+id/tvMucularGroups"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontal_min_margin"
+            android:layout_marginTop="@dimen/vertical_min_margin"
+            app:layout_constraintBottom_toTopOf="@+id/tvExercisesNumber"
+            app:layout_constraintEnd_toEndOf="@+id/tvTrainginDescription"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvMuscularLabel"
+            app:layout_constraintTop_toBottomOf="@+id/tvTrainginDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

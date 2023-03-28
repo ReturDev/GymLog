@@ -1,15 +1,12 @@
 package com.sergio.gymlog.data.repository.firestore
 
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
-import com.sergio.gymlog.data.model.Exercise
+import com.sergio.gymlog.data.model.Exercises
 import com.sergio.gymlog.data.model.Training
-import com.sergio.gymlog.data.model.User
-import com.sergio.gymlog.data.model.FirebaseResource
-import com.sergio.gymlog.util.helper.CloudFirestoreConstants
+import com.sergio.gymlog.data.model.UserInfo
+import com.sergio.gymlog.util.CloudFirestoreConstants
 import kotlinx.coroutines.tasks.await
-import java.net.URI
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -18,16 +15,16 @@ import javax.inject.Singleton
 class CloudFirestoreService @Inject constructor(
     private val db : FirebaseFirestore,
 ) : CloudFirestore {
-    override suspend fun createNewUser(user: User){
+    override suspend fun createNewUser(user: UserInfo){
 
-        user.dailyTraining = User.DailyTraining(date = Date(), training = Training("Training", exercises = emptyList()))
+        user.dailyTraining = UserInfo.DailyTraining(date = Date(), training = Training("Training", exercises = emptyList()))
 
         db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG).document(user.id)
             .set(user).await()
 
     }
 
-    override suspend fun getUserInfo(userUID: String) : User{
+    override suspend fun getUserInfo(userUID: String) : UserInfo{
         val data = db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG).document(userUID).get().await()
         return data.toObject()!!
     }
@@ -37,18 +34,7 @@ class CloudFirestoreService @Inject constructor(
         return data != null
     }
 
-    override suspend fun updateUserName(username: String) {
-
-    }
-
-    override suspend fun updateUserPhoto(photo: URI) {
-    }
-
-    override suspend fun updateUserWeight(weight: Int) {
-
-    }
-
-    override suspend fun updateDailyTraining(userUID: String, training: User.DailyTraining?) {
+    override suspend fun updateDailyTraining(userUID: String, training: UserInfo.DailyTraining?) {
 
         db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG).document(userUID).update(
             mapOf(
@@ -56,18 +42,44 @@ class CloudFirestoreService @Inject constructor(
             )
         )
 
+    }
+
+    override suspend fun getProvidedExercises() : List<Exercises.ProvidedExercise> {
+
+        val documents = db.collection(CloudFirestoreConstants.EXERCISES_COLLECTION_TAG).get().await().documents
+
+        val exercisesList = mutableListOf<Exercises.ProvidedExercise>()
+
+        for (doc in documents){
+
+            val exercise = doc.toObject<Exercises.ProvidedExercise>()!!
+            exercise.id = doc.id
+
+
+            exercisesList.add(exercise)
+
+        }
+
+        return exercisesList.toList()
 
     }
 
-    override suspend fun setExercise(exercise: Exercise) {
+    override suspend fun getUserExercises(userUID: String): List<Exercises.UserExercise> {
 
-    }
+        val documents = db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG).document(userUID).collection(CloudFirestoreConstants.USER_EXERCISES_COLLECTION_TAG).get().await().documents
 
-    override suspend fun setRecord(record: Training) {
+        val exercisesList = mutableListOf<Exercises.UserExercise>()
 
-    }
+        for (doc in documents){
 
-    override suspend fun setTraining(training: Training) {
+            val exercise = doc.toObject<Exercises.UserExercise>()!!
+            exercise.id = doc.id
+
+            exercisesList.add(exercise)
+
+        }
+
+        return exercisesList.toList()
 
     }
 

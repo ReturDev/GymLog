@@ -1,33 +1,21 @@
 package com.sergio.gymlog.data.repository.firestore
 
-import com.sergio.gymlog.data.model.Exercise
-import com.sergio.gymlog.data.model.Training
-import com.sergio.gymlog.data.model.User
-import com.sergio.gymlog.data.model.FirebaseResource
-import java.net.URI
-import javax.inject.Inject
+import com.sergio.gymlog.data.model.Exercises
+import com.sergio.gymlog.data.model.UserInfo
 
 interface CloudFirestore {
 
-    suspend fun createNewUser(user : User)
+    suspend fun createNewUser(user : UserInfo)
 
-    suspend fun getUserInfo(userUID: String): User
+    suspend fun getUserInfo(userUID: String): UserInfo
 
     suspend fun existUser(userUID : String) : Boolean
 
-    suspend fun updateUserName(username : String)
+    suspend fun updateDailyTraining(userUID: String, training: UserInfo.DailyTraining?)
 
-    suspend fun updateUserPhoto(photo : URI)
+    suspend fun getProvidedExercises() : List<Exercises.ProvidedExercise>
 
-    suspend fun updateUserWeight(weight : Int)
-
-    suspend fun updateDailyTraining(userUID: String, training: User.DailyTraining?)
-
-    suspend fun setExercise(exercise : Exercise)
-
-    suspend fun setRecord(record : Training)
-
-    suspend fun setTraining(training : Training)
+    suspend fun getUserExercises(userUID: String): List<Exercises.UserExercise>
 
 
 }

@@ -7,43 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.home.HomeFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/homeGuidelineTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="@dimen/guideline_size" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/homeGuidelineBegin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/guideline_size" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/homeGuidelineEnd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/guideline_size" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/homeGuidelineBottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="@dimen/guideline_size" />
-
     <Button
         android:id="@+id/btnModifyTaining"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/modify_daily_training_btn"
-        app:layout_constraintBottom_toTopOf="@+id/homeGuidelineBottom"
-        app:layout_constraintEnd_toStartOf="@+id/homeGuidelineEnd"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/homeGuidelineBegin" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/trainingSelectedLayout"
@@ -52,9 +23,9 @@
         android:orientation="vertical"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/btnModifyTaining"
-        app:layout_constraintEnd_toStartOf="@+id/homeGuidelineEnd"
-        app:layout_constraintStart_toStartOf="@+id/homeGuidelineBegin"
-        app:layout_constraintTop_toTopOf="@+id/homeGuidelineTop">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trainingNotSelectedLayout">
 
         <TextView
             android:id="@+id/trainingName"
@@ -101,9 +72,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/btnModifyTaining"
-        app:layout_constraintEnd_toStartOf="@+id/homeGuidelineEnd"
-        app:layout_constraintStart_toStartOf="@+id/homeGuidelineBegin"
-        app:layout_constraintTop_toTopOf="@+id/homeGuidelineTop">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tvAddDailyTrainging"

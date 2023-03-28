@@ -30,5 +30,20 @@
     <string name="cloud_error_unavailable">Los servicios no se encuentran disponibles. Intenteló más tarde.</string>
     <string name="cloud_error_generic">Error al conectar. Intentelo más tarde.</string>
     <string name="firebase_error_network">Error. Comprueba el estado de tu conexión.</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="muscular_groups">Grupos Musculares</string>
+    <string name="number_of_exercises">Ejercicios: %d</string>
+    <string name="filter">Filtrar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="add_quantity">Añadir(%d)</string>
+    <string name="exercisesTitle">Ejercicios</string>
 
 </resources>
