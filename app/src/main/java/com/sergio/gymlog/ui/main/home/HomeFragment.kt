@@ -60,8 +60,6 @@ class HomeFragment : Fragment() {
 
                         }
 
-                        homeViewModel.refreshed()
-
                     }
 
                 }
@@ -73,7 +71,7 @@ class HomeFragment : Fragment() {
 
     private fun setListeners() {
         binding.btnCompleteTraining.setOnClickListener {  }
-        binding.btnRemoveTraining.setOnClickListener { homeViewModel.removeDailyTraining() }
+        //binding.btnRemoveTraining.setOnClickListener { homeViewModel.removeDailyTraining() }
         binding.btnModifyTaining.setOnClickListener { findNavController().navigate(R.id.action_global_modifyDailyTrainingFragment)  }
         binding.trainingNotSelectedLayout.setOnClickListener {  }
 

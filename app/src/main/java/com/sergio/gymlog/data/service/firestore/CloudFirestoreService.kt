@@ -24,8 +24,9 @@ class CloudFirestoreService @Inject constructor(
 
     }
 
-    override suspend fun getUserInfo(userUID: String) : UserInfo{
+    override suspend fun getUserInfo(userUID: String): UserInfo {
         val data = db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG).document(userUID).get().await()
+
         return data.toObject()!!
     }
 

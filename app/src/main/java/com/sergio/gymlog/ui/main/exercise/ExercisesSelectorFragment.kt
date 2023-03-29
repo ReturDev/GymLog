@@ -6,15 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.navArgs
 import com.sergio.gymlog.databinding.FragmentExercisesSelectorBinding
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 
+@AndroidEntryPoint
 class ExercisesSelectorFragment : Fragment() {
 
     private lateinit var binding : FragmentExercisesSelectorBinding
     private lateinit var adapter: ExercisesSelectorAdapter
+
     private val exercisesSelectorVM  by viewModels<ExercisesSelectorViewModel>()
+    private val args : ExercisesSelectorFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,11 +37,47 @@ class ExercisesSelectorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
+        setCollector()
+        setListeners()
     }
 
     private fun initRecyclerView() {
-        adapter = ExercisesSelectorAdapter()
+        adapter = ExercisesSelectorAdapter(exercisesSelectorVM.uiState.value.exercises, onClickElement = {position, selected -> onClickElement(position, selected)})
     }
+
+    private fun setCollector() {
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+
+                exercisesSelectorVM.uiState.collect{currentState->
+
+                    if (!currentState.loaded){
+
+                        exercisesSelectorVM.setExercises(args.idsExercises)
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+    private fun setListeners() {
+        binding.btnAddES.setOnClickListener {  }
+    }
+
+    private fun onClickElement(position : Int, selected : Boolean){
+
+
+
+    }
+
+
+
 
 
 

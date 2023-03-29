@@ -1,10 +1,16 @@
 package com.sergio.gymlog.data.model
 
-data class ApplicationData (
-    
-    val userInfo : UserInfo? = null,
-    val userExercises : List<Exercises.UserExercise> = emptyList(),
-    val userTrainings : List<Training> = emptyList(),
-    val providedExercises : List<Exercises.ProvidedExercise> = emptyList(),
+import javax.inject.Inject
 
-    )
+
+data class ApplicationData private constructor(
+
+    val userInfo: UserInfo,
+    val userExercises : MutableList<Exercises.UserExercise>,
+    val userTrainings : MutableList<Training>,
+    val providedExercise: MutableList<Exercises.ProvidedExercise>
+
+){
+    @Inject constructor() : this(UserInfo(), mutableListOf(), mutableListOf(), mutableListOf())
+
+}

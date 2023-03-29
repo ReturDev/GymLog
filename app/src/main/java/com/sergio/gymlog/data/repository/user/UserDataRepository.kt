@@ -2,6 +2,8 @@ package com.sergio.gymlog.data.repository.user
 
 import com.sergio.gymlog.data.model.UserInfo
 import com.sergio.gymlog.data.model.ApplicationData
+import com.sergio.gymlog.data.model.Exercises
+import com.sergio.gymlog.data.model.Training
 import com.sergio.gymlog.data.service.authentication.FirebaseAuthenticationService
 import com.sergio.gymlog.data.service.firestore.CloudFirestoreService
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,12 +17,9 @@ class UserDataRepository @Inject constructor(
 
     private val firebaseAuthenticationService: FirebaseAuthenticationService,
     private val cloudFirestoreService: CloudFirestoreService,
-    applicationData: ApplicationData,
+    private val applicationData: ApplicationData
 
     ) {
-
-    private val _userDataState = MutableStateFlow(applicationData)
-    val userDataState = _userDataState.asStateFlow()
 
     suspend fun manageUserData(){
 
@@ -40,17 +39,10 @@ class UserDataRepository @Inject constructor(
 
     private suspend fun getUserData(userUID : String){
 
-         val userInfo = cloudFirestoreService.getUserInfo(userUID)
-        userInfo.id = userUID
+        val tempUser = cloudFirestoreService.getUserInfo(userUID)
+        tempUser.id = userUID
 
-        _userDataState.update { currentState ->
-
-            currentState.copy(
-
-                userInfo = userInfo
-
-            )
-        }
+        applicationData.userInfo.setAllData(tempUser)
 
     }
 
@@ -58,73 +50,25 @@ class UserDataRepository @Inject constructor(
 
         cloudFirestoreService.createNewUser(currentUserData)
 
-        _userDataState.update { currentState ->
-
-            currentState.copy(
-
-                userInfo = currentUserData
-
-            )
-
-        }
+        applicationData.userInfo.setAllData(currentUserData)
 
     }
 
      suspend fun removeDailyTraining(){
 
-        _userDataState.update { currentState ->
-
-            val userInfo = currentState.userInfo
-            userInfo?.let {
-
-                userInfo.dailyTraining = null
-                cloudFirestoreService.updateDailyTraining(currentState.userInfo.id, userInfo.dailyTraining)
-            }
-
-            currentState.copy(
-                userInfo = userInfo
-            )
-
-        }
+         applicationData.userInfo.dailyTraining = null
+         cloudFirestoreService.updateDailyTraining(applicationData.userInfo.id, null)
 
     }
 
     suspend fun setDailyTraining(dailyTraining: UserInfo.DailyTraining){
 
-        _userDataState.update { currentState ->
-
-            val userInfo = currentState.userInfo
-            userInfo?.let {
-
-                userInfo.dailyTraining = dailyTraining
-                cloudFirestoreService.updateDailyTraining(currentState.userInfo.id, userInfo.dailyTraining)
-            }
-
-            currentState.copy(
-                userInfo = userInfo
-            )
-
-        }
+        applicationData.userInfo.dailyTraining = dailyTraining
+        cloudFirestoreService.updateDailyTraining(applicationData.userInfo.id, applicationData.userInfo.dailyTraining)
 
     }
 
-    private suspend fun getExercises(){
 
-        _userDataState.update { currentState ->
-
-            val providedExercises = cloudFirestoreService.getProvidedExercises()
-            val userExercises = cloudFirestoreService.getUserExercises(currentState.userInfo!!.id)
-
-            currentState.copy(
-
-                providedExercises = providedExercises,
-                userExercises = userExercises
-
-            )
-
-        }
-
-    }
 
      suspend fun addUserExercise(){
 

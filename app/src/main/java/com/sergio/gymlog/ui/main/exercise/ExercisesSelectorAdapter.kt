@@ -6,13 +6,12 @@ import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.sergio.gymlog.R
-import com.sergio.gymlog.data.model.ExerciseItem
 import com.sergio.gymlog.data.model.Exercises
 import com.sergio.gymlog.databinding.ExerciseItemBinding
 
 class ExercisesSelectorAdapter(
-    private val exercisesList : List<ExerciseItem>,
-    private val onClickElement : (Int) -> Unit
+    private val exercisesList : List<Exercises>,
+    private val onClickElement : (Int, Boolean) -> Unit
 ) : RecyclerView.Adapter<ExercisesSelectorAdapter.ExercisesSelectorHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExercisesSelectorHolder {
@@ -32,34 +31,33 @@ class ExercisesSelectorAdapter(
 
         private val binding = ExerciseItemBinding.bind(view)
 
-        fun bind(exerciseItem : ExerciseItem, onClickElement: (Int) -> Unit){
-            val exercise = exerciseItem.exercise
+        fun bind(exercise : Exercises, onClickElement: (Int, Boolean) -> Unit){
             binding.tvExerciseName.text = exercise.name
             binding.ivExerciseImage.setImageURI(exercise.image.toUri())
             binding.tvExerciseDescription.text = exercise.description
             binding.tvExerciseMuscularGroup.text = exercise.muscularGroup.toString()
-            manageItemSelected(exerciseItem)
 
             binding.exerciseCard.setOnClickListener {
 
-                onClickElement(layoutPosition)
+                onClickElement(layoutPosition,manageItemSelected())
 
             }
 
         }
 
-        private fun manageItemSelected(exerciseItem : ExerciseItem){
+        private fun manageItemSelected() : Boolean{
 
-            if (exerciseItem.selected){
+            val selected : Boolean
 
-                binding.ivChecked.visibility = View.GONE
-
-            }else{
-
+            if (binding.ivChecked.visibility == View.GONE){
                 binding.ivChecked.visibility = View.VISIBLE
-
+                selected = true
+            }else{
+                binding.ivChecked.visibility = View.GONE
+                selected = false
             }
 
+            return selected
 
         }
 

@@ -1,50 +1,51 @@
 package com.sergio.gymlog.data.model
 
+import javax.inject.Inject
 
 
 sealed class Exercises{
 
-    abstract val name : String
-    abstract val image : String
-    abstract val description : String
-    abstract val equipment : Equipment
-    abstract val muscularGroup : MuscularGroup
+    abstract var name : String
+    abstract var image : String
+    abstract var description : String
+    abstract var equipment : Equipment
+    abstract var muscularGroup : MuscularGroup
 
-    data class ProvidedExercise(
-        var id: String = "",
-        override val name: String,
-        override val image: String,
-        override val description: String,
-        override val equipment: Equipment,
-        override val muscularGroup: MuscularGroup
+    data class ProvidedExercise @Inject constructor(
+        var id: String,
+        override var name: String,
+        override var image: String,
+        override var description: String,
+        override var equipment: Equipment,
+        override var muscularGroup: MuscularGroup
     ) : Exercises()
 
-    data class UserExercise(
-        var id: String = "",
-        override val name: String,
-        override val image: String,
-        override val description: String,
-        override val equipment: Equipment,
-        override val muscularGroup: MuscularGroup
+    data class UserExercise @Inject constructor(
+        var id: String,
+        override var name: String,
+        override var image: String,
+        override var description: String,
+        override var equipment: Equipment,
+        override var muscularGroup: MuscularGroup
     ) : Exercises()
 
-    data class RecordTrainingExercise(
-        override val name: String,
-        override val image: String,
-        override val description: String,
-        override val equipment: Equipment,
-        override val muscularGroup: MuscularGroup,
-        var observations : String = "",
+    data class RecordTrainingExercise @Inject constructor(
+        override var name: String,
+        override var image: String,
+        override var description: String,
+        override var equipment: Equipment,
+        override var muscularGroup: MuscularGroup,
+        var observations : String,
         val sets : List<TrainingSet>
     ) : Exercises()
 
-    data class TrainingExercise(
-        var id: String = "",
-        override val name: String,
-        override val image: String,
-        override val description: String,
-        override val equipment: Equipment,
-        override val muscularGroup: MuscularGroup,
+    data class TrainingExercise @Inject constructor(
+        var id: String,
+        override var name: String,
+        override var image: String,
+        override var description: String,
+        override var equipment: Equipment,
+        override var muscularGroup: MuscularGroup,
         val sets : List<TrainingSet>,
     ) : Exercises()
 

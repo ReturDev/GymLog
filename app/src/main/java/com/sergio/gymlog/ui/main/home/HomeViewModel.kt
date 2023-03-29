@@ -22,91 +22,91 @@ class HomeViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState get() = _uiState.asStateFlow()
 
-    init {
-        observeUserDataChanges()
-    }
-    private fun observeUserDataChanges(){
-
-        viewModelScope.launch {
-
-            userDataRepository.userDataState.collect{userDataState ->
-
-                if (userDataState.userInfo != null){
-
-                    _uiState.update { currentState ->
-
-                        currentState.copy(
-                            dailyTraining = userDataState.userInfo.dailyTraining,
-                            refresh = true
-                        )
-                    }
-                }
-
-            }
-        }
-    }
-
-    fun removeDailyTraining(){
-
-        try {
-
-            viewModelScope.launch {
-
-                userDataRepository.removeDailyTraining()
-
-                _uiState.update { currentState ->
-
-                    currentState.copy(
-
-                        dailyTraining = null,
-                        refresh = true
-
-                    )
-                }
-
-            }
-
-        }catch (e : Exception){
-
-        }
-
-    }
-
-    fun addDailyTraining(){
-
-        try {
-
-            viewModelScope.launch {
-
-                userDataRepository.setDailyTraining(UserInfo.DailyTraining(Date()))
-
-                _uiState.update { currentState ->
-
-                    currentState.copy(
-
-                        dailyTraining = userDataRepository.userDataState.value.userInfo!!.dailyTraining,
-                        refresh = true
-
-                    )
-                }
-
-            }
-
-        }catch (e : Exception){
-
-        }
-
-    }
-
-    fun refreshed(){
-
-        _uiState.update { currentState ->
-
-            currentState.copy(
-                refresh = true
-            )
-        }
-
-    }
+//    init {
+//        observeUserDataChanges()
+//    }
+//    private fun observeUserDataChanges(){
+//
+//        viewModelScope.launch {
+//
+//            userDataRepository.userDataState.collect{userDataState ->
+//
+//                if (userDataState.userInfo != null){
+//
+//                    _uiState.update { currentState ->
+//
+//                        currentState.copy(
+//                            dailyTraining = userDataState.userInfo.dailyTraining,
+//                            refresh = true
+//                        )
+//                    }
+//                }
+//
+//            }
+//        }
+//    }
+//
+//    fun removeDailyTraining(){
+//
+//        try {
+//
+//            viewModelScope.launch {
+//
+//                userDataRepository.removeDailyTraining()
+//
+//                _uiState.update { currentState ->
+//
+//                    currentState.copy(
+//
+//                        dailyTraining = null,
+//                        refresh = true
+//
+//                    )
+//                }
+//
+//            }
+//
+//        }catch (e : Exception){
+//
+//        }
+//
+//    }
+//
+//    fun addDailyTraining(){
+//
+//        try {
+//
+//            viewModelScope.launch {
+//
+//                userDataRepository.setDailyTraining(UserInfo.DailyTraining(Date()))
+//
+//                _uiState.update { currentState ->
+//
+//                    currentState.copy(
+//
+//                        dailyTraining = userDataRepository.userDataState.value.userInfo!!.dailyTraining,
+//                        refresh = true
+//
+//                    )
+//                }
+//
+//            }
+//
+//        }catch (e : Exception){
+//
+//        }
+//
+//    }
+//
+//    fun refreshed(){
+//
+//        _uiState.update { currentState ->
+//
+//            currentState.copy(
+//                refresh = true
+//            )
+//        }
+//
+//    }
 
 }

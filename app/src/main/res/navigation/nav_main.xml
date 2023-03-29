@@ -24,7 +24,11 @@
         android:id="@+id/trainingFragment"
         android:name="com.sergio.gymlog.ui.main.training.TrainingFragment"
         android:label="fragment_training"
-        tools:layout="@layout/fragment_training" />
+        tools:layout="@layout/fragment_training" >
+        <action
+            android:id="@+id/action_trainingFragment_to_trainingEditorFragment"
+            app:destination="@id/trainingEditorFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userFragment"
         android:name="com.sergio.gymlog.ui.main.user.UserFragment"
@@ -40,4 +44,23 @@
         android:name="com.sergio.gymlog.ui.main.training.dailytraining.ModifyDailyTrainingFragment"
         android:label="fragment_modify_daily_training"
         tools:layout="@layout/fragment_modify_daily_training" /><action android:id="@+id/action_global_modifyDailyTrainingFragment" app:destination="@id/modifyDailyTrainingFragment"/>
+    <fragment
+        android:id="@+id/exercisesSelectorFragment"
+        android:name="com.sergio.gymlog.ui.main.exercise.ExercisesSelectorFragment"
+        android:label="fragment_exercises_selector"
+        tools:layout="@layout/fragment_exercises_selector" >
+        <argument
+            android:name="idsExercises"
+            app:argType="string[]" />
+    </fragment>
+    <fragment
+        android:id="@+id/trainingEditorFragment"
+        android:name="com.sergio.gymlog.ui.main.training.TrainingEditorFragment"
+        android:label="fragment_training_editor"
+        tools:layout="@layout/fragment_training_editor" >
+        <action
+            android:id="@+id/action_trainingEditorFragment_to_exercisesSelectorFragment"
+            app:destination="@id/exercisesSelectorFragment" />
+
+    </fragment>
 </navigation>
