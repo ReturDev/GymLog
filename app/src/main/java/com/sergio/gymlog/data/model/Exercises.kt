@@ -1,6 +1,6 @@
 package com.sergio.gymlog.data.model
 
-import com.google.firebase.firestore.Exclude
+
 
 sealed class Exercises{
 

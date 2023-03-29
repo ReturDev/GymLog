@@ -2,7 +2,7 @@ package com.sergio.gymlog.ui.main
 
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestoreException
-import com.sergio.gymlog.data.repository.authentication.FirebaseAuthenticationService
+import com.sergio.gymlog.data.service.authentication.FirebaseAuthenticationService
 import com.sergio.gymlog.data.repository.user.UserDataRepository
 import com.sergio.gymlog.util.extension.getErrorMessage
 import dagger.hilt.android.lifecycle.HiltViewModel

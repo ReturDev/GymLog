@@ -31,12 +31,12 @@ class HomeViewModel @Inject constructor(
 
             userDataRepository.userDataState.collect{userDataState ->
 
-                if (userDataState.userData != null){
+                if (userDataState.userInfo != null){
 
                     _uiState.update { currentState ->
 
                         currentState.copy(
-                            dailyTraining = userDataState.userData.dailyTraining,
+                            dailyTraining = userDataState.userInfo.dailyTraining,
                             refresh = true
                         )
                     }
@@ -84,7 +84,7 @@ class HomeViewModel @Inject constructor(
 
                     currentState.copy(
 
-                        dailyTraining = userDataRepository.userDataState.value.userData!!.dailyTraining,
+                        dailyTraining = userDataRepository.userDataState.value.userInfo!!.dailyTraining,
                         refresh = true
 
                     )

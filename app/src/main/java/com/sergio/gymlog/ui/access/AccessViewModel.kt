@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.tasks.Task
-import com.sergio.gymlog.data.repository.authentication.FirebaseAuthenticationService
-import com.sergio.gymlog.data.repository.firestore.CloudFirestoreService
+import com.sergio.gymlog.data.service.authentication.FirebaseAuthenticationService
+import com.sergio.gymlog.data.service.firestore.CloudFirestoreService
 import com.sergio.gymlog.data.model.FirebaseResource
 import com.sergio.gymlog.util.helper.LoginAndSignUpHelper
 import dagger.hilt.android.lifecycle.HiltViewModel

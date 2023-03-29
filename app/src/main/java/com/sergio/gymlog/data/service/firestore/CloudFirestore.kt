@@ -1,4 +1,4 @@
-package com.sergio.gymlog.data.repository.firestore
+package com.sergio.gymlog.data.service.firestore
 
 import com.sergio.gymlog.data.model.Exercises
 import com.sergio.gymlog.data.model.UserInfo

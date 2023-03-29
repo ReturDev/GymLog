@@ -1,4 +1,4 @@
-package com.sergio.gymlog.data.repository.authentication
+package com.sergio.gymlog.data.service.authentication
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.tasks.Task

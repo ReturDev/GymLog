@@ -1,4 +1,4 @@
-package com.sergio.gymlog.data.repository.firestore
+package com.sergio.gymlog.data.service.firestore
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject

@@ -2,8 +2,8 @@ package com.sergio.gymlog.data.repository.user
 
 import com.sergio.gymlog.data.model.UserInfo
 import com.sergio.gymlog.data.model.ApplicationData
-import com.sergio.gymlog.data.repository.authentication.FirebaseAuthenticationService
-import com.sergio.gymlog.data.repository.firestore.CloudFirestoreService
+import com.sergio.gymlog.data.service.authentication.FirebaseAuthenticationService
+import com.sergio.gymlog.data.service.firestore.CloudFirestoreService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -17,7 +17,7 @@ class UserDataRepository @Inject constructor(
     private val cloudFirestoreService: CloudFirestoreService,
     applicationData: ApplicationData,
 
-) {
+    ) {
 
     private val _userDataState = MutableStateFlow(applicationData)
     val userDataState = _userDataState.asStateFlow()
