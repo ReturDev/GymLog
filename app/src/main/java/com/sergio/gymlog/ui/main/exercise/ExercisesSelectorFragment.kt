@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.sergio.gymlog.databinding.FragmentExercisesSelectorBinding
+import com.sergio.gymlog.ui.main.exercise.adapter.ExercisesSelectorAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -54,7 +55,7 @@ class ExercisesSelectorFragment : Fragment() {
 
                     if (!currentState.loaded){
 
-                        exercisesSelectorVM.setExercises(args.idsExercises)
+                        exercisesSelectorVM.loadExercises(args.idsExercises)
 
                     }
 

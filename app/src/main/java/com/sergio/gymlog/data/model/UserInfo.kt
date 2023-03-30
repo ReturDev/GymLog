@@ -8,11 +8,10 @@ import javax.inject.Inject
 
 data class UserInfo constructor(
 
-    @Exclude @JvmField var id : String = "",
+    var id : String = "",
     var email : String = "",
     var username : String = "",
     var photo : String = "",
-    @Exclude @JvmField var verifiedEmail : Boolean = false,
     var weight : Int = 0,
     var dailyTraining: DailyTraining? = null,
     var sets : Int = 3,
@@ -34,7 +33,6 @@ data class UserInfo constructor(
         this.photo = user.photo
         this.repetitions = user.repetitions
         this.sets = user.sets
-        this.verifiedEmail = user.verifiedEmail
         this.weight = user.weight
     }
 

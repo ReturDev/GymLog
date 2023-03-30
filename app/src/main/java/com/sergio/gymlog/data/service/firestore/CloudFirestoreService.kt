@@ -1,6 +1,9 @@
 package com.sergio.gymlog.data.service.firestore
 
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.toObject
 import com.sergio.gymlog.data.model.Exercises
 import com.sergio.gymlog.data.model.Training
@@ -17,6 +20,7 @@ class CloudFirestoreService @Inject constructor(
 ) : CloudFirestore {
     override suspend fun createNewUser(user: UserInfo){
 
+        //TODO linea solo para pruebas
         user.dailyTraining = UserInfo.DailyTraining(date = Date(), training = Training("Training", exercises = emptyList()))
 
         db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG).document(user.id)
@@ -24,10 +28,8 @@ class CloudFirestoreService @Inject constructor(
 
     }
 
-    override suspend fun getUserInfo(userUID: String): UserInfo {
-        val data = db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG).document(userUID).get().await()
-
-        return data.toObject()!!
+    override suspend fun getUserInfo(userUID: String): Task<DocumentSnapshot> {
+        return  db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG).document(userUID).get()
     }
 
     override suspend fun existUser(userUID: String): Boolean {
@@ -45,43 +47,15 @@ class CloudFirestoreService @Inject constructor(
 
     }
 
-    override suspend fun getProvidedExercises() : List<Exercises.ProvidedExercise> {
+    override suspend fun getProvidedExercises() : Task<QuerySnapshot> {
 
-        val documents = db.collection(CloudFirestoreConstants.EXERCISES_COLLECTION_TAG).get().await().documents
-
-        val exercisesList = mutableListOf<Exercises.ProvidedExercise>()
-
-        for (doc in documents){
-
-            val exercise = doc.toObject<Exercises.ProvidedExercise>()!!
-            exercise.id = doc.id
-
-
-            exercisesList.add(exercise)
-
-        }
-
-        return exercisesList.toList()
+        return db.collection(CloudFirestoreConstants.EXERCISES_COLLECTION_TAG).get()
 
     }
 
-    override suspend fun getUserExercises(userUID: String): List<Exercises.UserExercise> {
+    override suspend fun getUserExercises(userUID: String): Task<QuerySnapshot> {
 
-        val documents = db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG).document(userUID).collection(CloudFirestoreConstants.USER_EXERCISES_COLLECTION_TAG).get().await().documents
-
-        val exercisesList = mutableListOf<Exercises.UserExercise>()
-
-        for (doc in documents){
-
-            val exercise = doc.toObject<Exercises.UserExercise>()!!
-            exercise.id = doc.id
-
-            exercisesList.add(exercise)
-
-        }
-
-        return exercisesList.toList()
-
+        return db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG).document(userUID).collection(CloudFirestoreConstants.USER_EXERCISES_COLLECTION_TAG).get()
     }
 
 }

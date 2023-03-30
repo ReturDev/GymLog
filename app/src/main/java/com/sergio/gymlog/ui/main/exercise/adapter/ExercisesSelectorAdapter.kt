@@ -1,4 +1,4 @@
-package com.sergio.gymlog.ui.main.exercise
+package com.sergio.gymlog.ui.main.exercise.adapter
 
 import android.view.LayoutInflater
 import android.view.View

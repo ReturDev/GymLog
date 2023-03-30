@@ -18,7 +18,11 @@ sealed class Exercises{
         override var description: String,
         override var equipment: Equipment,
         override var muscularGroup: MuscularGroup
-    ) : Exercises()
+    ) : Exercises(){
+
+        constructor():this("","","","",Equipment.BARRA, MuscularGroup.PECHO)
+
+    }
 
     data class UserExercise @Inject constructor(
         var id: String,
@@ -27,7 +31,11 @@ sealed class Exercises{
         override var description: String,
         override var equipment: Equipment,
         override var muscularGroup: MuscularGroup
-    ) : Exercises()
+    ) : Exercises(){
+
+        constructor():this("","","","",Equipment.BARRA, MuscularGroup.PECHO)
+
+    }
 
     data class RecordTrainingExercise @Inject constructor(
         override var name: String,

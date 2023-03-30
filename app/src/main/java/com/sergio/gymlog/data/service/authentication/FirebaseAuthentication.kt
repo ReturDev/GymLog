@@ -7,12 +7,9 @@ import com.sergio.gymlog.data.model.UserInfo
 import com.sergio.gymlog.data.model.FirebaseResource
 
 interface FirebaseAuthentication {
-
-    fun checkUserLogged() : Boolean
-    fun getUserData() : UserInfo?
-    suspend fun  loginWithEmailAndPassword(email : String, password : String)  : FirebaseResource<AuthResult>
-    suspend fun  signUpWithEmailAndPassword(email : String, password : String) : FirebaseResource<AuthResult>
-    suspend fun loginWithGoogleAccount(task : Task<GoogleSignInAccount>) : FirebaseResource<GoogleSignInAccount>
+    suspend fun  loginWithEmailAndPassword(email : String, password : String)  : Task<AuthResult>
+    suspend fun  signUpWithEmailAndPassword(email : String, password : String) : Task<AuthResult>
+    suspend fun loginWithGoogleAccount(task : Task<GoogleSignInAccount>)
     fun logout()
 
 }

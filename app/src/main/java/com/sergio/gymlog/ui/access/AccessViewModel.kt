@@ -7,6 +7,8 @@ import com.google.android.gms.tasks.Task
 import com.sergio.gymlog.data.service.authentication.FirebaseAuthenticationService
 import com.sergio.gymlog.data.service.firestore.CloudFirestoreService
 import com.sergio.gymlog.data.model.FirebaseResource
+import com.sergio.gymlog.data.repository.access.LoginRepository
+import com.sergio.gymlog.data.repository.access.SignUpRepository
 import com.sergio.gymlog.util.helper.LoginAndSignUpHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AccessViewModel @Inject constructor(
-    private val firebaseRepository: FirebaseAuthenticationService,
+    private val loginRepository: LoginRepository,
+    private val signUpRepository: SignUpRepository,
     private val loginAndSignUpHelper : LoginAndSignUpHelper
 ) : ViewModel(){
 
@@ -25,13 +28,13 @@ class AccessViewModel @Inject constructor(
 
     fun loginWithEmailAndPassword(email : String, password : String){
 
-        login { firebaseRepository.loginWithEmailAndPassword(email, password) }
+        login { loginRepository.loginWithEmailAndPassword(email, password) }
 
     }
 
     fun loginWithGoogle(task : Task<GoogleSignInAccount>){
 
-        login { firebaseRepository.loginWithGoogleAccount(task) }
+        login { loginRepository.loginWithGoogleAccount(task) }
 
     }
 
@@ -46,13 +49,13 @@ class AccessViewModel @Inject constructor(
 
     fun signUpWithEmailAndPassword(email : String, password : String){
 
-        signUp { firebaseRepository.signUpWithEmailAndPassword(email, password) }
+        signUp { signUpRepository.signUpWithEmailAndPassword(email, password) }
 
     }
 
     fun signUpWithGoogle(task : Task<GoogleSignInAccount>){
 
-        signUp { firebaseRepository.loginWithGoogleAccount(task) }
+        signUp { signUpRepository.signUpWithGoogleAccount(task) }
 
     }
 
@@ -65,8 +68,6 @@ class AccessViewModel @Inject constructor(
         }
 
     }
-
-
 
     fun errorMessageShown(){
 

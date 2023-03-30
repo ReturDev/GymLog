@@ -21,7 +21,7 @@ import javax.inject.Inject
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
-    private val accesViewModel : AccessViewModel by activityViewModels()
+    private val accessViewModel : AccessViewModel by activityViewModels()
 
     @Inject
     lateinit var loginAndSignUpHelper: LoginAndSignUpHelper
@@ -52,7 +52,7 @@ class LoginFragment : Fragment() {
             val userText = binding.etEmailLogin.text.toString()
             val passwordText = binding.etPasswordLogin.text.toString()
 
-            accesViewModel.loginWithEmailAndPassword(userText, passwordText)
+            accessViewModel.loginWithEmailAndPassword(userText, passwordText)
 
 
         }

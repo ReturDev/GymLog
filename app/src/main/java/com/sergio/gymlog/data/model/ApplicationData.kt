@@ -1,8 +1,10 @@
 package com.sergio.gymlog.data.model
 
 import javax.inject.Inject
+import javax.inject.Singleton
 
 
+@Singleton
 data class ApplicationData private constructor(
 
     val userInfo: UserInfo,

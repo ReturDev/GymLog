@@ -22,73 +22,21 @@ class FirebaseAuthenticationService @Inject constructor(
     ) : FirebaseAuthentication {
 
 
-    override fun checkUserLogged(): Boolean {
-
-        return firebaseAuth.currentUser != null
-
+    override suspend fun loginWithEmailAndPassword(email: String,password: String): Task<AuthResult> {
+        return firebaseAuth.signInWithEmailAndPassword(email,password)
     }
 
-    override fun getUserData(): UserInfo {
-
-        return firebaseAuth.currentUser!!.let {
-
-            UserInfo(
-                id = it.uid,
-                email = it.email ?: "",
-                username = it.displayName ?: "",
-                verifiedEmail = it.isEmailVerified,
-                photo = it.photoUrl.toString()
-            )
-
-        }
-
+    override suspend fun signUpWithEmailAndPassword(email: String,password: String): Task<AuthResult> {
+       return firebaseAuth.createUserWithEmailAndPassword(email, password)
     }
 
-    override suspend fun loginWithEmailAndPassword(
-        email: String,
-        password: String
-    ): FirebaseResource<AuthResult> {
-        return try {
-
-            val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
-            FirebaseResource.Success(result)
-
-        }catch (e : Exception){
-
-            FirebaseResource.Failure(e)
-
-        }
-
-    }
-
-    override suspend fun signUpWithEmailAndPassword(
-        email: String,
-        password: String
-    ): FirebaseResource<AuthResult> {
-       return try {
-           val result = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
-           FirebaseResource.Success(result!!)
-       }catch (e :Exception) {
-
-            FirebaseResource.Failure(e)
-       }
-    }
-
-    override suspend fun loginWithGoogleAccount(task : Task<GoogleSignInAccount>) : FirebaseResource<GoogleSignInAccount> {
-       return if (task.isSuccessful){
+    override suspend fun loginWithGoogleAccount(task : Task<GoogleSignInAccount>){
 
            val account = task.result
            val credential = GoogleAuthProvider.getCredential(account.idToken, null)
            firebaseAuth.signInWithCredential(credential)
-           FirebaseResource.Success(task.result)
 
-       }else{
-
-           FirebaseResource.Failure(task.exception!!)
-
-       }
     }
-
 
     override fun logout() {
 

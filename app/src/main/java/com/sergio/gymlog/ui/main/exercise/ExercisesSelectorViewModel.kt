@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sergio.gymlog.data.model.ApplicationData
 import com.sergio.gymlog.data.model.Exercises
-import com.sergio.gymlog.data.repository.user.UserDataRepository
+import com.sergio.gymlog.data.repository.user.ExercisesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ExercisesSelectorViewModel @Inject constructor(
-    private val userDataRepository: UserDataRepository,
+    private val exercisesRepository: ExercisesRepository,
     private val applicationData: ApplicationData
 ) : ViewModel() {
 
@@ -24,10 +24,16 @@ class ExercisesSelectorViewModel @Inject constructor(
     private val allExercises : MutableList<Exercises> = mutableListOf()
     private val exercisesSelected : MutableList<Exercises> = mutableListOf()
 
-    fun setExercises(exercisesSelected: Array<String>){
+    init {
+        viewModelScope.launch {
+            exercisesRepository.getProvidedExercises()
+            exercisesRepository.getUserExercises()
+        }
+    }
+
+    fun loadExercises(exercisesSelected: Array<String>){
 
         val exercises = applicationData.providedExercise + applicationData.userExercises
-
 
         for (exercise in exercises){
             if (exercise is Exercises.ProvidedExercise){

@@ -12,5 +12,5 @@
     <dimen name="margin_card">5dp</dimen>
     <dimen name="training_card_height">200dp</dimen>
     <dimen name="vertical_margin">16dp</dimen>
-    <dimen name="exercise_image_size">100dp</dimen>
+    <dimen name="exercise_image_size">120dp</dimen>
 </resources>

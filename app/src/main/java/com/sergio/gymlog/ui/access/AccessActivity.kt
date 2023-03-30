@@ -38,6 +38,7 @@ class AccessActivity : AppCompatActivity() {
                 userLogged()
 
             }
+
         }
         binding = ActivityAccessBinding.inflate(layoutInflater)
         setContentView(binding.root)
