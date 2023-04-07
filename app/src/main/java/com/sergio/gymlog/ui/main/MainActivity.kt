@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //https://developer.android.com/guide/navigation/navigation-ui?hl=es-419
+        //https://developer.android.com/guide/navigation/multi-back-stacks?hl=es-419#nav-xml
         configNavBottomMenu()
 
         lifecycleScope.launch {
@@ -46,7 +48,13 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
+
         binding.bottomNavigationView.setupWithNavController(navController)
+        binding.bottomNavigationView.setOnItemReselectedListener { item ->
+
+            supportFragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+
+        }
 
     }
 
@@ -61,11 +69,13 @@ class MainActivity : AppCompatActivity() {
 
                         binding.pbMainLoading.visibility = View.VISIBLE
                         binding.navHostFragment.visibility = View.GONE
+                        binding.bottomNavigationView.visibility = View.GONE
 
                     }else {
 
                         binding.pbMainLoading.visibility = View.GONE
                         binding.navHostFragment.visibility = View.VISIBLE
+                        binding.bottomNavigationView.visibility = View.VISIBLE
 
                     }
 

@@ -1,14 +1,10 @@
 package com.sergio.gymlog.ui.main.home
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.sergio.gymlog.data.model.UserInfo
 import com.sergio.gymlog.data.repository.user.UserDataRepository
 import com.sergio.gymlog.util.helper.CloudFirestoreHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel

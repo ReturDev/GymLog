@@ -1,6 +1,6 @@
 package com.sergio.gymlog.ui.main.home
 
-import com.sergio.gymlog.data.model.UserInfo
+import com.sergio.gymlog.data.model.user.UserInfo
 
 data class HomeUiState(
 

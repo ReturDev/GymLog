@@ -1,13 +1,14 @@
 package com.sergio.gymlog.ui.main.exercise
 
-import com.sergio.gymlog.data.model.Exercises
+import com.sergio.gymlog.data.model.exercise.ExerciseItem
 
 data class ExercisesSelectorUiState(
 
     val loaded : Boolean = false,
-    //val refresh : Boolean = true,
-    val exercises : List<Exercises> = emptyList(),
+    val refresh : Boolean = false,
+    val exercises : List<ExerciseItem> = emptyList(),
     val idExercisesToAdd : List<String> = emptyList(),
-    val exercisesSelectedSize : Int = 0
+    val exercisesSelectedQuantity : Int = 0,
+    val exerciseChangedPosition : Int = -1
 
     )

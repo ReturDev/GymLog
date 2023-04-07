@@ -4,7 +4,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuthException
 import com.sergio.gymlog.R
-import com.sergio.gymlog.data.model.FirebaseResource
+import com.sergio.gymlog.data.model.remote.FirebaseResource
 import com.sergio.gymlog.ui.access.AccessUiState
 import com.sergio.gymlog.util.extension.getErrorMessage
 import kotlinx.coroutines.flow.MutableStateFlow

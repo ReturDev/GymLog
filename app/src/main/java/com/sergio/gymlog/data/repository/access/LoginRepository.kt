@@ -3,9 +3,8 @@ package com.sergio.gymlog.data.repository.access
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.GoogleAuthProvider
-import com.sergio.gymlog.data.model.FirebaseResource
-import com.sergio.gymlog.data.service.authentication.FirebaseAuthenticationService
+import com.sergio.gymlog.data.model.remote.FirebaseResource
+import com.sergio.gymlog.data.remote.authentication.FirebaseAuthenticationService
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -27,7 +26,7 @@ class LoginRepository @Inject constructor(
 
     }
 
-    suspend fun loginWithGoogleAccount(task : Task<GoogleSignInAccount>) : FirebaseResource<GoogleSignInAccount>{
+    suspend fun loginWithGoogleAccount(task : Task<GoogleSignInAccount>) : FirebaseResource<GoogleSignInAccount> {
 
         return if(task.isSuccessful) {
 

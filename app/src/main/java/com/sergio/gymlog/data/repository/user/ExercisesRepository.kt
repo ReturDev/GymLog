@@ -1,70 +1,66 @@
 package com.sergio.gymlog.data.repository.user
 
-import android.util.Log
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.toObject
-import com.sergio.gymlog.data.model.ApplicationData
-import com.sergio.gymlog.data.model.Exercises
-import com.sergio.gymlog.data.service.firestore.CloudFirestoreService
-import kotlinx.coroutines.tasks.await
+import com.sergio.gymlog.data.model.exercise.Exercises
+import com.sergio.gymlog.data.remote.firestore.CloudFirestoreService
 import javax.inject.Inject
 import javax.inject.Singleton
 
 
 @Singleton
 class ExercisesRepository @Inject constructor(
-    private val cloudFirestoreService: CloudFirestoreService,
-    private val applicationData: ApplicationData
+    private val cloudFirestoreService: CloudFirestoreService
 ){
-     suspend fun getProvidedExercises(){
+     suspend fun getProvidedExercises() : MutableList<Exercises.ProvidedExercise> {
 
-         if (applicationData.providedExercise.isEmpty()){
+         val documents = cloudFirestoreService.getProvidedExercises()!!.documents
 
-             val documents = cloudFirestoreService.getProvidedExercises().await().documents
+         val exercisesList = mutableListOf<Exercises.ProvidedExercise>()
 
-             val exercisesList = mutableListOf<Exercises.ProvidedExercise>()
+         for (doc in documents){
 
-             for (doc in documents){
-
-                 val exercise = doc.toObject<Exercises.ProvidedExercise>()!!
-                 exercise.id = doc.id
+             val exercise = doc.toObject<Exercises.ProvidedExercise>()!!
+             exercise.id = doc.id
 
 
-                 exercisesList.add(exercise)
-
-             }
-
-             applicationData.providedExercise.addAll(exercisesList)
+             exercisesList.add(exercise)
 
          }
 
+         return exercisesList
     }
 
-    suspend fun getUserExercises(){
+    suspend fun getUserExercises(uid : String) : MutableList<Exercises.UserExercise>{
 
-        if (applicationData.userExercises.isEmpty()){
+        val documents = cloudFirestoreService.getUserExercises(uid)?.documents
 
-            val task = cloudFirestoreService.getUserExercises(applicationData.userInfo.id)
+        val exercisesList = mutableListOf<Exercises.UserExercise>()
 
-            if(task.isSuccessful){
-                val documents = task.result.documents
+        documents?.let {
 
-                val exercisesList = mutableListOf<Exercises.UserExercise>()
 
-                for (doc in documents){
+            for (doc in documents){
 
-                    val exercise = doc.toObject<Exercises.UserExercise>()!!
-                    exercise.id = doc.id
+                val exercise = doc.toObject<Exercises.UserExercise>()!!
+                exercise.id = doc.id
 
-                    exercisesList.add(exercise)
-
-                }
-
-                applicationData.userExercises.addAll(exercisesList)
+                exercisesList.add(exercise)
 
             }
+
         }
+
+        return exercisesList
 
     }
 
+    suspend fun getUserExerciseReference(userID: String, userExerciseID : String): DocumentReference {
+        return cloudFirestoreService.getUserExerciseReference(userID, userExerciseID)
+    }
+
+    suspend fun getExerciseReference(exerciseID : String): DocumentReference {
+        return cloudFirestoreService.getExerciseReference(exerciseID)
+    }
 
 }

@@ -2,9 +2,10 @@ package com.sergio.gymlog.ui.main.exercise
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sergio.gymlog.data.model.ApplicationData
-import com.sergio.gymlog.data.model.Exercises
-import com.sergio.gymlog.data.repository.user.ExercisesRepository
+import com.sergio.gymlog.data.model.exercise.ExerciseItem
+import com.sergio.gymlog.data.model.exercise.Exercises
+import com.sergio.gymlog.domain.exercise.*
+import com.sergio.gymlog.domain.exercise.filter.FilterExercisesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,75 +15,54 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ExercisesSelectorViewModel @Inject constructor(
-    private val exercisesRepository: ExercisesRepository,
-    private val applicationData: ApplicationData
+    private val getExercisesAsExerciseItemsUseCase: GetExercisesAsExerciseItemsUseCase,
+    private val filterExercisesUseCase: FilterExercisesUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ExercisesSelectorUiState())
     val uiState = _uiState.asStateFlow()
 
-    private val allExercises : MutableList<Exercises> = mutableListOf()
-    private val exercisesSelected : MutableList<Exercises> = mutableListOf()
+    private lateinit var allExerciseItems : List<ExerciseItem>
+    private lateinit var filteredExercises : List<ExerciseItem>
 
-    init {
-        viewModelScope.launch {
-            exercisesRepository.getProvidedExercises()
-            exercisesRepository.getUserExercises()
-        }
-    }
 
     fun loadExercises(exercisesSelected: Array<String>){
 
-        val exercises = applicationData.providedExercise + applicationData.userExercises
+        viewModelScope.launch {
 
-        for (exercise in exercises){
-            if (exercise is Exercises.ProvidedExercise){
-                if (!exercisesSelected.contains(exercise.id)){
-                    allExercises.add(exercise)
-                }
-            }else if (exercise is Exercises.UserExercise){
-                if (!exercisesSelected.contains(exercise.id)){
-                    allExercises.add(exercise)
-                }
+            allExerciseItems = getExercisesAsExerciseItemsUseCase(exercisesSelected)
+
+            _uiState.update { currentState ->
+
+                currentState.copy(
+
+                    loaded = true,
+                    exercises = allExerciseItems,
+                    refresh = true
+
+                )
+
             }
-
-        }
-
-        _uiState.update { currentState ->
-
-            currentState.copy(
-
-                loaded = true
-
-            )
-
         }
 
     }
 
     fun selectExercise(position : Int){
-        val exercise = _uiState.value.exercises[position]
-        exercisesSelected.add(exercise)
+        _uiState.value.exercises[position].selected = true
 
-        viewModelScope.launch {
-
-            _uiState.update { currentState ->
-
-                currentState.copy(
-
-                    exercisesSelectedSize = currentState.exercisesSelectedSize+1
-
-                )
-            }
-
-        }
+        changeStatusExercise(position, true)
 
     }
 
     fun deselectExercise(position : Int){
 
-        val exercise = _uiState.value.exercises[position]
-        exercisesSelected.remove(exercise)
+        _uiState.value.exercises[position].selected = false
+
+        changeStatusExercise(position, false)
+
+    }
+
+    private fun changeStatusExercise(position : Int, incremented : Boolean){
 
         viewModelScope.launch {
 
@@ -90,7 +70,12 @@ class ExercisesSelectorViewModel @Inject constructor(
 
                 currentState.copy(
 
-                    exercisesSelectedSize = currentState.exercisesSelectedSize-1
+                    exerciseChangedPosition = position,
+                    exercisesSelectedQuantity = if(incremented){
+                        currentState.exercisesSelectedQuantity+1
+                    } else {
+                        currentState.exercisesSelectedQuantity-1
+                    }
 
                 )
             }
@@ -99,9 +84,21 @@ class ExercisesSelectorViewModel @Inject constructor(
 
     }
 
+    fun exerciseStatusChanged(){
+        _uiState.update {currentState ->
+            currentState.copy(
+                exerciseChangedPosition = -1
+            )
+        }
+    }
+
     fun filter(){
 
+        viewModelScope.launch {
 
+            //filterExercisesUseCase("Hola")
+
+        }
 
     }
 
@@ -109,11 +106,11 @@ class ExercisesSelectorViewModel @Inject constructor(
 
         val idExercises = mutableListOf<String>()
 
-        for (exercise in exercisesSelected){
-            if (exercise is Exercises.ProvidedExercise){
-                idExercises.add(exercise.id)
-            }else if (exercise is Exercises.UserExercise){
-                idExercises.add(exercise.id)
+        for (exerciseItem in allExerciseItems){
+            if (exerciseItem.exercise is Exercises.ProvidedExercise && exerciseItem.selected){
+                idExercises.add(exerciseItem.exercise.id)
+            }else if (exerciseItem.exercise is Exercises.UserExercise && exerciseItem.selected){
+                idExercises.add(exerciseItem.exercise.id)
             }
         }
 
@@ -132,9 +129,15 @@ class ExercisesSelectorViewModel @Inject constructor(
 
     }
 
+    fun refreshed() {
+        _uiState.update {currentState ->
 
+            currentState.copy(
+                refresh = false
+            )
 
-
+        }
+    }
 
 
 }

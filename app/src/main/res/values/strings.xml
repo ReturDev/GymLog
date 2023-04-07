@@ -45,5 +45,33 @@
     <string name="cancel">Cancelar</string>
     <string name="add_quantity">Añadir(%d)</string>
     <string name="exercisesTitle">Ejercicios</string>
+    <string name="custom_exercises_only">Solo personalizados</string>
+    <string name="reset">Resetear</string>
+    <string name="equipment">Equipamiento</string>
+    <string name="all">Todos</string>
+    <string name="muscular_group">Grupo Muscular</string>
+    <string name="create_new_training">Crear nuevo entrenamiento</string>
+    <string name="search">Buscar</string>
+    <string name="create_your_first_training">¡Crea ya tu primer entrenamiento!</string>
+    <string name="delete">Eliminar</string>
+    <string name="modify">Modificar</string>
+    <string name="set">Serie</string>
+    <string name="repetitions">Repeticiones</string>
+    <string name="weight">Peso</string>
+    <string name="show_sets">Mostrar series</string>
+    <string name="hide_sets">Ocultar series</string>
+    <string name="body_weight">P. Corporal</string>
+    <string name="name_hint">Nombre</string>
+    <string name="description_hint">Descripción</string>
+    <string name="cable">Cable</string>
+    <string name="ez_bar">Barra Z</string>
+    <string name="dumbbells">Mancuernas</string>
+    <string name="barbell">Barra</string>
+    <string name="back_muscle">Espalda</string>
+    <string name="chest_muscle">Pecho</string>
+    <string name="shoulders_muscle">Hombros</string>
+    <string name="legs_muscle">Piernas</string>
+    <string name="save">Guardar</string>
+    <string name="add_exercises">Añadir Ejercicios</string>
 
 </resources>

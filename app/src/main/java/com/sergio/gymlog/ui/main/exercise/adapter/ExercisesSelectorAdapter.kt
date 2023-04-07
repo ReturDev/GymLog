@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.sergio.gymlog.R
-import com.sergio.gymlog.data.model.Exercises
+import com.sergio.gymlog.data.model.exercise.ExerciseItem
 import com.sergio.gymlog.databinding.ExerciseItemBinding
 
 class ExercisesSelectorAdapter(
-    private val exercisesList : List<Exercises>,
-    private val onClickElement : (Int, Boolean) -> Unit
+    var exercisesList : List<ExerciseItem>,
+    private val onClickElement : (Int) -> Unit
 ) : RecyclerView.Adapter<ExercisesSelectorAdapter.ExercisesSelectorHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExercisesSelectorHolder {
@@ -31,33 +31,33 @@ class ExercisesSelectorAdapter(
 
         private val binding = ExerciseItemBinding.bind(view)
 
-        fun bind(exercise : Exercises, onClickElement: (Int, Boolean) -> Unit){
+        fun bind(exerciseItem : ExerciseItem, onClickElement: (Int) -> Unit){
+            val exercise = exerciseItem.exercise
+            manageItemSelected(exerciseItem)
             binding.tvExerciseName.text = exercise.name
             binding.ivExerciseImage.setImageURI(exercise.image.toUri())
-            binding.tvExerciseDescription.text = exercise.description
             binding.tvExerciseMuscularGroup.text = exercise.muscularGroup.toString()
+            binding.tvExerciseEquipment.text = exercise.equipment.toString()
 
-            binding.exerciseCard.setOnClickListener {
+            binding.selectionExerciseCard.setOnClickListener {
 
-                onClickElement(layoutPosition,manageItemSelected())
+                onClickElement(layoutPosition)
 
             }
 
         }
 
-        private fun manageItemSelected() : Boolean{
+        private fun manageItemSelected(exerciseItem: ExerciseItem){
 
-            val selected : Boolean
+            if (exerciseItem.selected){
 
-            if (binding.ivChecked.visibility == View.GONE){
-                binding.ivChecked.visibility = View.VISIBLE
-                selected = true
-            }else{
                 binding.ivChecked.visibility = View.GONE
-                selected = false
-            }
 
-            return selected
+            }else{
+
+                binding.ivChecked.visibility = View.VISIBLE
+
+            }
 
         }
 

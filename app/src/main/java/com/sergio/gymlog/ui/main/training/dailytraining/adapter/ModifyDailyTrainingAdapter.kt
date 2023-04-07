@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sergio.gymlog.R
-import com.sergio.gymlog.data.model.MuscularGroup
-import com.sergio.gymlog.data.model.Training
+import com.sergio.gymlog.data.model.exercise.MuscularGroup
+import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.databinding.TrainingItemBinding
 import java.util.*
 
@@ -35,7 +35,6 @@ class ModifyDailyTrainingAdapter(
 
         fun bind(training: Training){
             binding.tvTrainingName.text = training.name
-            binding.tvTrainginDescription.text = training.description
             binding.tvMucularGroups.text = training.exercises.map {it.muscularGroup }.groupByTo(
                 EnumMap(MuscularGroup::class.java),{it},{it.toString()}).values.toString()
             binding.tvExercisesNumber.text = binding.root.context.getString(R.string.number_of_exercises,training.exercises.size)
