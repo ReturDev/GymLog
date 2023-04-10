@@ -87,7 +87,7 @@ class TrainingDetailsFragment : Fragment() {
          }
 
         binding.btnModifyTraining.setOnClickListener {
-            val action = TrainingDetailsFragmentDirections.actionTrainingDetailsFragmentToTrainingEditorFragment(trainingDetailViewModel.uiState.value.training!!.id)
+            val action = TrainingDetailsFragmentDirections.actionGlobalTrainingEditorFragment(idTraining = trainingDetailViewModel.uiState.value.training!!.id, idsExercises = emptyArray<String>())
             findNavController().navigate(action)
         }
 

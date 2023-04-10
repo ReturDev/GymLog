@@ -52,16 +52,52 @@
             app:layout_constraintStart_toStartOf="@+id/tvTrainingExEquipment"
             app:layout_constraintTop_toBottomOf="@+id/tvTrainingExEquipment" />
 
-        <include
+        <LinearLayout
             android:id="@+id/setsView"
-            layout="@layout/sets_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_marginTop="@dimen/vertical_min_margin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivTrainingExercise" />
+            app:layout_constraintTop_toBottomOf="@+id/ivTrainingExercise">
+
+            <TextView
+                android:id="@+id/tvInvisibleSets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/show_sets"
+                android:textAlignment="center" />
+
+            <LinearLayout
+                android:id="@+id/setsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/vertical_min_margin"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <include layout="@layout/exercise_sets_header" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvSets"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/sets_recycler_height">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/tvVisibleSets"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hide_sets"
+                    android:textAlignment="center" />
+            </LinearLayout>
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/trainingEditorExCard"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin_card">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/trainingEditorExRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvTrainingEditorExName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/horizontal_min_margin"
+            app:layout_constraintBottom_toTopOf="@+id/tvTrainingEditorExEquipment"
+            app:layout_constraintEnd_toStartOf="@+id/ivTrainingEditorExRemove"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ivTrainingEditorExImage"
+            app:layout_constraintTop_toTopOf="@+id/ivTrainingEditorExImage" />
+
+        <TextView
+            android:id="@+id/tvTrainingEditorExMuscularGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/ivTrainingEditorExImage"
+            app:layout_constraintEnd_toEndOf="@+id/tvTrainingEditorExEquipment"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tvTrainingEditorExEquipment"
+            app:layout_constraintTop_toBottomOf="@+id/tvTrainingEditorExEquipment" />
+
+        <TextView
+            android:id="@+id/tvTrainingEditorExEquipment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/tvTrainingEditorExMuscularGroup"
+            app:layout_constraintEnd_toEndOf="@+id/tvTrainingEditorExName"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tvTrainingEditorExName"
+            app:layout_constraintTop_toBottomOf="@+id/tvTrainingEditorExName" />
+
+        <ImageView
+            android:id="@+id/ivTrainingEditorExImage"
+            android:layout_width="@dimen/exercise_image_size"
+            android:layout_height="@dimen/exercise_image_size"
+            android:layout_marginStart="@dimen/horizontal_min_margin"
+            android:layout_marginTop="@dimen/vertical_min_margin"
+            android:layout_marginEnd="@dimen/vertical_min_margin"
+            app:layout_constraintEnd_toStartOf="@+id/tvTrainingEditorExName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/ivTrainingEditorExRemove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/ivTrainingEditorExImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivTrainingEditorExImage"
+            app:layout_constraintVertical_bias="0.428"
+            app:srcCompat="@drawable/ic_delete_item" />
+
+        <TextView
+            android:id="@+id/tvTrainingEditorExSetsQuantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontal_min_margin"
+            android:layout_marginTop="@dimen/vertical_min_margin"
+            android:text="TextView"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/btnTrainingEditorExAddSet"
+            app:layout_constraintEnd_toEndOf="@+id/ivTrainingEditorExRemove"
+            app:layout_constraintStart_toEndOf="@+id/btnTrainingEditorExAddSet"
+            app:layout_constraintTop_toTopOf="@+id/btnTrainingEditorExAddSet" />
+
+        <Button
+            android:id="@+id/btnTrainingEditorExAddSet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            app:layout_constraintStart_toStartOf="@+id/ivTrainingEditorExImage"
+            app:layout_constraintTop_toBottomOf="@+id/ivTrainingEditorExImage" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTrainingEditorExSets"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/tvTrainingEditorExSetsQuantity"
+            app:layout_constraintStart_toStartOf="@+id/btnTrainingEditorExAddSet"
+            app:layout_constraintTop_toBottomOf="@+id/btnTrainingEditorExAddSet" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

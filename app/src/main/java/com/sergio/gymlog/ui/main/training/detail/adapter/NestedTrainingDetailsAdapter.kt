@@ -1,20 +1,21 @@
 package com.sergio.gymlog.ui.main.training.detail.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sergio.gymlog.R
-import com.sergio.gymlog.data.model.training.TrainingSet
+import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
 import com.sergio.gymlog.databinding.SetItemBinding
 
 class NestedTrainingDetailsAdapter(
-    private val setsList: List<TrainingSet>
+    private val setsList: List<TrainingExerciseSet>
 ) : RecyclerView.Adapter<NestedTrainingDetailsAdapter.NestedTrainingDetailsHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NestedTrainingDetailsHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.set_item, parent, false)
+        val view = layoutInflater.inflate(R.layout.exercise_set_item, parent, false)
         return NestedTrainingDetailsHolder(view)
     }
 
@@ -29,8 +30,9 @@ class NestedTrainingDetailsAdapter(
 
         private val binding = SetItemBinding.bind(view)
 
-        fun binSet(set : TrainingSet) {
-            binding.tvSetNumber.text = (layoutPosition+1).toString()
+        @SuppressLint("SetTextI18n")
+        fun binSet(set : TrainingExerciseSet) {
+            binding.tvSetNumber.text = "${layoutPosition+1}"
             binding.tvSetRepetitions.text = set.repetitions.toString()
             binding.tvSetWeight.text = set.weight.toString()
 

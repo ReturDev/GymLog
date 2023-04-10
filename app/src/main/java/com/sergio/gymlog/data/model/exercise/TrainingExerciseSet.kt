@@ -1,6 +1,6 @@
-package com.sergio.gymlog.data.model.training
+package com.sergio.gymlog.data.model.exercise
 
-data class TrainingSet (
+data class TrainingExerciseSet (
     val repetitions : Int = 0,
     val weight : Double = 0.0,
     val bodyWeight : Boolean = false

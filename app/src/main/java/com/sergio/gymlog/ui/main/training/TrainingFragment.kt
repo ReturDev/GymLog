@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sergio.gymlog.R
 import com.sergio.gymlog.databinding.FragmentTrainingBinding
 import com.sergio.gymlog.ui.main.training.adapter.TrainingAdapter
-import com.sergio.gymlog.ui.main.training.detail.TrainingDetailsFragmentDirections
-import com.sergio.gymlog.ui.main.training.editor.TrainingEditorFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -30,7 +28,7 @@ class TrainingFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentTrainingBinding.inflate(inflater,container,false)
         return binding.root
     }
@@ -38,6 +36,7 @@ class TrainingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        trainingViewModel.loadTrainings()
         initRecyclerView()
         setCollector()
         setListeners()
@@ -68,17 +67,20 @@ class TrainingFragment : Fragment() {
 
                 trainingViewModel.uiState.collect{currentState ->
 
-                    if (currentState.trainings.isNotEmpty()){
+                    if (currentState.loading){
+
+                        binding.tvRecyclerEmpty.visibility = View.VISIBLE
+                        binding.etSearchTraining.isEnabled = false
+
+                    }
+
+                    if (currentState.loaded){
 
                         adapter.trainingList = currentState.trainings
                         adapter.notifyDataSetChanged()
                         binding.tvRecyclerEmpty.visibility = View.GONE
                         binding.etSearchTraining.isEnabled = true
-
-                    }else{
-
-                        binding.tvRecyclerEmpty.visibility = View.VISIBLE
-                        binding.etSearchTraining.isEnabled = false
+                        trainingViewModel.resetLoaded()
 
                     }
 
@@ -91,8 +93,7 @@ class TrainingFragment : Fragment() {
 
     private fun setListeners() {
         binding.btnCreateNewTraining.setOnClickListener {
-            val action = TrainingFragmentDirections.actionTrainingFragmentToTrainingEditorFragment("")
-            findNavController().navigate(action)
+            findNavController().navigate(R.id.action_global_trainingEditorFragment)
         }
     }
 

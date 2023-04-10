@@ -1,6 +1,5 @@
 package com.sergio.gymlog.data.model.exercise
 
-import com.sergio.gymlog.data.model.training.TrainingSet
 import javax.inject.Inject
 
 
@@ -43,7 +42,7 @@ sealed class Exercises{
         override var equipment: Equipment,
         override var muscularGroup: MuscularGroup,
         var observations : String,
-        val sets : List<TrainingSet>
+        val sets : List<TrainingExerciseSet>
     ) : Exercises(){
 
         constructor():this("","","","", Equipment.NONE, MuscularGroup.NONE, "", emptyList())
@@ -59,7 +58,7 @@ sealed class Exercises{
         override var description: String,
         override var equipment: Equipment,
         override var muscularGroup: MuscularGroup,
-        var sets: List<TrainingSet>
+        var sets: List<TrainingExerciseSet>
     ) : Exercises(){
         constructor():this("","","","", Equipment.NONE, MuscularGroup.NONE, emptyList())
         constructor(id : String, name : String, image: String, description: String, equipment: Equipment, muscularGroup: MuscularGroup) :

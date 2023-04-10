@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputBinding
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavGraph
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.sergio.gymlog.R
 import com.sergio.gymlog.databinding.FragmentModifyDailyTrainingBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +39,10 @@ class ModifyDailyTrainingFragment : Fragment() {
 
     private fun setListeners() {
         binding.btnEditDailyTraining.setOnClickListener {  }
+        binding.tvNewTraining.setOnClickListener {
+           findNavController().navigate(R.id.action_global_trainingEditorFragment)
+
+        }
 
     }
 

@@ -2,7 +2,6 @@ package com.sergio.gymlog.ui.main.training
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sergio.gymlog.data.repository.user.UserDataRepository
 import com.sergio.gymlog.domain.training.GetUserTrainingsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,11 +18,7 @@ class TrainingViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(TrainingUiState())
     val uiState = _uiState.asStateFlow()
 
-    init {
-        loadTrainings()
-    }
-
-    private fun loadTrainings() {
+     fun loadTrainings() {
 
         viewModelScope.launch {
 
@@ -32,6 +27,8 @@ class TrainingViewModel @Inject constructor(
             _uiState.update { currentState ->
 
                 currentState.copy(
+                    loading = false,
+                    loaded = true,
                     trainings = trainings
                 )
 
@@ -39,6 +36,16 @@ class TrainingViewModel @Inject constructor(
 
         }
 
+    }
+
+    fun resetLoaded() {
+
+        _uiState.update {currentState ->
+
+            currentState.copy(
+                loaded = false
+            )
+        }
     }
 
 }

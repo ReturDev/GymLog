@@ -3,35 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/nav_home">
 
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.sergio.gymlog.ui.main.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_trainingFragment"
-            app:destination="@id/trainingFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_recordFragment"
-            app:destination="@id/recordFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_userFragment"
-            app:destination="@id/userFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/trainingFragment"
-        android:name="com.sergio.gymlog.ui.main.training.TrainingFragment"
-        android:label="fragment_training"
-        tools:layout="@layout/fragment_training" >
-        <action
-            android:id="@+id/action_trainingFragment_to_trainingDetailsFragment"
-            app:destination="@id/trainingDetailsFragment" />
-        <action
-            android:id="@+id/action_trainingFragment_to_trainingEditorFragment"
-            app:destination="@id/trainingEditorFragment" />
-    </fragment>
     <fragment
         android:id="@+id/userFragment"
         android:name="com.sergio.gymlog.ui.main.user.UserFragment"
@@ -43,45 +16,74 @@
         android:label="fragment_record"
         tools:layout="@layout/fragment_record" />
     <fragment
-        android:id="@+id/modifyDailyTrainingFragment"
-        android:name="com.sergio.gymlog.ui.main.training.dailytraining.ModifyDailyTrainingFragment"
-        android:label="fragment_modify_daily_training"
-        tools:layout="@layout/fragment_modify_daily_training" /><action android:id="@+id/action_global_modifyDailyTrainingFragment" app:destination="@id/modifyDailyTrainingFragment"/>
-    <fragment
-        android:id="@+id/exercisesSelectorFragment"
-        android:name="com.sergio.gymlog.ui.main.exercise.ExercisesSelectorFragment"
-        android:label="fragment_exercises_selector"
-        tools:layout="@layout/fragment_exercises_selector" >
-        <argument
-            android:name="idsExercises"
-            app:argType="string[]" />
-        <action
-            android:id="@+id/action_exercisesSelectorFragment_to_trainingEditorFragment"
-            app:destination="@id/trainingEditorFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/trainingEditorFragment"
         android:name="com.sergio.gymlog.ui.main.training.editor.TrainingEditorFragment"
         android:label="fragment_training_editor"
-        tools:layout="@layout/fragment_training_editor" >
+        tools:layout="@layout/fragment_training_editor">
+        <argument
+            android:name="idsExercises"
+            app:argType="string[]" />
         <action
             android:id="@+id/action_trainingEditorFragment_to_exercisesSelectorFragment"
             app:destination="@id/exercisesSelectorFragment" />
         <argument
             android:name="idTraining"
-            app:argType="string" />
-
+            app:argType="string"
+            android:defaultValue=""/>
     </fragment>
     <fragment
-        android:id="@+id/trainingDetailsFragment"
-        android:name="com.sergio.gymlog.ui.main.training.detail.TrainingDetailsFragment"
-        android:label="fragment_training_details"
-        tools:layout="@layout/fragment_training_details" >
+        android:id="@+id/exercisesSelectorFragment"
+        android:name="com.sergio.gymlog.ui.main.exercise.ExercisesSelectorFragment"
+        android:label="fragment_exercises_selector"
+        tools:layout="@layout/fragment_exercises_selector">
         <argument
-            android:name="idTraining"
-            app:argType="string" />
+            android:name="idsExercises"
+            app:argType="string[]" />
         <action
-            android:id="@+id/action_trainingDetailsFragment_to_trainingEditorFragment"
-            app:destination="@id/trainingEditorFragment" />
+            android:id="@+id/action_exercisesSelectorFragment_to_trainingEditorFragment"
+            app:destination="@id/trainingEditorFragment"
+            app:popUpTo="@id/trainingEditorFragment"
+            app:popUpToInclusive="true" />
     </fragment>
+    <navigation android:id="@+id/nav_training"
+        app:startDestination="@id/trainingFragment">
+        <fragment
+            android:id="@+id/trainingFragment"
+            android:name="com.sergio.gymlog.ui.main.training.TrainingFragment"
+            android:label="fragment_training"
+            tools:layout="@layout/fragment_training">
+            <action
+                android:id="@+id/action_trainingFragment_to_trainingDetailsFragment"
+                app:destination="@id/trainingDetailsFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/trainingDetailsFragment"
+            android:name="com.sergio.gymlog.ui.main.training.detail.TrainingDetailsFragment"
+            android:label="fragment_training_details"
+            tools:layout="@layout/fragment_training_details">
+            <argument
+                android:name="idTraining"
+                app:argType="string" />
+        </fragment>
+    </navigation>
+    <navigation android:id="@+id/nav_home"
+        app:startDestination="@id/homeFragment">
+        <fragment
+            android:id="@+id/modifyDailyTrainingFragment"
+            android:name="com.sergio.gymlog.ui.main.training.dailytraining.ModifyDailyTrainingFragment"
+            android:label="fragment_modify_daily_training"
+            tools:layout="@layout/fragment_modify_daily_training"/>
+        <fragment
+            android:id="@+id/homeFragment"
+            android:name="com.sergio.gymlog.ui.main.home.HomeFragment"
+            android:label="fragment_home"
+            tools:layout="@layout/fragment_home">
+            <action
+                android:id="@+id/action_homeFragment_to_modifyDailyTrainingFragment"
+                app:destination="@id/modifyDailyTrainingFragment" />
+        </fragment>
+    </navigation>
+    <action
+        android:id="@+id/action_global_trainingEditorFragment"
+        app:destination="@id/trainingEditorFragment" />
 </navigation>

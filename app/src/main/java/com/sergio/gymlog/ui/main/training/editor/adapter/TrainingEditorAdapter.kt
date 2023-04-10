@@ -7,12 +7,15 @@ import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.Exercises
-import com.sergio.gymlog.databinding.ExerciseItemBinding
+import com.sergio.gymlog.databinding.TrainingEditorExerciseItemBinding
 
 class TrainingEditorAdapter(
     var trainingExercises : List<Exercises.TrainingExercise>,
-    private val onRemoveExercise : (Int) -> Unit
+    private val onRemoveExercise : (Int) -> Unit,
+    private val onDeleteExerciseSet : (Int, Int) -> Unit
 ) : RecyclerView.Adapter<TrainingEditorAdapter.TrainingEditorHolder>() {
+
+    lateinit var nestedTrainingEditorAdapter : NestedTrainingEditorAdapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrainingEditorHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -24,22 +27,23 @@ class TrainingEditorAdapter(
 
     override fun onBindViewHolder(holder: TrainingEditorHolder, position: Int) {
 
-        holder.bind(trainingExercises[position], onRemoveExercise)
+        holder.bind(trainingExercises[position], onRemoveExercise, onDeleteExerciseSet)
 
     }
 
     inner class TrainingEditorHolder(view : View) : RecyclerView.ViewHolder(view){
 
-        private val binding = ExerciseItemBinding.bind(view)
+        private val binding = TrainingEditorExerciseItemBinding.bind(view)
 
-        fun bind(trainingExercise: Exercises.TrainingExercise, onRemoveExercise: (Int) -> Unit){
 
-            binding.ivRemoveItem.visibility = View.VISIBLE
+        fun bind(trainingExercise: Exercises.TrainingExercise, onRemoveExercise: (Int) -> Unit, onExerciseSetDeleteClick : (Int, Int) -> Unit){
 
-            binding.ivExerciseImage.setImageURI(trainingExercise.image.toUri())
-            binding.tvExerciseName.text = trainingExercise.name
-            binding.tvExerciseEquipment.text = trainingExercise.equipment.toString()
-            binding.tvExerciseMuscularGroup.text = trainingExercise.muscularGroup.toString()
+            nestedTrainingEditorAdapter = NestedTrainingEditorAdapter(trainingExercise.sets.toMutableList(), onDeleteClick = {exerciseSetPosition -> onExerciseSetDeleteClick(layoutPosition, exerciseSetPosition)})
+
+            binding.ivTrainingEditorExImage.setImageURI(trainingExercise.image.toUri())
+            binding.tvTrainingEditorExName.text = trainingExercise.name
+            binding.tvTrainingEditorExEquipment.text = trainingExercise.equipment.toString()
+            binding.tvTrainingEditorExMuscularGroup.text = trainingExercise.muscularGroup.toString()
 
             setListeners(onRemoveExercise)
 
@@ -47,10 +51,9 @@ class TrainingEditorAdapter(
 
         private fun setListeners(onRemoveExercise: (Int) -> Unit) {
 
-            binding.ivRemoveItem.setOnClickListener { onRemoveExercise(layoutPosition) }
+            binding.ivTrainingEditorExRemove.setOnClickListener { onRemoveExercise(layoutPosition) }
 
         }
-
 
     }
 

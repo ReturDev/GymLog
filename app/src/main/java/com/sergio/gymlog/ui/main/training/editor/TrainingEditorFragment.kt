@@ -18,6 +18,7 @@ import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.databinding.FragmentTrainingEditorBinding
 import com.sergio.gymlog.ui.main.training.editor.adapter.TrainingEditorAdapter
+import com.sergio.gymlog.util.TrainingEdit
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -29,6 +30,7 @@ class TrainingEditorFragment : Fragment() {
 
     private val trainingEditorViewModel by viewModels<TrainingEditorViewModel>()
     private val args by navArgs<TrainingEditorFragmentArgs>()
+    private var argsGetted : Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,8 +39,9 @@ class TrainingEditorFragment : Fragment() {
 
         binding = FragmentTrainingEditorBinding.inflate(layoutInflater, container, false)
 
-        if (args.idTraining.isNotBlank()){
-            trainingEditorViewModel.loadTrainingData(args.idTraining)
+        if (!argsGetted){
+            trainingEditorViewModel.loadTrainingData(args.idTraining, args.idsExercises)
+            argsGetted = true
         }
 
         return binding.root
@@ -54,18 +57,34 @@ class TrainingEditorFragment : Fragment() {
 
     private fun setListeners() {
 
-        binding.btnEditorCancel.setOnClickListener { findNavController().popBackStack() }
+        binding.btnEditorCancel.setOnClickListener {
 
-        binding.btnEditorAccept.setOnClickListener {  }
+            //TODO añadir dialog
+            findNavController().popBackStack()
+        }
 
-        binding.btnEditorAddExercises.setOnClickListener {
+        binding.btnEditorAccept.setOnClickListener {
 
-            //val exID =
-            //val action = TrainingEditorFragmentDirections.actionTrainingEditorFragmentToExercisesSelectorFragment()
+            //TODO añadir dialog
+            //TODO Terminar
+            TrainingEdit.setTraining(null)
 
         }
 
-        binding.btnEditorFilter.setOnClickListener {  }
+        binding.btnEditorAddExercises.setOnClickListener {
+
+            TrainingEdit.setTraining(getTrainingInfo())
+            val idsExercises = trainingEditorViewModel.uiState.value.training.exercises.map { e -> e.id }.toTypedArray()
+            val action = TrainingEditorFragmentDirections.actionTrainingEditorFragmentToExercisesSelectorFragment(idsExercises)
+            findNavController().navigate(action)
+
+        }
+
+        binding.btnEditorFilter.setOnClickListener {
+
+
+
+        }
 
         binding.etEditorName.addTextChangedListener{}
         binding.etEditorDescription.addTextChangedListener {  }
@@ -92,19 +111,16 @@ class TrainingEditorFragment : Fragment() {
                         binding.editorElementsRoot.visibility = View.VISIBLE
                         binding.pbTrainingEditorLoading.visibility = View.GONE
 
-                        currentState.training?.let {
+                        bindTrainingData(currentState.training)
+                        initRecyclerView(currentState.training.exercises)
 
-                            bindTrainingData(it)
-                            initRecyclerView(currentState.training.exercises)
-                            trainingEditorViewModel.resetValues()
-
-                        }
+                        trainingEditorViewModel.resetValues()
 
                     }
 
                     if(currentState.removedExercisePosition != -1){
 
-                        adapter.trainingExercises = currentState.training!!.exercises
+                        adapter.trainingExercises = currentState.training.exercises
                         adapter.notifyItemRemoved(currentState.removedExercisePosition)
                         trainingEditorViewModel.resetValues()
 
@@ -124,19 +140,37 @@ class TrainingEditorFragment : Fragment() {
 
     private fun initRecyclerView(exercises : List<Exercises.TrainingExercise>){
 
-        adapter = TrainingEditorAdapter(exercises, onRemoveExercise = { position -> onRemoveExercise(position)})
+        adapter = TrainingEditorAdapter(
+            exercises,
+            onRemoveExercise = { position -> onRemoveExercise(position)},
+            onDeleteExerciseSet = {exercisePosition, exerciseSetPosition -> onDeleteExerciseSet(exercisePosition,exerciseSetPosition)}
+        )
         val recyclerView = binding.rvEditorExercises
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
 
     }
 
+
     private fun onRemoveExercise(position : Int){
 
-        trainingEditorViewModel.removeExercise(position)
+        trainingEditorViewModel.removeExercise(adapter.trainingExercises[position], position)
 
     }
 
+    private fun onDeleteExerciseSet(exercisePosition : Int, setPosition : Int){
 
+        trainingEditorViewModel.deleteExerciseSet(adapter.trainingExercises[exercisePosition].id, setPosition)
+
+    }
+
+    private fun getTrainingInfo() : Training{
+
+        return trainingEditorViewModel.uiState.value.training.copy(
+            name = binding.etEditorName.text.toString(),
+            description = binding.etEditorDescription.text.toString()
+        )
+
+    }
 
 }

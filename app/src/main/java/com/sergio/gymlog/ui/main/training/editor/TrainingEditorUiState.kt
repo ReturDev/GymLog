@@ -4,9 +4,9 @@ import com.sergio.gymlog.data.model.training.Training
 
 data class TrainingEditorUiState(
 
-    val loading : Boolean = true,
+    val loading : Boolean = false,
     val loaded : Boolean = false,
-    val training : Training? = null,
+    val training : Training = Training(),
     val removedExercisePosition : Int = -1
 
 )

@@ -16,6 +16,8 @@ class GetUserExercisesUseCase @Inject constructor(
 
             applicationData.userExercises.addAll(exercisesRepository.getUserExercises(applicationData.userInfo.id))
 
+            applicationData.userExercisesConsulted = true
+
         }
 
         return applicationData.userExercises

@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sergio.gymlog.R
@@ -55,6 +56,7 @@ class ExercisesSelectorFragment : Fragment() {
                     if (currentState.loaded){
 
                         initRecyclerView()
+                        binding.btnAddES.text = getString(R.string.add_quantity, currentState.exercisesSelectedQuantity)
 
                     }
                     if (currentState.refresh){
@@ -70,6 +72,11 @@ class ExercisesSelectorFragment : Fragment() {
                         binding.btnAddES.text = getString(R.string.add_quantity, currentState.exercisesSelectedQuantity)
                         exercisesSelectorVM.exerciseStatusChanged()
 
+                    }
+                    if (currentState.idExercisesToAdd.isNotEmpty()){
+
+                        val action = ExercisesSelectorFragmentDirections.actionExercisesSelectorFragmentToTrainingEditorFragment(currentState.idExercisesToAdd.toTypedArray())
+                        findNavController().navigate(action)
                     }
 
                 }
@@ -90,7 +97,7 @@ class ExercisesSelectorFragment : Fragment() {
     private fun setListeners() {
         binding.btnAddES.setOnClickListener {
 
-
+            exercisesSelectorVM.addSelectedExercises()
 
         }
     }

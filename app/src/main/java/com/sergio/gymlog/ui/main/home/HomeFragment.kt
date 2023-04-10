@@ -72,7 +72,7 @@ class HomeFragment : Fragment() {
     private fun setListeners() {
         binding.btnCompleteTraining.setOnClickListener {  }
         //binding.btnRemoveTraining.setOnClickListener { homeViewModel.removeDailyTraining() }
-        binding.btnModifyTaining.setOnClickListener { findNavController().navigate(R.id.action_global_modifyDailyTrainingFragment)  }
+        binding.btnModifyTaining.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_modifyDailyTrainingFragment)  }
         binding.trainingNotSelectedLayout.setOnClickListener {  }
 
 

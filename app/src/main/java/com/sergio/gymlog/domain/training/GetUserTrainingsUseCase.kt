@@ -15,7 +15,7 @@ class GetUserTrainingsUseCase @Inject constructor(
 
     suspend operator fun invoke() : List<Training>{
 
-        if (!applicationData.userExercisesConsulted){
+        if (!applicationData.userTrainingsConsulted){
 
             val trainingsCloud = trainingsRepository.getUserTrainings(applicationData.userInfo.id)
             val trainings = mutableListOf<Training>()

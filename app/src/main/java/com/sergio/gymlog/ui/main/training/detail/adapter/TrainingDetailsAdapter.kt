@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.Exercises
-import com.sergio.gymlog.data.model.training.TrainingSet
+import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
 import com.sergio.gymlog.databinding.TrainingExerciseItemBinding
 
 class TrainingDetailsAdapter(
@@ -60,7 +60,7 @@ class TrainingDetailsAdapter(
             }
         }
 
-        private fun initNestedRecycler(sets : List<TrainingSet>){
+        private fun initNestedRecycler(sets : List<TrainingExerciseSet>){
 
             adapter = NestedTrainingDetailsAdapter(sets)
             val recycler = binding.setsView.rvSets

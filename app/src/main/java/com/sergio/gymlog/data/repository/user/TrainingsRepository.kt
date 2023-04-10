@@ -2,6 +2,7 @@ package com.sergio.gymlog.data.repository.user
 
 import com.google.firebase.firestore.ktx.toObject
 import com.sergio.gymlog.data.model.remote.firestore.TrainingCloud
+import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.data.remote.firestore.CloudFirestoreService
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -31,11 +32,17 @@ class TrainingsRepository @Inject constructor(
 
     }
 
-    suspend fun createUserTraining(userUID: String, training : TrainingCloud){
+    suspend fun generateTrainingRandomId(userUID: String) : String{
 
-        val newTraining = training.copy(id = cloudFirestoreService.generateTrainingRandomId(userUID))
+        return cloudFirestoreService.generateTrainingRandomId(userUID)
 
-        cloudFirestoreService.createUserTraining(userUID, newTraining)
+    }
+
+    suspend fun createUserTraining(userUID: String, training : TrainingCloud) : Training{
+
+        cloudFirestoreService.createUserTraining(userUID, training)
+
+        return Training()
 
     }
 

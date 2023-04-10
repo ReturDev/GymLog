@@ -7,7 +7,7 @@ class GetTrainingByIdUseCase @Inject constructor(
    private val getUserTrainingsUseCase: GetUserTrainingsUseCase
 ) {
 
-    suspend operator fun invoke(id : String) : Training?{
+    suspend operator fun invoke(id : String) : Training{
 
         if (id.isNotBlank()) {
 
