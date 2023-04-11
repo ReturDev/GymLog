@@ -46,14 +46,14 @@
             android:id="@+id/tvTrainingExMuscularG"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/setsView"
+            app:layout_constraintBottom_toTopOf="@+id/tvTrainingExSetsView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/tvTrainingExEquipment"
             app:layout_constraintTop_toBottomOf="@+id/tvTrainingExEquipment" />
 
         <LinearLayout
-            android:id="@+id/setsView"
+            android:id="@+id/tvTrainingExSetsView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -64,7 +64,7 @@
             app:layout_constraintTop_toBottomOf="@+id/ivTrainingExercise">
 
             <TextView
-                android:id="@+id/tvInvisibleSets"
+                android:id="@+id/tvTrainingExInvisibleSets"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -72,7 +72,7 @@
                 android:textAlignment="center" />
 
             <LinearLayout
-                android:id="@+id/setsLayout"
+                android:id="@+id/trainingExSetsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/vertical_min_margin"
@@ -80,17 +80,19 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <include layout="@layout/exercise_sets_header" />
+                <include
+                    android:id="@+id/tvTrainingExSetsHeader"
+                    layout="@layout/exercise_sets_header" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvSets"
+                    android:id="@+id/rvTrainingExSets"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/sets_recycler_height">
 
                 </androidx.recyclerview.widget.RecyclerView>
 
                 <TextView
-                    android:id="@+id/tvVisibleSets"
+                    android:id="@+id/tvTrainingExVisibleSets"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/hide_sets"

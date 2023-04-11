@@ -6,7 +6,7 @@ import com.sergio.gymlog.data.model.user.UserInfo
 import com.sergio.gymlog.data.repository.user.UserDataRepository
 import javax.inject.Inject
 
-class ManageUserInfoUserCase @Inject constructor(
+class ManageUserInfoUseCase @Inject constructor(
     private val applicationData: ApplicationData,
     private val auth : FirebaseAuth,
     private val userDataRepository: UserDataRepository

@@ -51,11 +51,11 @@ class ExercisesSelectorAdapter(
 
             if (exerciseItem.selected){
 
-                binding.ivChecked.visibility = View.VISIBLE
+                binding.ivExerciseSelected.visibility = View.VISIBLE
 
             }else{
 
-                binding.ivChecked.visibility = View.GONE
+                binding.ivExerciseSelected.visibility = View.GONE
 
             }
 

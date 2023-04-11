@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/horizontal_min_margin"
             android:layout_marginTop="@dimen/vertical_min_margin"
-            android:text="TextView"
+            android:text="@string/exercise_sets"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@+id/btnTrainingEditorExAddSet"
             app:layout_constraintEnd_toEndOf="@+id/ivTrainingEditorExRemove"

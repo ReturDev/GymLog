@@ -1,4 +1,4 @@
-package com.sergio.gymlog.domain.training.sets
+package com.sergio.gymlog.domain.exercise.sets
 
 import com.sergio.gymlog.data.model.repository.ApplicationData
 import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet

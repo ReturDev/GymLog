@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sergio.gymlog.data.model.exercise.Exercises
+import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.databinding.FragmentTrainingEditorBinding
 import com.sergio.gymlog.ui.main.training.editor.adapter.TrainingEditorAdapter
@@ -30,7 +31,7 @@ class TrainingEditorFragment : Fragment() {
 
     private val trainingEditorViewModel by viewModels<TrainingEditorViewModel>()
     private val args by navArgs<TrainingEditorFragmentArgs>()
-    private var argsGetted : Boolean = false
+    private var argsGet : Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,9 +40,9 @@ class TrainingEditorFragment : Fragment() {
 
         binding = FragmentTrainingEditorBinding.inflate(layoutInflater, container, false)
 
-        if (!argsGetted){
+        if (!argsGet){
             trainingEditorViewModel.loadTrainingData(args.idTraining, args.idsExercises)
-            argsGetted = true
+            argsGet = true
         }
 
         return binding.root
@@ -120,10 +121,24 @@ class TrainingEditorFragment : Fragment() {
 
                     if(currentState.removedExercisePosition != -1){
 
-                        adapter.trainingExercises = currentState.training.exercises
+                        adapter.trainingExercises.removeAt(currentState.removedExercisePosition)
                         adapter.notifyItemRemoved(currentState.removedExercisePosition)
                         trainingEditorViewModel.resetValues()
 
+                    }
+
+                    if (currentState.deletedExerciseSetPosition != -1){
+
+                        val holder = binding.rvEditorExercises.findViewHolderForAdapterPosition(currentState.changedExercisePosition) as TrainingEditorAdapter.TrainingEditorHolder
+                        holder.deleteExerciseSet(currentState.deletedExerciseSetPosition)
+                        trainingEditorViewModel.resetValues()
+                    }
+
+                    if (currentState.exerciseSetInserted){
+
+                        val holder = binding.rvEditorExercises.findViewHolderForAdapterPosition(currentState.changedExercisePosition) as TrainingEditorAdapter.TrainingEditorHolder
+                        holder.addExerciseSet(currentState.newExerciseSet!!)
+                        trainingEditorViewModel.resetValues()
                     }
 
                 }
@@ -141,14 +156,33 @@ class TrainingEditorFragment : Fragment() {
     private fun initRecyclerView(exercises : List<Exercises.TrainingExercise>){
 
         adapter = TrainingEditorAdapter(
-            exercises,
+            trainingExercises = exercises.toMutableList(),
             onRemoveExercise = { position -> onRemoveExercise(position)},
-            onDeleteExerciseSet = {exercisePosition, exerciseSetPosition -> onDeleteExerciseSet(exercisePosition,exerciseSetPosition)}
+            onAddExerciseSet = { exercisePos  -> onAddExerciseSet(exercisePos)},
+            onDeleteExerciseSet = {
+                    exercisePosition,
+                    exerciseSetPosition ->
+                onDeleteExerciseSet(exercisePosition,exerciseSetPosition)
+            },
+            onExerciseSetValueChanged = {
+                    exerciseID,
+                    exerciseSetPos,
+                    trainingSet ->
+                onExerciseSetValueChanged(exerciseID,exerciseSetPos, trainingSet)
+            }
         )
         val recyclerView = binding.rvEditorExercises
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
 
+    }
+
+    private fun onExerciseSetValueChanged(
+        exerciseID: String,
+        exerciseSetPos: Int,
+        trainingSet: TrainingExerciseSet
+    ) {
+        TODO() //Implementar y luego probarlo todo
     }
 
 
@@ -158,9 +192,22 @@ class TrainingEditorFragment : Fragment() {
 
     }
 
+    private fun onAddExerciseSet(exercisePos : Int){
+
+        trainingEditorViewModel.addExerciseSet(
+            exercisePos,
+            adapter.trainingExercises[exercisePos].id,
+        )
+
+    }
+
     private fun onDeleteExerciseSet(exercisePosition : Int, setPosition : Int){
 
-        trainingEditorViewModel.deleteExerciseSet(adapter.trainingExercises[exercisePosition].id, setPosition)
+        trainingEditorViewModel.deleteExerciseSet(
+            exercisePosition,
+            adapter.trainingExercises[exercisePosition].id,
+            setPosition
+        )
 
     }
 

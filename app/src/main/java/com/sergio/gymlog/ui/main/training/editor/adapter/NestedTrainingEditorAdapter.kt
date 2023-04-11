@@ -91,37 +91,8 @@ class NestedTrainingEditorAdapter(
                 }
 
             }
-            //TODO ANALIZAR EL CODIGO
-            val filter = InputFilter { source, start, end, dest, dstart, dend ->
 
-                val sb = StringBuilder(dest)
-                sb.replace(dstart, dend, source.subSequence(start, end).toString())
-                val temp = sb.toString()
-
-                if (temp == ".") {
-                    return@InputFilter "0."
-                } else if (temp.isNotEmpty() && temp[0] == '0' && temp.length > 1 && temp[1] != '.') {
-                    return@InputFilter ""
-                }
-
-                val indexPoint = temp.indexOf(".")
-                if (indexPoint == -1) {
-                    if (temp.length > 3) {
-                        return@InputFilter ""
-                    }
-                } else {
-                    val intPart = temp.substring(0, indexPoint)
-                    val decimalPart = temp.substring(indexPoint + 1)
-
-                    if (intPart.length > 3 || decimalPart.length > 2) {
-                        return@InputFilter ""
-                    }
-                }
-
-                return@InputFilter null
-            }
-
-            binding.etSetWeight.filters = arrayOf(filter)
+            binding.etSetWeight.filters = arrayOf(createWeightFilter())
 
 
         }
@@ -138,6 +109,39 @@ class NestedTrainingEditorAdapter(
                 bodyWeight = binding.cbBodyWeight.isChecked
             )
 
+
+        private fun createWeightFilter() = InputFilter { source, start, end, dest, dstart, dend ->
+
+            val sb = StringBuilder(dest)
+            sb.replace(dstart, dend, source.subSequence(start, end).toString())
+            val temp = sb.toString()
+
+            if (temp == ".") {
+                return@InputFilter "0."
+            }else if (temp.isNotBlank() && temp[0] == '0' && temp.length > 1 && temp[1] != '.'){
+                binding.etSetWeight.text = SpannableStringBuilder(source)
+                binding.etSetWeight.setSelection(end)
+
+            }
+
+            val indexPoint = temp.indexOf(".")
+            if (indexPoint == -1) {
+                if (temp.length == 4 ) {
+                    return@InputFilter ".$source"
+                }else if (temp.length > 5){
+                    return@InputFilter ""
+                }
+            } else {
+                val intPart = temp.substring(0, indexPoint)
+                val decimalPart = temp.substring(indexPoint + 1)
+
+                if (intPart.length > 3 || decimalPart.length > 2) {
+                    return@InputFilter ""
+                }
+            }
+
+            return@InputFilter null
+        }
 
     }
 

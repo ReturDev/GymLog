@@ -34,7 +34,7 @@ class TrainingDetailsAdapter(
         private val binding = TrainingExerciseItemBinding.bind(view)
         private lateinit var adapter : NestedTrainingDetailsAdapter
 
-        fun bind(trainingExercise: Exercises.TrainingExercise) {
+         fun bind(trainingExercise: Exercises.TrainingExercise) {
 
             binding.tvTrainingExerciseName.text = trainingExercise.name
             binding.tvTrainingExEquipment.text = trainingExercise.equipment.toString()
@@ -45,17 +45,17 @@ class TrainingDetailsAdapter(
         }
 
         private fun setListeners() {
-            binding.setsView.tvInvisibleSets.setOnClickListener {
+            binding.tvTrainingExInvisibleSets.setOnClickListener {
 
                 it.visibility = View.GONE
-                binding.setsView.setsLayout.visibility = View.VISIBLE
+                binding.trainingExSetsLayout.visibility = View.VISIBLE
 
             }
 
-            binding.setsView.tvVisibleSets.setOnClickListener {
+            binding.tvTrainingExVisibleSets.setOnClickListener {
 
-                binding.setsView.tvInvisibleSets.visibility = View.VISIBLE
-                binding.setsView.setsLayout.visibility = View.GONE
+                binding.tvTrainingExInvisibleSets.visibility = View.VISIBLE
+                binding.trainingExSetsLayout.visibility = View.GONE
 
             }
         }
@@ -63,7 +63,7 @@ class TrainingDetailsAdapter(
         private fun initNestedRecycler(sets : List<TrainingExerciseSet>){
 
             adapter = NestedTrainingDetailsAdapter(sets)
-            val recycler = binding.setsView.rvSets
+            val recycler = binding.rvTrainingExSets
             recycler.adapter = adapter
             recycler.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
 

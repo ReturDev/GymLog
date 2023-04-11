@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
-import com.sergio.gymlog.databinding.SetItemBinding
+import com.sergio.gymlog.databinding.ExerciseSetItemBinding
 
 class NestedTrainingDetailsAdapter(
     private val setsList: List<TrainingExerciseSet>
@@ -28,7 +28,7 @@ class NestedTrainingDetailsAdapter(
 
     inner class NestedTrainingDetailsHolder(view : View) : RecyclerView.ViewHolder(view) {
 
-        private val binding = SetItemBinding.bind(view)
+        private val binding = ExerciseSetItemBinding.bind(view)
 
         @SuppressLint("SetTextI18n")
         fun binSet(set : TrainingExerciseSet) {

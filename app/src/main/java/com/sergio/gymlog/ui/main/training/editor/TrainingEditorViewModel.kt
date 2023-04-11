@@ -4,12 +4,14 @@ package com.sergio.gymlog.ui.main.training.editor
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sergio.gymlog.data.model.exercise.Exercises
+import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.domain.exercise.GetExerciseByIdUseCase
 import com.sergio.gymlog.domain.training.CreateUserTrainingUseCase
 import com.sergio.gymlog.domain.training.GetTrainingByIdUseCase
 import com.sergio.gymlog.domain.training.ModifyTrainingUseCase
-import com.sergio.gymlog.domain.training.sets.GetUserSetsPreferencesUseCase
+import com.sergio.gymlog.domain.exercise.sets.GetUserSetsPreferencesUseCase
+import com.sergio.gymlog.domain.user.GetUserInfoUseCase
 import com.sergio.gymlog.util.TrainingEdit
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,7 +26,8 @@ class TrainingEditorViewModel @Inject constructor(
     private val getExerciseByIdUseCase: GetExerciseByIdUseCase,
     private val createUserTrainingUseCase: CreateUserTrainingUseCase,
     private val modifyTrainingUseCase: ModifyTrainingUseCase,
-    private val getUserSetsPreferencesUseCase: GetUserSetsPreferencesUseCase
+    private val getUserSetsPreferencesUseCase: GetUserSetsPreferencesUseCase,
+    private val getUserInfoUseCase: GetUserInfoUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(TrainingEditorUiState())
@@ -45,21 +48,7 @@ class TrainingEditorViewModel @Inject constructor(
             val training = TrainingEdit.getTraining()
             if (training != null){
 
-                if (idExercises.isNotEmpty() && !training.exercises.map { e -> e.id }.contains(idExercises[0])){
-
-                    loadAndAddNewExercises(idExercises, training)
-
-                }else{
-
-                    _uiState.update { currentState ->
-                        currentState.copy(
-                            loading = false,
-                            loaded = true,
-                            training = training
-                        )
-                    }
-
-                }
+                loadAndAddNewExercises(idExercises, training)
 
             }else{
 
@@ -137,6 +126,57 @@ class TrainingEditorViewModel @Inject constructor(
 
     }
 
+    fun deleteExerciseSet(exercisePosition: Int, exerciseID: String, trainingSetPosition: Int) {
+        viewModelScope.launch {
+
+            _uiState.update {currentState ->
+
+                val exercises = currentState.training.exercises.toMutableList()
+                val exerciseIndex = exercises.indexOfFirst { it.id == exerciseID }
+                val sets = exercises[exerciseIndex].sets.toMutableList()
+                sets.removeAt(trainingSetPosition)
+
+                exercises[exerciseIndex] = exercises[exerciseIndex].copy(sets = sets)
+
+                currentState.copy(
+
+                    deletedExerciseSetPosition = trainingSetPosition,
+                    changedExercisePosition = exercisePosition,
+                    training = currentState.training.copy(exercises = exercises)
+
+                )
+            }
+
+        }
+    }
+
+    fun addExerciseSet(exercisePos: Int, exerciseID: String) {
+        viewModelScope.launch {
+
+            _uiState.update { currentState ->
+
+                val exercises = currentState.training.exercises.toMutableList()
+                val exerciseIndex = exercises.indexOfFirst { it.id == exerciseID }
+                val sets = exercises[exerciseIndex].sets.toMutableList()
+                sets.add(
+                    TrainingExerciseSet(
+                        repetitions = getUserInfoUseCase().repetitions
+                    )
+                )
+
+                exercises[exerciseIndex] = exercises[exerciseIndex].copy(sets = sets)
+
+                currentState.copy(
+
+                    exerciseSetInserted = true,
+                    changedExercisePosition = exercisePos
+
+                )
+
+            }
+        }
+    }
+
     fun resetValues(){
 
         viewModelScope.launch {
@@ -144,16 +184,14 @@ class TrainingEditorViewModel @Inject constructor(
                 currentState.copy(
 
                     loaded = false,
-                    removedExercisePosition = -1
+                    removedExercisePosition = -1,
+                    deletedExerciseSetPosition = -1,
+                    exerciseSetInserted = false
 
                 )
             }
         }
 
-    }
-
-    fun deleteExerciseSet(exercisePosition: String, position: Int) {
-        TODO("Not yet implemented")
     }
 
 }

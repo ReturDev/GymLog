@@ -2,7 +2,7 @@ package com.sergio.gymlog.ui.main
 
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestoreException
-import com.sergio.gymlog.domain.user.ManageUserInfoUserCase
+import com.sergio.gymlog.domain.user.ManageUserInfoUseCase
 import com.sergio.gymlog.util.extension.getErrorMessage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val manageUserInfoUserCase: ManageUserInfoUserCase
+    private val manageUserInfoUseCase: ManageUserInfoUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(MainUiState())
@@ -22,7 +22,7 @@ class MainViewModel @Inject constructor(
 
         try {
 
-            manageUserInfoUserCase()
+            manageUserInfoUseCase()
 
             _uiState.update { currentState ->
 
