@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/trainingModifySetItemCard"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_card">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/trainingModifySetItemRoot"
@@ -13,8 +14,8 @@
 
         <ImageView
             android:id="@+id/ivDeteleSet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             app:layout_constraintBottom_toBottomOf="@+id/tvTrainingMSetNumber"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvTrainingMSetNumber"
@@ -24,17 +25,21 @@
             android:id="@+id/tvTrainingMSetNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/spSetRepetitions"
-            app:layout_constraintEnd_toStartOf="@+id/spSetRepetitions"
+            app:layout_constraintBottom_toBottomOf="@+id/etSetRepetitions"
+            app:layout_constraintEnd_toStartOf="@+id/etSetRepetitions"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toEndOf="@+id/ivDeteleSet"
-            app:layout_constraintTop_toTopOf="@+id/spSetRepetitions" />
+            app:layout_constraintTop_toTopOf="@+id/etSetRepetitions" />
 
-        <Spinner
-            android:id="@+id/spSetRepetitions"
+        <EditText
+            android:id="@+id/etSetRepetitions"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:ems="3"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@+id/etSetWeight"
             app:layout_constraintEnd_toStartOf="@+id/etSetWeight"
             app:layout_constraintHorizontal_bias="0.5"
@@ -49,10 +54,11 @@
             android:ems="3"
             android:inputType="numberDecimal"
             android:minHeight="48dp"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@+id/cbBodyWeight"
             app:layout_constraintEnd_toStartOf="@+id/cbBodyWeight"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/spSetRepetitions"
+            app:layout_constraintStart_toEndOf="@+id/etSetRepetitions"
             app:layout_constraintTop_toTopOf="@+id/cbBodyWeight" />
 
         <CheckBox

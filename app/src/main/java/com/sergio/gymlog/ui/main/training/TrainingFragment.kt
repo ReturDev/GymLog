@@ -93,7 +93,8 @@ class TrainingFragment : Fragment() {
 
     private fun setListeners() {
         binding.btnCreateNewTraining.setOnClickListener {
-            findNavController().navigate(R.id.action_global_trainingEditorFragment)
+            val action = TrainingFragmentDirections.actionGlobalTrainingEditorFragment(emptyArray())
+            findNavController().navigate(action)
         }
     }
 

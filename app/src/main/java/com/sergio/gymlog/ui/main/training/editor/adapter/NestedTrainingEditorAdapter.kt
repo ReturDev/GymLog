@@ -5,9 +5,6 @@ import android.text.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
@@ -28,7 +25,7 @@ class NestedTrainingEditorAdapter(
     override fun getItemCount() = exerciseSets.size
 
     override fun onBindViewHolder(holder: NestedTrainingEditorHolder, position: Int) {
-        holder.bind(exerciseSets[position],onDeleteClick, onExerciseSetValueChanged)
+        holder.bind(exerciseSets[position])
     }
 
     inner class NestedTrainingEditorHolder(view : View) : RecyclerView.ViewHolder(view){
@@ -36,16 +33,31 @@ class NestedTrainingEditorAdapter(
         private val binding = TrainingEditorSetItemBinding.bind(view)
 
         @SuppressLint("SetTextI18n")
-        fun bind(exerciseSet: TrainingExerciseSet, onDeleteClick : (Int) -> Unit, onExerciseSetValueChanged: (Int, TrainingExerciseSet) -> Unit){
+        fun bind(exerciseSet: TrainingExerciseSet){
 
-            val arrayAdapter = ArrayAdapter(binding.root.context, R.layout.training_editor_set_item, arrayOf(1..30))
-            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-            binding.spSetRepetitions.adapter = arrayAdapter
+            binding.etSetRepetitions.text = SpannableStringBuilder(exerciseSet.repetitions.toString())
 
             binding.tvTrainingMSetNumber.text = "${layoutPosition+1}"
 
             binding.etSetWeight.text = SpannableStringBuilder(exerciseSet.weight.toString())
+
+            binding.cbBodyWeight.isChecked = exerciseSet.bodyWeight
+
+            binding.etSetWeight.isEnabled = !binding.cbBodyWeight.isChecked
+
+
+            setListeners(exerciseSet)
+
+        }
+
+        private fun setListeners(exerciseSet: TrainingExerciseSet) {
+
+            binding.cbBodyWeight.setOnCheckedChangeListener { _, isChecked ->
+
+                binding.etSetWeight.isEnabled = !isChecked
+
+            }
+
 
             binding.ivDeteleSet.setOnClickListener {
 
@@ -53,22 +65,66 @@ class NestedTrainingEditorAdapter(
 
             }
 
-            setListeners(exerciseSet,onExerciseSetValueChanged)
+            binding.etSetRepetitions.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
 
-        }
+                if (!hasFocus){
 
-        private fun setListeners(exerciseSet: TrainingExerciseSet, onExerciseSetValueChanged: (Int, TrainingExerciseSet) -> Unit) {
+                    if (binding.etSetRepetitions.text.isBlank()){
 
-            binding.spSetRepetitions.onItemSelectedListener  = object : AdapterView.OnItemSelectedListener{
-                override fun onItemSelected(parent: AdapterView<*>?,view: View?,position: Int,id: Long) {
-                    onValueChanged(onExerciseSetValueChanged)
+                        binding.etSetRepetitions.text = SpannableStringBuilder("0")
+
+                    }
+
                 }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
 
             }
 
-            binding.etSetWeight.onFocusChangeListener = View.OnFocusChangeListener{ view, hasFocus ->
+            binding.etSetRepetitions.addTextChangedListener(object : TextWatcher{
+                override fun beforeTextChanged(s: CharSequence?,start: Int,count: Int,after: Int) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+                override fun afterTextChanged(s: Editable?) {
+
+                    val text = s.toString()
+
+                    if (text.isNotBlank()){
+
+                        if (text.toInt() != exerciseSet.repetitions){
+
+                            onValueChanged(onExerciseSetValueChanged)
+
+                        }
+
+                    }
+
+                }
+
+
+            })
+
+            binding.etSetWeight.addTextChangedListener(object : TextWatcher{
+                override fun beforeTextChanged(s: CharSequence?,start: Int,count: Int,after: Int) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+                override fun afterTextChanged(s: Editable?) {
+
+                    val text = s.toString()
+
+                    if (text.isNotBlank()){
+
+                        if (text.toDouble() != exerciseSet.weight){
+
+                            onValueChanged(onExerciseSetValueChanged)
+
+                        }
+
+                    }
+
+                }
+
+            })
+
+            binding.etSetWeight.onFocusChangeListener = View.OnFocusChangeListener{ _, hasFocus ->
 
                 if (!hasFocus){
 
@@ -76,22 +132,26 @@ class NestedTrainingEditorAdapter(
 
                         binding.etSetWeight.text = SpannableStringBuilder("0")
 
+                    }else if (binding.etSetWeight.text.indexOf(".") == -1){
+
+                        binding.etSetWeight.text = binding.etSetWeight.text.append(".0")
+
+                    }else if (binding.etSetWeight.text.indexOf(".") == 0){
+                        binding.etSetWeight.text = binding.etSetWeight.text.insert(0,"0")
                     }
+
 
                     if (binding.etSetWeight.text.toString().toDouble() != exerciseSet.weight){
+
                         onValueChanged(onExerciseSetValueChanged)
-                    }
-
-                }else{
-                    if (binding.etSetWeight.text.isBlank()){
-
-                        binding.etSetWeight.text = SpannableStringBuilder()
 
                     }
+
                 }
 
             }
 
+            binding.etSetRepetitions.filters = arrayOf(createRepetitionsFilter())
             binding.etSetWeight.filters = arrayOf(createWeightFilter())
 
 
@@ -104,11 +164,27 @@ class NestedTrainingEditorAdapter(
         }
 
         private fun getDataTrainingExerciseSet() = TrainingExerciseSet(
-                repetitions = binding.spSetRepetitions.selectedItem as Int,
+                repetitions = binding.etSetRepetitions.text.toString().toInt(),
                 weight = binding.etSetWeight.text.toString().toDouble(),
                 bodyWeight = binding.cbBodyWeight.isChecked
             )
 
+        private fun createRepetitionsFilter() = InputFilter { source, start, end, dest, dstart, dend ->
+
+            val sb = StringBuilder(dest)
+            sb.replace(dstart, dend, source.subSequence(start, end).toString())
+            val temp = sb.toString()
+
+            if (temp.length > 2){
+                return@InputFilter ""
+            }
+            if (temp.isNotBlank() && temp[0] == '0'){
+                return@InputFilter ""
+            }
+
+            return@InputFilter null
+
+        }
 
         private fun createWeightFilter() = InputFilter { source, start, end, dest, dstart, dend ->
 

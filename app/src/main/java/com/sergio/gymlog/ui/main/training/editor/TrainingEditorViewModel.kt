@@ -1,6 +1,7 @@
 package com.sergio.gymlog.ui.main.training.editor
 
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sergio.gymlog.data.model.exercise.Exercises
@@ -63,6 +64,7 @@ class TrainingEditorViewModel @Inject constructor(
     private suspend fun loadTraining(idTraining: String){
 
         _uiState.update { currentState ->
+
             currentState.copy(
                 loading = false,
                 loaded = true,
@@ -99,7 +101,7 @@ class TrainingEditorViewModel @Inject constructor(
                 currentState.copy(
 
                     removedExercisePosition = position,
-                    training = Training(training.id, training.name, training.description, newExerciseList)
+                    training = currentState.training.copy(exercises = newExerciseList)
 
                 )
 
@@ -158,18 +160,19 @@ class TrainingEditorViewModel @Inject constructor(
                 val exercises = currentState.training.exercises.toMutableList()
                 val exerciseIndex = exercises.indexOfFirst { it.id == exerciseID }
                 val sets = exercises[exerciseIndex].sets.toMutableList()
-                sets.add(
-                    TrainingExerciseSet(
-                        repetitions = getUserInfoUseCase().repetitions
-                    )
+                val set = TrainingExerciseSet(
+                    repetitions = getUserInfoUseCase().repetitions
                 )
+                sets.add(set)
 
                 exercises[exerciseIndex] = exercises[exerciseIndex].copy(sets = sets)
 
                 currentState.copy(
 
                     exerciseSetInserted = true,
-                    changedExercisePosition = exercisePos
+                    newExerciseSet = set ,
+                    changedExercisePosition = exercisePos,
+                    training = currentState.training.copy(exercises = exercises)
 
                 )
 
@@ -179,18 +182,44 @@ class TrainingEditorViewModel @Inject constructor(
 
     fun resetValues(){
 
+        _uiState.update { currentState ->
+            currentState.copy(
+
+                loaded = false,
+                removedExercisePosition = -1,
+                deletedExerciseSetPosition = -1,
+                exerciseSetInserted = false
+
+            )
+        }
+
+    }
+
+    fun onExerciseSetValueChanged(
+        exerciseID: String,
+        exerciseSetPos: Int,
+        exerciseSet: TrainingExerciseSet
+    ) {
+
         viewModelScope.launch {
             _uiState.update { currentState ->
+
+                val exercises = currentState.training.exercises.toMutableList()
+                val exerciseIndex = exercises.indexOfFirst { it.id == exerciseID }
+                val sets = exercises[exerciseIndex].sets.toMutableList()
+                sets[exerciseSetPos] = exerciseSet
+
+                exercises[exerciseIndex] = exercises[exerciseIndex].copy(sets = sets)
+
                 currentState.copy(
 
-                    loaded = false,
-                    removedExercisePosition = -1,
-                    deletedExerciseSetPosition = -1,
-                    exerciseSetInserted = false
+                    training = currentState.training.copy(exercises = exercises)
 
                 )
+
             }
         }
+
 
     }
 

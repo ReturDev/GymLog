@@ -16,15 +16,13 @@ class GetExerciseReferenceUseCase @Inject constructor(
 
         val userExercises = getUserExercisesUseCase()
 
-        val reference : DocumentReference
+        val reference = if (userExercises.contains(exercise)){
 
-        if (userExercises.contains(exercise)){
-
-            reference = exercisesRepository.getUserExerciseReference(exercise.id, applicationData.userInfo.id)
+            exercisesRepository.getUserExerciseReference(exercise.id, applicationData.userInfo.id)
 
         }else{
 
-            reference = exercisesRepository.getExerciseReference(exercise.id)
+            exercisesRepository.getExerciseReference(exercise.id)
 
         }
 

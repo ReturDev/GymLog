@@ -1,5 +1,6 @@
 package com.sergio.gymlog.ui.main.training.editor.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
 import com.sergio.gymlog.databinding.TrainingEditorExerciseItemBinding
 import com.sergio.gymlog.ui.main.training.detail.adapter.NestedTrainingDetailsAdapter
+import kotlin.math.log
 
 class TrainingEditorAdapter(
     val trainingExercises : MutableList<Exercises.TrainingExercise>,
@@ -22,7 +24,7 @@ class TrainingEditorAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrainingEditorHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.exercise_item, parent, false)
+        val view = layoutInflater.inflate(R.layout.training_editor_exercise_item, parent, false)
         return TrainingEditorHolder(view)
     }
 
@@ -89,7 +91,11 @@ class TrainingEditorAdapter(
         fun addExerciseSet(exerciseSets : TrainingExerciseSet){
 
             adapter.exerciseSets.add(exerciseSets)
-            adapter.notifyItemInserted(adapter.exerciseSets.size)
+
+            adapter.exerciseSets.forEach {  Log.e("SETS", it.toString() )}
+
+
+            adapter.notifyItemInserted(adapter.exerciseSets.size -1)
 
         }
 

@@ -18,6 +18,8 @@ import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.databinding.FragmentTrainingEditorBinding
+import com.sergio.gymlog.ui.main.training.editor.TrainingEditorFragmentArgs
+import com.sergio.gymlog.ui.main.training.editor.TrainingEditorFragmentDirections
 import com.sergio.gymlog.ui.main.training.editor.adapter.TrainingEditorAdapter
 import com.sergio.gymlog.util.TrainingEdit
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,6 +53,7 @@ class TrainingEditorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initRecyclerView()
         setListeners()
         setCollectors()
 
@@ -61,22 +64,23 @@ class TrainingEditorFragment : Fragment() {
         binding.btnEditorCancel.setOnClickListener {
 
             //TODO añadir dialog
+            TrainingEdit.setTraining(null)
             findNavController().popBackStack()
         }
 
-        binding.btnEditorAccept.setOnClickListener {
-
-            //TODO añadir dialog
-            //TODO Terminar
+        binding.btnEditorSave.setOnClickListener {
+            trainingEditorViewModel.saveTrainingData(getTrainingInfo())
             TrainingEdit.setTraining(null)
-
+            findNavController().popBackStack()
         }
 
         binding.btnEditorAddExercises.setOnClickListener {
 
             TrainingEdit.setTraining(getTrainingInfo())
             val idsExercises = trainingEditorViewModel.uiState.value.training.exercises.map { e -> e.id }.toTypedArray()
-            val action = TrainingEditorFragmentDirections.actionTrainingEditorFragmentToExercisesSelectorFragment(idsExercises)
+            val action = TrainingEditorFragmentDirections.actionTrainingEditorFragmentToExercisesSelectorFragment(
+                    idsExercises
+                )
             findNavController().navigate(action)
 
         }
@@ -113,8 +117,6 @@ class TrainingEditorFragment : Fragment() {
                         binding.pbTrainingEditorLoading.visibility = View.GONE
 
                         bindTrainingData(currentState.training)
-                        initRecyclerView(currentState.training.exercises)
-
                         trainingEditorViewModel.resetValues()
 
                     }
@@ -153,10 +155,10 @@ class TrainingEditorFragment : Fragment() {
 
     }
 
-    private fun initRecyclerView(exercises : List<Exercises.TrainingExercise>){
+    private fun initRecyclerView(){
 
         adapter = TrainingEditorAdapter(
-            trainingExercises = exercises.toMutableList(),
+            trainingExercises = trainingEditorViewModel.uiState.value.training.exercises.toMutableList(),
             onRemoveExercise = { position -> onRemoveExercise(position)},
             onAddExerciseSet = { exercisePos  -> onAddExerciseSet(exercisePos)},
             onDeleteExerciseSet = {
@@ -180,9 +182,11 @@ class TrainingEditorFragment : Fragment() {
     private fun onExerciseSetValueChanged(
         exerciseID: String,
         exerciseSetPos: Int,
-        trainingSet: TrainingExerciseSet
+        exerciseSet: TrainingExerciseSet
     ) {
-        TODO() //Implementar y luego probarlo todo
+
+        trainingEditorViewModel.onExerciseSetValueChanged(exerciseID, exerciseSetPos, exerciseSet)
+
     }
 
 

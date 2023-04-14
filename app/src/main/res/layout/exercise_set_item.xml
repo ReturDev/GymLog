@@ -15,7 +15,7 @@
 
         <TextView
             android:id="@+id/tvSetNumber"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/set"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -50,7 +50,7 @@
 
         <ImageView
             android:id="@+id/ivBodyWeightChecked"
-            android:layout_width="@dimen/body_weight_checked_iv_size"
+            android:layout_width="0dp"
             android:layout_height="@dimen/body_weight_checked_iv_size"
             app:layout_constraintBottom_toBottomOf="@+id/tvSetWeight"
             app:layout_constraintEnd_toEndOf="parent"
