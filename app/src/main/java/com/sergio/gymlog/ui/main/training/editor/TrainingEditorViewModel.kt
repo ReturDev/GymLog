@@ -1,11 +1,13 @@
 package com.sergio.gymlog.ui.main.training.editor
 
 
-import android.util.Log
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sergio.gymlog.data.model.exercise.Equipment
 import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
+import com.sergio.gymlog.data.model.repository.EditingTraining
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.domain.exercise.GetExerciseByIdUseCase
 import com.sergio.gymlog.domain.training.CreateUserTrainingUseCase
@@ -13,7 +15,6 @@ import com.sergio.gymlog.domain.training.GetTrainingByIdUseCase
 import com.sergio.gymlog.domain.training.ModifyTrainingUseCase
 import com.sergio.gymlog.domain.exercise.sets.GetUserSetsPreferencesUseCase
 import com.sergio.gymlog.domain.user.GetUserInfoUseCase
-import com.sergio.gymlog.util.TrainingEdit
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -28,7 +29,8 @@ class TrainingEditorViewModel @Inject constructor(
     private val createUserTrainingUseCase: CreateUserTrainingUseCase,
     private val modifyTrainingUseCase: ModifyTrainingUseCase,
     private val getUserSetsPreferencesUseCase: GetUserSetsPreferencesUseCase,
-    private val getUserInfoUseCase: GetUserInfoUseCase
+    private val getUserInfoUseCase: GetUserInfoUseCase,
+    private val editingTraining: EditingTraining
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(TrainingEditorUiState())
@@ -46,7 +48,7 @@ class TrainingEditorViewModel @Inject constructor(
 
             }
 
-            val training = TrainingEdit.getTraining()
+            val training = editingTraining.value
             if (training != null){
 
                 loadAndAddNewExercises(idExercises, training)
@@ -77,7 +79,7 @@ class TrainingEditorViewModel @Inject constructor(
     private suspend fun loadAndAddNewExercises(idExercises: Array<String>, training: Training) {
 
         val newExercises = idExercises.map { id -> getExerciseByIdUseCase(id).convertTo<Exercises.TrainingExercise>() }
-        newExercises.forEach{ex -> ex.sets = getUserSetsPreferencesUseCase()}
+        newExercises.forEach{ex -> ex.sets = getUserSetsPreferencesUseCase(ex.equipment == Equipment.BODY_WEIGHT)}
         val newTraining = training.copy(exercises =  newExercises + training.exercises)
 
         _uiState.update { currentState ->
@@ -160,9 +162,23 @@ class TrainingEditorViewModel @Inject constructor(
                 val exercises = currentState.training.exercises.toMutableList()
                 val exerciseIndex = exercises.indexOfFirst { it.id == exerciseID }
                 val sets = exercises[exerciseIndex].sets.toMutableList()
-                val set = TrainingExerciseSet(
-                    repetitions = getUserInfoUseCase().repetitions
-                )
+
+                val set = if (exercises[exerciseIndex].equipment == Equipment.BODY_WEIGHT){
+
+                     TrainingExerciseSet(
+                        repetitions = getUserInfoUseCase().repetitions
+                    )
+
+                }else{
+
+                    TrainingExerciseSet(
+                        repetitions = getUserInfoUseCase().repetitions,
+                        weight = getUserInfoUseCase().weight,
+                        bodyWeight = true
+                    )
+
+                }
+
                 sets.add(set)
 
                 exercises[exerciseIndex] = exercises[exerciseIndex].copy(sets = sets)
@@ -220,7 +236,7 @@ class TrainingEditorViewModel @Inject constructor(
             }
         }
 
-
     }
+
 
 }

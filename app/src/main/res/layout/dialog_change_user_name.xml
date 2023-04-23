@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/changeUsernameRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dialog_root_padding">
+
+    <ImageView
+        android:id="@+id/ivChangeUsernameAccept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/horizontal_max_margin"
+        app:layout_constraintBottom_toBottomOf="@+id/ivChangeUsernameCancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivChangeUsernameCancel"
+        app:srcCompat="@drawable/ic_checked_item" />
+
+    <ImageView
+        android:id="@+id/ivChangeUsernameCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontal_max_margin"
+        android:layout_marginTop="@dimen/vertical_min_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etChangeUsernameValue"
+        app:srcCompat="@drawable/ic_delete_item" />
+
+    <EditText
+        android:id="@+id/etChangeUsernameValue"
+        android:hint="@string/user_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
+</androidx.constraintlayout.widget.ConstraintLayout>

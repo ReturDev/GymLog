@@ -11,18 +11,20 @@ interface CloudFirestore {
 
     suspend fun createNewUser(user : UserInfo)
 
-    suspend fun getUserInfo(userUID: String): DocumentSnapshot?
+    suspend fun getUserInfo(userID: String): DocumentSnapshot?
 
-    suspend fun updateDailyTraining(userUID: String, training: UserInfo.DailyTraining?)
+    suspend fun <T> modifyUserInfo(userID: String, fieldName : String, fieldData : T)
+
+    suspend fun updateDailyTraining(userID: String, training: UserInfo.DailyTraining?)
 
     suspend fun getProvidedExercises() : QuerySnapshot?
 
-    suspend fun getUserExercises(userUID: String): QuerySnapshot?
+    suspend fun getUserExercises(userID: String): QuerySnapshot?
 
-    suspend fun getUserTrainings(userUID: String): QuerySnapshot?
+    suspend fun getUserTrainings(userID: String): QuerySnapshot?
     suspend fun createUserTraining(userID: String, training: TrainingCloud)
-    suspend fun deleteUserTraining(userUID: String, trainingId: String)
-    suspend fun getUserExerciseReference(userID: String, exerciseID: String): DocumentReference
+    suspend fun deleteUserTraining(userID: String, trainingID: String)
+    suspend fun getUserExerciseReference(userID: String, userExerciseID: String): DocumentReference
     suspend fun getExerciseReference(exerciseID: String): DocumentReference
     suspend fun generateTrainingRandomId(userID: String): String
 

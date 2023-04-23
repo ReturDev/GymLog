@@ -14,13 +14,16 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.navOptions
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.sergio.gymlog.R
+import com.sergio.gymlog.data.model.exercise.Equipment
 import com.sergio.gymlog.databinding.ActivityMainBinding
+import com.sergio.gymlog.ui.main.training.editor.TrainingEditorFragment
 import com.sergio.gymlog.util.extension.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay

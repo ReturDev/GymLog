@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -15,12 +18,13 @@ import com.sergio.gymlog.R
 import com.sergio.gymlog.databinding.FragmentSignUpBinding
 import com.sergio.gymlog.ui.access.AccessViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
-    private val accesViewModel : AccessViewModel by activityViewModels()
+    private val accessViewModel : AccessViewModel by activityViewModels()
     private lateinit var binding : FragmentSignUpBinding
 
     @Inject
@@ -30,7 +34,7 @@ class SignUpFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentSignUpBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -40,6 +44,35 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
+        setCollector()
+
+    }
+
+    private fun setCollector() {
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+
+               accessViewModel.uiState.collect{currentState ->
+
+                   if (currentState.loading){
+
+                       binding.btnSignUp.isEnabled = false
+                       binding.btnSignUpGoogle.isEnabled = false
+                       binding.tvLogin.isEnabled = false
+
+                   }else{
+
+                       binding.btnSignUp.isEnabled = true
+                       binding.btnSignUpGoogle.isEnabled = true
+                       binding.tvLogin.isEnabled = true
+
+                   }
+
+               }
+
+            }
+        }
 
     }
 
@@ -56,7 +89,7 @@ class SignUpFragment : Fragment() {
             val userText = binding.etEmailLogin.text.toString()
             val passwordText = binding.etPasswordLogin.text.toString()
 
-            accesViewModel.signUpWithEmailAndPassword(userText, passwordText)
+            accessViewModel.signUpWithEmailAndPassword(userText, passwordText)
 
         }
 
@@ -76,7 +109,7 @@ class SignUpFragment : Fragment() {
         if (result.resultCode == Activity.RESULT_OK){
 
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-            accesViewModel.signUpWithGoogle(task)
+            accessViewModel.signUpWithGoogle(task)
 
         }
 

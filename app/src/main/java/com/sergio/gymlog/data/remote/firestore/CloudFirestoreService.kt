@@ -7,7 +7,7 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.sergio.gymlog.data.model.remote.firestore.TrainingCloud
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.data.model.user.UserInfo
-import com.sergio.gymlog.util.CloudFirestoreConstants
+import com.sergio.gymlog.util.CloudFirestoreCollections
 import kotlinx.coroutines.tasks.await
 import java.util.*
 import javax.inject.Inject
@@ -22,20 +22,30 @@ class CloudFirestoreService @Inject constructor(
         //TODO linea solo para pruebas
         user.dailyTraining = UserInfo.DailyTraining(date = Date(), training = Training("Training", exercises = emptyList()))
 
-        db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG).document(user.id)
+        db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG).document(user.id)
             .set(user).await()
 
     }
 
     override suspend fun getUserInfo(userID: String): DocumentSnapshot? {
-        return  db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG).document(userID).get().await()
+        return  db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG).document(userID).get().await()
+    }
+
+    override suspend fun <T> modifyUserInfo(userID: String, fieldName: String, fieldData : T) {
+
+        db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG).document(userID).update(
+            mapOf(
+                    fieldName to fieldData
+            )
+        )
+
     }
 
     override suspend fun updateDailyTraining(userID: String, training: UserInfo.DailyTraining?) {
 
-        db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG).document(userID).update(
+        db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG).document(userID).update(
             mapOf(
-                    CloudFirestoreConstants.DAILY_TRAINING_TAG to training
+                    UserInfo.DAILY_TRAINING_TAG to training
             )
         )
 
@@ -43,24 +53,24 @@ class CloudFirestoreService @Inject constructor(
 
     override suspend fun getProvidedExercises() : QuerySnapshot? {
 
-        return db.collection(CloudFirestoreConstants.EXERCISES_COLLECTION_TAG).get().await()
+        return db.collection(CloudFirestoreCollections.EXERCISES_COLLECTION_TAG).get().await()
 
     }
 
     override suspend fun getUserExercises(userID: String) : QuerySnapshot? {
 
-        return db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG)
+        return db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG)
             .document(userID)
-            .collection(CloudFirestoreConstants.USER_EXERCISES_COLLECTION_TAG)
+            .collection(CloudFirestoreCollections.USER_EXERCISES_COLLECTION_TAG)
             .get()
             .await()
 
     }
 
     suspend fun deleteUserExercise(userID: String, exerciseID: String){
-        db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG)
+        db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG)
             .document(userID)
-            .collection(CloudFirestoreConstants.USER_EXERCISES_COLLECTION_TAG)
+            .collection(CloudFirestoreCollections.USER_EXERCISES_COLLECTION_TAG)
             .document(exerciseID)
             .delete()
     }
@@ -69,9 +79,9 @@ class CloudFirestoreService @Inject constructor(
 
     override suspend fun getUserTrainings(userID: String) : QuerySnapshot? {
 
-        return db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG)
+        return db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG)
             .document(userID)
-            .collection(CloudFirestoreConstants.TRAINING_COLLECTION_TAG)
+            .collection(CloudFirestoreCollections.TRAINING_COLLECTION_TAG)
             .get()
             .await()
 
@@ -79,18 +89,18 @@ class CloudFirestoreService @Inject constructor(
 
     override suspend fun createUserTraining(userID: String, training: TrainingCloud){
 
-        db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG)
+        db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG)
             .document(userID)
-            .collection(CloudFirestoreConstants.TRAINING_COLLECTION_TAG)
+            .collection(CloudFirestoreCollections.TRAINING_COLLECTION_TAG)
             .add(training)
 
     }
 
     override suspend fun deleteUserTraining(userID: String, trainingID : String){
 
-        db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG)
+        db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG)
             .document(userID)
-            .collection(CloudFirestoreConstants.TRAINING_COLLECTION_TAG)
+            .collection(CloudFirestoreCollections.TRAINING_COLLECTION_TAG)
             .document(trainingID)
             .delete()
 
@@ -98,18 +108,18 @@ class CloudFirestoreService @Inject constructor(
 
     override suspend fun setUserTraining(userID : String, training : TrainingCloud){
 
-        db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG)
+        db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG)
             .document(userID)
-            .collection(CloudFirestoreConstants.TRAINING_COLLECTION_TAG)
+            .collection(CloudFirestoreCollections.TRAINING_COLLECTION_TAG)
             .document(training.id).set(training)
 
     }
 
     override suspend fun generateTrainingRandomId(userID: String) : String{
 
-        val collectionRef = db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG)
+        val collectionRef = db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG)
             .document(userID)
-            .collection(CloudFirestoreConstants.TRAINING_COLLECTION_TAG)
+            .collection(CloudFirestoreCollections.TRAINING_COLLECTION_TAG)
 
         return collectionRef.document().id
 
@@ -117,16 +127,16 @@ class CloudFirestoreService @Inject constructor(
 
     override suspend fun getUserExerciseReference(userID: String, userExerciseID : String): DocumentReference {
 
-        return db.collection(CloudFirestoreConstants.USER_COLLECTION_TAG)
+        return db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG)
             .document(userID)
-            .collection(CloudFirestoreConstants.USER_EXERCISES_COLLECTION_TAG)
+            .collection(CloudFirestoreCollections.USER_EXERCISES_COLLECTION_TAG)
             .document(userExerciseID)
 
     }
 
     override suspend fun getExerciseReference(exerciseID : String): DocumentReference {
 
-        return db.collection(CloudFirestoreConstants.EXERCISES_COLLECTION_TAG)
+        return db.collection(CloudFirestoreCollections.EXERCISES_COLLECTION_TAG)
             .document(exerciseID)
 
     }

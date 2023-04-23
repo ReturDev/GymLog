@@ -20,4 +20,24 @@ data class ApplicationData private constructor(
     ){
     @Inject constructor() : this(UserInfo(), mutableListOf(), mutableListOf(), mutableListOf(), false, false)
 
+    fun clear(){
+        userInfo.apply {
+            this.id = ""
+            this.email = ""
+            this.username = ""
+            this.photo = ""
+            this.weight = 0.0
+            this.dailyTraining = null
+            this.sets = 3
+            this.repetitions = 10
+        }
+
+        providedExercises.clear()
+        userExercises.clear()
+        userTrainings.clear()
+        userExercisesConsulted = false
+        userTrainingsConsulted = false
+
+    }
+
 }

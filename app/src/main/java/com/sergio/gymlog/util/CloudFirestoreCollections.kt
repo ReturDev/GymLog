@@ -1,11 +1,6 @@
 package com.sergio.gymlog.util
 
-object CloudFirestoreConstants {
-
-//    const val DATE_TAG = "date"
-//    const val TRAINING_TAG = "training"
-    const val DAILY_TRAINING_TAG = "dailyTraining"
-
+object CloudFirestoreCollections {
 
     const val USER_COLLECTION_TAG = "users"
     const val EXERCISES_COLLECTION_TAG = "exercises"

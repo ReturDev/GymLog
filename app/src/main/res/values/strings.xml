@@ -75,5 +75,14 @@
     <string name="save">Guardar</string>
     <string name="add_exercises">Añadir Ejercicios</string>
     <string name="exercise_sets">Series</string>
+    <string name="user_weight">Mi peso</string>
+    <string name="user_preferences">Perferencias</string>
+    <string name="user_exercises">Mis ejercicios</string>
+    <string name="start_selection_daily_training">Comenzar seleccion</string>
+    <string name="end_selection_daily_training">Finalizar seleccion</string>
+    <string name="user_measures">Medidas</string>
+    <string name="kg">kg</string>
+    <string name="user_name_label">Nombre de usuario</string>
+    <string name="exercise_sets_quantity">Series(%d)</string>
 
 </resources>

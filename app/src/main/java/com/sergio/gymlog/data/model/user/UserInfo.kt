@@ -11,7 +11,7 @@ data class UserInfo constructor(
     var email : String = "",
     var username : String = "",
     var photo : String = "",
-    var weight : Int = 0,
+    var weight : Double = 0.0,
     var dailyTraining: DailyTraining? = null,
     var sets : Int = 3,
     var repetitions : Int = 10
@@ -35,5 +35,13 @@ data class UserInfo constructor(
         this.weight = user.weight
     }
 
+    companion object{
+        const val DAILY_TRAINING_TAG = "dailyTraining"
+        const val USERNAME_TAG = "username"
+        const val PHOTO_TAG = "photo"
+        const val WEIGHT_TAG = "weight"
+        const val SETS_TAG = "sets"
+        const val REPETITIONS_TAG = "repetitions"
+    }
 
 }

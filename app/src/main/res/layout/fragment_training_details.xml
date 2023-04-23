@@ -7,6 +7,34 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.training.detail.TrainingDetailsFragment">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glTrainingDetailsBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/vertical_margin_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glTrainingDetailsStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/horizontal_margin_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glTrainingDetailsTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/vertical_margin_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glTrainingDetailsEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/horizontal_margin_guideline" />
+
     <Button
         android:id="@+id/btnDeleteTraining"
         android:layout_width="wrap_content"
@@ -14,18 +42,18 @@
         android:text="@string/delete"
         app:layout_constraintEnd_toStartOf="@+id/btnModifyTraining"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/glTrainingDetailsStart"
+        app:layout_constraintTop_toTopOf="@+id/glTrainingDetailsTop" />
 
     <Button
         android:id="@+id/btnModifyTraining"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/modify"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/glTrainingDetailsEnd"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnDeleteTraining"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/glTrainingDetailsTop" />
 
     <TextView
         android:id="@+id/tvTrainingDetailName"
@@ -34,8 +62,8 @@
         android:layout_marginTop="@dimen/vertical_min_margin"
         android:text="TextView"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/glTrainingDetailsEnd"
+        app:layout_constraintStart_toStartOf="@+id/glTrainingDetailsStart"
         app:layout_constraintTop_toBottomOf="@+id/btnDeleteTraining" />
 
     <TextView
@@ -44,8 +72,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/vertical_min_margin"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/glTrainingDetailsEnd"
+        app:layout_constraintStart_toStartOf="@+id/glTrainingDetailsStart"
         app:layout_constraintTop_toBottomOf="@+id/tvTrainingDetailName" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -53,8 +81,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/vertical_min_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/glTrainingDetailsBottom"
+        app:layout_constraintEnd_toStartOf="@+id/glTrainingDetailsEnd"
+        app:layout_constraintStart_toStartOf="@+id/glTrainingDetailsStart"
         app:layout_constraintTop_toBottomOf="@+id/tvTrainingDescription" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,6 @@
 package com.sergio.gymlog.ui.main.training.editor.adapter
 
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +8,10 @@ import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sergio.gymlog.R
+import com.sergio.gymlog.data.model.exercise.Equipment
 import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
 import com.sergio.gymlog.databinding.TrainingEditorExerciseItemBinding
-import com.sergio.gymlog.ui.main.training.detail.adapter.NestedTrainingDetailsAdapter
-import kotlin.math.log
 
 class TrainingEditorAdapter(
     val trainingExercises : MutableList<Exercises.TrainingExercise>,
@@ -21,6 +20,8 @@ class TrainingEditorAdapter(
     private val onDeleteExerciseSet : (exercisePos : Int, exerciseSetPos : Int) -> Unit,
     private val onExerciseSetValueChanged : (exerciseID : String ,exerciseSetPos : Int, trainingSet : TrainingExerciseSet) -> Unit
 ) : RecyclerView.Adapter<TrainingEditorAdapter.TrainingEditorHolder>() {
+
+    private var itemShowingExerciseSetsPos = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrainingEditorHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -49,15 +50,20 @@ class TrainingEditorAdapter(
             binding.tvTrainingEditorExName.text = trainingExercise.name
             binding.tvTrainingEditorExEquipment.text = trainingExercise.equipment.toString()
             binding.tvTrainingEditorExMuscularGroup.text = trainingExercise.muscularGroup.toString()
+            binding.rvTrainingEditorExSets.visibility = if (layoutPosition != itemShowingExerciseSetsPos) View.GONE else View.VISIBLE
 
             initNestedRecycler(trainingExercise)
-            setListeners(onRemoveExercise)
+
+            binding.tvTrainingEditorExSetsQuantity.text = binding.root.context.getString(R.string.exercise_sets_quantity, adapter.exerciseSets.size)
+
+            setListeners()
 
         }
 
         private fun initNestedRecycler(trainingExercise : Exercises.TrainingExercise){
             adapter = NestedTrainingEditorAdapter(
-                trainingExercise.sets.toMutableList(),
+                exerciseSets = trainingExercise.sets.toMutableList(),
+                bodyWeightExerciseSets = trainingExercise.equipment == Equipment.BODY_WEIGHT,
                 onDeleteClick = { exerciseSetPos -> onDeleteExerciseSet(layoutPosition,exerciseSetPos)},
                 onExerciseSetValueChanged = { exerciseSetPos,
                                               trainingSet ->
@@ -73,10 +79,11 @@ class TrainingEditorAdapter(
         }
 
 
-        private fun setListeners(onRemoveExercise: (Int) -> Unit) {
+        private fun setListeners() {
 
             binding.ivTrainingEditorExRemove.setOnClickListener { onRemoveExercise(layoutPosition) }
             binding.btnTrainingEditorExAddSet.setOnClickListener { onAddExerciseSet(layoutPosition) }
+            binding.tvTrainingEditorExSetsQuantity.setOnClickListener { showExerciseSets()}
 
         }
 
@@ -84,6 +91,35 @@ class TrainingEditorAdapter(
 
             adapter.exerciseSets.removeAt(exerciseSetPos)
             adapter.notifyItemRemoved(exerciseSetPos)
+            if (exerciseSetPos != adapter.exerciseSets.size){
+                adapter.notifyItemRangeChanged(exerciseSetPos ,adapter.exerciseSets.size)
+            }
+            if (adapter.exerciseSets.size == 1){
+                adapter.notifyItemChanged(0)
+            }
+            binding.tvTrainingEditorExSetsQuantity.text = binding.root.context.getString(R.string.exercise_sets_quantity, adapter.exerciseSets.size)
+
+        }
+
+        private fun showExerciseSets(){
+
+            when (itemShowingExerciseSetsPos) {
+                layoutPosition -> {
+                    binding.rvTrainingEditorExSets.visibility = View.GONE
+                    itemShowingExerciseSetsPos = -1
+                }
+                -1 -> {
+                    binding.rvTrainingEditorExSets.visibility = View.VISIBLE
+                    itemShowingExerciseSetsPos = layoutPosition
+                }
+                else -> {
+                    val changeItemPos = itemShowingExerciseSetsPos
+                    itemShowingExerciseSetsPos = layoutPosition
+                    notifyItemChanged(changeItemPos)
+                    binding.rvTrainingEditorExSets.visibility = View.VISIBLE
+
+                }
+            }
 
 
         }
@@ -92,10 +128,11 @@ class TrainingEditorAdapter(
 
             adapter.exerciseSets.add(exerciseSets)
 
-            adapter.exerciseSets.forEach {  Log.e("SETS", it.toString() )}
-
-
             adapter.notifyItemInserted(adapter.exerciseSets.size -1)
+            binding.tvTrainingEditorExSetsQuantity.text = binding.root.context.getString(R.string.exercise_sets_quantity, adapter.exerciseSets.size)
+            if (adapter.exerciseSets.size == 2){
+                adapter.notifyItemChanged(0)
+            }
 
         }
 

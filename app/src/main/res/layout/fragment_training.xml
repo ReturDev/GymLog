@@ -7,36 +7,43 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.training.TrainingFragment">
 
-    <Button
-        android:id="@+id/btnCreateNewTraining"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glTrainingTop"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/create_new_training"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/vertical_margin_guideline" />
 
-    <EditText
-        android:id="@+id/etSearchTraining"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glTrainingBottom"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/vertical_min_margin"
-        android:ems="10"
-        android:hint="@string/search"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCreateNewTraining" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/vertical_margin_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glTrainingEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/horizontal_margin_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glTrainingStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/horizontal_margin_guideline" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTrainings"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/vertical_min_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etSearchTraining" />
+        android:layout_marginBottom="@dimen/vertical_min_margin"
+        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
+        app:layout_constraintEnd_toStartOf="@+id/glTrainingEnd"
+        app:layout_constraintStart_toStartOf="@+id/glTrainingStart"
+        app:layout_constraintTop_toTopOf="@+id/glTrainingTop" />
 
     <TextView
         android:id="@+id/tvRecyclerEmpty"
@@ -47,4 +54,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/rvTrainings" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:src="@drawable/ic_checked_item"
+        app:layout_constraintBottom_toTopOf="@+id/glTrainingBottom"
+        app:layout_constraintEnd_toStartOf="@+id/glTrainingEnd"
+        app:layout_constraintStart_toStartOf="@+id/glTrainingStart" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

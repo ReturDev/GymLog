@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
 import com.sergio.gymlog.databinding.TrainingEditorSetItemBinding
+import com.sergio.gymlog.util.InputFiltersProvider
 
 class NestedTrainingEditorAdapter(
     val exerciseSets : MutableList<TrainingExerciseSet>,
+    private val bodyWeightExerciseSets : Boolean,
     private val onDeleteClick : (Int) -> Unit,
     private val onExerciseSetValueChanged : (Int, TrainingExerciseSet) -> Unit
 ) : RecyclerView.Adapter<NestedTrainingEditorAdapter.NestedTrainingEditorHolder>() {
@@ -35,29 +37,21 @@ class NestedTrainingEditorAdapter(
         @SuppressLint("SetTextI18n")
         fun bind(exerciseSet: TrainingExerciseSet){
 
-            binding.etSetRepetitions.text = SpannableStringBuilder(exerciseSet.repetitions.toString())
-
+            if (exerciseSets.size > 1){
+                binding.ivDeteleSet.visibility = View.VISIBLE
+            }else{
+                binding.ivDeteleSet.visibility = View.GONE
+            }
             binding.tvTrainingMSetNumber.text = "${layoutPosition+1}"
-
+            binding.etSetRepetitions.text = SpannableStringBuilder(exerciseSet.repetitions.toString())
             binding.etSetWeight.text = SpannableStringBuilder(exerciseSet.weight.toString())
-
-            binding.cbBodyWeight.isChecked = exerciseSet.bodyWeight
-
-            binding.etSetWeight.isEnabled = !binding.cbBodyWeight.isChecked
-
+            binding.etSetWeight.isEnabled = !bodyWeightExerciseSets
 
             setListeners(exerciseSet)
 
         }
 
         private fun setListeners(exerciseSet: TrainingExerciseSet) {
-
-            binding.cbBodyWeight.setOnCheckedChangeListener { _, isChecked ->
-
-                binding.etSetWeight.isEnabled = !isChecked
-
-            }
-
 
             binding.ivDeteleSet.setOnClickListener {
 
@@ -151,8 +145,8 @@ class NestedTrainingEditorAdapter(
 
             }
 
-            binding.etSetRepetitions.filters = arrayOf(createRepetitionsFilter())
-            binding.etSetWeight.filters = arrayOf(createWeightFilter())
+            binding.etSetRepetitions.filters = arrayOf(InputFiltersProvider.repetitionsFilter())
+            binding.etSetWeight.filters = arrayOf(InputFiltersProvider.weightFilter(binding.etSetWeight))
 
 
         }
@@ -165,59 +159,9 @@ class NestedTrainingEditorAdapter(
 
         private fun getDataTrainingExerciseSet() = TrainingExerciseSet(
                 repetitions = binding.etSetRepetitions.text.toString().toInt(),
-                weight = binding.etSetWeight.text.toString().toDouble(),
-                bodyWeight = binding.cbBodyWeight.isChecked
+                weight = binding.etSetWeight.text.toString().toDouble()
             )
 
-        private fun createRepetitionsFilter() = InputFilter { source, start, end, dest, dstart, dend ->
-
-            val sb = StringBuilder(dest)
-            sb.replace(dstart, dend, source.subSequence(start, end).toString())
-            val temp = sb.toString()
-
-            if (temp.length > 2){
-                return@InputFilter ""
-            }
-            if (temp.isNotBlank() && temp[0] == '0'){
-                return@InputFilter ""
-            }
-
-            return@InputFilter null
-
-        }
-
-        private fun createWeightFilter() = InputFilter { source, start, end, dest, dstart, dend ->
-
-            val sb = StringBuilder(dest)
-            sb.replace(dstart, dend, source.subSequence(start, end).toString())
-            val temp = sb.toString()
-
-            if (temp == ".") {
-                return@InputFilter "0."
-            }else if (temp.isNotBlank() && temp[0] == '0' && temp.length > 1 && temp[1] != '.'){
-                binding.etSetWeight.text = SpannableStringBuilder(source)
-                binding.etSetWeight.setSelection(end)
-
-            }
-
-            val indexPoint = temp.indexOf(".")
-            if (indexPoint == -1) {
-                if (temp.length == 4 ) {
-                    return@InputFilter ".$source"
-                }else if (temp.length > 5){
-                    return@InputFilter ""
-                }
-            } else {
-                val intPart = temp.substring(0, indexPoint)
-                val decimalPart = temp.substring(indexPoint + 1)
-
-                if (intPart.length > 3 || decimalPart.length > 2) {
-                    return@InputFilter ""
-                }
-            }
-
-            return@InputFilter null
-        }
 
     }
 

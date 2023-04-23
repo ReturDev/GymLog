@@ -1,11 +1,16 @@
 package com.sergio.gymlog.ui.main.training.editor
 
+import android.app.Dialog
 import android.os.Bundle
 import android.text.SpannableStringBuilder
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -14,26 +19,31 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sergio.gymlog.data.model.exercise.Exercises
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
+import com.sergio.gymlog.data.model.repository.EditingTraining
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.databinding.FragmentTrainingEditorBinding
-import com.sergio.gymlog.ui.main.training.editor.TrainingEditorFragmentArgs
-import com.sergio.gymlog.ui.main.training.editor.TrainingEditorFragmentDirections
 import com.sergio.gymlog.ui.main.training.editor.adapter.TrainingEditorAdapter
-import com.sergio.gymlog.util.TrainingEdit
+import com.sergio.gymlog.util.InputFiltersProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class TrainingEditorFragment : Fragment() {
 
     private lateinit var binding : FragmentTrainingEditorBinding
     private lateinit var adapter : TrainingEditorAdapter
+    private lateinit var bottomMenu : BottomNavigationView
+    @Inject lateinit var editingTraining: EditingTraining
 
     private val trainingEditorViewModel by viewModels<TrainingEditorViewModel>()
     private val args by navArgs<TrainingEditorFragmentArgs>()
     private var argsGet : Boolean = false
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +56,11 @@ class TrainingEditorFragment : Fragment() {
             trainingEditorViewModel.loadTrainingData(args.idTraining, args.idsExercises)
             argsGet = true
         }
+
+        bottomMenu = requireActivity().findViewById(R.id.bottomNavigationView)
+        bottomMenu.visibility = View.GONE
+
+        setupOnBackPressed()
 
         return binding.root
     }
@@ -63,20 +78,20 @@ class TrainingEditorFragment : Fragment() {
 
         binding.btnEditorCancel.setOnClickListener {
 
-            //TODO añadir dialog
-            TrainingEdit.setTraining(null)
+            setupOnEditCanceled()
+            editingTraining.value = null
             findNavController().popBackStack()
         }
 
         binding.btnEditorSave.setOnClickListener {
             trainingEditorViewModel.saveTrainingData(getTrainingInfo())
-            TrainingEdit.setTraining(null)
+            editingTraining.value = null
             findNavController().popBackStack()
         }
 
         binding.btnEditorAddExercises.setOnClickListener {
 
-            TrainingEdit.setTraining(getTrainingInfo())
+            editingTraining.value = getTrainingInfo()
             val idsExercises = trainingEditorViewModel.uiState.value.training.exercises.map { e -> e.id }.toTypedArray()
             val action = TrainingEditorFragmentDirections.actionTrainingEditorFragmentToExercisesSelectorFragment(
                     idsExercises
@@ -85,15 +100,8 @@ class TrainingEditorFragment : Fragment() {
 
         }
 
-        binding.btnEditorFilter.setOnClickListener {
-
-
-
-        }
-
-        binding.etEditorName.addTextChangedListener{}
-        binding.etEditorDescription.addTextChangedListener {  }
-        binding.etEditorSearcher.addTextChangedListener{}
+        binding.etEditorName.filters = arrayOf(InputFiltersProvider.usernameFilter())
+        binding.etEditorDescription.filters = arrayOf(InputFiltersProvider.descriptionFilter())
 
     }
 
@@ -223,5 +231,29 @@ class TrainingEditorFragment : Fragment() {
         )
 
     }
+
+    private fun setupOnBackPressed(){
+        requireActivity().onBackPressedDispatcher.addCallback (this){
+            Log.e("Edicion", "AAAA")
+            setupOnEditCanceled()
+            //TODO implemantar el mismo dialog que en cancelar.
+        }
+
+    }
+
+    private fun setupOnEditCanceled(){
+
+        val  dialog = Dialog(requireContext())
+        //https://developer.android.com/guide/topics/ui/dialogs?hl=es-419
+        //TODO
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        bottomMenu.visibility = View.VISIBLE
+    }
+
+
 
 }

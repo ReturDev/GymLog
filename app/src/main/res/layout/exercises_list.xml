@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/exercisesListRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glExercisesListTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/vertical_margin_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glExercisesListStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/horizontal_margin_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glExercisesListEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/horizontal_margin_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glExercisesListBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/vertical_margin_guideline" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvExercisesList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/vertical_min_margin"
+        android:layout_marginBottom="@dimen/vertical_min_margin"
+        app:layout_constraintBottom_toTopOf="@+id/fabExerciseListNewExercise"
+        app:layout_constraintEnd_toStartOf="@+id/glExercisesListStart"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/glExercisesListEnd"
+        app:layout_constraintTop_toBottomOf="@+id/tvExercisesListNumberLabel"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/etExerciseListSearcher"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="56dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintEnd_toStartOf="@+id/btnExerciseListFilter"
+        app:layout_constraintStart_toStartOf="@+id/glExercisesListEnd"
+        app:layout_constraintTop_toTopOf="@+id/glExercisesListTop" />
+
+    <Button
+        android:id="@+id/btnExerciseListFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/filter"
+        app:layout_constraintBaseline_toBaselineOf="@+id/etExerciseListSearcher"
+        app:layout_constraintEnd_toStartOf="@+id/glExercisesListStart"
+        app:layout_constraintStart_toEndOf="@+id/etExerciseListSearcher" />
+
+    <TextView
+        android:id="@+id/tvExercisesListNumberLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vertical_min_margin"
+        android:text="@string/number_of_exercises"
+        app:layout_constraintStart_toStartOf="@+id/glExercisesListEnd"
+        app:layout_constraintTop_toBottomOf="@+id/etExerciseListSearcher" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabExerciseListNewExercise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/glExercisesListBottom"
+        app:layout_constraintEnd_toStartOf="@+id/glExercisesListStart"
+        app:layout_constraintStart_toStartOf="@+id/glExercisesListEnd"
+        app:srcCompat="@drawable/ic_checked_item" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

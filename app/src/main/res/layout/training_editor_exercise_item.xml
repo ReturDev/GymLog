@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/horizontal_min_margin"
             android:layout_marginTop="@dimen/vertical_min_margin"
-            android:text="@string/exercise_sets"
+            android:text="@string/exercise_sets_quantity"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@+id/btnTrainingEditorExAddSet"
             app:layout_constraintEnd_toEndOf="@+id/ivTrainingEditorExRemove"
@@ -92,6 +92,7 @@
             android:id="@+id/rvTrainingEditorExSets"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnTrainingEditorExAddSet" />

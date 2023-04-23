@@ -70,7 +70,6 @@ class TrainingFragment : Fragment() {
                     if (currentState.loading){
 
                         binding.tvRecyclerEmpty.visibility = View.VISIBLE
-                        binding.etSearchTraining.isEnabled = false
 
                     }
 
@@ -79,7 +78,6 @@ class TrainingFragment : Fragment() {
                         adapter.trainingList = currentState.trainings
                         adapter.notifyDataSetChanged()
                         binding.tvRecyclerEmpty.visibility = View.GONE
-                        binding.etSearchTraining.isEnabled = true
                         trainingViewModel.resetLoaded()
 
                     }
@@ -92,7 +90,7 @@ class TrainingFragment : Fragment() {
     }
 
     private fun setListeners() {
-        binding.btnCreateNewTraining.setOnClickListener {
+        binding.floatingActionButton.setOnClickListener {
             val action = TrainingFragmentDirections.actionGlobalTrainingEditorFragment(emptyArray())
             findNavController().navigate(action)
         }
