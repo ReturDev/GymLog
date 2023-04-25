@@ -238,5 +238,12 @@ class TrainingEditorViewModel @Inject constructor(
 
     }
 
+    suspend fun trainingHasChanges(currentTraining : Training) : Boolean{
+
+        val training = getTrainingByIdUseCase(currentTraining.id)
+
+        return training != currentTraining
+
+    }
 
 }

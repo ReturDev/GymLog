@@ -84,5 +84,7 @@
     <string name="kg">kg</string>
     <string name="user_name_label">Nombre de usuario</string>
     <string name="exercise_sets_quantity">Series(%d)</string>
+    <string name="cancel_training_edit">¿Quieres descartar los cambios?</string>
+    <string name="discard">Descartar</string>
 
 </resources>

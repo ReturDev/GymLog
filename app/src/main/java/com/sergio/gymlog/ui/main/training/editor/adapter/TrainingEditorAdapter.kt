@@ -91,11 +91,13 @@ class TrainingEditorAdapter(
 
             adapter.exerciseSets.removeAt(exerciseSetPos)
             adapter.notifyItemRemoved(exerciseSetPos)
+
+            if (adapter.exerciseSets.size == 1){
+                adapter.notifyItemChanged(0,Any())
+            }
+
             if (exerciseSetPos != adapter.exerciseSets.size){
                 adapter.notifyItemRangeChanged(exerciseSetPos ,adapter.exerciseSets.size)
-            }
-            if (adapter.exerciseSets.size == 1){
-                adapter.notifyItemChanged(0)
             }
             binding.tvTrainingEditorExSetsQuantity.text = binding.root.context.getString(R.string.exercise_sets_quantity, adapter.exerciseSets.size)
 
@@ -128,11 +130,12 @@ class TrainingEditorAdapter(
 
             adapter.exerciseSets.add(exerciseSets)
 
-            adapter.notifyItemInserted(adapter.exerciseSets.size -1)
             binding.tvTrainingEditorExSetsQuantity.text = binding.root.context.getString(R.string.exercise_sets_quantity, adapter.exerciseSets.size)
             if (adapter.exerciseSets.size == 2){
                 adapter.notifyItemChanged(0)
             }
+
+            adapter.notifyItemInserted(adapter.exerciseSets.size -1)
 
         }
 
