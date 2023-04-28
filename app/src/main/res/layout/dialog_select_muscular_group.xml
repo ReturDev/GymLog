@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/selectMuscularGroupRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/dialog_root_padding">
+
+    <Button
+        android:id="@+id/btnSelectMuscularGBack"
+        android:layout_width="@dimen/select_equipment_btn_width"
+        android:layout_height="@dimen/select_equipment_btn_height"
+        android:singleLine="true"
+        android:text="@string/back_muscle"
+        app:icon="@drawable/ic_checked_item"
+        app:iconGravity="top"
+        app:layout_constraintEnd_toStartOf="@+id/btnSelectMuscularGChest"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnSelectMuscularGChest"
+        android:layout_width="@dimen/select_equipment_btn_width"
+        android:layout_height="@dimen/select_equipment_btn_height"
+        android:singleLine="true"
+        android:text="@string/chest_muscle"
+        app:icon="@drawable/ic_checked_item"
+        app:iconGravity="top"
+        app:layout_constraintEnd_toStartOf="@+id/btnSelectMuscularGShoulders"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnSelectMuscularGBack"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnSelectMuscularGShoulders"
+        android:layout_width="@dimen/select_equipment_btn_width"
+        android:layout_height="@dimen/select_equipment_btn_height"
+        android:singleLine="true"
+        android:text="@string/shoulders_muscle"
+        app:icon="@drawable/ic_checked_item"
+        app:iconGravity="top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnSelectMuscularGChest"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck" />
+
+    <Button
+        android:id="@+id/btnSelectMuscularGLegs"
+        android:layout_width="@dimen/select_equipment_btn_width"
+        android:layout_height="@dimen/select_equipment_btn_height"
+        android:layout_marginTop="@dimen/vertical_min_margin"
+        android:singleLine="true"
+        android:text="@string/legs_muscle"
+        app:icon="@drawable/ic_checked_item"
+        app:iconGravity="top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSelectMuscularGBack" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

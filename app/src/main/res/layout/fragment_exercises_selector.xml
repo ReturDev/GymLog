@@ -5,7 +5,7 @@
     android:id="@+id/exercisesSelectorRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.exercise.ExercisesSelectorFragment">
+    tools:context=".ui.main.exercise.selector.ExercisesSelectorFragment">
 
     <Button
         android:id="@+id/btnCancelES"

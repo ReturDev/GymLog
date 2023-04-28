@@ -1,4 +1,4 @@
-package com.sergio.gymlog.ui.main.exercise
+package com.sergio.gymlog.ui.main.exercise.selector
 
 import com.sergio.gymlog.data.model.exercise.ExerciseItem
 

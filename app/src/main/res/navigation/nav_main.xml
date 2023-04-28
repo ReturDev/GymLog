@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/exercisesSelectorFragment"
-        android:name="com.sergio.gymlog.ui.main.exercise.ExercisesSelectorFragment"
+        android:name="com.sergio.gymlog.ui.main.exercise.selector.ExercisesSelectorFragment"
         android:label="fragment_exercises_selector"
         tools:layout="@layout/fragment_exercises_selector">
         <argument
@@ -44,6 +44,9 @@
             app:destination="@id/trainingEditorFragment"
             app:popUpTo="@id/trainingEditorFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_exercisesSelectorFragment_to_exerciseCreatorFragment"
+            app:destination="@id/exerciseCreatorFragment" />
     </fragment>
     <navigation android:id="@+id/nav_training"
         app:startDestination="@id/trainingFragment">
@@ -86,4 +89,44 @@
     <action
         android:id="@+id/action_global_trainingEditorFragment"
         app:destination="@id/trainingEditorFragment" />
+    <fragment
+        android:id="@+id/exerciseCreatorFragment"
+        android:name="com.sergio.gymlog.ui.main.exercise.creator.ExerciseCreatorFragment"
+        android:label="fragment_exercise_creator"
+        tools:layout="@layout/fragment_exercise_creator" >
+        <argument
+            android:name="equipmentSelected"
+            app:argType="com.sergio.gymlog.data.model.exercise.Equipment"
+            android:defaultValue="NONE" />
+        <action
+            android:id="@+id/action_exerciseCreatorFragment_to_exerciseCreatorSelectEquipmentDialog"
+            app:destination="@id/exerciseCreatorSelectEquipmentDialog" />
+        <argument
+            android:name="muscularGroupSelected"
+            app:argType="com.sergio.gymlog.data.model.exercise.MuscularGroup"
+            android:defaultValue="NONE" />
+        <action
+            android:id="@+id/action_exerciseCreatorFragment_to_exerciseCreatorSelectMuscularGroupDialog"
+            app:destination="@id/exerciseCreatorSelectMuscularGroupDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/exerciseCreatorSelectEquipmentDialog"
+        android:name="com.sergio.gymlog.ui.main.exercise.creator.ExerciseCreatorSelectEquipmentDialog"
+        android:label="ExerciseCreatorSelectEquipmentDialog" >
+        <action
+            android:id="@+id/action_exerciseCreatorSelectEquipmentDialog_to_exerciseCreatorFragment"
+            app:destination="@id/exerciseCreatorFragment"
+            app:popUpTo="@id/exerciseCreatorFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
+    <dialog
+        android:id="@+id/exerciseCreatorSelectMuscularGroupDialog"
+        android:name="com.sergio.gymlog.ui.main.exercise.creator.ExerciseCreatorSelectMuscularGroupDialog"
+        android:label="ExerciseCreatorSelectMuscularGroupDialog" >
+        <action
+            android:id="@+id/action_exerciseCreatorSelectMuscularGroupDialog_to_exerciseCreatorFragment"
+            app:destination="@id/exerciseCreatorFragment"
+            app:popUpTo="@id/exerciseCreatorFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
 </navigation>

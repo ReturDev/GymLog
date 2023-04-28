@@ -3,12 +3,9 @@ package com.sergio.gymlog.ui.main.training.dailytraining
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sergio.gymlog.data.model.user.UserInfo
-import com.sergio.gymlog.data.repository.user.UserDataRepository
 import com.sergio.gymlog.domain.training.GetUserTrainingsUseCase
 import com.sergio.gymlog.domain.training.daily.SetDailyTrainingUseCase
 import com.sergio.gymlog.domain.user.GetUserInfoUseCase
-import com.sergio.gymlog.ui.main.exercise.ExercisesSelectorUiState
-import com.sergio.gymlog.ui.main.exercise.ExercisesSelectorViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

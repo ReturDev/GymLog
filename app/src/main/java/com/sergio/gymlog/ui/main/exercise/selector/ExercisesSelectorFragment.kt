@@ -1,7 +1,6 @@
-package com.sergio.gymlog.ui.main.exercise
+package com.sergio.gymlog.ui.main.exercise.selector
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +14,8 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sergio.gymlog.R
 import com.sergio.gymlog.databinding.FragmentExercisesSelectorBinding
+import com.sergio.gymlog.ui.main.exercise.ExercisesSelectorFragmentArgs
+import com.sergio.gymlog.ui.main.exercise.ExercisesSelectorFragmentDirections
 import com.sergio.gymlog.ui.main.exercise.adapter.ExercisesSelectorAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -75,7 +76,10 @@ class ExercisesSelectorFragment : Fragment() {
                     }
                     if (currentState.idExercisesToAdd.isNotEmpty()){
 
-                        val action = ExercisesSelectorFragmentDirections.actionExercisesSelectorFragmentToTrainingEditorFragment(currentState.idExercisesToAdd.toTypedArray())
+                        val action =
+                            ExercisesSelectorFragmentDirections.actionExercisesSelectorFragmentToTrainingEditorFragment(
+                                currentState.idExercisesToAdd.toTypedArray()
+                            )
                         findNavController().navigate(action)
                     }
 
@@ -98,6 +102,16 @@ class ExercisesSelectorFragment : Fragment() {
         binding.btnAddES.setOnClickListener {
 
             exercisesSelectorVM.addSelectedExercises()
+
+        }
+
+        binding.btnCancelES.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        binding.exercisesListIncluded.fabExerciseListNewExercise.setOnClickListener{
+
+            findNavController().navigate(R.id.action_exercisesSelectorFragment_to_exerciseCreatorFragment)
 
         }
     }

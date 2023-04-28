@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
 
                     if (currentState.errorResource != null){
 
-                        this@MainActivity.toast(getString(currentState.errorResource), Toast.LENGTH_LONG)
+                        this@MainActivity.toast(currentState.errorResource, Toast.LENGTH_LONG)
                         //TODO si entra aquí, cerrar la sesión y volver automaticamente a la Activity de Access, introduciendo un dialog con el mensaje superior.
 
                     }

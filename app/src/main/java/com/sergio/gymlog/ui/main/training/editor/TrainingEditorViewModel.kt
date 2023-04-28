@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.sergio.gymlog.data.model.exercise.Equipment
 import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
-import com.sergio.gymlog.data.model.repository.EditingTraining
+import com.sergio.gymlog.data.model.temporal.EditingTraining
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.domain.exercise.GetExerciseByIdUseCase
 import com.sergio.gymlog.domain.training.CreateUserTrainingUseCase
@@ -244,6 +244,14 @@ class TrainingEditorViewModel @Inject constructor(
 
         return training != currentTraining
 
+    }
+
+    fun resetEditingTraining(){
+        this.editingTraining.value = null
+    }
+
+    fun setEditingTraining(editingTraining : Training){
+        this.editingTraining.value = editingTraining
     }
 
 }

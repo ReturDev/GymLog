@@ -1,4 +1,4 @@
-package com.sergio.gymlog.ui.main.exercise
+package com.sergio.gymlog.ui.main.exercise.selector
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

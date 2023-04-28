@@ -86,5 +86,11 @@
     <string name="exercise_sets_quantity">Series(%d)</string>
     <string name="cancel_training_edit">¿Quieres descartar los cambios?</string>
     <string name="discard">Descartar</string>
+    <string name="training_exercise_reqired">El entrenamiento debe tener al menos un ejercicio.</string>
+    <string name="training_name_required">Debes introducir un nombre para el entrenamiento.</string>
+    <string name="create">Crear</string>
+    <string name="exercise_name_required">Debes introducir un nombre al ejercicio.</string>
+    <string name="exercise_equipment_required">Debes seleccionar un equipamiento.</string>
+    <string name="exercise_muscular_group_required">Debes seleccionar un grupo muscular.</string>
 
 </resources>

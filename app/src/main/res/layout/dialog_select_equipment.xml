@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/selectEquipmentRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dialog_root_padding">
+
+    <Button
+        android:id="@+id/btnSelectEquipmentBarbell"
+        android:layout_width="@dimen/select_equipment_btn_width"
+        android:layout_height="@dimen/select_equipment_btn_height"
+        android:text="@string/barbell"
+        app:icon="@drawable/ic_checked_item"
+        app:iconGravity="top"
+        app:layout_constraintEnd_toStartOf="@+id/btnSelectEquipmentDumbbells"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnSelectEquipmentDumbbells"
+        android:layout_width="@dimen/select_equipment_btn_width"
+        android:layout_height="@dimen/select_equipment_btn_height"
+        android:singleLine="true"
+        android:text="@string/dumbbells"
+        app:icon="@drawable/ic_checked_item"
+        app:iconGravity="top"
+        app:layout_constraintEnd_toStartOf="@+id/btnSelectEquipmentEzBar"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnSelectEquipmentBarbell"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnSelectEquipmentEzBar"
+        android:layout_width="@dimen/select_equipment_btn_width"
+        android:layout_height="@dimen/select_equipment_btn_height"
+        android:text="@string/ez_bar"
+        app:icon="@drawable/ic_checked_item"
+        app:iconGravity="top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnSelectEquipmentDumbbells"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnSelectEquipmentCable"
+        android:layout_width="@dimen/select_equipment_btn_width"
+        android:layout_height="@dimen/select_equipment_btn_height"
+        android:layout_marginTop="@dimen/vertical_min_margin"
+        android:text="@string/cable"
+        app:icon="@drawable/ic_checked_item"
+        app:iconGravity="top"
+        app:layout_constraintEnd_toStartOf="@+id/btnSelectEquipmentBodyWeight"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSelectEquipmentBarbell" />
+
+    <Button
+        android:id="@+id/btnSelectEquipmentBodyWeight"
+        android:layout_width="@dimen/select_equipment_btn_width"
+        android:layout_height="@dimen/select_equipment_btn_height"
+        android:singleLine="true"
+        android:text="@string/body_weight"
+        app:icon="@drawable/ic_checked_item"
+        app:iconGravity="top"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSelectEquipmentCable"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnSelectEquipmentCable"
+        app:layout_constraintTop_toTopOf="@+id/btnSelectEquipmentCable" />
+</androidx.constraintlayout.widget.ConstraintLayout>

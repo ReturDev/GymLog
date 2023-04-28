@@ -67,7 +67,7 @@ class AccessActivity : AppCompatActivity() {
 
                     if (currentState.errorResource != null){
 
-                        this@AccessActivity.toast(getString(currentState.errorResource))
+                        this@AccessActivity.toast(currentState.errorResource)
                         accessViewModel.errorMessageShown()
 
                     }

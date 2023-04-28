@@ -1,4 +1,4 @@
-package com.sergio.gymlog.data.model.repository
+package com.sergio.gymlog.data.model.temporal
 
 import com.sergio.gymlog.data.model.training.Training
 import javax.inject.Inject

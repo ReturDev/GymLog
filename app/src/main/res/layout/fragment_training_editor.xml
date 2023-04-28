@@ -21,13 +21,27 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:context=".ui.main.training.editor.TrainingEditorFragment">
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glTrainingEditorStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/horizontal_margin_guideline" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glTrainingEditorEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/horizontal_margin_guideline" />
+
             <Button
                 android:id="@+id/btnEditorCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cancel"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="@+id/glTrainingEditorStart"
+                app:layout_constraintTop_toTopOf="@+id/glTrainingEditorTop" />
 
             <Button
                 android:id="@+id/btnEditorSave"
@@ -35,8 +49,8 @@
                 android:layout_height="wrap_content"
                 android:focusableInTouchMode="false"
                 android:text="@string/save"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toStartOf="@+id/glTrainingEditorEnd"
+                app:layout_constraintTop_toTopOf="@+id/glTrainingEditorTop" />
 
             <EditText
                 android:id="@+id/etEditorName"
@@ -47,8 +61,8 @@
                 android:hint="@string/name_hint"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/glTrainingEditorEnd"
+                app:layout_constraintStart_toStartOf="@+id/glTrainingEditorStart"
                 app:layout_constraintTop_toBottomOf="@+id/btnEditorCancel" />
 
             <EditText
@@ -61,8 +75,9 @@
                 android:inputType="textMultiLine"
                 android:minHeight="48dp"
                 android:singleLine="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/glTrainingEditorEnd"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/glTrainingEditorStart"
                 app:layout_constraintTop_toBottomOf="@+id/etEditorName" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -70,9 +85,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/vertical_min_margin"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:minHeight="150dp"
+                app:layout_constraintBottom_toTopOf="@+id/btnEditorAddExercises"
+                app:layout_constraintEnd_toStartOf="@+id/glTrainingEditorEnd"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/glTrainingEditorStart"
                 app:layout_constraintTop_toBottomOf="@+id/etEditorDescription" />
 
             <Button
@@ -80,9 +97,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/add_exercises"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/rvEditorExercises"
-                app:layout_constraintTop_toBottomOf="@+id/rvEditorExercises" />
+                app:layout_constraintBottom_toTopOf="@+id/glTrainingEditorBottom"
+                app:layout_constraintStart_toStartOf="@+id/rvEditorExercises" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glTrainingEditorTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="@dimen/vertical_margin_guideline" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glTrainingEditorBottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="@dimen/vertical_margin_guideline" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ProgressBar

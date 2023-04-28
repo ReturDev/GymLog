@@ -4,6 +4,7 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
+import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.remote.firestore.TrainingCloud
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.data.model.user.UserInfo
@@ -112,6 +113,23 @@ class CloudFirestoreService @Inject constructor(
             .document(userID)
             .collection(CloudFirestoreCollections.TRAINING_COLLECTION_TAG)
             .document(training.id).set(training)
+
+    }
+
+    override suspend fun createUserExercise(userID: String, exercise: Exercises.UserExercise){
+        db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG)
+            .document(userID)
+            .collection(CloudFirestoreCollections.USER_EXERCISES_COLLECTION_TAG)
+            .document(exercise.id)
+            .set(exercise)
+    }
+
+    override suspend fun generateUserExerciseRandomId(userID : String) : String{
+
+        return db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG)
+            .document(userID)
+            .collection(CloudFirestoreCollections.USER_EXERCISES_COLLECTION_TAG)
+            .document().id
 
     }
 

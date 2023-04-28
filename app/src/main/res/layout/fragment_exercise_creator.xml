@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/exerciseCreatorRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.exercise.creator.ExerciseCreatorFragment">
+
+    <EditText
+        android:id="@+id/etExerciseCreatorName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vertical_max_margin"
+        android:ems="10"
+        android:hint="@string/name_hint"
+        android:inputType="text"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/glExerciseCreatorEnd"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/glExerciseCreatorStart"
+        app:layout_constraintTop_toBottomOf="@+id/btnExerciseCreatorCancel" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glExerciseCreatorBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/vertical_margin_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glExerciseCreatorTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="15dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glExerciseCreatorStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/horizontal_margin_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glExerciseCreatorEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/horizontal_margin_guideline" />
+
+    <EditText
+        android:id="@+id/etExerciseCreatorDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vertical_max_margin"
+        android:ems="10"
+        android:hint="@string/description_hint"
+        android:inputType="text"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/glExerciseCreatorEnd"
+        app:layout_constraintStart_toStartOf="@+id/glExerciseCreatorStart"
+        app:layout_constraintTop_toBottomOf="@+id/etExerciseCreatorName" />
+
+    <Button
+        android:id="@+id/btnExerciseCreatorEquipment"
+        android:layout_width="@dimen/exercise_creator_selector_btn_width"
+        android:layout_height="@dimen/exercise_creator_selector_btn_height"
+        android:layout_marginTop="@dimen/vertical_max_margin"
+        app:layout_constraintEnd_toStartOf="@+id/glExerciseCreatorEnd"
+        app:layout_constraintStart_toStartOf="@+id/glExerciseCreatorStart"
+        app:layout_constraintTop_toBottomOf="@+id/etExerciseCreatorDescription" />
+
+    <Button
+        android:id="@+id/btnExerciseCreatorMuscularG"
+        android:layout_width="@dimen/exercise_creator_selector_btn_width"
+        android:layout_height="@dimen/exercise_creator_selector_btn_height"
+        android:layout_marginTop="@dimen/vertical_max_margin"
+        app:layout_constraintEnd_toEndOf="@+id/btnExerciseCreatorEquipment"
+        app:layout_constraintStart_toStartOf="@+id/btnExerciseCreatorEquipment"
+        app:layout_constraintTop_toBottomOf="@+id/btnExerciseCreatorEquipment" />
+
+    <TextView
+        android:id="@+id/tvExerciseCreatorEquipment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/equipment"
+        app:layout_constraintBottom_toBottomOf="@+id/btnExerciseCreatorEquipment"
+        app:layout_constraintStart_toStartOf="@+id/glExerciseCreatorStart"
+        app:layout_constraintTop_toTopOf="@+id/btnExerciseCreatorEquipment" />
+
+    <TextView
+        android:id="@+id/tvExerciseCreatorMuscularG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/muscular_group"
+        app:layout_constraintBottom_toBottomOf="@+id/btnExerciseCreatorMuscularG"
+        app:layout_constraintStart_toStartOf="@+id/glExerciseCreatorStart"
+        app:layout_constraintTop_toTopOf="@+id/btnExerciseCreatorMuscularG" />
+
+    <Button
+        android:id="@+id/btnExerciseCreatorCreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create"
+        app:layout_constraintEnd_toStartOf="@+id/glExerciseCreatorEnd"
+        app:layout_constraintTop_toTopOf="@+id/glExerciseCreatorTop" />
+
+    <Button
+        android:id="@+id/btnExerciseCreatorCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        app:layout_constraintStart_toStartOf="@+id/glExerciseCreatorStart"
+        app:layout_constraintTop_toTopOf="@+id/glExerciseCreatorTop" />
+</androidx.constraintlayout.widget.ConstraintLayout>

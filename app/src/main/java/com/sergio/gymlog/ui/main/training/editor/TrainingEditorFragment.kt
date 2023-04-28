@@ -1,19 +1,13 @@
 package com.sergio.gymlog.ui.main.training.editor
 
-import android.app.Dialog
 import android.os.Bundle
 import android.text.SpannableStringBuilder
-import android.util.Log
-import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
+import android.widget.Toast
 import androidx.activity.addCallback
-import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -24,14 +18,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
-import com.sergio.gymlog.data.model.repository.EditingTraining
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.databinding.FragmentTrainingEditorBinding
 import com.sergio.gymlog.ui.main.training.editor.adapter.TrainingEditorAdapter
 import com.sergio.gymlog.util.InputFiltersProvider
+import com.sergio.gymlog.util.extension.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class TrainingEditorFragment : Fragment() {
@@ -39,7 +32,6 @@ class TrainingEditorFragment : Fragment() {
     private lateinit var binding : FragmentTrainingEditorBinding
     private lateinit var adapter : TrainingEditorAdapter
     private lateinit var bottomMenu : BottomNavigationView
-    @Inject lateinit var editingTraining: EditingTraining
 
     private val trainingEditorViewModel by viewModels<TrainingEditorViewModel>()
     private val args by navArgs<TrainingEditorFragmentArgs>()
@@ -85,14 +77,32 @@ class TrainingEditorFragment : Fragment() {
         }
 
         binding.btnEditorSave.setOnClickListener {
-            trainingEditorViewModel.saveTrainingData(getTrainingInfo())
-            editingTraining.value = null
-            findNavController().popBackStack()
+            val training = getTrainingInfo()
+            if (training.name.isNotBlank()){
+
+                if (training.exercises.isNotEmpty()){
+
+                    trainingEditorViewModel.saveTrainingData(getTrainingInfo())
+                    trainingEditorViewModel.resetEditingTraining()
+                    findNavController().popBackStack()
+
+                }else{
+
+                    requireActivity().toast(R.string.training_exercise_reqired, Toast.LENGTH_LONG)
+
+                }
+
+            }else{
+
+                requireActivity().toast(R.string.training_name_required, Toast.LENGTH_LONG)
+
+            }
+
         }
 
         binding.btnEditorAddExercises.setOnClickListener {
 
-            editingTraining.value = getTrainingInfo()
+            trainingEditorViewModel.setEditingTraining(getTrainingInfo())
             val idsExercises = trainingEditorViewModel.uiState.value.training.exercises.map { e -> e.id }.toTypedArray()
             val action = TrainingEditorFragmentDirections.actionTrainingEditorFragmentToExercisesSelectorFragment(
                     idsExercises
@@ -248,7 +258,7 @@ class TrainingEditorFragment : Fragment() {
 
                 val dialog  =  TrainingEditorCancelDialog{
 
-                    editingTraining.value = null
+                    trainingEditorViewModel.resetEditingTraining()
                     findNavController().popBackStack()
 
 

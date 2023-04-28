@@ -21,5 +21,9 @@
     <dimen name="user_characteristics_padding">5dp</dimen>
     <dimen name="dialog_root_padding">5dp</dimen>
     <dimen name="horizontal_max_margin">32dp</dimen>
+    <dimen name="select_equipment_btn_width">100dp</dimen>
+    <dimen name="select_equipment_btn_height">120dp</dimen>
+    <dimen name="exercise_creator_selector_btn_width">120dp</dimen>
+    <dimen name="exercise_creator_selector_btn_height">100dp</dimen>
 
 </resources>

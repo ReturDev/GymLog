@@ -55,8 +55,18 @@ class ExercisesRepository @Inject constructor(
 
     }
 
+    suspend fun createUserExercise(uid : String, exercise : Exercises.UserExercise){
+
+        cloudFirestoreService.createUserExercise(uid, exercise)
+
+    }
+
     suspend fun getUserExerciseReference(userID: String, userExerciseID : String): DocumentReference {
         return cloudFirestoreService.getUserExerciseReference(userID, userExerciseID)
+    }
+
+    suspend fun generateUserExerciseRandomId(userID : String) : String{
+        return cloudFirestoreService.generateUserExerciseRandomId(userID)
     }
 
     suspend fun getExerciseReference(exerciseID : String): DocumentReference {
