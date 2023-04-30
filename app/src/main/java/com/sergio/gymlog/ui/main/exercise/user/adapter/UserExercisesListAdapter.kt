@@ -9,7 +9,8 @@ import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.databinding.ExerciseItemBinding
 
 class UserExercisesListAdapter(
-    val userExercises : MutableList<Exercises.UserExercise>
+    val userExercises : MutableList<Exercises.UserExercise>,
+    private val onClickExercise : (Int) -> Unit
 ) : RecyclerView.Adapter<UserExercisesListAdapter.UserExercisesListViewHolder>() {
 
 
@@ -24,6 +25,9 @@ class UserExercisesListAdapter(
     override fun getItemCount() = userExercises.size
 
     override fun onBindViewHolder(holder: UserExercisesListViewHolder, position: Int) {
+
+        holder.bind(userExercises[position])
+
 
     }
 
@@ -42,7 +46,11 @@ class UserExercisesListAdapter(
         }
 
         private fun setListeners() {
-            TODO("Not yet implemented")
+            binding.root.setOnClickListener {
+
+                onClickExercise(layoutPosition)
+
+            }
         }
 
     }

@@ -6,11 +6,6 @@
     app:startDestination="@id/nav_home">
 
     <fragment
-        android:id="@+id/userFragment"
-        android:name="com.sergio.gymlog.ui.main.user.UserFragment"
-        android:label="fragment_user"
-        tools:layout="@layout/fragment_user" />
-    <fragment
         android:id="@+id/recordFragment"
         android:name="com.sergio.gymlog.ui.main.record.RecordFragment"
         android:label="fragment_record"
@@ -44,9 +39,6 @@
             app:destination="@id/trainingEditorFragment"
             app:popUpTo="@id/trainingEditorFragment"
             app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_exercisesSelectorFragment_to_exerciseCreatorFragment"
-            app:destination="@id/exerciseCreatorFragment" />
     </fragment>
     <navigation android:id="@+id/nav_training"
         app:startDestination="@id/trainingFragment">
@@ -129,4 +121,21 @@
             app:popUpTo="@id/exerciseCreatorFragment"
             app:popUpToInclusive="true" />
     </dialog>
+    <navigation android:id="@+id/nav_user"
+        app:startDestination="@id/userFragment">
+        <fragment
+            android:id="@+id/userFragment"
+            android:name="com.sergio.gymlog.ui.main.user.UserFragment"
+            android:label="fragment_user"
+            tools:layout="@layout/fragment_user" >
+            <action
+                android:id="@+id/action_fragment_user_to_userExercisesListFragment"
+                app:destination="@id/userExercisesListFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/userExercisesListFragment"
+            android:name="com.sergio.gymlog.ui.main.exercise.user.UserExercisesListFragment"
+            android:label="fragment_user_exercises_list"
+            tools:layout="@layout/fragment_user_exercises_list" />
+    </navigation><action android:id="@+id/action_global_exerciseCreatorFragment" app:destination="@id/exerciseCreatorFragment"/>
 </navigation>

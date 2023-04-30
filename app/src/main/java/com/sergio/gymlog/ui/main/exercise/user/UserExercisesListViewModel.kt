@@ -2,6 +2,7 @@ package com.sergio.gymlog.ui.main.exercise.user
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sergio.gymlog.domain.exercise.DeleteUserExerciseUseCase
 import com.sergio.gymlog.domain.exercise.GetUserExercisesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserExercisesListViewModel @Inject constructor(
-    private val getUserExercisesUseCase: GetUserExercisesUseCase
+    private val getUserExercisesUseCase: GetUserExercisesUseCase,
+    private val deleteUserExerciseUseCase: DeleteUserExerciseUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UserExercisesListUiState())
@@ -36,10 +38,27 @@ class UserExercisesListViewModel @Inject constructor(
     fun resetStates(){
         _uiState.update { currentState->
             currentState.copy(
-                userExercises = emptyList(),
-                loaded = false
+                loaded = false,
+                exerciseDeletedPos = -1
             )
         }
+    }
+
+    fun deleteUserExercise(exercisePos: Int) {
+
+        viewModelScope.launch {
+
+            deleteUserExerciseUseCase(uiState.value.userExercises[exercisePos])
+
+            _uiState.update {currentState ->
+
+                currentState.copy(
+                    exerciseDeletedPos = exercisePos
+                )
+
+            }
+        }
+
     }
 
 

@@ -3,6 +3,7 @@ package com.sergio.gymlog.data.repository.user
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.toObject
 import com.sergio.gymlog.data.model.exercise.Exercises
+import com.sergio.gymlog.data.model.remote.firestore.ReferencedExercises
 import com.sergio.gymlog.data.remote.firestore.CloudFirestoreService
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -58,6 +59,12 @@ class ExercisesRepository @Inject constructor(
     suspend fun createUserExercise(uid : String, exercise : Exercises.UserExercise){
 
         cloudFirestoreService.createUserExercise(uid, exercise)
+
+    }
+
+    suspend fun deleteUserExercise(userID: String, exerciseReference: DocumentReference, trainingsIds : Map<String, List<ReferencedExercises>> ){
+
+        cloudFirestoreService.deleteUserExercise(userID, exerciseReference, trainingsIds)
 
     }
 

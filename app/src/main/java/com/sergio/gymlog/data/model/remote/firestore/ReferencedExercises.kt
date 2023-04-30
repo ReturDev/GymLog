@@ -8,4 +8,8 @@ data class ReferencedExercises(
     val reference : DocumentReference? = null,
     val sets : List<TrainingExerciseSet> = emptyList()
 
-)
+){
+    companion object{
+        const val REFERENCE_TAG = "reference"
+    }
+}

@@ -13,9 +13,12 @@ data class TrainingCloud(
     val exercises : List<ReferencedExercises> = emptyList()
 
 ){
-
     fun toTraining(exercises: List<Exercises.TrainingExercise>) : Training{
         return Training(this.id,this.name,this.description,this.muscularGroups,exercises)
+    }
+
+    companion object{
+        const val EXERCISES_TAG = "exercises"
     }
 
 }

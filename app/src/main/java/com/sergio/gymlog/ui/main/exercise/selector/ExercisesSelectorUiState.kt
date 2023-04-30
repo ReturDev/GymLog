@@ -4,7 +4,6 @@ import com.sergio.gymlog.data.model.exercise.ExerciseItem
 
 data class ExercisesSelectorUiState(
 
-    val loaded : Boolean = false,
     val refresh : Boolean = false,
     val exercises : List<ExerciseItem> = emptyList(),
     val idExercisesToAdd : List<String> = emptyList(),

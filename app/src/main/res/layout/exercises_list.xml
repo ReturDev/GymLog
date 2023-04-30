@@ -39,13 +39,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/vertical_min_margin"
-        android:layout_marginBottom="@dimen/vertical_min_margin"
-        app:layout_constraintBottom_toTopOf="@+id/fabExerciseListNewExercise"
+        app:layout_constraintBottom_toTopOf="@+id/btnExercisesListCreateExercise"
         app:layout_constraintEnd_toStartOf="@+id/glExercisesListStart"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/glExercisesListEnd"
-        app:layout_constraintTop_toBottomOf="@+id/tvExercisesListNumberLabel"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/tvExercisesListNumberLabel" />
 
     <EditText
         android:id="@+id/etExerciseListSearcher"
@@ -53,8 +51,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="56dp"
         android:ems="10"
+        android:hint="@string/search"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toStartOf="@+id/btnExerciseListFilter"
         app:layout_constraintStart_toStartOf="@+id/glExercisesListEnd"
         app:layout_constraintTop_toTopOf="@+id/glExercisesListTop" />
@@ -77,14 +75,12 @@
         app:layout_constraintStart_toStartOf="@+id/glExercisesListEnd"
         app:layout_constraintTop_toBottomOf="@+id/etExerciseListSearcher" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabExerciseListNewExercise"
+    <Button
+        android:id="@+id/btnExercisesListCreateExercise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
+        android:text="@string/create_user_exercise"
         app:layout_constraintBottom_toTopOf="@+id/glExercisesListBottom"
-        app:layout_constraintEnd_toStartOf="@+id/glExercisesListStart"
-        app:layout_constraintStart_toStartOf="@+id/glExercisesListEnd"
-        app:srcCompat="@drawable/ic_checked_item" />
+        app:layout_constraintStart_toStartOf="@+id/glExercisesListEnd" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

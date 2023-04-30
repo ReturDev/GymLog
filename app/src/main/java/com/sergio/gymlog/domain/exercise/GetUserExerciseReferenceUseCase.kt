@@ -6,7 +6,7 @@ import com.sergio.gymlog.data.model.repository.ApplicationData
 import com.sergio.gymlog.data.repository.user.ExercisesRepository
 import javax.inject.Inject
 
-class GetExerciseReferenceUseCase @Inject constructor(
+class GetUserExerciseReferenceUseCase @Inject constructor(
     private val getUserExercisesUseCase: GetUserExercisesUseCase,
     private val exercisesRepository: ExercisesRepository,
     private val applicationData: ApplicationData
@@ -16,9 +16,9 @@ class GetExerciseReferenceUseCase @Inject constructor(
 
         val userExercises = getUserExercisesUseCase()
 
-        val reference = if (userExercises.contains(exercise)){
+        val reference = if (userExercises.map { ex -> ex.id }.any { id -> id == exercise.id }){
 
-            exercisesRepository.getUserExerciseReference(exercise.id, applicationData.userInfo.id)
+            exercisesRepository.getUserExerciseReference(applicationData.userInfo.id, exercise.id )
 
         }else{
 

@@ -5,6 +5,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.sergio.gymlog.data.model.exercise.Exercises
+import com.sergio.gymlog.data.model.remote.firestore.ReferencedExercises
 import com.sergio.gymlog.data.model.remote.firestore.TrainingCloud
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.data.model.user.UserInfo
@@ -68,12 +69,24 @@ class CloudFirestoreService @Inject constructor(
 
     }
 
-    suspend fun deleteUserExercise(userID: String, exerciseID: String){
-        db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG)
-            .document(userID)
-            .collection(CloudFirestoreCollections.USER_EXERCISES_COLLECTION_TAG)
-            .document(exerciseID)
-            .delete()
+    override suspend fun deleteUserExercise(userID: String, exerciseReference: DocumentReference, trainingsIds : Map<String, List<ReferencedExercises>>){
+        db.runTransaction {transaction ->
+
+            transaction.delete(exerciseReference)
+
+            val trainingsCollection = db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG)
+                .document(userID)
+                .collection(CloudFirestoreCollections.TRAINING_COLLECTION_TAG)
+
+            for (entry in trainingsIds.entries){
+
+                val trainingRef = trainingsCollection.document(entry.key)
+
+                transaction.update(trainingRef, TrainingCloud.EXERCISES_TAG, entry.value)
+
+            }
+
+        }
     }
 
 

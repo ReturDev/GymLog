@@ -1,8 +1,9 @@
-package com.sergio.gymlog.ui.main.exercise.adapter
+package com.sergio.gymlog.ui.main.exercise.selector.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.sergio.gymlog.R

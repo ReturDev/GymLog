@@ -1,10 +1,12 @@
 package com.sergio.gymlog.ui.main.exercise.selector
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -14,9 +16,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sergio.gymlog.R
 import com.sergio.gymlog.databinding.FragmentExercisesSelectorBinding
-import com.sergio.gymlog.ui.main.exercise.ExercisesSelectorFragmentArgs
-import com.sergio.gymlog.ui.main.exercise.ExercisesSelectorFragmentDirections
-import com.sergio.gymlog.ui.main.exercise.adapter.ExercisesSelectorAdapter
+import com.sergio.gymlog.ui.main.exercise.selector.adapter.ExercisesSelectorAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -43,10 +43,12 @@ class ExercisesSelectorFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initRecyclerView()
         setCollector()
         setListeners()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun setCollector() {
 
         lifecycleScope.launch {
@@ -54,17 +56,12 @@ class ExercisesSelectorFragment : Fragment() {
 
                 exercisesSelectorVM.uiState.collect{currentState->
 
-                    if (currentState.loaded){
-
-                        initRecyclerView()
-                        binding.btnAddES.text = getString(R.string.add_quantity, currentState.exercisesSelectedQuantity)
-
-                    }
                     if (currentState.refresh){
 
                         adapter.exercisesList = currentState.exercises
                         adapter.notifyDataSetChanged()
-                        exercisesSelectorVM.refreshed()
+                        binding.btnAddES.text = getString(R.string.add_quantity, currentState.exercisesSelectedQuantity)
+                        exercisesSelectorVM.exerciseStatusChanged()
 
                     }
                     if (currentState.exerciseChangedPosition != -1){
@@ -81,6 +78,7 @@ class ExercisesSelectorFragment : Fragment() {
                                 currentState.idExercisesToAdd.toTypedArray()
                             )
                         findNavController().navigate(action)
+                        exercisesSelectorVM.exerciseStatusChanged()
                     }
 
                 }
@@ -109,11 +107,17 @@ class ExercisesSelectorFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-        binding.exercisesListIncluded.fabExerciseListNewExercise.setOnClickListener{
+        binding.exercisesListIncluded.btnExercisesListCreateExercise.setOnClickListener{
 
-            findNavController().navigate(R.id.action_exercisesSelectorFragment_to_exerciseCreatorFragment)
+            val action = ExercisesSelectorFragmentDirections.actionGlobalExerciseCreatorFragment()
+            findNavController().navigate(action)
 
         }
+
+        binding.exercisesListIncluded.etExerciseListSearcher.doOnTextChanged { text, start, before, count ->
+            exercisesSelectorVM.filter(text.toString())
+        }
+
     }
 
     private fun onClickElement(position : Int){

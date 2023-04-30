@@ -36,9 +36,9 @@ class ExercisesSelectorViewModel @Inject constructor(
 
                 currentState.copy(
 
-                    loaded = true,
                     exercises = allExerciseItems,
-                    refresh = true
+                    refresh = true,
+                    exercisesSelectedQuantity = 0
 
                 )
 
@@ -87,16 +87,18 @@ class ExercisesSelectorViewModel @Inject constructor(
     fun exerciseStatusChanged(){
         _uiState.update {currentState ->
             currentState.copy(
-                exerciseChangedPosition = -1
+                refresh = false,
+                exerciseChangedPosition = -1,
+                idExercisesToAdd = emptyList()
             )
         }
     }
 
-    fun filter(){
+    fun filter(text : String){
 
         viewModelScope.launch {
 
-            //filterExercisesUseCase("Hola")
+            filteredExercises = filterExercisesUseCase(text)
 
         }
 
@@ -107,9 +109,7 @@ class ExercisesSelectorViewModel @Inject constructor(
         val idExercises = mutableListOf<String>()
 
         for (exerciseItem in allExerciseItems){
-            if (exerciseItem.exercise is Exercises.ProvidedExercise && exerciseItem.selected){
-                idExercises.add(exerciseItem.exercise.id)
-            }else if (exerciseItem.exercise is Exercises.UserExercise && exerciseItem.selected){
+            if ( exerciseItem.selected){
                 idExercises.add(exerciseItem.exercise.id)
             }
         }
@@ -129,15 +129,6 @@ class ExercisesSelectorViewModel @Inject constructor(
 
     }
 
-    fun refreshed() {
-        _uiState.update {currentState ->
-
-            currentState.copy(
-                refresh = false
-            )
-
-        }
-    }
 
 
 }

@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.user.UserInfo
 import com.sergio.gymlog.data.repository.access.LoginRepository
@@ -85,11 +86,7 @@ class UserFragment : Fragment() {
 
         binding.btnUserExercises.setOnClickListener {
 
-        }
-
-        binding.btnUserExercises.setOnClickListener {
-
-
+            findNavController().navigate(R.id.action_fragment_user_to_userExercisesListFragment)
 
         }
 

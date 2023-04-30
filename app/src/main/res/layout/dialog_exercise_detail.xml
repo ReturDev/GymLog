@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/exerciseDetailDialogRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.exercise.detail.ExerciseDetailDialog">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glExerciseDetailDialogTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/vertical_margin_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glExerciseDetailDialogBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/vertical_margin_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glExerciseDetailDialogLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/horizontal_margin_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glExerciseDetailDialogEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/horizontal_margin_guideline" />
+
+    <ImageView
+        android:id="@+id/ivExerciseDetailDialogImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/glExerciseDetailDialogEnd"
+        app:layout_constraintStart_toStartOf="@+id/glExerciseDetailDialogLeft"
+        app:layout_constraintTop_toTopOf="@+id/glExerciseDetailDialogTop"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvExerciseDetailDialogName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vertical_min_margin"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/glExerciseDetailDialogEnd"
+        app:layout_constraintStart_toStartOf="@+id/glExerciseDetailDialogLeft"
+        app:layout_constraintTop_toBottomOf="@+id/ivExerciseDetailDialogImage" />
+
+    <TextView
+        android:id="@+id/tvExerciseDetailDialogDescription"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/vertical_min_margin"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/tvExerciseDetailDialogEquipment"
+        app:layout_constraintEnd_toStartOf="@+id/glExerciseDetailDialogEnd"
+        app:layout_constraintStart_toStartOf="@+id/glExerciseDetailDialogLeft"
+        app:layout_constraintTop_toBottomOf="@+id/tvExerciseDetailDialogName" />
+
+    <TextView
+        android:id="@+id/tvExerciseDetailDialogEquipment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/glExerciseDetailDialogBottom"
+        app:layout_constraintEnd_toStartOf="@+id/tvExerciseDetailDialogMuscularG"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/glExerciseDetailDialogLeft" />
+
+    <TextView
+        android:id="@+id/tvExerciseDetailDialogMuscularG"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/glExerciseDetailDialogBottom"
+        app:layout_constraintEnd_toStartOf="@+id/glExerciseDetailDialogEnd"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tvExerciseDetailDialogEquipment" />
+</androidx.constraintlayout.widget.ConstraintLayout>

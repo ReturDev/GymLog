@@ -35,6 +35,20 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="@dimen/horizontal_margin_guideline" />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glTrainingEditorBottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="@dimen/vertical_margin_guideline" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glTrainingEditorTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="@dimen/vertical_margin_guideline" />
+
             <Button
                 android:id="@+id/btnEditorCancel"
                 android:layout_width="wrap_content"
@@ -85,7 +99,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/vertical_min_margin"
-                android:minHeight="150dp"
+                android:minHeight="300dp"
                 app:layout_constraintBottom_toTopOf="@+id/btnEditorAddExercises"
                 app:layout_constraintEnd_toStartOf="@+id/glTrainingEditorEnd"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -99,20 +113,6 @@
                 android:text="@string/add_exercises"
                 app:layout_constraintBottom_toTopOf="@+id/glTrainingEditorBottom"
                 app:layout_constraintStart_toStartOf="@+id/rvEditorExercises" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/glTrainingEditorTop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_begin="@dimen/vertical_margin_guideline" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/glTrainingEditorBottom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_end="@dimen/vertical_margin_guideline" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

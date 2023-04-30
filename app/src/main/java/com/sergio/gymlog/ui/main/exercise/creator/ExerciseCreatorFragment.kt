@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.Equipment
 import com.sergio.gymlog.data.model.exercise.Exercises
@@ -40,6 +41,8 @@ class ExerciseCreatorFragment : Fragment() {
     ): View {
 
         binding = FragmentExerciseCreatorBinding.inflate(inflater, container, false)
+        val bottomMenu = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomMenu.visibility = View.GONE
 
         return binding.root
 

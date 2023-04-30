@@ -92,5 +92,9 @@
     <string name="exercise_name_required">Debes introducir un nombre al ejercicio.</string>
     <string name="exercise_equipment_required">Debes seleccionar un equipamiento.</string>
     <string name="exercise_muscular_group_required">Debes seleccionar un grupo muscular.</string>
+    <string name="details">Detalles</string>
+    <string name="confirm_delete_exercise_message">La eliminación del ejercicio implicará su eliminación de todos los entrenamientos a los que pertenece.</string>
+    <string name="delete_with_time">Eliminar(%d)</string>
+    <string name="create_user_exercise">Crear ejercicio</string>
 
 </resources>

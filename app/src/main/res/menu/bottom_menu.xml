@@ -11,6 +11,6 @@
         android:id="@+id/recordFragment"
         android:title="@string/training_record_bottom_menu" />
     <item
-        android:id="@+id/userFragment"
+        android:id="@+id/nav_user"
         android:title="@string/user_bottom_menu" />
 </menu>

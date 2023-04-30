@@ -1,20 +1,24 @@
 package com.sergio.gymlog.domain.exercise.filter
 
 import com.sergio.gymlog.data.model.exercise.Equipment
+import com.sergio.gymlog.data.model.exercise.ExerciseItem
 import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.exercise.MuscularGroup
 import com.sergio.gymlog.domain.exercise.GetAllExercisesUseCase
+import com.sergio.gymlog.domain.exercise.GetExercisesAsExerciseItemsUseCase
 import javax.inject.Inject
 
 class FilterExercisesUseCase @Inject constructor(
 
-    private val getAllExercisesUseCase: GetAllExercisesUseCase
+    private val getAllExercisesUseCase: GetAllExercisesUseCase,
+    private val getExercisesAsExerciseItemsUseCase: GetExercisesAsExerciseItemsUseCase
 
 ) {
 
-    suspend operator fun invoke(name : String, userExercises : Boolean, equipments : List<Equipment>, muscularGroups : List<MuscularGroup> ) : List<Exercises>{
+    suspend operator fun invoke(name : String = "", userExercises : Boolean = false, equipments : List<Equipment> = emptyList(), muscularGroups : List<MuscularGroup> = emptyList()) : List<ExerciseItem> {
 
-        var exercises = getAllExercisesUseCase()
+        val exercisesIds = getAllExercisesUseCase().map { ex -> ex.id }.toTypedArray()
+        var exercises = getExercisesAsExerciseItemsUseCase(exercisesIds).toList()
 
         if (name.isNotBlank()){
 
@@ -45,13 +49,13 @@ class FilterExercisesUseCase @Inject constructor(
 
     }
 
-    private fun filterByUserExercises(exercises: List<Exercises>): List<Exercises> {
+    private fun filterByUserExercises(exercises: List<ExerciseItem>): List<ExerciseItem> {
 
-        val filteredExercises = mutableListOf<Exercises>()
+        val filteredExercises = mutableListOf<ExerciseItem>()
 
         for (exercise in exercises){
 
-            if (exercise is Exercises.UserExercise){
+            if (exercise.exercise is Exercises.UserExercise){
 
                 filteredExercises.add(exercise)
 
@@ -64,13 +68,13 @@ class FilterExercisesUseCase @Inject constructor(
     }
 
 
-    private fun filterExercisesByName(name : String, exercises: List<Exercises>) : List<Exercises>{
+    private fun filterExercisesByName(name : String, exercises: List<ExerciseItem>) : List<ExerciseItem>{
 
-        val filteredExercises = mutableListOf<Exercises>()
+        val filteredExercises = mutableListOf<ExerciseItem>()
 
         for (exercise in exercises){
 
-            if (exercise.name.contains(name)){
+            if (exercise.exercise.name.contains(name)){
 
                 filteredExercises.add(exercise)
 
@@ -82,15 +86,15 @@ class FilterExercisesUseCase @Inject constructor(
 
     }
 
-    private fun filterExercisesByEquipment(equipments : List<Equipment>, exercises: List<Exercises>) : List<Exercises>{
+    private fun filterExercisesByEquipment(equipments : List<Equipment>, exercises: List<ExerciseItem>) : List<ExerciseItem>{
 
-        val filteredExercises = mutableListOf<Exercises>()
+        val filteredExercises = mutableListOf<ExerciseItem>()
 
         for (exercise in exercises){
 
             for (equipment in equipments){
 
-                if (exercise.equipment  == equipment){
+                if (exercise.exercise.equipment  == equipment){
 
                     filteredExercises.add(exercise)
 
@@ -104,16 +108,16 @@ class FilterExercisesUseCase @Inject constructor(
 
     }
 
-    private fun filterExercisesByMuscularGroup(muscularGroups: List<MuscularGroup>, exercises: List<Exercises>) : List<Exercises>{
+    private fun filterExercisesByMuscularGroup(muscularGroups: List<MuscularGroup>, exercises: List<ExerciseItem>) : List<ExerciseItem>{
 
 
-        val filteredExercises = mutableListOf<Exercises>()
+        val filteredExercises = mutableListOf<ExerciseItem>()
 
         for (exercise in exercises){
 
             for (muscularG in muscularGroups){
 
-                if (exercise.muscularGroup  == muscularG){
+                if (exercise.exercise.muscularGroup  == muscularG){
 
                     filteredExercises.add(exercise)
 
