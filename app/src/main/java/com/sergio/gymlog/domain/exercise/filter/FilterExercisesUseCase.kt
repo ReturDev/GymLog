@@ -10,15 +10,13 @@ import javax.inject.Inject
 
 class FilterExercisesUseCase @Inject constructor(
 
-    private val getAllExercisesUseCase: GetAllExercisesUseCase,
     private val getExercisesAsExerciseItemsUseCase: GetExercisesAsExerciseItemsUseCase
 
 ) {
 
-    suspend operator fun invoke(name : String = "", userExercises : Boolean = false, equipments : List<Equipment> = emptyList(), muscularGroups : List<MuscularGroup> = emptyList()) : List<ExerciseItem> {
+    suspend operator fun invoke(name : String = "", userExercises : Boolean = false, equipments : List<Equipment> = emptyList(), muscularGroups : List<MuscularGroup> = emptyList(), exercisesExcluded: Array<String>) : List<ExerciseItem> {
 
-        val exercisesIds = getAllExercisesUseCase().map { ex -> ex.id }.toTypedArray()
-        var exercises = getExercisesAsExerciseItemsUseCase(exercisesIds).toList()
+        var exercises = getExercisesAsExerciseItemsUseCase(exercisesExcluded).toList()
 
         if (name.isNotBlank()){
 

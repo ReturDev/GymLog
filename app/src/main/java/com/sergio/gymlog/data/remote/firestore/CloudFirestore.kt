@@ -38,4 +38,6 @@ interface CloudFirestore {
         exerciseReference: DocumentReference,
         trainingsIds: Map<String, List<ReferencedExercises>>
     )
+
+    suspend fun getTrainingLogs(userID: String): QuerySnapshot?
 }

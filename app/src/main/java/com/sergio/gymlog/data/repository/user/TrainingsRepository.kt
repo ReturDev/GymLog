@@ -12,11 +12,11 @@ class TrainingsRepository @Inject constructor(
     private val cloudFirestoreService: CloudFirestoreService
 ) {
 
-    suspend fun getUserTrainings(userUID: String) : List<TrainingCloud>{
+    suspend fun getUserTrainings(userID: String) : List<TrainingCloud>{
 
         val trainingsList = mutableListOf<TrainingCloud>()
 
-        val data = cloudFirestoreService.getUserTrainings(userUID)?.documents
+        val data = cloudFirestoreService.getUserTrainings(userID)?.documents
 
         data?.let {
 
@@ -32,28 +32,28 @@ class TrainingsRepository @Inject constructor(
 
     }
 
-    suspend fun generateTrainingRandomId(userUID: String) : String{
+    suspend fun generateTrainingRandomId(userID: String) : String{
 
-        return cloudFirestoreService.generateTrainingRandomId(userUID)
+        return cloudFirestoreService.generateTrainingRandomId(userID)
 
     }
 
-    suspend fun createUserTraining(userUID: String, training : TrainingCloud) : Training{
+    suspend fun createUserTraining(userID: String, training : TrainingCloud) : Training{
 
-        cloudFirestoreService.createUserTraining(userUID, training)
+        cloudFirestoreService.createUserTraining(userID, training)
 
         return Training()
 
     }
 
-    suspend fun modifyUserTraining(userUID: String, training: TrainingCloud){
+    suspend fun modifyUserTraining(userID: String, training: TrainingCloud){
 
-        cloudFirestoreService.setUserTraining(userUID, training)
+        cloudFirestoreService.setUserTraining(userID, training)
 
     }
 
-    suspend fun deleteUserTraining(userUID: String, trainingID : String){
-        cloudFirestoreService.deleteUserTraining(userUID, trainingID)
+    suspend fun deleteUserTraining(userID: String, trainingID : String){
+        cloudFirestoreService.deleteUserTraining(userID, trainingID)
     }
 
 }

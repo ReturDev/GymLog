@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/trainingRecordItemCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_card"
+    android:padding="@dimen/dialog_root_padding">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/trainingRecordItemRoot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dialog_root_padding">
+
+        <ImageView
+            android:id="@+id/ivTrainingRecordItemIcon"
+            android:layout_width="@dimen/user_edits_icon_size"
+            android:layout_height="@dimen/user_edits_icon_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_edit" />
+
+        <TextView
+            android:id="@+id/tvTrainingRecordItemDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontal_min_margin"
+            app:layout_constraintBottom_toBottomOf="@+id/ivTrainingRecordItemIcon"
+            app:layout_constraintStart_toEndOf="@+id/ivTrainingRecordItemIcon"
+            app:layout_constraintTop_toTopOf="@+id/ivTrainingRecordItemIcon" />
+
+        <TextView
+            android:id="@+id/tvTrainingRecordItemTrainingName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontal_min_margin"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTrainingRecordItemDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvTrainingRecordItemDate"
+            app:layout_constraintTop_toTopOf="@+id/tvTrainingRecordItemDate" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -3,6 +3,7 @@ package com.sergio.gymlog.data.model.repository
 import com.sergio.gymlog.data.model.user.UserInfo
 import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.training.Training
+import com.sergio.gymlog.data.model.training.TrainingLog
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -14,11 +15,12 @@ data class ApplicationData private constructor(
     val providedExercises : MutableList<Exercises.ProvidedExercise>,
     val userExercises: MutableList<Exercises.UserExercise>,
     val userTrainings : MutableList<Training>,
+    val userTrainingLogs : MutableList<TrainingLog>,
     var userExercisesConsulted : Boolean,
     var userTrainingsConsulted : Boolean
 
     ){
-    @Inject constructor() : this(UserInfo(), mutableListOf(), mutableListOf(), mutableListOf(), false, false)
+    @Inject constructor() : this(UserInfo(), mutableListOf(), mutableListOf(), mutableListOf(), mutableListOf(), false, false)
 
     fun clear(){
         userInfo.apply {
@@ -35,6 +37,7 @@ data class ApplicationData private constructor(
         providedExercises.clear()
         userExercises.clear()
         userTrainings.clear()
+        userTrainingLogs.clear()
         userExercisesConsulted = false
         userTrainingsConsulted = false
 

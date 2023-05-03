@@ -23,14 +23,19 @@ class ExercisesSelectorViewModel @Inject constructor(
     val uiState = _uiState.asStateFlow()
 
     private lateinit var allExerciseItems : List<ExerciseItem>
-    private lateinit var filteredExercises : List<ExerciseItem>
+    private val exercisesSelected = mutableListOf<ExerciseItem>()
+
+    private lateinit var exercisesExcluded : Array<String>
 
 
-    fun loadExercises(exercisesSelected: Array<String>){
+    fun loadExercises(exercisesExcluded: Array<String>){
+
+        this.exercisesExcluded = exercisesExcluded
 
         viewModelScope.launch {
 
-            allExerciseItems = getExercisesAsExerciseItemsUseCase(exercisesSelected)
+
+            allExerciseItems = getExercisesAsExerciseItemsUseCase(exercisesExcluded)
 
             _uiState.update { currentState ->
 
@@ -48,15 +53,22 @@ class ExercisesSelectorViewModel @Inject constructor(
     }
 
     fun selectExercise(position : Int){
-        _uiState.value.exercises[position].selected = true
+        val exercise = _uiState.value.exercises[position]
+        exercise.selected = true
+
+        exercisesSelected.add(exercise)
 
         changeStatusExercise(position, true)
+
 
     }
 
     fun deselectExercise(position : Int){
 
-        _uiState.value.exercises[position].selected = false
+        val exercise = _uiState.value.exercises[position]
+        exercise.selected = false
+
+        exercisesSelected.remove(exercise)
 
         changeStatusExercise(position, false)
 
@@ -98,7 +110,14 @@ class ExercisesSelectorViewModel @Inject constructor(
 
         viewModelScope.launch {
 
-            filteredExercises = filterExercisesUseCase(text)
+            _uiState.update {currentState ->
+
+                currentState.copy(
+                    refresh = true,
+                    exercises = filterExercisesUseCase(name = text, exercisesExcluded = exercisesExcluded)
+                )
+
+            }
 
         }
 
@@ -106,21 +125,13 @@ class ExercisesSelectorViewModel @Inject constructor(
 
     fun addSelectedExercises(){
 
-        val idExercises = mutableListOf<String>()
-
-        for (exerciseItem in allExerciseItems){
-            if ( exerciseItem.selected){
-                idExercises.add(exerciseItem.exercise.id)
-            }
-        }
-
         viewModelScope.launch {
 
             _uiState.update { currentState ->
 
                 currentState.copy(
 
-                    idExercisesToAdd = idExercises
+                    idExercisesToAdd = exercisesSelected.map { ex -> ex.exercise.id }
 
                 )
             }

@@ -96,5 +96,6 @@
     <string name="confirm_delete_exercise_message">La eliminación del ejercicio implicará su eliminación de todos los entrenamientos a los que pertenece.</string>
     <string name="delete_with_time">Eliminar(%d)</string>
     <string name="create_user_exercise">Crear ejercicio</string>
+    <string name="calendar">Calendario</string>
 
 </resources>

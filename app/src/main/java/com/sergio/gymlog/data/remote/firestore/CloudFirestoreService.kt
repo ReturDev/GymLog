@@ -89,8 +89,6 @@ class CloudFirestoreService @Inject constructor(
         }
     }
 
-
-
     override suspend fun getUserTrainings(userID: String) : QuerySnapshot? {
 
         return db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG)
@@ -130,12 +128,26 @@ class CloudFirestoreService @Inject constructor(
     }
 
     override suspend fun createUserExercise(userID: String, exercise: Exercises.UserExercise){
+
         db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG)
             .document(userID)
             .collection(CloudFirestoreCollections.USER_EXERCISES_COLLECTION_TAG)
             .document(exercise.id)
             .set(exercise)
+
     }
+
+    override suspend fun getTrainingLogs(userID : String) : QuerySnapshot?{
+
+        return db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG)
+            .document(userID)
+            .collection(CloudFirestoreCollections.TRAINING_RECORD_COLLECTION_TAG)
+            .get()
+            .await()
+
+    }
+
+//    override suspend fun createTrainingLog()
 
     override suspend fun generateUserExerciseRandomId(userID : String) : String{
 
