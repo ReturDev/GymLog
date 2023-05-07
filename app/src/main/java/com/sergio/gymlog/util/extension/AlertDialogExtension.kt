@@ -2,6 +2,7 @@ package com.sergio.gymlog.util.extension
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.text.InputFilter
 import android.text.InputType
 import android.text.SpannableStringBuilder
@@ -10,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
+import com.sergio.gymlog.R
 import com.sergio.gymlog.databinding.DialogChangeUserDataBinding
 import com.sergio.gymlog.util.InputFiltersProvider
 
@@ -37,7 +39,7 @@ fun AlertDialog.Builder.userDataChangeDialog(
 
     val dialog = this.setView(binding.root)
         .setCancelable(true)
-        .setTitle(context.getString(titleResource))
+        .setTitle(titleResource)
         .create()
 
 
@@ -71,5 +73,15 @@ fun AlertDialog.Builder.userDataChangeDialog(
     }
 
     dialog.show()
+
+}
+
+fun AlertDialog.Builder.alertDialog(positiveButtonListener : DialogInterface.OnClickListener, negativeButtonListener : DialogInterface.OnClickListener){
+
+    this.setCancelable(false)
+        .setMessage(R.string.cancel_daily_training_completed)
+        .setNegativeButton(R.string.cancel, negativeButtonListener)
+        .setPositiveButton(R.string.accept, positiveButtonListener)
+        .show()
 
 }

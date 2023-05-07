@@ -43,6 +43,7 @@ class RecordViewModel @Inject constructor(
                 currentState.copy(
                     loading = false,
                     loaded = true,
+                    refresh = true,
                     trainingLogs = getTrainingLogsUseCase()
                 )
 
@@ -54,7 +55,7 @@ class RecordViewModel @Inject constructor(
 
     }
 
-    fun getLog(date : Timestamp?){
+    fun getLog(date : Date?){
 
         viewModelScope.launch {
 

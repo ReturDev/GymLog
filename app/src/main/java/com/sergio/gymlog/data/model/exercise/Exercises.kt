@@ -32,23 +32,6 @@ sealed class Exercises{
         override var muscularGroup: MuscularGroup = MuscularGroup.NONE
     ) : Exercises()
 
-    data class RecordTrainingExercise @Inject constructor(
-        override var id: String,
-        override var name: String,
-        override var image: String,
-        override var description: String,
-        override var equipment: Equipment,
-        override var muscularGroup: MuscularGroup,
-        var observations : String,
-        val sets : List<TrainingExerciseSet>
-    ) : Exercises(){
-
-        constructor():this("","","","", Equipment.NONE, MuscularGroup.NONE, "", emptyList())
-        constructor(id : String, name : String, image: String, description: String, equipment: Equipment, muscularGroup: MuscularGroup) :
-                this(id,name,image,description,equipment,muscularGroup, "", emptyList())
-
-    }
-
     data class TrainingExercise @Inject constructor(
         override var id: String,
         override var name: String,

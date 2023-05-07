@@ -32,7 +32,6 @@ class RecordFragment : Fragment() {
     private lateinit var binding : FragmentRecordBinding
     private val recordViewModel by viewModels<RecordViewModel>()
 
-    private var dateSelected : Calendar? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -114,6 +113,7 @@ class RecordFragment : Fragment() {
             }
 
             view.date = calendar.timeInMillis
+            recordViewModel.getLog(Date(calendar.timeInMillis))
 
         }
 
@@ -127,7 +127,7 @@ class RecordFragment : Fragment() {
             }else{
 
                 binding.calendarRecord.visibility = View.VISIBLE
-                recordViewModel.getLog(Timestamp(Date(binding.calendarRecord.date)))
+                recordViewModel.getLog(Date(binding.calendarRecord.date))
 
             }
         }

@@ -1,6 +1,7 @@
 package com.sergio.gymlog.data.model.user
 
 
+import com.google.firebase.Timestamp
 import com.sergio.gymlog.data.model.training.Training
 import java.util.*
 
@@ -19,7 +20,7 @@ data class UserInfo constructor(
 
     data class DailyTraining (
 
-        val date : Date? = null ,
+        val date : Timestamp? = null ,
         val training : Training? = null
 
     )

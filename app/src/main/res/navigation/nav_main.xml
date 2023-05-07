@@ -64,19 +64,10 @@
     <navigation android:id="@+id/nav_home"
         app:startDestination="@id/homeFragment">
         <fragment
-            android:id="@+id/modifyDailyTrainingFragment"
-            android:name="com.sergio.gymlog.ui.main.training.dailytraining.ModifyDailyTrainingFragment"
-            android:label="fragment_modify_daily_training"
-            tools:layout="@layout/fragment_modify_daily_training"/>
-        <fragment
             android:id="@+id/homeFragment"
             android:name="com.sergio.gymlog.ui.main.home.HomeFragment"
             android:label="fragment_home"
-            tools:layout="@layout/fragment_home">
-            <action
-                android:id="@+id/action_homeFragment_to_modifyDailyTrainingFragment"
-                app:destination="@id/modifyDailyTrainingFragment" />
-        </fragment>
+            tools:layout="@layout/fragment_home"/>
     </navigation>
     <action
         android:id="@+id/action_global_trainingEditorFragment"

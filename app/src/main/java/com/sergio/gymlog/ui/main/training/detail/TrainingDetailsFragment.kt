@@ -45,7 +45,7 @@ class TrainingDetailsFragment : Fragment() {
     }
 
     private fun initRecyclerView(exercises: List<Exercises.TrainingExercise>) {
-        adapter = TrainingDetailsAdapter(exercises)
+        adapter = TrainingDetailsAdapter(exercises.toMutableList())
         val recycler = binding.rvTrainingExercises
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

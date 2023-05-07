@@ -1,5 +1,6 @@
 package com.sergio.gymlog.data.model.training
 
 data class TrainingOfTrainingLog(
-    private val dsf : Boolean
+    private val training: Training,
+    private val remarks : String
 )

@@ -1,5 +1,7 @@
 package com.sergio.gymlog.data.remote.firestore
 
+import android.util.Log
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,9 +23,8 @@ class CloudFirestoreService @Inject constructor(
 ) : CloudFirestore {
     override suspend fun createNewUser(user: UserInfo){
 
-        //TODO linea solo para pruebas
-        user.dailyTraining = UserInfo.DailyTraining(date = Date(), training = Training("Training", exercises = emptyList()))
-
+        Log.e("FFF", "UserCreado")
+        Log.e("FFF", user.toString())
         db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG).document(user.id)
             .set(user).await()
 

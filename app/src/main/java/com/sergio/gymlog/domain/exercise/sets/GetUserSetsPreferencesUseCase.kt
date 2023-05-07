@@ -9,7 +9,7 @@ class GetUserSetsPreferencesUseCase @Inject constructor(
     private val getUserInfoUseCase: GetUserInfoUseCase
 ) {
 
-    operator fun invoke(bodyWeight : Boolean) : List<TrainingExerciseSet>{
+    suspend operator fun invoke(bodyWeight : Boolean) : List<TrainingExerciseSet>{
 
         val userInfo = getUserInfoUseCase()
 

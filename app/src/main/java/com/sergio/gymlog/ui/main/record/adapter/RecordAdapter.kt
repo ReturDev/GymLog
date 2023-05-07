@@ -40,7 +40,7 @@ class RecordAdapter(
                 Locale.getDefault()
             )
 
-            binding.tvTrainingRecordItemDate.text = format.format(trainingLog.date)
+            binding.tvTrainingRecordItemDate.text = format.format(trainingLog.date!!.toDate())
             binding.tvTrainingRecordItemTrainingName.text = trainingLog.trainingName
 
         }

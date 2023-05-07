@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/logSaverScroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.home.logsaver.LogSaverDialog">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/logSaverRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glLogSaverTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="@dimen/vertical_margin_guideline" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glLogSaverBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="@dimen/vertical_margin_guideline" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glLogSaverEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/horizontal_margin_guideline" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glLogSaverStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/horizontal_margin_guideline" />
+
+        <Button
+            android:id="@+id/btnLogSaverCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            app:layout_constraintStart_toStartOf="@+id/glLogSaverStart"
+            app:layout_constraintTop_toTopOf="@+id/glLogSaverTop" />
+
+        <Button
+            android:id="@+id/btnLogSaverSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            app:layout_constraintEnd_toStartOf="@+id/glLogSaverEnd"
+            app:layout_constraintTop_toTopOf="@+id/glLogSaverTop" />
+
+        <TextView
+            android:id="@+id/tvLogSaverName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/vertical_min_margin"
+            android:maxLines="2"
+            android:singleLine="false"
+            app:layout_constraintEnd_toStartOf="@+id/glLogSaverEnd"
+            app:layout_constraintStart_toStartOf="@+id/glLogSaverStart"
+            app:layout_constraintTop_toBottomOf="@+id/btnLogSaverCancel" />
+
+        <TextView
+            android:id="@+id/tvLogSaverDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/vertical_min_margin"
+            android:singleLine="false"
+            app:layout_constraintEnd_toStartOf="@+id/glLogSaverEnd"
+            app:layout_constraintStart_toStartOf="@+id/glLogSaverStart"
+            app:layout_constraintTop_toBottomOf="@+id/tvLogSaverName" />
+
+        <EditText
+            android:id="@+id/etLogSaverRemarks"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/vertical_min_margin"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="@string/remarks"
+            android:inputType="textMultiLine"
+            android:maxLines="7"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toStartOf="@+id/glLogSaverEnd"
+            app:layout_constraintStart_toStartOf="@+id/glLogSaverStart"
+            app:layout_constraintTop_toBottomOf="@+id/tvLogSaverDescription"
+            android:autofillHints="" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLogSaverExercises"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/vertical_min_margin"
+            app:layout_constraintBottom_toTopOf="@+id/glLogSaverBottom"
+            app:layout_constraintEnd_toStartOf="@+id/glLogSaverEnd"
+            app:layout_constraintStart_toStartOf="@+id/glLogSaverStart"
+            app:layout_constraintTop_toBottomOf="@+id/etLogSaverRemarks" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

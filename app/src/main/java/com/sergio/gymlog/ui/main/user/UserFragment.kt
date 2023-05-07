@@ -1,6 +1,7 @@
 package com.sergio.gymlog.ui.main.user
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.util.Log
@@ -22,6 +23,8 @@ import com.sergio.gymlog.util.extension.userDataChangeDialog
 import com.sergio.gymlog.databinding.DialogChangeUserDataBinding
 import com.sergio.gymlog.databinding.DialogChangeUserNameBinding
 import com.sergio.gymlog.databinding.FragmentUserBinding
+import com.sergio.gymlog.ui.access.AccessActivity
+import com.sergio.gymlog.ui.main.MainActivity
 import com.sergio.gymlog.util.InputFiltersProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -133,7 +136,7 @@ class UserFragment : Fragment() {
         }
 
 
-        binding.ivUserEditName.setOnClickListener {
+        binding.tvUserName.setOnClickListener {
 
             val dialogBinding = DialogChangeUserNameBinding.inflate(LayoutInflater.from(requireContext()))
 
@@ -170,6 +173,10 @@ class UserFragment : Fragment() {
             dialog.show()
 
 
+        }
+
+        binding.btnUserLogOut.setOnClickListener {
+            userViewModel.logOut()
         }
 
     }

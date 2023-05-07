@@ -97,5 +97,10 @@
     <string name="delete_with_time">Eliminar(%d)</string>
     <string name="create_user_exercise">Crear ejercicio</string>
     <string name="calendar">Calendario</string>
+    <string name="user_without_trainings">No tienes ningún entrenamiento creado. ¡Crea ya tu primer entrenamiento!</string>
+    <string name="remarks">Observaciones</string>
+    <string name="cancel_daily_training_completed">Perderás las observaciones introducidas al salir.¿Estás seguro?</string>
+    <string name="accept">Aceptar\n</string>
+    <string name="Completed">Completado</string>
 
 </resources>

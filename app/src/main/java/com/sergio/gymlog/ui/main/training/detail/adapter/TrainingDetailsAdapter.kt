@@ -12,7 +12,7 @@ import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
 import com.sergio.gymlog.databinding.TrainingExerciseItemBinding
 
 class TrainingDetailsAdapter(
-    private val trainingExercises : List<Exercises.TrainingExercise>
+    private val trainingExercises : MutableList<Exercises.TrainingExercise>
 ) : RecyclerView.Adapter<TrainingDetailsAdapter.TrainingDetailsHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrainingDetailsHolder {
@@ -27,6 +27,11 @@ class TrainingDetailsAdapter(
         
         holder.bind(trainingExercises[position])
         
+    }
+
+    fun changeExerciseList(newExercises : List<Exercises.TrainingExercise>){
+        trainingExercises.clear()
+        trainingExercises.addAll(newExercises)
     }
 
     inner class TrainingDetailsHolder(view : View) : RecyclerView.ViewHolder(view){
@@ -68,6 +73,7 @@ class TrainingDetailsAdapter(
             recycler.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
 
         }
+
 
     }
     

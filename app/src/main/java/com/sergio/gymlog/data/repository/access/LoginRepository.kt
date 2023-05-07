@@ -43,6 +43,7 @@ class LoginRepository @Inject constructor(
 
     fun logout() {
 
+
         firebaseAuthenticationService.logout()
 
     }

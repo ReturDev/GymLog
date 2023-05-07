@@ -48,15 +48,6 @@
         app:layout_constraintTop_toTopOf="@+id/glUserTop" />
 
     <ImageView
-        android:id="@+id/ivUserEditName"
-        android:layout_width="@dimen/user_edits_icon_size"
-        android:layout_height="@dimen/user_edits_icon_size"
-        app:layout_constraintBottom_toBottomOf="@+id/tvUserName"
-        app:layout_constraintStart_toEndOf="@+id/tvUserName"
-        app:layout_constraintTop_toTopOf="@+id/tvUserName"
-        app:srcCompat="@drawable/ic_edit" />
-
-    <ImageView
         android:id="@+id/ivUserImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -3,7 +3,9 @@ package com.sergio.gymlog.ui.main.user
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sergio.gymlog.data.model.user.UserInfo
+import com.sergio.gymlog.data.repository.access.LoginRepository
 import com.sergio.gymlog.domain.user.GetUserInfoUseCase
+import com.sergio.gymlog.domain.user.LogOutUseCase
 import com.sergio.gymlog.domain.user.ModifyUserInfoFieldUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class UserViewModel @Inject constructor(
     private val getUserInfoUseCase: GetUserInfoUseCase,
-    private val modifyUserInfoFieldUseCase: ModifyUserInfoFieldUseCase
+    private val modifyUserInfoFieldUseCase: ModifyUserInfoFieldUseCase,
+    private val logOutUseCase: LogOutUseCase
 ) : ViewModel() {
 
 
@@ -63,6 +66,12 @@ class UserViewModel @Inject constructor(
             )
 
         }
+
+    }
+
+    fun logOut(){
+
+        logOutUseCase()
 
     }
 

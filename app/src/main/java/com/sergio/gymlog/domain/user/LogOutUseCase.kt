@@ -1,4 +1,4 @@
-package com.sergio.gymlog.domain
+package com.sergio.gymlog.domain.user
 
 import com.sergio.gymlog.data.model.repository.ApplicationData
 import com.sergio.gymlog.data.repository.access.LoginRepository
