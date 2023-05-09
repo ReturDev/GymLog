@@ -7,6 +7,7 @@ import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.remote.firestore.ReferencedExercises
 import com.sergio.gymlog.data.model.remote.firestore.TrainingCloud
 import com.sergio.gymlog.data.model.training.Training
+import com.sergio.gymlog.data.model.training.TrainingLog
 import com.sergio.gymlog.data.model.user.UserInfo
 
 interface CloudFirestore {
@@ -40,4 +41,6 @@ interface CloudFirestore {
     )
 
     suspend fun getTrainingLogs(userID: String): QuerySnapshot?
+    suspend fun generateTrainingLogId(userID: String): String
+    suspend fun createTrainingLog(userID: String, log: TrainingLog)
 }

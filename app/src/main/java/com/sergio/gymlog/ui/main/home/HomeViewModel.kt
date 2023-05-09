@@ -2,13 +2,12 @@ package com.sergio.gymlog.ui.main.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sergio.gymlog.data.model.repository.ApplicationData
+import com.sergio.gymlog.data.model.training.TrainingOfTrainingLog
 import com.sergio.gymlog.data.model.user.UserInfo
-import com.sergio.gymlog.data.repository.user.UserDataRepository
+import com.sergio.gymlog.domain.record.CreateTrainingLogUseCase
 import com.sergio.gymlog.domain.training.daily.GetDailyTrainingUseCase
 import com.sergio.gymlog.domain.training.daily.RemoveDailyTrainingUseCase
 import com.sergio.gymlog.domain.training.daily.SetDailyTrainingUseCase
-import com.sergio.gymlog.util.helper.CloudFirestoreHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -18,7 +17,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getDailyTrainingUseCase: GetDailyTrainingUseCase,
     private val removeDailyTrainingUseCase: RemoveDailyTrainingUseCase,
-    private val setDailyTrainingUseCase: SetDailyTrainingUseCase
+    private val setDailyTrainingUseCase: SetDailyTrainingUseCase,
+    private val createTrainingLogUseCase: CreateTrainingLogUseCase
 
 ) : ViewModel() {
 
@@ -97,12 +97,11 @@ class HomeViewModel @Inject constructor(
 
     }
 
-    fun complete(){
-
-
+    fun complete(trainingOfTrainingLog: TrainingOfTrainingLog) {
 
         viewModelScope.launch {
 
+            createTrainingLogUseCase(trainingOfTrainingLog)
             removeDailyTrainingUseCase()
 
             _uiState.update { currentState ->

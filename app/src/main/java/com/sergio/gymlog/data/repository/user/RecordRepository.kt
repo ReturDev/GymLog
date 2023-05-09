@@ -27,5 +27,13 @@ class RecordRepository @Inject constructor(
         return logs
     }
 
+    suspend fun createTrainingLog(userID: String, log : TrainingLog){
+        cloudFirestoreService.createTrainingLog(userID, log)
+    }
+
+    suspend fun generateTrainingLogId(userID: String) : String{
+        return cloudFirestoreService.generateTrainingLogId(userID)
+    }
+
 
 }

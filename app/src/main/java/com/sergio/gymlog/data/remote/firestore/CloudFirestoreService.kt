@@ -10,6 +10,7 @@ import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.remote.firestore.ReferencedExercises
 import com.sergio.gymlog.data.model.remote.firestore.TrainingCloud
 import com.sergio.gymlog.data.model.training.Training
+import com.sergio.gymlog.data.model.training.TrainingLog
 import com.sergio.gymlog.data.model.user.UserInfo
 import com.sergio.gymlog.util.CloudFirestoreCollections
 import kotlinx.coroutines.tasks.await
@@ -23,8 +24,6 @@ class CloudFirestoreService @Inject constructor(
 ) : CloudFirestore {
     override suspend fun createNewUser(user: UserInfo){
 
-        Log.e("FFF", "UserCreado")
-        Log.e("FFF", user.toString())
         db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG).document(user.id)
             .set(user).await()
 
@@ -148,7 +147,13 @@ class CloudFirestoreService @Inject constructor(
 
     }
 
-//    override suspend fun createTrainingLog()
+    override suspend fun createTrainingLog(userID: String, log : TrainingLog){
+        db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG)
+            .document(userID)
+            .collection(CloudFirestoreCollections.TRAINING_RECORD_COLLECTION_TAG)
+            .document(log.id)
+            .set(log)
+    }
 
     override suspend fun generateUserExerciseRandomId(userID : String) : String{
 
@@ -167,6 +172,14 @@ class CloudFirestoreService @Inject constructor(
 
         return collectionRef.document().id
 
+    }
+
+    override suspend fun generateTrainingLogId(userID: String) : String{
+        val collectionRef = db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG)
+            .document(userID)
+            .collection(CloudFirestoreCollections.TRAINING_RECORD_COLLECTION_TAG)
+
+        return collectionRef.document().id
     }
 
     override suspend fun getUserExerciseReference(userID: String, userExerciseID : String): DocumentReference {

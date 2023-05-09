@@ -11,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sergio.gymlog.data.model.training.TrainingOfTrainingLog
 import com.sergio.gymlog.data.model.user.UserInfo
 import com.sergio.gymlog.databinding.FragmentHomeBinding
 import com.sergio.gymlog.ui.main.home.logsaver.LogSaverDialog
@@ -117,7 +118,9 @@ class HomeFragment : Fragment(), DailyTrainingSelectionListener, SaveLogInterfac
         homeViewModel.setDailyTraining()
     }
 
-    override fun saveLog() {
+    override fun saveLog(trainingOfTrainingLog: TrainingOfTrainingLog) {
+
+        homeViewModel.complete(trainingOfTrainingLog)
 
     }
 

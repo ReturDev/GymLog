@@ -17,8 +17,10 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Timestamp
 import com.sergio.gymlog.R
+import com.sergio.gymlog.databinding.DialogLogDetailsBinding
 import com.sergio.gymlog.databinding.FragmentRecordBinding
 import com.sergio.gymlog.ui.main.record.adapter.RecordAdapter
+import com.sergio.gymlog.ui.main.record.log.LogDetailsDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -136,7 +138,7 @@ class RecordFragment : Fragment() {
     }
 
     private fun onClickTrainingLog(position : Int){
-
+        LogDetailsDialog(adapter.trainingLogs[position]).show(parentFragmentManager, "log_details_dialog")
     }
 
     private fun setCalendarConfig(){

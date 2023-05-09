@@ -2,7 +2,6 @@ package com.sergio.gymlog.ui.main.home.logsaver
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.DialogInterface
 import com.sergio.gymlog.util.extension.alertDialog
 import android.content.res.Resources
 import android.os.Bundle
@@ -15,11 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.training.Training
+import com.sergio.gymlog.data.model.training.TrainingOfTrainingLog
 import com.sergio.gymlog.databinding.DialogLogSaverBinding
 import com.sergio.gymlog.ui.main.training.detail.adapter.TrainingDetailsAdapter
-import com.sergio.gymlog.util.extension.toast
 
 
 class LogSaverDialog(
@@ -137,7 +135,8 @@ class LogSaverDialog(
         }
 
         binding.btnLogSaverSave.setOnClickListener {
-            saveLogInterface.saveLog()
+            saveLogInterface.saveLog(createTrainingOfTrainingLog())
+            dismiss()
         }
 
     }
@@ -159,9 +158,13 @@ class LogSaverDialog(
             )
 
         }else{
-            dialog?.dismiss()
+            this.dismiss()
         }
 
+    }
+
+    private fun createTrainingOfTrainingLog() : TrainingOfTrainingLog{
+        return TrainingOfTrainingLog(training = training, remarks = binding.etLogSaverRemarks.text.toString().trim())
     }
 
 }

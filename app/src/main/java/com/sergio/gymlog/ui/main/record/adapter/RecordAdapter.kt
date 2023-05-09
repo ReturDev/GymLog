@@ -1,7 +1,6 @@
 package com.sergio.gymlog.ui.main.record.adapter
 
 import android.icu.text.DateFormat
-import android.icu.text.SimpleDateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,7 +40,11 @@ class RecordAdapter(
             )
 
             binding.tvTrainingRecordItemDate.text = format.format(trainingLog.date!!.toDate())
-            binding.tvTrainingRecordItemTrainingName.text = trainingLog.trainingName
+            binding.tvTrainingRecordItemTrainingName.text = trainingLog.training!!.training!!.name
+
+            binding.root.setOnClickListener{
+                onClickTrainingRecord(layoutPosition)
+            }
 
         }
 
