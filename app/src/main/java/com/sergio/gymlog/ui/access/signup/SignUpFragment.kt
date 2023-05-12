@@ -59,13 +59,14 @@ class SignUpFragment : Fragment() {
 
                        binding.btnSignUp.isEnabled = false
                        binding.btnSignUpGoogle.isEnabled = false
-                       binding.tvLogin.isEnabled = false
+                       binding.tvSingUpLogin.isEnabled = false
 
-                   }else{
+                   }
+                   if (currentState.loaded){
 
                        binding.btnSignUp.isEnabled = true
                        binding.btnSignUpGoogle.isEnabled = true
-                       binding.tvLogin.isEnabled = true
+                       binding.tvSingUpLogin.isEnabled = true
 
                    }
 
@@ -78,7 +79,7 @@ class SignUpFragment : Fragment() {
 
     private fun setListeners() {
 
-        binding.tvLogin.setOnClickListener {
+        binding.tvSingUpLogin.setOnClickListener {
 
             findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
 
@@ -86,8 +87,8 @@ class SignUpFragment : Fragment() {
 
         binding.btnSignUp.setOnClickListener {
 
-            val userText = binding.etEmailLogin.text.toString()
-            val passwordText = binding.etPasswordLogin.text.toString()
+            val userText = binding.etSignUpEmail.text.toString()
+            val passwordText = binding.etSignUpPassword.text.toString()
 
             accessViewModel.signUpWithEmailAndPassword(userText, passwordText)
 

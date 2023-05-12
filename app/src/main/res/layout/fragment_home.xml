@@ -35,7 +35,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/horizontal_margin_guideline" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/homeTrainingSelectedRoot"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -47,50 +47,71 @@
 
         <TextView
             android:id="@+id/tvHomeTrainingName"
+            style="@style/TrainingNameTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvHomeTrainingDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="false" />
+            android:layout_marginTop="@dimen/vertical_min_margin"
+            android:singleLine="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvHomeTrainingName" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvHomeTrainingExercises"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_marginTop="@dimen/vertical_min_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvHomeTrainingDescription">
 
         </androidx.recyclerview.widget.RecyclerView>
 
-        <LinearLayout
-            android:id="@+id/homeTrainingButtonsRoot"
-            android:layout_width="match_parent"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnHomeDiscardTraining"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:src="@drawable/ic_cancel_training"
+            app:layout_constraintBottom_toBottomOf="@+id/btnHomeChangeDailyTraining"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnHomeChangeDailyTraining"
+            app:layout_constraintTop_toTopOf="@+id/btnHomeChangeDailyTraining" />
 
-            <Button
-                android:id="@+id/btnHomeStartDailyTraining"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/start_daily_training" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnHomeStartDailyTraining"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_play_training"
+            app:layout_constraintBottom_toBottomOf="@+id/btnHomeChangeDailyTraining"
+            app:layout_constraintEnd_toStartOf="@+id/btnHomeChangeDailyTraining"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnHomeChangeDailyTraining"
+            app:layout_constraintVertical_bias="0.0" />
 
-            <Button
-                android:id="@+id/btnHomeChangeDailyTraining"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/change_daily_training_btn" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnHomeChangeDailyTraining"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/vertical_margin"
+            android:src="@drawable/ic_change_training"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnHomeDiscardTraining"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnHomeStartDailyTraining" />
 
-            <Button
-                android:id="@+id/btnHomeDiscardTraining"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/discard_daily_training" />
-        </LinearLayout>
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/homeTrainingNotSelectedRoot"

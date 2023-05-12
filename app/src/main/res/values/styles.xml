@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="datepicker" parent="android:Widget.Material.CalendarView">
-        <item name="android:dateTextAppearance">@color/black</item>
+    <style name="AccessTitle">
+        <item name="android:textSize">34sp</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="ChangerAccessLabel">
+        <item name="android:textColor">@color/label_selector</item>
+    </style>
+
+    <style name="CardViewStyle" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardElevation">5dp</item>
+    </style>
+
+<!--    <style name="TrainingNameStyle" parent="AppaMater"-->
+
+    <style name="TrainingNameTextStyle" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="FloatingButtonStyle" parent="Widget.Material3.FloatingActionButton.Secondary">
+        <item name="tint">?attr/colorOnSecondaryContainer</item>
+
+    </style>
+
 </resources>

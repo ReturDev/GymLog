@@ -52,6 +52,7 @@ class LoginAndSignUpHelper @Inject constructor(){
             currentState.copy(
 
                 loading = false,
+                loaded = true,
                 errorResource = errorResource
 
             )
@@ -66,6 +67,7 @@ class LoginAndSignUpHelper @Inject constructor(){
 
             currentState.copy(
 
+                loaded = false,
                 errorResource = null
 
             )

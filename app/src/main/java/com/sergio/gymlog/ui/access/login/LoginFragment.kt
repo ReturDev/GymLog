@@ -36,7 +36,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentLoginBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -61,13 +61,15 @@ class LoginFragment : Fragment() {
 
                         binding.btnLogin.isEnabled = false
                         binding.btnLoginGoogle.isEnabled = false
-                        binding.tvSignUp.isEnabled = false
+                        binding.tvLoginSignUp.isEnabled = false
 
-                    }else{
+                    }
+
+                    if (currentState.loaded){
 
                         binding.btnLogin.isEnabled = true
                         binding.btnLoginGoogle.isEnabled = true
-                        binding.tvSignUp.isEnabled = true
+                        binding.tvLoginSignUp.isEnabled = true
 
                     }
 
@@ -82,15 +84,15 @@ class LoginFragment : Fragment() {
 
         binding.btnLogin.setOnClickListener {
 
-            val userText = binding.etEmailLogin.text.toString()
-            val passwordText = binding.etPasswordLogin.text.toString()
+            val userText = binding.etLoginEmail.text.toString()
+            val passwordText = binding.etLoginPassword.text.toString()
 
             accessViewModel.loginWithEmailAndPassword(userText, passwordText)
 
 
         }
 
-        binding.tvSignUp.setOnClickListener {
+        binding.tvLoginSignUp.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
 
@@ -98,8 +100,8 @@ class LoginFragment : Fragment() {
             (requireActivity() as AccessActivity).googleAccess()
         }
 
-        binding.etEmailLogin.buttonActivationOnTextChanged(binding.btnLogin, binding.etPasswordLogin)
-        binding.etPasswordLogin.buttonActivationOnTextChanged(binding.btnLogin, binding.etEmailLogin)
+        binding.etLoginEmail.buttonActivationOnTextChanged(binding.btnLogin, binding.etLoginPassword)
+        binding.etLoginPassword.buttonActivationOnTextChanged(binding.btnLogin, binding.etLoginEmail)
     }
 
 

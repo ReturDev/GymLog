@@ -9,45 +9,59 @@
 
     <TextView
         android:id="@+id/tvLoginTitle"
+        style="@style/AccessTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_title"
-        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/fieldsLoginContainer"
+        android:id="@+id/loginFieldsContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/dividerLayout"
+        app:layout_constraintBottom_toTopOf="@+id/loginDividerLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvLoginTitle"
         app:layout_constraintVertical_chainStyle="spread">
 
-        <EditText
-            android:id="@+id/etEmailLogin"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilLoginEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/vertical_min_margin"
-            android:ems="10"
             android:hint="@string/email_text"
-            android:inputType="textEmailAddress" />
+            app:errorEnabled="true">
 
-        <EditText
-            android:id="@+id/etPasswordLogin"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLoginEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilLoginPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/vertical_min_margin"
-            android:ems="10"
             android:hint="@string/password_text"
-            android:inputType="textPassword" />
+            app:errorEnabled="true"
+            app:endIconMode="password_toggle"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLoginPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/tvPasswordForgotten"
+            android:id="@+id/tvLoginPasswordForgotten"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/vertical_max_margin"
@@ -65,15 +79,16 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/dividerLayout"
+        android:id="@+id/loginDividerLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/btnsLoginContainer"
+        app:layout_constraintBottom_toTopOf="@+id/loginButtonsContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fieldsLoginContainer">
+        app:layout_constraintTop_toBottomOf="@+id/loginFieldsContainer">
 
         <View
+            android:id="@+id/vLoginDivider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginStart="12dp"
@@ -83,6 +98,7 @@
             android:background="@android:color/black" />
 
         <TextView
+            android:id="@+id/tvLoginDivider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -95,27 +111,20 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/btnsLoginContainer"
+        android:id="@+id/loginButtonsContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/tvLoginQuestionAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dividerLayout">
+        app:layout_constraintTop_toBottomOf="@+id/loginDividerLayout">
 
         <Button
             android:id="@+id/btnLoginGoogle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/login_google_btn" />
-
-        <Button
-            android:id="@+id/btnLoginAnonymous"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login_anonymous"
-            android:visibility="gone" />
 
     </LinearLayout>
 
@@ -125,18 +134,19 @@
         android:layout_height="wrap_content"
         android:text="@string/login_without_account"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvSignUp"
+        app:layout_constraintEnd_toStartOf="@+id/tvLoginSignUp"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@+id/btnsLoginContainer" />
+        app:layout_constraintStart_toStartOf="@+id/loginButtonsContainer" />
 
     <TextView
-        android:id="@+id/tvSignUp"
+        android:id="@+id/tvLoginSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/horizontal_min_margin"
         android:text="@string/sign_up_action"
+        style="@style/ChangerAccessLabel"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvLoginQuestionAccount"
-        app:layout_constraintEnd_toEndOf="@+id/btnsLoginContainer"
+        app:layout_constraintEnd_toEndOf="@+id/loginButtonsContainer"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tvLoginQuestionAccount" />
 

@@ -11,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.training.TrainingOfTrainingLog
 import com.sergio.gymlog.data.model.user.UserInfo
 import com.sergio.gymlog.databinding.FragmentHomeBinding
@@ -56,6 +57,8 @@ class HomeFragment : Fragment(), DailyTrainingSelectionListener, SaveLogInterfac
         val recycler = binding.rvHomeTrainingExercises
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        val spacingDecorator = HomeSpacingItemDecorator(resources.getDimensionPixelSize(R.dimen.recycler_decoration_bottom_spacing))
+        recycler.addItemDecoration(spacingDecorator)
 
     }
 
