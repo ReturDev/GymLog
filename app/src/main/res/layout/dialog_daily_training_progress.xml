@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dailyTrainingProgressDialogRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.home.progress.DailyTrainingProgressDialog">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDailyTrainingProgressDialogExercises"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/vertical_min_margin"
+        android:layout_marginBottom="@dimen/vertical_min_margin"
+        app:layout_constraintBottom_toTopOf="@+id/btnDailyTrainingProgressDialogComplete"
+        app:layout_constraintEnd_toStartOf="@+id/glDailyTrainingProgressDialogEnd"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/glDailyTrainingProgressDialogStart"
+        app:layout_constraintTop_toBottomOf="@+id/tvDailyTrainingProgressDialogInstruction" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glDailyTrainingProgressDialogTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/vertical_margin_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glDailyTrainingProgressDialogBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/vertical_margin_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glDailyTrainingProgressDialogStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/horizontal_margin_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glDailyTrainingProgressDialogEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/horizontal_margin_guideline" />
+
+    <TextView
+        android:id="@+id/tvDailyTrainingProgressDialogInstruction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/training_progress_instruction"
+        app:layout_constraintEnd_toStartOf="@+id/glDailyTrainingProgressDialogEnd"
+        app:layout_constraintStart_toStartOf="@+id/glDailyTrainingProgressDialogStart"
+        app:layout_constraintTop_toTopOf="@+id/glDailyTrainingProgressDialogTop" />
+
+    <Button
+        android:id="@+id/btnDailyTrainingProgressDialogComplete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/Completed"
+        app:layout_constraintBottom_toTopOf="@+id/glDailyTrainingProgressDialogBottom"
+        app:layout_constraintEnd_toStartOf="@+id/glDailyTrainingProgressDialogEnd"
+        app:layout_constraintStart_toStartOf="@+id/glDailyTrainingProgressDialogStart" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

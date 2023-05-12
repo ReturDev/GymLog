@@ -5,6 +5,7 @@ import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.remote.firestore.ReferencedExercises
@@ -142,6 +143,7 @@ class CloudFirestoreService @Inject constructor(
         return db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG)
             .document(userID)
             .collection(CloudFirestoreCollections.TRAINING_RECORD_COLLECTION_TAG)
+            .orderBy(TrainingLog.DATE_TAG, Query.Direction.DESCENDING)
             .get()
             .await()
 

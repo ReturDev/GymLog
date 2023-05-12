@@ -50,6 +50,7 @@ class RecordFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        recordViewModel.loadLogs()
         initRecyclerView()
         setCalendarConfig()
         setCollector()
@@ -58,7 +59,7 @@ class RecordFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = RecordAdapter(emptyList()) { position -> onClickTrainingLog(position) }
+        adapter = RecordAdapter(recordViewModel.uiState.value.trainingLogs) { position -> onClickTrainingLog(position) }
         val recycler = binding.rvRecordList
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

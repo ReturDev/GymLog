@@ -14,18 +14,24 @@ import javax.inject.Inject
 class CreateTrainingLogUseCase @Inject constructor(
     private val recordRepository: RecordRepository,
     private val removeDailyTrainingUseCase: RemoveDailyTrainingUseCase,
-    private val getUserInfoUseCase: GetUserInfoUseCase
+    private val getUserInfoUseCase: GetUserInfoUseCase,
+    private val applicationData: ApplicationData
 ) {
 
     suspend operator fun invoke(training : TrainingOfTrainingLog){
 
         val id = recordRepository.generateTrainingLogId(getUserInfoUseCase().id)
-
-        recordRepository.createTrainingLog(getUserInfoUseCase().id, TrainingLog(
+        val trainingLog = TrainingLog(
             id = id,
             date= Timestamp(Date()),
             training = training,
-        ))
+        )
+
+        recordRepository.createTrainingLog(getUserInfoUseCase().id, trainingLog )
+
+        applicationData.userTrainingLogs.add(trainingLog)
+        applicationData.userTrainingLogs.sortByDescending { selector -> selector.date }
+
 
         removeDailyTrainingUseCase()
 

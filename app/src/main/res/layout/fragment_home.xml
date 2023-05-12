@@ -35,22 +35,12 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/horizontal_margin_guideline" />
 
-    <Button
-        android:id="@+id/btnHomeModifyDailyTraining"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/modify_daily_training_btn"
-        app:layout_constraintBottom_toTopOf="@+id/glHomeBottom"
-        app:layout_constraintEnd_toStartOf="@+id/glHomeEnd"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/glHomeStart" />
-
     <LinearLayout
         android:id="@+id/homeTrainingSelectedRoot"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/btnHomeModifyDailyTraining"
+        app:layout_constraintBottom_toTopOf="@+id/glHomeBottom"
         app:layout_constraintEnd_toStartOf="@+id/glHomeEnd"
         app:layout_constraintStart_toStartOf="@+id/glHomeStart"
         app:layout_constraintTop_toTopOf="@+id/glHomeTop">
@@ -71,7 +61,7 @@
             android:id="@+id/rvHomeTrainingExercises"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2">
+            android:layout_weight="1">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -79,24 +69,25 @@
             android:id="@+id/homeTrainingButtonsRoot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <Button
-                android:id="@+id/btnHomeRemoveTraining"
+                android:id="@+id/btnHomeStartDailyTraining"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/horizontal_min_margin"
-                android:layout_weight="1"
-                android:text="@string/delete" />
+                android:text="@string/start_daily_training" />
 
             <Button
-                android:id="@+id/btnHomeCompletedTraining"
+                android:id="@+id/btnHomeChangeDailyTraining"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/horizontal_min_margin"
-                android:layout_weight="1"
-                android:text="@string/Completed" />
+                android:text="@string/change_daily_training_btn" />
 
+            <Button
+                android:id="@+id/btnHomeDiscardTraining"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/discard_daily_training" />
         </LinearLayout>
 
     </LinearLayout>
@@ -106,7 +97,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/btnHomeModifyDailyTraining"
+        app:layout_constraintBottom_toTopOf="@+id/glHomeBottom"
         app:layout_constraintEnd_toStartOf="@+id/glHomeEnd"
         app:layout_constraintStart_toStartOf="@+id/glHomeStart"
         app:layout_constraintTop_toTopOf="@+id/glHomeTop">

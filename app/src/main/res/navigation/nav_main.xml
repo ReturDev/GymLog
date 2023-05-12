@@ -6,11 +6,6 @@
     app:startDestination="@id/nav_home">
 
     <fragment
-        android:id="@+id/recordFragment"
-        android:name="com.sergio.gymlog.ui.main.record.RecordFragment"
-        android:label="fragment_record"
-        tools:layout="@layout/fragment_record" />
-    <fragment
         android:id="@+id/trainingEditorFragment"
         android:name="com.sergio.gymlog.ui.main.training.editor.TrainingEditorFragment"
         android:label="fragment_training_editor"
@@ -129,4 +124,12 @@
             android:label="fragment_user_exercises_list"
             tools:layout="@layout/fragment_user_exercises_list" />
     </navigation><action android:id="@+id/action_global_exerciseCreatorFragment" app:destination="@id/exerciseCreatorFragment"/>
+    <navigation android:id="@+id/nav_record"
+        app:startDestination="@id/recordFragment">
+        <fragment
+            android:id="@+id/recordFragment"
+            android:name="com.sergio.gymlog.ui.main.record.RecordFragment"
+            android:label="fragment_record"
+            tools:layout="@layout/fragment_record" />
+    </navigation>
 </navigation>

@@ -8,7 +8,7 @@
         android:id="@+id/nav_training"
         android:title="@string/training_bottom_menu" />
     <item
-        android:id="@+id/recordFragment"
+        android:id="@+id/nav_record"
         android:title="@string/training_record_bottom_menu" />
     <item
         android:id="@+id/nav_user"

@@ -16,6 +16,7 @@ import com.sergio.gymlog.data.model.user.UserInfo
 import com.sergio.gymlog.databinding.FragmentHomeBinding
 import com.sergio.gymlog.ui.main.home.logsaver.LogSaverDialog
 import com.sergio.gymlog.ui.main.home.logsaver.SaveLogInterface
+import com.sergio.gymlog.ui.main.home.progress.DailyTrainingProgressDialog
 import com.sergio.gymlog.ui.main.home.selector.DailyTrainingSelectionListener
 import com.sergio.gymlog.ui.main.home.selector.DailyTrainingSelectorDialog
 import com.sergio.gymlog.ui.main.training.detail.adapter.TrainingDetailsAdapter
@@ -97,11 +98,16 @@ class HomeFragment : Fragment(), DailyTrainingSelectionListener, SaveLogInterfac
 
     private fun setListeners() {
 
-        binding.btnHomeCompletedTraining.setOnClickListener {
-            LogSaverDialog(homeViewModel.uiState.value.dailyTraining!!.training!!,this).show(parentFragmentManager, "log_saver_dialog")
+//        binding.btnHomeCompletedTraining.setOnClickListener {
+//
+//        }
+        binding.btnHomeDiscardTraining.setOnClickListener { homeViewModel.removeDailyTraining() }
+
+        binding.btnHomeStartDailyTraining.setOnClickListener {
+            DailyTrainingProgressDialog(homeViewModel.uiState.value.dailyTraining!!.training!!, this).show(parentFragmentManager, "daily_training_progress_dialog")
         }
-        binding.btnHomeRemoveTraining.setOnClickListener { homeViewModel.removeDailyTraining() }
-        binding.btnHomeModifyDailyTraining.setOnClickListener {
+
+        binding.btnHomeChangeDailyTraining.setOnClickListener {
             DailyTrainingSelectorDialog(this, homeViewModel.uiState.value.dailyTraining?.training).show(parentFragmentManager, "daily_training_selector_dialog")
         }
         binding.homeTrainingNotSelectedRoot.setOnClickListener {

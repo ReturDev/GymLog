@@ -22,11 +22,8 @@ class RecordViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(RecordUiState())
     val uiState = _uiState.asStateFlow()
 
-    init {
-        loadLogs()
-    }
 
-    private fun loadLogs(){
+    fun loadLogs(){
 
         viewModelScope.launch {
 

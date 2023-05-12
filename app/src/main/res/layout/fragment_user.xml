@@ -37,15 +37,15 @@
 
     <TextView
         android:id="@+id/tvUserName"
-        android:hint="@string/user_name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/vertical_margin"
+        android:layout_marginTop="@dimen/vertical_min_margin"
         android:ems="13"
+        android:hint="@string/user_name_label"
         android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/glUserEnd"
         app:layout_constraintStart_toStartOf="@+id/glUserBegin"
-        app:layout_constraintTop_toTopOf="@+id/glUserTop" />
+        app:layout_constraintTop_toBottomOf="@+id/btnUserLogOut" />
 
     <ImageView
         android:id="@+id/ivUserImage"
@@ -61,136 +61,118 @@
         android:id="@+id/btnUserExercises"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/vertical_margin"
         android:text="@string/user_exercises"
+        app:layout_constraintBottom_toTopOf="@+id/glUserBottom"
         app:layout_constraintEnd_toStartOf="@+id/glUserEnd"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/glUserBegin"
-        app:layout_constraintTop_toBottomOf="@+id/ivUserImage"
         app:layout_constraintVertical_chainStyle="packed" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/userPreferencesCard"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/vertical_max_margin"
-        app:layout_constraintEnd_toStartOf="@+id/glUserEnd"
-        app:layout_constraintStart_toStartOf="@+id/glUserBegin"
-        app:layout_constraintTop_toBottomOf="@+id/btnUserExercises">
-
-        <LinearLayout
-            android:id="@+id/userPreferencesRoot"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvPreferencesLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/user_preferences"
-                android:textAlignment="center" />
-
-            <LinearLayout
-                android:id="@+id/userSetsRoot"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/user_characteristics_padding">
-
-                <TextView
-                    android:id="@+id/tvUserSetsLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/exercise_sets" />
-
-                <TextView
-                    android:id="@+id/tvUserSetsQuantity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:textAlignment="textEnd" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/userRepetitionsRoot"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/user_characteristics_padding">
-
-                <TextView
-                    android:id="@+id/tvUserRepetitionsLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/repetitions" />
-
-                <TextView
-                    android:id="@+id/tvUserRepetitionsQuantity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:textAlignment="textEnd" />
-            </LinearLayout>
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/userMeasuresCard"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/vertical_max_margin"
-        app:layout_constraintEnd_toStartOf="@+id/glUserEnd"
-        app:layout_constraintStart_toStartOf="@+id/glUserBegin"
-        app:layout_constraintTop_toBottomOf="@+id/userPreferencesCard">
-
-        <LinearLayout
-            android:id="@+id/userMeasuresRoot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvUserMeasuresLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/user_measures"
-                android:textAlignment="center" />
-
-            <LinearLayout
-                android:id="@+id/userWeightRoot"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/user_characteristics_padding">
-
-                <TextView
-                    android:id="@+id/tvUserWeightLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/user_weight" />
-
-                <TextView
-                    android:id="@+id/tvUserWeightQuantity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0" />
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/btnUserLogOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/log_out"
-        app:layout_constraintBottom_toTopOf="@+id/glUserBottom"
         app:layout_constraintEnd_toStartOf="@+id/glUserEnd"
-        app:layout_constraintStart_toStartOf="@+id/glUserBegin" />
+        app:layout_constraintTop_toTopOf="@+id/glUserTop" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/userSetsCard"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/user_characteristics_card_height"
+        android:layout_marginTop="@dimen/vertical_min_margin"
+        app:layout_constraintEnd_toStartOf="@+id/glUserEnd"
+        app:layout_constraintStart_toStartOf="@+id/glUserBegin"
+        app:layout_constraintTop_toBottomOf="@+id/ivUserImage">
+
+        <LinearLayout
+            android:id="@+id/userSetsRoot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/user_characteristics_padding">
+
+            <TextView
+                android:id="@+id/tvUserSetsLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/exercise_sets" />
+
+            <TextView
+                android:id="@+id/tvUserSetsQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:textAlignment="textEnd" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/userRepetitionsCard"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/user_characteristics_card_height"
+        android:layout_marginTop="@dimen/vertical_min_margin"
+        app:layout_constraintEnd_toStartOf="@+id/glUserEnd"
+        app:layout_constraintStart_toStartOf="@+id/glUserBegin"
+        app:layout_constraintTop_toBottomOf="@+id/userSetsCard">
+
+        <LinearLayout
+            android:id="@+id/userRepetitionsRoot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/user_characteristics_padding">
+
+            <TextView
+                android:id="@+id/tvUserRepetitionsLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/repetitions" />
+
+            <TextView
+                android:id="@+id/tvUserRepetitionsQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/userWeightCard"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/user_characteristics_card_height"
+        android:layout_marginTop="@dimen/vertical_min_margin"
+        app:layout_constraintEnd_toStartOf="@+id/glUserEnd"
+        app:layout_constraintStart_toStartOf="@+id/glUserBegin"
+        app:layout_constraintTop_toBottomOf="@+id/userRepetitionsCard">
+
+        <LinearLayout
+            android:id="@+id/userWeightRoot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/user_characteristics_padding">
+
+            <TextView
+                android:id="@+id/tvUserWeightLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/user_weight" />
+
+            <TextView
+                android:id="@+id/tvUserWeightQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
