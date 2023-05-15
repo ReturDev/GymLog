@@ -22,7 +22,7 @@
     <string name="cloud_error_generic">Error al conectar. Intentelo más tarde.</string>
     <string name="firebase_error_network">Error. Comprueba el estado de tu conexión.</string>
     <string name="log_out">Cerrar sesión</string>
-    <string name="home_bottom_menu">Incio</string>
+    <string name="home_bottom_menu">Inicio</string>
     <string name="training_bottom_menu">Entrenamiento</string>
     <string name="training_record_bottom_menu">Historial</string>
     <string name="user_bottom_menu">Usuario</string>
@@ -100,5 +100,7 @@
     <string name="accept">Aceptar\n</string>
     <string name="Completed">Completado</string>
     <string name="training_progress_instruction">Selecciona los ejercicios completados y pulsa completado para guardarlo en el historial.</string>
+    <string name="arms">Brazos</string>
+    <string name="delete_training">El entrenamiento se eliminara permanentemente.</string>
 
 </resources>

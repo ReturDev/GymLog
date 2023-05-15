@@ -9,11 +9,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.sergio.gymlog.R
 import com.sergio.gymlog.databinding.DialogDeleteExerciseBinding
 import com.sergio.gymlog.ui.main.exercise.ExerciseDialogListener
+import com.sergio.gymlog.ui.main.training.DeleteTrainingListener
 
 
 class DeleteExerciseDialog(
-    private val listener : ExerciseDialogListener,
-    private val exercisePos : Int
+    private val listener : DeleteTrainingListener,
+    private val elementPosition : Int,
+    private val messageResource : Int
 ) : BottomSheetDialogFragment() {
 
     private lateinit var binding : DialogDeleteExerciseBinding
@@ -44,12 +46,14 @@ class DeleteExerciseDialog(
 
         }
 
+        binding.tvDeleteExerciseDialogMessage.text = getString(messageResource)
+
         binding.btnDeleteExerciseDialogDelete.isEnabled = false
         countDownTimer.start()
 
         binding.btnDeleteExerciseDialogDelete.setOnClickListener {
             dialog?.dismiss()
-            listener.onClickDelete(exercisePos)
+            listener.onClickDelete(elementPosition)
         }
 
     }

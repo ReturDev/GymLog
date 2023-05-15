@@ -17,6 +17,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sergio.gymlog.R
+import com.sergio.gymlog.data.model.exercise.MuscularGroup
 import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.databinding.FragmentTrainingEditorBinding
@@ -25,6 +26,7 @@ import com.sergio.gymlog.util.InputFiltersProvider
 import com.sergio.gymlog.util.extension.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.EnumMap
 
 @AndroidEntryPoint
 class TrainingEditorFragment : Fragment() {
@@ -238,8 +240,34 @@ class TrainingEditorFragment : Fragment() {
 
         return trainingEditorViewModel.uiState.value.training.copy(
             name = binding.etEditorName.text.toString(),
-            description = binding.etEditorDescription.text.toString()
+            description = binding.etEditorDescription.text.toString(),
+            muscularGroups = getMuscularGroups()
         )
+
+    }
+
+    private fun getMuscularGroups(): List<MuscularGroup> {
+        val muscularGroups = MuscularGroup.values()
+
+        val trainingMuscularGroups = mutableListOf<MuscularGroup>()
+
+        for (muscularGroup in muscularGroups){
+
+            if (muscularGroup != MuscularGroup.NONE){
+                val contains = trainingEditorViewModel.uiState.value.training.exercises.map { ex ->
+                    ex.muscularGroup
+                }.any { mg ->
+                    mg == muscularGroup
+                }
+
+                if (contains){
+                    trainingMuscularGroups.add(muscularGroup)
+                }
+            }
+
+        }
+
+        return trainingMuscularGroups.toList()
 
     }
 

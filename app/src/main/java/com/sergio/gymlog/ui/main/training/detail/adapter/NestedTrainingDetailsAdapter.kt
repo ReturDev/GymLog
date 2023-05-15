@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
@@ -38,8 +39,10 @@ class NestedTrainingDetailsAdapter(
 
             if (set.bodyWeight){
 
-                binding.ivBodyWeightChecked.visibility = View.VISIBLE
+                binding.ivBodyWeightChecked.setImageDrawable(ResourcesCompat.getDrawable(binding.root.resources, R.drawable.ic_checked,null))
 
+            }else{
+                binding.ivBodyWeightChecked.setImageDrawable(ResourcesCompat.getDrawable(binding.root.resources, R.drawable.ic_unchecked,null))
             }
 
         }

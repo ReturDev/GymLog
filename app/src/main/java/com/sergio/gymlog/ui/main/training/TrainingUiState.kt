@@ -6,7 +6,7 @@ data class TrainingUiState (
 
     val loading : Boolean = true,
     val loaded : Boolean = false,
-    val trainings : List<Training> = emptyList()
-
+    val trainings : List<Training> = emptyList(),
+    val trainingDeletedPosition : Int = -1
 
 )

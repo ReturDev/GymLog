@@ -42,8 +42,8 @@ class TrainingDetailsAdapter(
          fun bind(trainingExercise: Exercises.TrainingExercise) {
 
             binding.tvTrainingExerciseName.text = trainingExercise.name
-            binding.tvTrainingExEquipment.text = trainingExercise.equipment.toString()
-            binding.tvTrainingExMuscularG.text = trainingExercise.muscularGroup.toString()
+            binding.tvTrainingExEquipment.text = binding.root.context.getString(trainingExercise.equipment.stringResource)
+            binding.tvTrainingExMuscularG.text = binding.root.context.getString(trainingExercise.muscularGroup.stringResource)
 
             initNestedRecycler(trainingExercise.sets)
             setListeners()
@@ -68,7 +68,7 @@ class TrainingDetailsAdapter(
         private fun initNestedRecycler(sets : List<TrainingExerciseSet>){
 
             adapter = NestedTrainingDetailsAdapter(sets)
-            val recycler = binding.rvTrainingExSets
+            val recycler = binding.trainingExSetsContainer.rvSetsContainerSetsList
             recycler.adapter = adapter
             recycler.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
 

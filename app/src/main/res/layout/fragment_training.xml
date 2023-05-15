@@ -60,9 +60,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:src="@drawable/ic_checked_item"
+        android:focusable="true"
+        style="@style/AddTrainingFloatingBtnStyle"
+        android:src="@drawable/ic_add_training"
         app:layout_constraintBottom_toTopOf="@+id/glTrainingBottom"
         app:layout_constraintEnd_toStartOf="@+id/glTrainingEnd"
-        app:layout_constraintStart_toStartOf="@+id/glTrainingStart" />
+        app:layout_constraintStart_toStartOf="@+id/glTrainingStart"
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

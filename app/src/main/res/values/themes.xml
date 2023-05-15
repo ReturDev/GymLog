@@ -31,7 +31,12 @@
 
         <!--Components-->
         <item name="materialCardViewStyle">@style/CardViewStyle</item>
-        <item name="floatingActionButtonStyle">@style/FloatingButtonStyle</item>
+        
+        <item name="android:statusBarColor">?attr/colorSurface</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <item name="fontFamily">@font/amaranth</item>
+        <item name="android:textSize">18sp</item>
 
     </style>
 </resources>

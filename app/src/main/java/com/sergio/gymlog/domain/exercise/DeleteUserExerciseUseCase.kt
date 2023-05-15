@@ -36,6 +36,7 @@ class DeleteUserExerciseUseCase @Inject constructor(
         }
 
         exercisesRepository.deleteUserExercise(applicationData.userInfo.id,exerciseReference, trainingsToUpdate)
+        applicationData.userExercises.remove(exercise)
 
     }
 

@@ -102,10 +102,7 @@ class CloudFirestoreService @Inject constructor(
 
     override suspend fun createUserTraining(userID: String, training: TrainingCloud){
 
-        db.collection(CloudFirestoreCollections.USER_COLLECTION_TAG)
-            .document(userID)
-            .collection(CloudFirestoreCollections.TRAINING_COLLECTION_TAG)
-            .add(training)
+        setUserTraining(userID,training)
 
     }
 

@@ -19,7 +19,6 @@ import com.sergio.gymlog.ui.main.exercise.ExerciseDialogListener
 import com.sergio.gymlog.ui.main.exercise.detail.ExerciseDetailDialog
 import com.sergio.gymlog.ui.main.exercise.dialog.ExerciseClickedDialog
 import com.sergio.gymlog.ui.main.exercise.user.adapter.UserExercisesListAdapter
-import com.sergio.gymlog.util.extension.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -78,6 +77,7 @@ class UserExercisesListFragment : Fragment(), ExerciseDialogListener {
 
                         adapter.userExercises.removeAt(currentState.exerciseDeletedPos)
                         adapter.notifyItemRemoved(currentState.exerciseDeletedPos)
+                        userExercisesListViewModel.resetStates()
 
                     }
 
@@ -123,9 +123,9 @@ class UserExercisesListFragment : Fragment(), ExerciseDialogListener {
 
     }
 
-    override fun onClickDelete(exercisePos: Int) {
+    override fun onClickDelete(position: Int) {
 
-        userExercisesListViewModel.deleteUserExercise(exercisePos)
+        userExercisesListViewModel.deleteUserExercise(position)
 
     }
 

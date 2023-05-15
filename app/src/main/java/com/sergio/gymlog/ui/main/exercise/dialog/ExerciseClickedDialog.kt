@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.sergio.gymlog.R
 import com.sergio.gymlog.databinding.DialogExerciseClickedBinding
 import com.sergio.gymlog.ui.main.exercise.ExerciseDialogListener
 
@@ -44,7 +45,7 @@ class ExerciseClickedDialog(
 
         binding.btnExerciseClickedDialogDelete.setOnClickListener {
             dialog?.dismiss()
-            val confirmDeleteDialog = DeleteExerciseDialog(listener,exercisePos)
+            val confirmDeleteDialog = DeleteExerciseDialog(listener,exercisePos, R.string.confirm_delete_exercise_message)
             confirmDeleteDialog.show(parentFragmentManager, "confirm_exercise_delete")
         }
 

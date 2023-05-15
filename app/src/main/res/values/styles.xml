@@ -15,16 +15,51 @@
         <item name="cardElevation">5dp</item>
     </style>
 
-<!--    <style name="TrainingNameStyle" parent="AppaMater"-->
+    <style name="CardTextStyle" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">?attr/colorOnPrimaryContainer</item>
+    </style>
 
     <style name="TrainingNameTextStyle" parent="TextAppearance.Material3.HeadlineSmall">
         <item name="android:textAlignment">center</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">?attr/colorOnPrimaryContainer</item>
     </style>
 
-    <style name="FloatingButtonStyle" parent="Widget.Material3.FloatingActionButton.Secondary">
-        <item name="tint">?attr/colorOnSecondaryContainer</item>
+    <style name="HomeTrainingNameStyle" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="fontFamily">@font/amaranth_bold</item>
+    </style>
+
+    <style name="NormalTextAppearance" parent="TextAppearance.Material3.HeadlineSmall">
 
     </style>
+
+    <style name="HomeFloatingButtonStyle" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="maxImageSize">32dp</item>
+    </style>
+
+    <style name="AddTrainingFloatingBtnStyle" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="fabCustomSize">65dp</item>
+        <item name="maxImageSize">40dp</item>
+    </style>
+
+    <style name="NestedCardStyle" parent="CardViewStyle">
+        <item name="cardBackgroundColor">?attr/colorTertiaryContainer</item>
+    </style>
+
+    <style name="NestedCardTextStyle" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">?attr/colorOnTertiaryContainer</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+
+    <style name= "DescriptionStyle">
+        <item name="android:background"> @drawable/description_background</item>
+        <item name="android:textColor">?attr/colorOnTertiaryContainer</item>
+        <item name="android:padding">@dimen/description_padding</item>
+        <item name="android:layout_marginRight">@dimen/margin_card</item>
+        <item name="android:layout_marginLeft">@dimen/margin_card</item>
+    </style>
+
 
 </resources>

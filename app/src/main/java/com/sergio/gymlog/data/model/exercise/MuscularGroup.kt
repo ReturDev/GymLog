@@ -8,6 +8,7 @@ enum class MuscularGroup(val stringResource : Int, val iconResource : Int) {
     CHEST(R.string.chest_muscle, 0),
     SHOULDERS(R.string.shoulders_muscle, 0),
     LEGS(R.string.legs_muscle, 0),
+    ARMS(R.string.arms, 0),
     NONE(-1, 0);
 
 }

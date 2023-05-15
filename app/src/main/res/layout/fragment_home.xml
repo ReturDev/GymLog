@@ -8,25 +8,11 @@
     tools:context=".ui.main.home.HomeFragment">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glHomeTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="@dimen/vertical_margin_guideline" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glHomeStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="@dimen/horizontal_margin_guideline" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glHomeBottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="@dimen/vertical_margin_guideline" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glHomeEnd"
@@ -35,93 +21,146 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/horizontal_margin_guideline" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/homeTrainingSelectedRoot"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/glHomeBottom"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/glHomeEnd"
         app:layout_constraintStart_toStartOf="@+id/glHomeStart"
-        app:layout_constraintTop_toTopOf="@+id/glHomeTop">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvHomeTrainingName"
-            style="@style/TrainingNameTextStyle"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/homeAppBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <TextView
+                    android:id="@+id/tvHomeTrainingName"
+                    style="@style/HomeTrainingNameStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/vertical_min_margin"
+                    android:padding="16dp"
+                    android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/tvHomeTrainingDescription"
+                        style="@style/DescriptionStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/vertical_min_margin"/>
+
+            </LinearLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvHomeTrainingExercises"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:nestedScrollingEnabled="true"
+                    android:layout_marginTop="@dimen/vertical_min_margin">
+                </androidx.recyclerview.widget.RecyclerView>
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_gravity="bottom">
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabHomeDiscardTraining"
+                style="@style/HomeFloatingButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_cancel_training"
+                app:layout_constraintBottom_toBottomOf="@+id/fabHomeChangeDailyTraining"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fabHomeChangeDailyTraining"
+                app:layout_constraintTop_toTopOf="@+id/fabHomeChangeDailyTraining" />
 
-        <TextView
-            android:id="@+id/tvHomeTrainingDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/vertical_min_margin"
-            android:singleLine="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvHomeTrainingName" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabHomeStartDailyTraining"
+                style="@style/HomeFloatingButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_play_training"
+                app:layout_constraintBottom_toBottomOf="@+id/fabHomeChangeDailyTraining"
+                app:layout_constraintEnd_toStartOf="@+id/fabHomeChangeDailyTraining"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/fabHomeChangeDailyTraining"
+                app:layout_constraintVertical_bias="0.0" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvHomeTrainingExercises"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/vertical_min_margin"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvHomeTrainingDescription">
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabHomeChangeDailyTraining"
+                style="@style/HomeFloatingButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/vertical_margin"
+                android:src="@drawable/ic_change_training"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/fabHomeDiscardTraining"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fabHomeStartDailyTraining" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.recyclerview.widget.RecyclerView>
+<!--        <TextView-->
+<!--            android:id="@+id/tvHomeTrainingName"-->
+<!--            style="@style/TrainingNameTextStyle"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textAlignment="center"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnHomeDiscardTraining"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_cancel_training"
-            app:layout_constraintBottom_toBottomOf="@+id/btnHomeChangeDailyTraining"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btnHomeChangeDailyTraining"
-            app:layout_constraintTop_toTopOf="@+id/btnHomeChangeDailyTraining" />
+<!--        <TextView-->
+<!--            android:id="@+id/tvHomeTrainingDescription"-->
+<!--            style="@style/DescriptionStyle"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/vertical_min_margin"-->
+<!--            android:singleLine="false"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tvHomeTrainingName" />-->
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnHomeStartDailyTraining"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_play_training"
-            app:layout_constraintBottom_toBottomOf="@+id/btnHomeChangeDailyTraining"
-            app:layout_constraintEnd_toStartOf="@+id/btnHomeChangeDailyTraining"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btnHomeChangeDailyTraining"
-            app:layout_constraintVertical_bias="0.0" />
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/rvHomeTrainingExercises"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginTop="@dimen/vertical_min_margin"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tvHomeTrainingDescription">-->
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnHomeChangeDailyTraining"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/vertical_margin"
-            android:src="@drawable/ic_change_training"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnHomeDiscardTraining"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btnHomeStartDailyTraining" />
+<!--        </androidx.recyclerview.widget.RecyclerView>-->
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/homeTrainingNotSelectedRoot"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/glHomeBottom"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/glHomeEnd"
         app:layout_constraintStart_toStartOf="@+id/glHomeStart"
-        app:layout_constraintTop_toTopOf="@+id/glHomeTop">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tvHomeAddDailyTrainging"

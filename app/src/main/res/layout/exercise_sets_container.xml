@@ -2,61 +2,69 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/setCard"
+    android:id="@+id/setsContainerCard"
     style="@style/NestedCardStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_card">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/setRoot"
+        android:id="@+id/setsContainerRoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/vertical_min_margin"
-        android:layout_marginBottom="@dimen/vertical_min_margin">
+        android:layout_margin="@dimen/margin_card">
 
         <TextView
-            android:id="@+id/tvSetNumber"
+            android:id="@+id/tvSetsContainerSet"
             style="@style/NestedCardTextStyle"
             android:layout_width="40sp"
             android:layout_height="wrap_content"
             android:text="@string/set"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvSetRepetitions"
+            android:id="@+id/tvSetsContainerRepetitions"
             style="@style/NestedCardTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvSetWeight"
+            android:text="@string/repetitions"
+            app:layout_constraintEnd_toStartOf="@+id/tvSetsContainerWeight"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toEndOf="@+id/tvSetNumber"
+            app:layout_constraintStart_toEndOf="@+id/tvSetsContainerSet"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvSetWeight"
+            android:id="@+id/tvSetsContainerWeight"
             style="@style/NestedCardTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/weight"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/ivBodyWeightChecked"
+            app:layout_constraintEnd_toStartOf="@+id/tvSetsContainerBodyWeight"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tvSetRepetitions"
+            app:layout_constraintStart_toEndOf="@+id/tvSetsContainerRepetitions"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/ivBodyWeightChecked"
+        <TextView
+            android:id="@+id/tvSetsContainerBodyWeight"
+            style="@style/NestedCardTextStyle"
             android:layout_width="80sp"
-            android:layout_height="@dimen/body_weight_checked_iv_size"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"
+            android:text="@string/body_weight"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_checked_item"
-            app:tint="?attr/colorOnTertiaryContainer" />
+            tools:ignore="TextSizeCheck" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSetsContainerSetsList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:layout_marginTop="@dimen/vertical_min_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSetsContainerSet" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

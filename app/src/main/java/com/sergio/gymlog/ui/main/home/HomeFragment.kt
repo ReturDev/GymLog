@@ -77,7 +77,14 @@ class HomeFragment : Fragment(), DailyTrainingSelectionListener, SaveLogInterfac
                             binding.homeTrainingNotSelectedRoot.visibility = View.GONE
                             binding.homeTrainingSelectedRoot.visibility = View.VISIBLE
                             binding.tvHomeTrainingName.text = currentState.dailyTraining.training!!.name
-                            binding.tvHomeTrainingDescription.text = currentState.dailyTraining.training.description
+
+                            if (currentState.dailyTraining.training.description.isNotBlank()){
+                                binding.tvHomeTrainingDescription.visibility = View.VISIBLE
+                                binding.tvHomeTrainingDescription.text = currentState.dailyTraining.training.description
+                            }else{
+                                binding.tvHomeTrainingDescription.visibility = View.GONE
+                            }
+
                             adapter.changeExerciseList(currentState.dailyTraining.training.exercises)
                             adapter.notifyDataSetChanged()
 
@@ -101,16 +108,13 @@ class HomeFragment : Fragment(), DailyTrainingSelectionListener, SaveLogInterfac
 
     private fun setListeners() {
 
-//        binding.btnHomeCompletedTraining.setOnClickListener {
-//
-//        }
-        binding.btnHomeDiscardTraining.setOnClickListener { homeViewModel.removeDailyTraining() }
+        binding.fabHomeDiscardTraining.setOnClickListener { homeViewModel.removeDailyTraining() }
 
-        binding.btnHomeStartDailyTraining.setOnClickListener {
+        binding.fabHomeStartDailyTraining.setOnClickListener {
             DailyTrainingProgressDialog(homeViewModel.uiState.value.dailyTraining!!.training!!, this).show(parentFragmentManager, "daily_training_progress_dialog")
         }
 
-        binding.btnHomeChangeDailyTraining.setOnClickListener {
+        binding.fabHomeChangeDailyTraining.setOnClickListener {
             DailyTrainingSelectorDialog(this, homeViewModel.uiState.value.dailyTraining?.training).show(parentFragmentManager, "daily_training_selector_dialog")
         }
         binding.homeTrainingNotSelectedRoot.setOnClickListener {

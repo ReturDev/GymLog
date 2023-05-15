@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.databinding.TrainingItemBinding
+import com.sergio.gymlog.ui.main.training.OnLongClickTrainingDialog
 
 class TrainingAdapter(
     var trainingList : List<Training>,
-    private val onClickElement : (String) -> Unit
+    private val onClickElement : (String) -> Unit,
+    private val onLongClickTraining : (Int) -> Unit
 ) : RecyclerView.Adapter<TrainingAdapter.TrainingHolder>() {
 
 
@@ -25,25 +27,28 @@ class TrainingAdapter(
 
     override fun onBindViewHolder(holder: TrainingHolder, position: Int) {
 
-        holder.bind(trainingList[position], onClickElement = onClickElement)
+        holder.bind(trainingList[position])
 
 
     }
 
-    class TrainingHolder(view : View) : RecyclerView.ViewHolder(view){
+    inner class TrainingHolder(view : View) : RecyclerView.ViewHolder(view){
 
         private val binding = TrainingItemBinding.bind(view)
 
-        fun bind(training : Training, onClickElement: (String) -> Unit){
+        fun bind(training : Training){
 
             binding.tvTrainingName.text = training.name
-            //binding.tvMucularGroups.text = training.exercises.map {it.muscularGroup }.groupByTo(
-                //EnumMap(MuscularGroup::class.java),{it},{it.toString()}).values.toString()
-            //binding.tvExercisesNumber.text = binding.root.context.getString(R.string.number_of_exercises,training.exercises.size)
+            val textMuscularGroups = training.muscularGroups.map { ex -> binding.root.context.getString(ex.stringResource)}.toString()
+            binding.tvMucularGroups.text = textMuscularGroups.substring(startIndex = 1, endIndex = textMuscularGroups.length-1)
+            binding.tvExercisesNumber.text = binding.root.context.getString(R.string.number_of_exercises,training.exercises.size)
 
 
             binding.root.setOnClickListener { onClickElement(training.id) }
-
+            binding.trainingCard.setOnLongClickListener {
+                onLongClickTraining(layoutPosition)
+                true
+            }
 
 
         }

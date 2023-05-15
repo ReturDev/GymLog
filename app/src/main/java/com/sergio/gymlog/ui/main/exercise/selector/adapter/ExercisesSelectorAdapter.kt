@@ -37,8 +37,8 @@ class ExercisesSelectorAdapter(
             manageItemSelected(exerciseItem)
             binding.tvExerciseName.text = exercise.name
             binding.ivExerciseImage.setImageURI(exercise.image.toUri())
-            binding.tvExerciseMuscularGroup.text = exercise.muscularGroup.toString()
-            binding.tvExerciseEquipment.text = exercise.equipment.toString()
+            binding.tvExerciseMuscularGroup.text = binding.root.context.getString(exercise.muscularGroup.stringResource)
+            binding.tvExerciseEquipment.text = binding.root.context.getString(exercise.equipment.stringResource)
 
             binding.selectionExerciseCard.setOnClickListener {
 
