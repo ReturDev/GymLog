@@ -3,20 +3,19 @@ package com.sergio.gymlog.ui.main.exercise.selector
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sergio.gymlog.data.model.exercise.ExerciseItem
-import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.domain.exercise.*
-import com.sergio.gymlog.domain.exercise.filter.FilterExercisesUseCase
+import com.sergio.gymlog.util.helper.FilterExercises
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.logging.Filter
 import javax.inject.Inject
 
 @HiltViewModel
 class ExercisesSelectorViewModel @Inject constructor(
-    private val getExercisesAsExerciseItemsUseCase: GetExercisesAsExerciseItemsUseCase,
-    private val filterExercisesUseCase: FilterExercisesUseCase
+    private val getExercisesAsExerciseItemsUseCase: GetExercisesAsExerciseItemsUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ExercisesSelectorUiState())
@@ -30,23 +29,25 @@ class ExercisesSelectorViewModel @Inject constructor(
 
     fun loadExercises(exercisesExcluded: Array<String>){
 
-        this.exercisesExcluded = exercisesExcluded
+        if (_uiState.value.exercises.isEmpty()){
+            this.exercisesExcluded = exercisesExcluded
 
-        viewModelScope.launch {
+            viewModelScope.launch {
 
 
-            allExerciseItems = getExercisesAsExerciseItemsUseCase(exercisesExcluded)
+                allExerciseItems = getExercisesAsExerciseItemsUseCase(exercisesExcluded)
 
-            _uiState.update { currentState ->
+                _uiState.update { currentState ->
 
-                currentState.copy(
+                    currentState.copy(
 
-                    exercises = allExerciseItems,
-                    refresh = true,
-                    exercisesSelectedQuantity = 0
+                        exercises = allExerciseItems,
+                        refresh = true,
+                        exercisesSelectedQuantity = 0
 
-                )
+                    )
 
+                }
             }
         }
 
@@ -114,7 +115,7 @@ class ExercisesSelectorViewModel @Inject constructor(
 
                 currentState.copy(
                     refresh = true,
-                    exercises = filterExercisesUseCase(name = text, exercisesExcluded = exercisesExcluded)
+                    exercises = FilterExercises.filter(name = text, exercises = currentState.exercises)
                 )
 
             }

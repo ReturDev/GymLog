@@ -1,49 +1,42 @@
-package com.sergio.gymlog.domain.exercise.filter
+package com.sergio.gymlog.util.helper
 
 import com.sergio.gymlog.data.model.exercise.Equipment
 import com.sergio.gymlog.data.model.exercise.ExerciseItem
 import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.exercise.MuscularGroup
-import com.sergio.gymlog.domain.exercise.GetAllExercisesUseCase
-import com.sergio.gymlog.domain.exercise.GetExercisesAsExerciseItemsUseCase
-import javax.inject.Inject
 
-class FilterExercisesUseCase @Inject constructor(
+object FilterExercises {
 
-    private val getExercisesAsExerciseItemsUseCase: GetExercisesAsExerciseItemsUseCase
+      fun filter(name : String = "", userExercises : Boolean = false, equipments : List<Equipment> = emptyList(), muscularGroups : List<MuscularGroup> = emptyList(), exercises : List<ExerciseItem>) : List<ExerciseItem> {
 
-) {
-
-    suspend operator fun invoke(name : String = "", userExercises : Boolean = false, equipments : List<Equipment> = emptyList(), muscularGroups : List<MuscularGroup> = emptyList(), exercisesExcluded: Array<String>) : List<ExerciseItem> {
-
-        var exercises = getExercisesAsExerciseItemsUseCase(exercisesExcluded).toList()
+        var filteredExercises = exercises
 
         if (name.isNotBlank()){
 
-           exercises = filterExercisesByName(name, exercises)
+            filteredExercises = filterExercisesByName(name, exercises)
 
         }
 
         if (userExercises){
 
 
-            exercises = filterByUserExercises(exercises)
+            filteredExercises = filterByUserExercises(exercises)
 
         }
 
         if (equipments.isNotEmpty()){
 
-            exercises = filterExercisesByEquipment(equipments,exercises)
+            filteredExercises = filterExercisesByEquipment(equipments,exercises)
 
         }
 
         if (equipments.isNotEmpty()){
 
-            exercises = filterExercisesByMuscularGroup(muscularGroups, exercises)
+            filteredExercises = filterExercisesByMuscularGroup(muscularGroups, exercises)
 
         }
 
-        return exercises
+        return filteredExercises
 
     }
 

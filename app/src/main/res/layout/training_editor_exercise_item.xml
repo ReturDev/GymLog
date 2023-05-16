@@ -14,6 +14,7 @@
 
         <TextView
             android:id="@+id/tvTrainingEditorExName"
+            style="@style/CardTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/horizontal_min_margin"
@@ -25,6 +26,7 @@
 
         <TextView
             android:id="@+id/tvTrainingEditorExMuscularGroup"
+            style="@style/CardTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/ivTrainingEditorExImage"
@@ -35,6 +37,7 @@
 
         <TextView
             android:id="@+id/tvTrainingEditorExEquipment"
+            style="@style/CardTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/tvTrainingEditorExMuscularGroup"

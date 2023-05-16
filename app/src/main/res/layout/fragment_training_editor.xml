@@ -95,6 +95,7 @@
                 style="?attr/textInputFilledStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/vertical_min_margin"
                 android:hint="@string/description_hint"
                 app:errorEnabled="true"
                 app:counterEnabled="true"

@@ -14,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sergio.gymlog.R
 import com.sergio.gymlog.databinding.FragmentExercisesSelectorBinding
 import com.sergio.gymlog.ui.main.exercise.selector.adapter.ExercisesSelectorAdapter
@@ -26,6 +27,7 @@ class ExercisesSelectorFragment : Fragment() {
 
     private lateinit var binding : FragmentExercisesSelectorBinding
     private lateinit var adapter: ExercisesSelectorAdapter
+    private lateinit var bottomMenu : BottomNavigationView
 
     private val exercisesSelectorVM  by viewModels<ExercisesSelectorViewModel>()
     private val args : ExercisesSelectorFragmentArgs by navArgs()
@@ -35,6 +37,8 @@ class ExercisesSelectorFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+        bottomMenu = requireActivity().findViewById(R.id.bottomNavigationView)
+        bottomMenu.visibility = View.GONE
         exercisesSelectorVM.loadExercises(args.idsExercises)
 
         binding = FragmentExercisesSelectorBinding.inflate(layoutInflater, container,false)

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -33,7 +34,7 @@ class TrainingEditorFragment : Fragment() {
 
     private lateinit var binding : FragmentTrainingEditorBinding
     private lateinit var adapter : TrainingEditorAdapter
-    private lateinit var bottomMenu : BottomNavigationView
+    private var bottomMenu : BottomNavigationView? = null
 
     private val trainingEditorViewModel by viewModels<TrainingEditorViewModel>()
     private val args by navArgs<TrainingEditorFragmentArgs>()
@@ -54,7 +55,7 @@ class TrainingEditorFragment : Fragment() {
         }
 
         bottomMenu = requireActivity().findViewById(R.id.bottomNavigationView)
-        bottomMenu.visibility = View.GONE
+        bottomMenu?.visibility = View.GONE
 
         setupOnBackPressed()
 
@@ -96,7 +97,7 @@ class TrainingEditorFragment : Fragment() {
 
             }else{
 
-                requireActivity().toast(R.string.training_name_required, Toast.LENGTH_LONG)
+                binding.tilEditorName.error = getString(R.string.training_name_required)
 
             }
 
@@ -114,6 +115,11 @@ class TrainingEditorFragment : Fragment() {
         }
 
         binding.etEditorName.filters = arrayOf(InputFiltersProvider.usernameFilter())
+        binding.etEditorName.addTextChangedListener {
+            if (binding.tilEditorName.error != null){
+                binding.tilEditorName.error = null
+            }
+        }
         binding.etEditorDescription.filters = arrayOf(InputFiltersProvider.descriptionFilter())
 
     }
@@ -304,7 +310,7 @@ class TrainingEditorFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        bottomMenu.visibility = View.VISIBLE
+        bottomMenu?.visibility = View.VISIBLE
     }
 
 

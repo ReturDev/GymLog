@@ -25,11 +25,12 @@
         <item name="boxStrokeColor">@color/nested_textfield_stroke_color</item>
         <item name="android:textColorHint">@color/nested_textfield_label_color</item>
         <item name="hintTextColor">@color/nested_textfield_label_color</item>
+        <item name="iconTint">#FFF000</item>
 
     </style>
 
-    <style name= "NestedCardEditTextStyle" parent="Widget.AppCompat.EditText">
-        <item name="colorControlActivated">?attr/colorOnTertiary</item>
+    <style name= "NestedCardEditTextTheme" parent="ThemeOverlay.Material3.TextInputEditText.FilledBox">
+        <item name="colorControlActivated">?attr/colorTertiary</item>
     </style>
 
     
@@ -59,10 +60,19 @@
 
     <style name="RemoveTrainingButtonStyle" parent="Widget.Material3.Button.IconButton">
         <item name="iconTint">?attr/colorTertiary</item>
+        <item name="android:scaleX">1.2</item>
+        <item name="android:scaleY">1.2</item>
     </style>
 
     <style name="NestedCardStyle" parent="CardViewStyle">
         <item name="cardBackgroundColor">?attr/colorTertiaryContainer</item>
+
+    </style>
+
+    <style name="NestedCardIconButtonStyle" parent="Widget.Material3.Button.IconButton">
+        <item name="iconTint">?attr/colorOnTertiaryContainer</item>
+        <item name="android:scaleX">1.5</item>
+        <item name="android:scaleY">1.5</item>
     </style>
 
     <style name="NestedCardTextStyle" parent="TextAppearance.Material3.BodyMedium">
