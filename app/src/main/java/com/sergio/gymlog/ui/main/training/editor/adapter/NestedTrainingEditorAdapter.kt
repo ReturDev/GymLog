@@ -33,14 +33,13 @@ class NestedTrainingEditorAdapter(
     inner class NestedTrainingEditorHolder(view : View) : RecyclerView.ViewHolder(view){
 
         private val binding = TrainingEditorSetItemBinding.bind(view)
-
         @SuppressLint("SetTextI18n")
         fun bind(exerciseSet: TrainingExerciseSet){
 
             if (exerciseSets.size > 1){
-                binding.ivDeteleSet.visibility = View.VISIBLE
+                binding.btnDeleteSet.visibility = View.VISIBLE
             }else{
-                binding.ivDeteleSet.visibility = View.GONE
+                binding.btnDeleteSet.visibility = View.GONE
             }
             binding.tvTrainingMSetNumber.text = "${layoutPosition+1}"
             binding.etSetRepetitions.text = SpannableStringBuilder(exerciseSet.repetitions.toString())
@@ -53,7 +52,7 @@ class NestedTrainingEditorAdapter(
 
         private fun setListeners(exerciseSet: TrainingExerciseSet) {
 
-            binding.ivDeteleSet.setOnClickListener {
+            binding.btnDeleteSet.setOnClickListener {
 
                 onDeleteClick(layoutPosition)
 
@@ -63,9 +62,9 @@ class NestedTrainingEditorAdapter(
 
                 if (!hasFocus){
 
-                    if (binding.etSetRepetitions.text.isBlank()){
+                    if (binding.etSetRepetitions.text!!.isBlank()){
 
-                        binding.etSetRepetitions.text = SpannableStringBuilder("0")
+                        binding.etSetRepetitions.text = SpannableStringBuilder("1")
 
                     }
 
@@ -122,16 +121,16 @@ class NestedTrainingEditorAdapter(
 
                 if (!hasFocus){
 
-                    if (binding.etSetWeight.text.isBlank()){
+                    if (binding.etSetWeight.text!!.isBlank()){
 
-                        binding.etSetWeight.text = SpannableStringBuilder("0")
+                        binding.etSetWeight.text = SpannableStringBuilder("0.0")
 
-                    }else if (binding.etSetWeight.text.indexOf(".") == -1){
+                    }else if (binding.etSetWeight.text!!.indexOf(".") == -1){
 
-                        binding.etSetWeight.text = binding.etSetWeight.text.append(".0")
+                        binding.etSetWeight.text = binding.etSetWeight.text!!.append(".0")
 
-                    }else if (binding.etSetWeight.text.indexOf(".") == 0){
-                        binding.etSetWeight.text = binding.etSetWeight.text.insert(0,"0")
+                    }else if (binding.etSetWeight.text!!.indexOf(".") == 0){
+                        binding.etSetWeight.text = binding.etSetWeight.text!!.insert(0,"0")
                     }
 
 

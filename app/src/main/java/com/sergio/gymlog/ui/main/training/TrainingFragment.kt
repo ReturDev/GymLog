@@ -13,8 +13,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sergio.gymlog.R
 import com.sergio.gymlog.databinding.FragmentTrainingBinding
 import com.sergio.gymlog.ui.main.training.adapter.TrainingAdapter
+import com.sergio.gymlog.util.SpacingItemDecorator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -49,6 +51,7 @@ class TrainingFragment : Fragment(), DeleteTrainingListener {
         val recycler = binding.rvTrainings
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recycler.addItemDecoration(SpacingItemDecorator(R.dimen.recycler_decoration_bottom_spacing))
 
     }
 
@@ -73,26 +76,36 @@ class TrainingFragment : Fragment(), DeleteTrainingListener {
 
                 trainingViewModel.uiState.collect{currentState ->
 
-                    Log.e("FFF", currentState.trainings.toString())
-
                     if (currentState.loading){
 
-                        binding.tvRecyclerEmpty.visibility = View.VISIBLE
+                        binding.trainingContentRoot.visibility = View.GONE
+                        binding.pbTrainingLoading.visibility = View.VISIBLE
 
                     }
 
                     if (currentState.loaded){
 
-                        adapter.trainingList = currentState.trainings
-                        adapter.notifyDataSetChanged()
-                        binding.tvRecyclerEmpty.visibility = View.GONE
+                        binding.trainingContentRoot.visibility = View.VISIBLE
+                        binding.pbTrainingLoading.visibility = View.GONE
+
+                        if (currentState.trainings.isEmpty()){
+
+                            binding.tvRecyclerEmpty.visibility = View.VISIBLE
+
+                        }else{
+
+                            binding.tvRecyclerEmpty.visibility = View.GONE
+                            adapter.trainingList = currentState.trainings
+                            adapter.notifyDataSetChanged()
+
+                        }
+
                         trainingViewModel.resetStates()
 
                     }
 
                     if (currentState.trainingDeletedPosition != -1){
 
-                        Log.e("FFF", currentState.trainings.toString())
                         adapter.notifyItemRemoved(currentState.trainingDeletedPosition)
                         trainingViewModel.resetStates()
 

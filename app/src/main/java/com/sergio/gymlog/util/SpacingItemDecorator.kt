@@ -1,10 +1,10 @@
-package com.sergio.gymlog.ui.main.home
+package com.sergio.gymlog.util
 
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class HomeSpacingItemDecorator(private val bottomSpacing : Int) : RecyclerView.ItemDecoration(){
+class SpacingItemDecorator(private val bottomSpacing : Int) : RecyclerView.ItemDecoration(){
 
     override fun getItemOffsets(
         outRect: Rect,

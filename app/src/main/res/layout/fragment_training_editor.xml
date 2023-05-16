@@ -66,50 +66,72 @@
                 app:layout_constraintEnd_toStartOf="@+id/glTrainingEditorEnd"
                 app:layout_constraintTop_toTopOf="@+id/glTrainingEditorTop" />
 
-            <EditText
-                android:id="@+id/etEditorName"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEditorName"
+                style="?attr/textInputFilledStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/vertical_margin"
-                android:ems="10"
                 android:hint="@string/name_hint"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"
+                app:errorEnabled="true"
+                app:counterEnabled="true"
+                app:counterMaxLength="50"
                 app:layout_constraintEnd_toStartOf="@+id/glTrainingEditorEnd"
                 app:layout_constraintStart_toStartOf="@+id/glTrainingEditorStart"
-                app:layout_constraintTop_toBottomOf="@+id/btnEditorCancel" />
+                app:layout_constraintTop_toBottomOf="@+id/btnEditorCancel">
 
-            <EditText
-                android:id="@+id/etEditorDescription"
+                    <com.google.android.material.textfield.TextInputEditText
+
+                    android:id="@+id/etEditorName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEditorDescription"
+                style="?attr/textInputFilledStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/vertical_min_margin"
-                android:ems="10"
                 android:hint="@string/description_hint"
-                android:inputType="textMultiLine"
-                android:minHeight="48dp"
-                android:singleLine="false"
+                app:errorEnabled="true"
+                app:counterEnabled="true"
+                app:counterMaxLength="250"
                 app:layout_constraintEnd_toStartOf="@+id/glTrainingEditorEnd"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/glTrainingEditorStart"
-                app:layout_constraintTop_toBottomOf="@+id/etEditorName" />
+                app:layout_constraintTop_toBottomOf="@+id/tilEditorName">
+
+                <com.google.android.material.textfield.TextInputEditText
+
+                    android:id="@+id/etEditorDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:singleLine="false"
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvEditorExercises"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/vertical_min_margin"
-                android:minHeight="300dp"
+                android:nestedScrollingEnabled="false"
                 app:layout_constraintBottom_toTopOf="@+id/btnEditorAddExercises"
                 app:layout_constraintEnd_toStartOf="@+id/glTrainingEditorEnd"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/glTrainingEditorStart"
-                app:layout_constraintTop_toBottomOf="@+id/etEditorDescription" />
+                app:layout_constraintTop_toBottomOf="@+id/tilEditorDescription" />
 
             <Button
                 android:id="@+id/btnEditorAddExercises"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/Widget.Material3.Button.TextButton"
                 android:text="@string/add_exercises"
                 app:layout_constraintBottom_toTopOf="@+id/glTrainingEditorBottom"
                 app:layout_constraintStart_toStartOf="@+id/rvEditorExercises" />

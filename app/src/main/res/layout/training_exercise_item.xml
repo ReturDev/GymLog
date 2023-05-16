@@ -23,6 +23,7 @@
 
         <TextView
             android:id="@+id/tvTrainingExerciseName"
+            style="@style/CardTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/horizontal_margin"
@@ -34,6 +35,7 @@
 
         <TextView
             android:id="@+id/tvTrainingExEquipment"
+            style="@style/CardTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/tvTrainingExMuscularG"
@@ -44,6 +46,7 @@
 
         <TextView
             android:id="@+id/tvTrainingExMuscularG"
+            style="@style/CardTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/tvTrainingExSetsView"
@@ -56,8 +59,8 @@
             android:id="@+id/tvTrainingExSetsView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="@dimen/vertical_min_margin"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/show_sets"
-                android:textAlignment="center"/>
+                android:textAlignment="center" />
 
             <LinearLayout
                 android:id="@+id/trainingExSetsLayout"

@@ -16,9 +16,23 @@
     </style>
 
     <style name="CardTextStyle" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">@dimen/default_text_size</item>
         <item name="android:textColor">?attr/colorOnPrimaryContainer</item>
     </style>
 
+    <style name="NestedCardLayoutEditTextStyle" parent="@style/Widget.Material3.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">@color/nested_textfield_filled_background_color</item>
+        <item name="boxStrokeColor">@color/nested_textfield_stroke_color</item>
+        <item name="android:textColorHint">@color/nested_textfield_label_color</item>
+        <item name="hintTextColor">@color/nested_textfield_label_color</item>
+
+    </style>
+
+    <style name= "NestedCardEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="colorControlActivated">?attr/colorOnTertiary</item>
+    </style>
+
+    
     <style name="TrainingNameTextStyle" parent="TextAppearance.Material3.HeadlineSmall">
         <item name="android:textAlignment">center</item>
         <item name="android:textStyle">bold</item>
@@ -41,6 +55,10 @@
     <style name="AddTrainingFloatingBtnStyle" parent="Widget.Material3.FloatingActionButton.Primary">
         <item name="fabCustomSize">65dp</item>
         <item name="maxImageSize">40dp</item>
+    </style>
+
+    <style name="RemoveTrainingButtonStyle" parent="Widget.Material3.Button.IconButton">
+        <item name="iconTint">?attr/colorTertiary</item>
     </style>
 
     <style name="NestedCardStyle" parent="CardViewStyle">

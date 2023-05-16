@@ -15,12 +15,12 @@ import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.training.TrainingOfTrainingLog
 import com.sergio.gymlog.data.model.user.UserInfo
 import com.sergio.gymlog.databinding.FragmentHomeBinding
-import com.sergio.gymlog.ui.main.home.logsaver.LogSaverDialog
 import com.sergio.gymlog.ui.main.home.logsaver.SaveLogInterface
 import com.sergio.gymlog.ui.main.home.progress.DailyTrainingProgressDialog
 import com.sergio.gymlog.ui.main.home.selector.DailyTrainingSelectionListener
 import com.sergio.gymlog.ui.main.home.selector.DailyTrainingSelectorDialog
 import com.sergio.gymlog.ui.main.training.detail.adapter.TrainingDetailsAdapter
+import com.sergio.gymlog.util.SpacingItemDecorator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -57,7 +57,7 @@ class HomeFragment : Fragment(), DailyTrainingSelectionListener, SaveLogInterfac
         val recycler = binding.rvHomeTrainingExercises
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        val spacingDecorator = HomeSpacingItemDecorator(resources.getDimensionPixelSize(R.dimen.recycler_decoration_bottom_spacing))
+        val spacingDecorator = SpacingItemDecorator(resources.getDimensionPixelSize(R.dimen.recycler_decoration_bottom_spacing))
         recycler.addItemDecoration(spacingDecorator)
 
     }

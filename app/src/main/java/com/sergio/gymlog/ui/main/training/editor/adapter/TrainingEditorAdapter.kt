@@ -48,13 +48,13 @@ class TrainingEditorAdapter(
 
             binding.ivTrainingEditorExImage.setImageURI(trainingExercise.image.toUri())
             binding.tvTrainingEditorExName.text = trainingExercise.name
-            binding.tvTrainingEditorExEquipment.text = trainingExercise.equipment.toString()
-            binding.tvTrainingEditorExMuscularGroup.text = trainingExercise.muscularGroup.toString()
+            binding.tvTrainingEditorExEquipment.text = binding.root.context.getString(trainingExercise.equipment.stringResource)
+            binding.tvTrainingEditorExMuscularGroup.text = binding.root.context.getString(trainingExercise.muscularGroup.stringResource)
             binding.rvTrainingEditorExSets.visibility = if (layoutPosition != itemShowingExerciseSetsPos) View.GONE else View.VISIBLE
 
             initNestedRecycler(trainingExercise)
 
-            binding.tvTrainingEditorExSetsQuantity.text = binding.root.context.getString(R.string.exercise_sets_quantity, adapter.exerciseSets.size)
+            binding.btnTrainingEditorExSetsQuantity.text = binding.root.context.getString(R.string.exercise_sets_quantity, adapter.exerciseSets.size)
 
             setListeners()
 
@@ -81,9 +81,9 @@ class TrainingEditorAdapter(
 
         private fun setListeners() {
 
-            binding.ivTrainingEditorExRemove.setOnClickListener { onRemoveExercise(layoutPosition) }
+            binding.btnTrainingEditorExRemove.setOnClickListener { onRemoveExercise(layoutPosition) }
             binding.btnTrainingEditorExAddSet.setOnClickListener { onAddExerciseSet(layoutPosition) }
-            binding.tvTrainingEditorExSetsQuantity.setOnClickListener { showExerciseSets()}
+            binding.btnTrainingEditorExSetsQuantity.setOnClickListener { showExerciseSets()}
 
         }
 
@@ -99,7 +99,7 @@ class TrainingEditorAdapter(
             if (exerciseSetPos != adapter.exerciseSets.size){
                 adapter.notifyItemRangeChanged(exerciseSetPos ,adapter.exerciseSets.size)
             }
-            binding.tvTrainingEditorExSetsQuantity.text = binding.root.context.getString(R.string.exercise_sets_quantity, adapter.exerciseSets.size)
+            binding.btnTrainingEditorExSetsQuantity.text = binding.root.context.getString(R.string.exercise_sets_quantity, adapter.exerciseSets.size)
 
         }
 
@@ -130,7 +130,7 @@ class TrainingEditorAdapter(
 
             adapter.exerciseSets.add(exerciseSets)
 
-            binding.tvTrainingEditorExSetsQuantity.text = binding.root.context.getString(R.string.exercise_sets_quantity, adapter.exerciseSets.size)
+            binding.btnTrainingEditorExSetsQuantity.text = binding.root.context.getString(R.string.exercise_sets_quantity, adapter.exerciseSets.size)
             if (adapter.exerciseSets.size == 2){
                 adapter.notifyItemChanged(0)
             }
