@@ -15,6 +15,10 @@ object FilterExercises {
 
             filteredExercises = filterExercisesByName(name, exercises)
 
+        }else{
+
+
+
         }
 
         if (userExercises){

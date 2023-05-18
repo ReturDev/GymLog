@@ -26,8 +26,6 @@
     <string name="training_bottom_menu">Entrenamiento</string>
     <string name="training_record_bottom_menu">Historial</string>
     <string name="user_bottom_menu">Usuario</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_daily_training">Añade un entrenamiento para hoy</string>
 
     <!-- Strings related to login -->
@@ -83,7 +81,7 @@
     <string name="exercise_sets_quantity">Series(%d)</string>
     <string name="cancel_training_edit">¿Quieres descartar los cambios?</string>
     <string name="discard">Descartar</string>
-    <string name="training_exercise_reqired">El entrenamiento debe tener al menos un ejercicio.</string>
+    <string name="training_exercise_required">El entrenamiento debe tener al menos un ejercicio.</string>
     <string name="training_name_required">Debes introducir un nombre para el entrenamiento.</string>
     <string name="create">Crear</string>
     <string name="exercise_name_required">Debes introducir un nombre al ejercicio.</string>
@@ -97,10 +95,11 @@
     <string name="user_without_trainings">No tienes ningún entrenamiento creado. ¡Crea ya tu primer entrenamiento!</string>
     <string name="remarks">Observaciones</string>
     <string name="cancel_daily_training_completed">Perderás las observaciones introducidas al salir.¿Estás seguro?</string>
-    <string name="accept">Aceptar\n</string>
+    <string name="accept">Aceptar</string>
     <string name="Completed">Completado</string>
     <string name="training_progress_instruction">Selecciona los ejercicios completados y pulsa completado para guardarlo en el historial.</string>
     <string name="arms">Brazos</string>
     <string name="delete_training">El entrenamiento se eliminara permanentemente.</string>
+    <string name="number_of_filters">Filtros(%d)</string>
 
 </resources>

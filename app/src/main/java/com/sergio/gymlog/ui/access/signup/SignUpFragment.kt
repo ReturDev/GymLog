@@ -2,11 +2,11 @@ package com.sergio.gymlog.ui.access.signup
 
 import android.app.Activity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -17,6 +17,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.sergio.gymlog.R
 import com.sergio.gymlog.databinding.FragmentSignUpBinding
 import com.sergio.gymlog.ui.access.AccessViewModel
+import com.sergio.gymlog.util.extension.buttonActivationOnTextChanged
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -97,6 +98,9 @@ class SignUpFragment : Fragment() {
         binding.btnSignUpGoogle.setOnClickListener {
             signUpWithGoogle()
         }
+
+        binding.etSignUpEmail.buttonActivationOnTextChanged(binding.btnSignUp, binding.etSignUpPassword)
+        binding.etSignUpPassword.buttonActivationOnTextChanged(binding.btnSignUp, binding.etSignUpEmail)
 
     }
 

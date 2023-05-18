@@ -1,9 +1,6 @@
 package com.sergio.gymlog.domain.record
 
-import android.util.Log
-import com.google.firebase.Timestamp
 import com.sergio.gymlog.data.model.training.TrainingLog
-import com.sergio.gymlog.data.repository.user.RecordRepository
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

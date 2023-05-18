@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.databinding.TrainingItemBinding
-import com.sergio.gymlog.ui.main.training.OnLongClickTrainingDialog
 
 class TrainingAdapter(
     var trainingList : List<Training>,

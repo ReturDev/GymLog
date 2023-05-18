@@ -2,11 +2,11 @@ package com.sergio.gymlog.ui.main.exercise.selector
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +16,8 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sergio.gymlog.R
+import com.sergio.gymlog.data.model.exercise.Equipment
+import com.sergio.gymlog.data.model.exercise.MuscularGroup
 import com.sergio.gymlog.databinding.FragmentExercisesSelectorBinding
 import com.sergio.gymlog.ui.main.exercise.selector.adapter.ExercisesSelectorAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,11 +25,12 @@ import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class ExercisesSelectorFragment : Fragment() {
+class ExercisesSelectorFragment() : Fragment(), FilterExercisesListener {
 
     private lateinit var binding : FragmentExercisesSelectorBinding
     private lateinit var adapter: ExercisesSelectorAdapter
     private lateinit var bottomMenu : BottomNavigationView
+    override var filterNumbers: Int = 0
 
     private val exercisesSelectorVM  by viewModels<ExercisesSelectorViewModel>()
     private val args : ExercisesSelectorFragmentArgs by navArgs()
@@ -65,6 +68,9 @@ class ExercisesSelectorFragment : Fragment() {
                         adapter.exercisesList = currentState.exercises
                         adapter.notifyDataSetChanged()
                         binding.btnAddES.text = getString(R.string.add_quantity, currentState.exercisesSelectedQuantity)
+                        binding.exercisesListIncluded.tvExercisesListNumberLabel.text = getString(R.string.number_of_exercises, currentState.exercises.size)
+                        val filterButtonText = if (filterNumbers == 0) R.string.filter else R.string.number_of_filters
+                        binding.exercisesListIncluded.btnExerciseListFilter.text = getString(filterButtonText)
                         exercisesSelectorVM.exerciseStatusChanged()
 
                     }
@@ -135,6 +141,15 @@ class ExercisesSelectorFragment : Fragment() {
             exercisesSelectorVM.selectExercise(position)
 
         }
+
+        TODO("Acabar")
+
+    }
+
+    override fun filter(filterNumbers: Int, userExercises : Boolean, equipments : List<Equipment>, muscularGroups : List<MuscularGroup>) {
+        super.filter(filterNumbers, userExercises, equipments, muscularGroups)
+
+        exercisesSelectorVM.filter()
 
     }
 

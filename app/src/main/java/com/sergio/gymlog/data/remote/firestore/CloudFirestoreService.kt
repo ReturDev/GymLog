@@ -1,7 +1,5 @@
 package com.sergio.gymlog.data.remote.firestore
 
-import android.util.Log
-import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -10,12 +8,10 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.remote.firestore.ReferencedExercises
 import com.sergio.gymlog.data.model.remote.firestore.TrainingCloud
-import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.data.model.training.TrainingLog
 import com.sergio.gymlog.data.model.user.UserInfo
 import com.sergio.gymlog.util.CloudFirestoreCollections
 import kotlinx.coroutines.tasks.await
-import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 

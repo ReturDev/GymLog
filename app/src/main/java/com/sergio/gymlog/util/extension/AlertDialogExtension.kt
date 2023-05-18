@@ -3,13 +3,10 @@ package com.sergio.gymlog.util.extension
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
-import android.text.InputFilter
 import android.text.InputType
 import android.text.SpannableStringBuilder
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
 import com.sergio.gymlog.R
 import com.sergio.gymlog.databinding.DialogChangeUserDataBinding

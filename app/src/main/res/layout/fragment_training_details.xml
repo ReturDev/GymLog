@@ -57,6 +57,7 @@
 
     <TextView
         android:id="@+id/tvTrainingDetailName"
+        style="@style/HomeTrainingNameStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/vertical_min_margin"
@@ -68,6 +69,7 @@
 
     <TextView
         android:id="@+id/tvTrainingDescription"
+        style="@style/DescriptionStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/vertical_min_margin"

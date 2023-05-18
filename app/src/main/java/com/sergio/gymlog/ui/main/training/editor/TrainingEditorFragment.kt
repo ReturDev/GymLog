@@ -2,13 +2,12 @@ package com.sergio.gymlog.ui.main.training.editor
 
 import android.os.Bundle
 import android.text.SpannableStringBuilder
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -24,10 +23,8 @@ import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.databinding.FragmentTrainingEditorBinding
 import com.sergio.gymlog.ui.main.training.editor.adapter.TrainingEditorAdapter
 import com.sergio.gymlog.util.InputFiltersProvider
-import com.sergio.gymlog.util.extension.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.util.EnumMap
 
 @AndroidEntryPoint
 class TrainingEditorFragment : Fragment() {
@@ -81,23 +78,28 @@ class TrainingEditorFragment : Fragment() {
 
         binding.btnEditorSave.setOnClickListener {
             val training = getTrainingInfo()
-            if (training.name.isNotBlank()){
 
-                if (training.exercises.isNotEmpty()){
+            if (training.exercises.isEmpty()){
 
-                    trainingEditorViewModel.saveTrainingData(getTrainingInfo())
-                    trainingEditorViewModel.resetEditingTraining()
-                    findNavController().popBackStack()
-
-                }else{
-
-                    requireActivity().toast(R.string.training_exercise_reqired, Toast.LENGTH_LONG)
-
-                }
+                binding.editorExercisesErrorRoot.visibility = View.VISIBLE
 
             }else{
 
+                binding.editorExercisesErrorRoot.visibility = View.GONE
+
+            }
+
+            if (training.name.isBlank()){
+
                 binding.tilEditorName.error = getString(R.string.training_name_required)
+
+            }
+
+            if (training.name.isNotBlank() && training.exercises.isNotEmpty()){
+
+                trainingEditorViewModel.saveTrainingData(getTrainingInfo())
+                trainingEditorViewModel.resetEditingTraining()
+                findNavController().popBackStack()
 
             }
 
@@ -142,7 +144,6 @@ class TrainingEditorFragment : Fragment() {
 
                         binding.editorElementsRoot.visibility = View.VISIBLE
                         binding.pbTrainingEditorLoading.visibility = View.GONE
-
                         bindTrainingData(currentState.training)
                         trainingEditorViewModel.resetValues()
 

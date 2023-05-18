@@ -2,34 +2,23 @@ package com.sergio.gymlog.ui.main
 
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.fragment.app.FragmentManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.NavController
 import androidx.navigation.NavGraph
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.navOptions
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.sergio.gymlog.R
-import com.sergio.gymlog.data.model.exercise.Equipment
 import com.sergio.gymlog.databinding.ActivityMainBinding
 import com.sergio.gymlog.ui.access.AccessActivity
-import com.sergio.gymlog.ui.main.training.editor.TrainingEditorFragment
 import com.sergio.gymlog.util.extension.toast
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
 import com.sergio.gymlog.databinding.ExerciseSetItemBinding
@@ -37,13 +37,15 @@ class NestedTrainingDetailsAdapter(
             binding.tvSetRepetitions.text = set.repetitions.toString()
             binding.tvSetWeight.text = set.weight.toString()
 
-            if (set.bodyWeight){
-
-                binding.ivBodyWeightChecked.setImageDrawable(ResourcesCompat.getDrawable(binding.root.resources, R.drawable.ic_checked,null))
-
-            }else{
-                binding.ivBodyWeightChecked.setImageDrawable(ResourcesCompat.getDrawable(binding.root.resources, R.drawable.ic_unchecked,null))
+            val image = if (set.bodyWeight){
+                R.drawable.ic_checked
+            }else {
+                R.drawable.ic_unchecked
             }
+
+            Glide.with(binding.root.context)
+                .load(image)
+                .into(binding.ivBodyWeightChecked)
 
         }
 

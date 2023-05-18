@@ -1,20 +1,21 @@
 package com.sergio.gymlog.ui.access
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.sergio.gymlog.databinding.ActivityAccessBinding
 import com.sergio.gymlog.ui.main.MainActivity
-import com.sergio.gymlog.util.extension.toast
+import com.sergio.gymlog.util.extension.createTopSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -67,7 +68,7 @@ class AccessActivity : AppCompatActivity() {
 
                     if (currentState.errorResource != null){
 
-                        this@AccessActivity.toast(currentState.errorResource)
+                        binding.root.createTopSnackBar(binding.root, currentState.errorResource, Snackbar.LENGTH_LONG)
                         accessViewModel.errorMessageShown()
 
                     }

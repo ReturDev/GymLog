@@ -1,6 +1,5 @@
 package com.sergio.gymlog.domain.exercise.sets
 
-import com.sergio.gymlog.data.model.repository.ApplicationData
 import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
 import com.sergio.gymlog.domain.user.GetUserInfoUseCase
 import javax.inject.Inject
@@ -18,14 +17,19 @@ class GetUserSetsPreferencesUseCase @Inject constructor(
         for (i in 1..userInfo.sets){
 
             val set = if (bodyWeight){
+
                 TrainingExerciseSet(
                     repetitions = userInfo.repetitions,
-                )
-            }else{
-                TrainingExerciseSet(
-                    repetitions = userInfo.repetitions,
+                    weight = userInfo.weight,
                     bodyWeight = true
                 )
+
+            }else{
+
+                TrainingExerciseSet(
+                    repetitions = userInfo.repetitions,
+                )
+
             }
 
             sets.add(set)

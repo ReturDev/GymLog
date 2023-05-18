@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/startedDailyTrainingExerciseItemRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_card">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/trainingExerciseRoot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_card">
+
+        <ImageView
+            android:id="@+id/ivStartedTrainingExerciseImage"
+            android:layout_width="@dimen/exercise_image_size"
+            android:layout_height="@dimen/exercise_image_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tvStartedTrainingExerciseName"
+            style="@style/CardTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontal_margin"
+            app:layout_constraintBottom_toTopOf="@+id/tvStartedTrainingExerciseEquipment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ivStartedTrainingExerciseImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvStartedTrainingExerciseEquipment"
+            style="@style/CardTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/tvStartedTrainingExerciseExMuscularG"
+            app:layout_constraintEnd_toStartOf="@+id/ivStartedTrainingExerciseExMuscularGSelected"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/tvStartedTrainingExerciseName"
+            app:layout_constraintTop_toBottomOf="@+id/tvStartedTrainingExerciseName" />
+
+        <TextView
+            android:id="@+id/tvStartedTrainingExerciseExMuscularG"
+            style="@style/CardTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/tvStartedTrainingExerciseSetsView"
+            app:layout_constraintEnd_toStartOf="@+id/ivStartedTrainingExerciseExMuscularGSelected"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/tvStartedTrainingExerciseEquipment"
+            app:layout_constraintTop_toBottomOf="@+id/tvStartedTrainingExerciseEquipment" />
+
+        <ImageView
+            android:id="@+id/ivStartedTrainingExerciseExMuscularGSelected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tvStartedTrainingExerciseExMuscularG"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvStartedTrainingExerciseEquipment"
+            app:layout_constraintVertical_bias="0.428"
+            app:srcCompat="@drawable/ic_checked_item"
+            app:tint="?attr/colorTertiary" />
+
+        <LinearLayout
+            android:id="@+id/tvStartedTrainingExerciseSetsView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/vertical_min_margin"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivStartedTrainingExerciseImage">
+
+            <Button
+                android:id="@+id/btnStartedTrainingExerciseInvisibleSets"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/show_sets"
+                android:textAlignment="center" />
+
+            <LinearLayout
+                android:id="@+id/startedTrainingExerciseSetsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/vertical_min_margin"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <include
+                    android:id="@+id/startedTrainingExerciseSetsContainer"
+                    layout="@layout/exercise_sets_container" />
+
+                <Button
+                    android:id="@+id/tvStartedTrainingExerciseVisibleSets"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hide_sets"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

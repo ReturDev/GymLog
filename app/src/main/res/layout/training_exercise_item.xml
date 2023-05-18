@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/trainingExerciseCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_card">
+    android:layout_margin="@dimen/margin_card"
+    android:backgroundTintMode="src_in">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/trainingExerciseRoot"
@@ -17,9 +17,10 @@
             android:id="@+id/ivTrainingExercise"
             android:layout_width="@dimen/exercise_image_size"
             android:layout_height="@dimen/exercise_image_size"
+            android:alpha="0.75"
+            android:backgroundTintMode="src_atop"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/tvTrainingExerciseName"
@@ -49,7 +50,7 @@
             style="@style/CardTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/tvTrainingExSetsView"
+            app:layout_constraintBottom_toBottomOf="@+id/ivTrainingExercise"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/tvTrainingExEquipment"

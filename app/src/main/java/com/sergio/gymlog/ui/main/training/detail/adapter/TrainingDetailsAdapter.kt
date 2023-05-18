@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
 import com.sergio.gymlog.databinding.TrainingExerciseItemBinding
+import com.sergio.gymlog.util.extension.setImageRoundedBorders
 
 class TrainingDetailsAdapter(
     private val trainingExercises : MutableList<Exercises.TrainingExercise>
@@ -29,11 +31,6 @@ class TrainingDetailsAdapter(
         
     }
 
-    fun changeExerciseList(newExercises : List<Exercises.TrainingExercise>){
-        trainingExercises.clear()
-        trainingExercises.addAll(newExercises)
-    }
-
     inner class TrainingDetailsHolder(view : View) : RecyclerView.ViewHolder(view){
 
         private val binding = TrainingExerciseItemBinding.bind(view)
@@ -41,12 +38,18 @@ class TrainingDetailsAdapter(
 
          fun bind(trainingExercise: Exercises.TrainingExercise) {
 
-            binding.tvTrainingExerciseName.text = trainingExercise.name
-            binding.tvTrainingExEquipment.text = binding.root.context.getString(trainingExercise.equipment.stringResource)
-            binding.tvTrainingExMuscularG.text = binding.root.context.getString(trainingExercise.muscularGroup.stringResource)
+             binding.tvTrainingExerciseName.text = trainingExercise.name
+             binding.tvTrainingExEquipment.text = binding.root.context.getString(trainingExercise.equipment.stringResource)
+             binding.tvTrainingExMuscularG.text = binding.root.context.getString(trainingExercise.muscularGroup.stringResource)
 
-            initNestedRecycler(trainingExercise.sets)
-            setListeners()
+             val image = trainingExercise.image.ifBlank {
+                 R.drawable.logo
+             }
+
+             Glide.with(binding.root.context).setImageRoundedBorders(image, binding.ivTrainingExercise)
+
+             initNestedRecycler(trainingExercise.sets)
+             setListeners()
         }
 
         private fun setListeners() {

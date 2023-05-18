@@ -2,10 +2,8 @@ package com.sergio.gymlog.util.extension
 
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import androidx.core.widget.addTextChangedListener
 
 fun EditText.buttonActivationOnTextChanged(button : Button, vararg othersEditText : EditText){
 

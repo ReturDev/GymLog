@@ -65,12 +65,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            app:tint="?attr/colorTertiary"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvExerciseName"
             app:layout_constraintVertical_bias="0.428"
-            app:srcCompat="@drawable/ic_checked_item" />
+            app:srcCompat="@drawable/ic_checked_item"
+            app:tint="?attr/colorTertiary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

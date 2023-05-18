@@ -3,12 +3,13 @@ package com.sergio.gymlog.ui.main.exercise.selector.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.ExerciseItem
 import com.sergio.gymlog.databinding.ExerciseItemBinding
+import com.sergio.gymlog.util.extension.setImageRoundedBorders
 
 class ExercisesSelectorAdapter(
     var exercisesList : List<ExerciseItem>,
@@ -24,21 +25,33 @@ class ExercisesSelectorAdapter(
     override fun getItemCount() = exercisesList.size
 
     override fun onBindViewHolder(holder: ExercisesSelectorHolder, position: Int) {
-        holder.bind(exercisesList[position], onClickElement = onClickElement)
+        holder.bind(exercisesList[position])
     }
 
 
-    class ExercisesSelectorHolder(view : View) : RecyclerView.ViewHolder(view){
+    inner class ExercisesSelectorHolder(view : View) : RecyclerView.ViewHolder(view){
 
         private val binding = ExerciseItemBinding.bind(view)
 
-        fun bind(exerciseItem : ExerciseItem, onClickElement: (Int) -> Unit){
+        fun bind(exerciseItem : ExerciseItem){
             val exercise = exerciseItem.exercise
             manageItemSelected(exerciseItem)
             binding.tvExerciseName.text = exercise.name
             binding.ivExerciseImage.setImageURI(exercise.image.toUri())
             binding.tvExerciseMuscularGroup.text = binding.root.context.getString(exercise.muscularGroup.stringResource)
             binding.tvExerciseEquipment.text = binding.root.context.getString(exercise.equipment.stringResource)
+
+            val image = exerciseItem.exercise.image.ifBlank {
+                R.drawable.logo
+            }
+
+            Glide.with(binding.root.context).setImageRoundedBorders(image, binding.ivExerciseImage)
+
+            setListeners()
+
+        }
+
+        private fun setListeners() {
 
             binding.selectionExerciseCard.setOnClickListener {
 

@@ -2,7 +2,6 @@ package com.sergio.gymlog.domain.record
 
 import com.google.firebase.Timestamp
 import com.sergio.gymlog.data.model.repository.ApplicationData
-import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.data.model.training.TrainingLog
 import com.sergio.gymlog.data.model.training.TrainingOfTrainingLog
 import com.sergio.gymlog.data.repository.user.RecordRepository

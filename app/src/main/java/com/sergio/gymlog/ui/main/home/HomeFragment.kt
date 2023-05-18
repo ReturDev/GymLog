@@ -2,10 +2,10 @@ package com.sergio.gymlog.ui.main.home
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,11 +15,11 @@ import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.training.TrainingOfTrainingLog
 import com.sergio.gymlog.data.model.user.UserInfo
 import com.sergio.gymlog.databinding.FragmentHomeBinding
+import com.sergio.gymlog.ui.main.home.adapter.HomeAdapter
 import com.sergio.gymlog.ui.main.home.logsaver.SaveLogInterface
 import com.sergio.gymlog.ui.main.home.progress.DailyTrainingProgressDialog
 import com.sergio.gymlog.ui.main.home.selector.DailyTrainingSelectionListener
 import com.sergio.gymlog.ui.main.home.selector.DailyTrainingSelectorDialog
-import com.sergio.gymlog.ui.main.training.detail.adapter.TrainingDetailsAdapter
 import com.sergio.gymlog.util.SpacingItemDecorator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -30,7 +30,7 @@ class HomeFragment : Fragment(), DailyTrainingSelectionListener, SaveLogInterfac
     private lateinit var binding : FragmentHomeBinding
     private val homeViewModel by viewModels<HomeViewModel>()
 
-    private lateinit var adapter : TrainingDetailsAdapter
+    private lateinit var adapter : HomeAdapter
 
 
     override fun onCreateView(
@@ -53,7 +53,7 @@ class HomeFragment : Fragment(), DailyTrainingSelectionListener, SaveLogInterfac
 
     private fun initRecyclerView(){
 
-        adapter = TrainingDetailsAdapter(mutableListOf())
+        adapter = HomeAdapter(mutableListOf())
         val recycler = binding.rvHomeTrainingExercises
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -114,9 +114,6 @@ class HomeFragment : Fragment(), DailyTrainingSelectionListener, SaveLogInterfac
             DailyTrainingProgressDialog(homeViewModel.uiState.value.dailyTraining!!.training!!, this).show(parentFragmentManager, "daily_training_progress_dialog")
         }
 
-        binding.fabHomeChangeDailyTraining.setOnClickListener {
-            DailyTrainingSelectorDialog(this, homeViewModel.uiState.value.dailyTraining?.training).show(parentFragmentManager, "daily_training_selector_dialog")
-        }
         binding.homeTrainingNotSelectedRoot.setOnClickListener {
             DailyTrainingSelectorDialog(this, homeViewModel.uiState.value.dailyTraining?.training).show(parentFragmentManager, "daily_training_selector_dialog")
         }

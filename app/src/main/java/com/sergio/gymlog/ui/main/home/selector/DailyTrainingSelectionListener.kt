@@ -1,6 +1,5 @@
 package com.sergio.gymlog.ui.main.home.selector
 
-import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.data.model.user.UserInfo
 
 interface DailyTrainingSelectionListener {

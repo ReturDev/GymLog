@@ -1,9 +1,9 @@
 package com.sergio.gymlog.data.model.repository
 
-import com.sergio.gymlog.data.model.user.UserInfo
 import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.data.model.training.TrainingLog
+import com.sergio.gymlog.data.model.user.UserInfo
 import javax.inject.Inject
 import javax.inject.Singleton
 

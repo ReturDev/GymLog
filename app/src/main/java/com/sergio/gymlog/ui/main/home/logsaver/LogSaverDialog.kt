@@ -2,7 +2,6 @@ package com.sergio.gymlog.ui.main.home.logsaver
 
 import android.app.AlertDialog
 import android.app.Dialog
-import com.sergio.gymlog.util.extension.alertDialog
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.KeyEvent
@@ -18,6 +17,7 @@ import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.data.model.training.TrainingOfTrainingLog
 import com.sergio.gymlog.databinding.DialogLogSaverBinding
 import com.sergio.gymlog.ui.main.training.detail.adapter.TrainingDetailsAdapter
+import com.sergio.gymlog.util.extension.alertDialog
 
 
 class LogSaverDialog(

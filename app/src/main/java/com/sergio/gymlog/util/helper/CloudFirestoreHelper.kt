@@ -2,7 +2,7 @@ package com.sergio.gymlog.util.helper
 
 
 import android.util.Log
-import java.util.*
+import java.util.Date
 import javax.inject.Inject
 import javax.inject.Singleton
 

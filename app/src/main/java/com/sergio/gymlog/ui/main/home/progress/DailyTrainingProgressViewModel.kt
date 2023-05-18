@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sergio.gymlog.data.model.exercise.ExerciseItem
 import com.sergio.gymlog.data.model.exercise.Exercises
-import com.sergio.gymlog.ui.main.exercise.selector.ExercisesSelectorUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

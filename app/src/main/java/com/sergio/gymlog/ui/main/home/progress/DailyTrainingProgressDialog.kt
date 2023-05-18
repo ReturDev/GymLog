@@ -11,17 +11,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.sergio.gymlog.data.model.exercise.ExerciseItem
-import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.data.model.training.TrainingOfTrainingLog
 import com.sergio.gymlog.databinding.DialogDailyTrainingProgressBinding
-import com.sergio.gymlog.ui.main.exercise.selector.adapter.ExercisesSelectorAdapter
 import com.sergio.gymlog.ui.main.home.logsaver.LogSaverDialog
 import com.sergio.gymlog.ui.main.home.logsaver.SaveLogInterface
 import kotlinx.coroutines.launch
@@ -32,7 +28,7 @@ class DailyTrainingProgressDialog(
 ) : BottomSheetDialogFragment() {
 
     private lateinit var binding : DialogDailyTrainingProgressBinding
-    private lateinit var adapter : ExercisesSelectorAdapter
+    private lateinit var adapter : DailyTrainingProgressAdapter
 
     private val dailyTrainingProgressViewModel by viewModels<DailyTrainingProgressViewModel>()
 
@@ -131,7 +127,7 @@ class DailyTrainingProgressDialog(
 
     private fun initRecyclerView() {
 
-        adapter = ExercisesSelectorAdapter(dailyTrainingProgressViewModel.uiState.value.exercises) { position -> onClickExercise(position) }
+        adapter = DailyTrainingProgressAdapter(dailyTrainingProgressViewModel.uiState.value.exercises) { position -> onClickExercise(position) }
         val recyclerView = binding.rvDailyTrainingProgressDialogExercises
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -140,7 +136,7 @@ class DailyTrainingProgressDialog(
 
     private fun onClickExercise(position : Int){
 
-        if (adapter.exercisesList[position].selected){
+        if (adapter.trainingExercises[position].selected){
 
             dailyTrainingProgressViewModel.deselectExercise(position)
 

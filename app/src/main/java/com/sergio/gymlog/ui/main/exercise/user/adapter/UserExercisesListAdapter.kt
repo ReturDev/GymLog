@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.databinding.ExerciseItemBinding
+import com.sergio.gymlog.util.extension.setImageRoundedBorders
 
 class UserExercisesListAdapter(
     val userExercises : MutableList<Exercises.UserExercise>,
@@ -40,6 +42,9 @@ class UserExercisesListAdapter(
             binding.tvExerciseName.text = userExercise.name
             binding.tvExerciseEquipment.text = binding.root.context.getString(userExercise.equipment.stringResource)
             binding.tvExerciseMuscularGroup.text = binding.root.context.getString(userExercise.muscularGroup.stringResource)
+
+
+            Glide.with(binding.root.context).setImageRoundedBorders(R.drawable.logo, binding.ivExerciseImage)
 
             setListeners()
 

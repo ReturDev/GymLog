@@ -2,8 +2,6 @@ package com.sergio.gymlog.ui.main.user
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sergio.gymlog.data.model.user.UserInfo
-import com.sergio.gymlog.data.repository.access.LoginRepository
 import com.sergio.gymlog.domain.user.GetUserInfoUseCase
 import com.sergio.gymlog.domain.user.LogOutUseCase
 import com.sergio.gymlog.domain.user.ModifyUserInfoFieldUseCase

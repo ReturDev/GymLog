@@ -73,14 +73,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/vertical_margin"
                 android:hint="@string/name_hint"
-                app:errorEnabled="true"
                 app:counterEnabled="true"
                 app:counterMaxLength="50"
+                app:errorEnabled="true"
                 app:layout_constraintEnd_toStartOf="@+id/glTrainingEditorEnd"
                 app:layout_constraintStart_toStartOf="@+id/glTrainingEditorStart"
                 app:layout_constraintTop_toBottomOf="@+id/btnEditorCancel">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputEditText
 
                     android:id="@+id/etEditorName"
                     android:layout_width="match_parent"
@@ -97,9 +97,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/vertical_min_margin"
                 android:hint="@string/description_hint"
-                app:errorEnabled="true"
                 app:counterEnabled="true"
                 app:counterMaxLength="250"
+                app:errorEnabled="true"
                 app:layout_constraintEnd_toStartOf="@+id/glTrainingEditorEnd"
                 app:layout_constraintStart_toStartOf="@+id/glTrainingEditorStart"
                 app:layout_constraintTop_toBottomOf="@+id/tilEditorName">
@@ -122,7 +122,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/vertical_min_margin"
                 android:nestedScrollingEnabled="false"
-                app:layout_constraintBottom_toTopOf="@+id/btnEditorAddExercises"
                 app:layout_constraintEnd_toStartOf="@+id/glTrainingEditorEnd"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/glTrainingEditorStart"
@@ -130,12 +129,42 @@
 
             <Button
                 android:id="@+id/btnEditorAddExercises"
+                style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/Widget.Material3.Button.TextButton"
                 android:text="@string/add_exercises"
                 app:layout_constraintBottom_toTopOf="@+id/glTrainingEditorBottom"
-                app:layout_constraintStart_toStartOf="@+id/rvEditorExercises" />
+                app:layout_constraintStart_toStartOf="@+id/rvEditorExercises"
+                app:layout_constraintTop_toBottomOf="@+id/editorExercisesErrorRoot" />
+
+            <LinearLayout
+                android:id="@+id/editorExercisesErrorRoot"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@+id/glTrainingEditorEnd"
+                app:layout_constraintStart_toStartOf="@+id/glTrainingEditorStart"
+                app:layout_constraintTop_toBottomOf="@+id/rvEditorExercises"
+                tools:ignore="UseCompoundDrawables">
+
+                <TextView
+                    android:id="@+id/tvEditorErrorMessage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/training_exercise_required"
+                    android:textColor="?attr/colorError"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/ivEditorErrorIcon"
+                    android:layout_width="@dimen/filter_icons_size"
+                    android:layout_height="@dimen/filter_icons_size"
+                    app:srcCompat="@drawable/ic_error"
+                    app:tint="?attr/colorError" />
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

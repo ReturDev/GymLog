@@ -4,6 +4,7 @@ import com.sergio.gymlog.data.model.training.Training
 
 data class TrainingDetailsUiState(
 
-    val training : Training? = null
+    val training : Training? = null,
+    val trainingDeleted : Boolean = false
 
 )

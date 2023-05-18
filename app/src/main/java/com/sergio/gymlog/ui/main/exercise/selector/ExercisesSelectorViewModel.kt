@@ -2,15 +2,16 @@ package com.sergio.gymlog.ui.main.exercise.selector
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sergio.gymlog.data.model.exercise.Equipment
 import com.sergio.gymlog.data.model.exercise.ExerciseItem
-import com.sergio.gymlog.domain.exercise.*
+import com.sergio.gymlog.data.model.exercise.MuscularGroup
+import com.sergio.gymlog.domain.exercise.GetExercisesAsExerciseItemsUseCase
 import com.sergio.gymlog.util.helper.FilterExercises
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.util.logging.Filter
 import javax.inject.Inject
 
 @HiltViewModel
@@ -107,7 +108,7 @@ class ExercisesSelectorViewModel @Inject constructor(
         }
     }
 
-    fun filter(text : String){
+    fun filter(text : String = "", userExercises : Boolean = false, equipments : List<Equipment> = emptyList(), muscularGroups : List<MuscularGroup> = emptyList()){
 
         viewModelScope.launch {
 
@@ -115,7 +116,13 @@ class ExercisesSelectorViewModel @Inject constructor(
 
                 currentState.copy(
                     refresh = true,
-                    exercises = FilterExercises.filter(name = text, exercises = currentState.exercises)
+                    exercises = FilterExercises.filter(
+                        name = text,
+                        userExercises = userExercises,
+                        equipments = equipments,
+                        muscularGroups = muscularGroups,
+                        exercises = allExerciseItems
+                    )
                 )
 
             }

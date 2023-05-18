@@ -2,7 +2,6 @@ package com.sergio.gymlog.ui.main.record
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.Timestamp
 import com.sergio.gymlog.domain.record.GetTrainingLogByDateUseCase
 import com.sergio.gymlog.domain.record.GetTrainingLogsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

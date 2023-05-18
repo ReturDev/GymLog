@@ -35,7 +35,9 @@
             android:id="@+id/homeAppBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
+                android:id="@+id/homeTitleAndDescriptionRoot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -50,44 +52,48 @@
                     android:padding="16dp"
                     android:textAlignment="center" />
 
-                    <TextView
-                        android:id="@+id/tvHomeTrainingDescription"
-                        style="@style/DescriptionStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/vertical_min_margin"/>
+                <TextView
+                    android:id="@+id/tvHomeTrainingDescription"
+                    style="@style/DescriptionStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/vertical_min_margin" />
 
             </LinearLayout>
         </com.google.android.material.appbar.AppBarLayout>
+
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/homeNestedScroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvHomeTrainingExercises"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:nestedScrollingEnabled="true"
-                    android:layout_marginTop="@dimen/vertical_min_margin">
-                </androidx.recyclerview.widget.RecyclerView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvHomeTrainingExercises"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/vertical_min_margin"
+                android:nestedScrollingEnabled="true"></androidx.recyclerview.widget.RecyclerView>
         </androidx.core.widget.NestedScrollView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/homButtonsRoot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom">
+
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabHomeDiscardTraining"
                 style="@style/HomeFloatingButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/vertical_margin"
                 android:src="@drawable/ic_cancel_training"
-                app:layout_constraintBottom_toBottomOf="@+id/fabHomeChangeDailyTraining"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/fabHomeChangeDailyTraining"
-                app:layout_constraintTop_toTopOf="@+id/fabHomeChangeDailyTraining" />
+                app:layout_constraintStart_toEndOf="@+id/fabHomeStartDailyTraining" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabHomeStartDailyTraining"
@@ -95,24 +101,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_play_training"
-                app:layout_constraintBottom_toBottomOf="@+id/fabHomeChangeDailyTraining"
-                app:layout_constraintEnd_toStartOf="@+id/fabHomeChangeDailyTraining"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/fabHomeChangeDailyTraining"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabHomeChangeDailyTraining"
-                style="@style/HomeFloatingButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/vertical_margin"
-                android:src="@drawable/ic_change_training"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/fabHomeDiscardTraining"
                 app:layout_constraintEnd_toStartOf="@+id/fabHomeDiscardTraining"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/fabHomeStartDailyTraining" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/fabHomeDiscardTraining" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 <!--        <TextView-->

@@ -10,10 +10,10 @@ import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
 import com.sergio.gymlog.data.model.temporal.EditingTraining
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.domain.exercise.GetExerciseByIdUseCase
+import com.sergio.gymlog.domain.exercise.sets.GetUserSetsPreferencesUseCase
 import com.sergio.gymlog.domain.training.CreateUserTrainingUseCase
 import com.sergio.gymlog.domain.training.GetTrainingByIdUseCase
 import com.sergio.gymlog.domain.training.ModifyTrainingUseCase
-import com.sergio.gymlog.domain.exercise.sets.GetUserSetsPreferencesUseCase
 import com.sergio.gymlog.domain.user.GetUserInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -165,16 +165,17 @@ class TrainingEditorViewModel @Inject constructor(
 
                 val set = if (exercises[exerciseIndex].equipment == Equipment.BODY_WEIGHT){
 
-                     TrainingExerciseSet(
-                        repetitions = getUserInfoUseCase().repetitions
-                    )
-
-                }else{
-
                     TrainingExerciseSet(
                         repetitions = getUserInfoUseCase().repetitions,
                         weight = getUserInfoUseCase().weight,
                         bodyWeight = true
+                    )
+
+                }else{
+
+
+                    TrainingExerciseSet(
+                        repetitions = getUserInfoUseCase().repetitions
                     )
 
                 }
