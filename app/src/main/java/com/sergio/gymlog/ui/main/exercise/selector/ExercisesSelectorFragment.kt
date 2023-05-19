@@ -124,7 +124,7 @@ class ExercisesSelectorFragment() : Fragment(), FilterExercisesListener {
 
         }
 
-        binding.exercisesListIncluded.etExerciseListSearcher.doOnTextChanged { text, start, before, count ->
+        binding.exercisesListIncluded.etExerciseListSearcher.doOnTextChanged { text, _ , _ , _ ->
             exercisesSelectorVM.filter(text.toString())
         }
 
@@ -142,7 +142,7 @@ class ExercisesSelectorFragment() : Fragment(), FilterExercisesListener {
 
         }
 
-        TODO("Acabar")
+        //TODO("Acabar")
 
     }
 

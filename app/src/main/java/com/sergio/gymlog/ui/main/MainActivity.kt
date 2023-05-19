@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
 
                 val intent = Intent(this, AccessActivity::class.java)
                 this.startActivity(intent)
+                this.finish()
 
             }
         }

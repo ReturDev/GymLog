@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.Equipment
 import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
 import com.sergio.gymlog.databinding.TrainingEditorExerciseItemBinding
+import com.sergio.gymlog.util.extension.setImageRoundedBorders
 
 class TrainingEditorAdapter(
     val trainingExercises : MutableList<Exercises.TrainingExercise>,
@@ -51,6 +53,13 @@ class TrainingEditorAdapter(
             binding.tvTrainingEditorExEquipment.text = binding.root.context.getString(trainingExercise.equipment.stringResource)
             binding.tvTrainingEditorExMuscularGroup.text = binding.root.context.getString(trainingExercise.muscularGroup.stringResource)
             binding.rvTrainingEditorExSets.visibility = if (layoutPosition != itemShowingExerciseSetsPos) View.GONE else View.VISIBLE
+
+
+            val image = trainingExercise.image.ifBlank {
+                R.drawable.logo
+            }
+
+            Glide.with(binding.root.context).setImageRoundedBorders(image, binding.ivTrainingEditorExImage)
 
             initNestedRecycler(trainingExercise)
 

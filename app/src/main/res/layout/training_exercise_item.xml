@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/trainingExerciseCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -28,33 +29,65 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/horizontal_margin"
-            app:layout_constraintBottom_toTopOf="@+id/tvTrainingExEquipment"
+            app:layout_constraintBottom_toTopOf="@+id/trainingExEquipmentRoot"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/ivTrainingExercise"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tvTrainingExEquipment"
-            style="@style/CardTextStyle"
+        <LinearLayout
+            android:id="@+id/trainingExEquipmentRoot"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/tvTrainingExMuscularG"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/tvTrainingExMuscularGIcon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/tvTrainingExerciseName"
-            app:layout_constraintTop_toBottomOf="@+id/tvTrainingExerciseName" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTrainingExerciseName">
 
-        <TextView
-            android:id="@+id/tvTrainingExMuscularG"
-            style="@style/CardTextStyle"
+            <ImageView
+                android:id="@+id/ivTrainingExEquipmentIcon"
+                android:layout_width="@dimen/items_icon_size"
+                android:layout_height="@dimen/items_icon_size"
+                android:layout_marginEnd="@dimen/horizontal_min_margin"
+                app:tint="?attr/colorOnPrimaryContainer" />
+
+            <TextView
+                android:id="@+id/tvTrainingExEquipment"
+                style="@style/CardTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:lines="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tvTrainingExMuscularGIcon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="@+id/ivTrainingExercise"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/tvTrainingExEquipment"
-            app:layout_constraintTop_toBottomOf="@+id/tvTrainingExEquipment" />
+            app:layout_constraintStart_toStartOf="@+id/trainingExEquipmentRoot"
+            app:layout_constraintTop_toBottomOf="@+id/trainingExEquipmentRoot"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/ivTrainingExMuscularGIcon"
+                android:layout_width="@dimen/items_icon_size"
+                android:layout_height="@dimen/items_icon_size"
+                android:layout_marginEnd="@dimen/horizontal_min_margin"
+                app:tint="?attr/colorOnPrimaryContainer" />
+
+            <TextView
+                android:id="@+id/tvTrainingExMuscularG"
+                style="@style/CardTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/tvTrainingExSetsView"

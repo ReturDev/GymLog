@@ -28,6 +28,7 @@
     <dimen name="description_padding">8dp</dimen>
     <dimen name="default_text_size">18sp</dimen>
     <dimen name="rounded_corners">10dp</dimen>
+    <dimen name="items_icon_size">20dp</dimen>
 
 
 </resources>

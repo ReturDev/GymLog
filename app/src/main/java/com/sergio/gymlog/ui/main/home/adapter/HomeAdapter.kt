@@ -46,6 +46,14 @@ private val trainingExercises : MutableList<Exercises.TrainingExercise>
                 binding.root.context.getString(trainingExercise.muscularGroup.stringResource)
             binding.tvTrainingExSetsView.visibility = View.GONE
 
+            Glide.with(binding.root.context)
+                .load(trainingExercise.equipment.iconResource)
+                .into(binding.ivTrainingExEquipmentIcon)
+
+            Glide.with(binding.root.context)
+                .load(trainingExercise.muscularGroup.iconResource)
+                .into(binding.ivTrainingExMuscularGIcon)
+
             val image = trainingExercise.image.ifBlank {
                 R.drawable.logo
             }

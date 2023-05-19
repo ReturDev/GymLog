@@ -48,6 +48,14 @@ class TrainingDetailsAdapter(
 
              Glide.with(binding.root.context).setImageRoundedBorders(image, binding.ivTrainingExercise)
 
+             Glide.with(binding.root.context)
+                 .load(trainingExercise.equipment.iconResource)
+                 .into(binding.ivTrainingExEquipmentIcon)
+
+             Glide.with(binding.root.context)
+                 .load(trainingExercise.muscularGroup.iconResource)
+                 .into(binding.ivTrainingExMuscularGIcon)
+
              initNestedRecycler(trainingExercise.sets)
              setListeners()
         }

@@ -4,11 +4,11 @@ import com.sergio.gymlog.R
 
 enum class MuscularGroup(val stringResource : Int, val iconResource : Int) {
 
-    BACK(R.string.back_muscle, R.drawable.ic_checked_item),
-    CHEST(R.string.chest_muscle, 0),
-    SHOULDERS(R.string.shoulders_muscle, 0),
-    LEGS(R.string.legs_muscle, 0),
-    ARMS(R.string.arms, 0),
+    BACK(R.string.back_muscle, R.drawable.ic_back),
+    CHEST(R.string.chest_muscle, R.drawable.ic_chest),
+    SHOULDERS(R.string.shoulders_muscle, R.drawable.ic_shoulders),
+    LEGS(R.string.legs_muscle, R.drawable.ic_leg),
+    ARMS(R.string.arms, R.drawable.ic_arms),
     NONE(-1, 0);
 
 }

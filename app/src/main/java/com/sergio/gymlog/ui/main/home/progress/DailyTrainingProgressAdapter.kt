@@ -5,12 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.ExerciseItem
 import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
 import com.sergio.gymlog.databinding.StartedDailyTrainingExerciseItemBinding
 import com.sergio.gymlog.ui.main.training.detail.adapter.NestedTrainingDetailsAdapter
+import com.sergio.gymlog.util.extension.setImageRoundedBorders
 
 class DailyTrainingProgressAdapter(
     val trainingExercises : List<ExerciseItem>,
@@ -43,6 +45,20 @@ class DailyTrainingProgressAdapter(
                 binding.root.context.getString(trainingExercise.exercise.equipment.stringResource)
             binding.tvStartedTrainingExerciseExMuscularG.text =
                 binding.root.context.getString(trainingExercise.exercise.muscularGroup.stringResource)
+
+            Glide.with(binding.root.context)
+                .load(trainingExercise.exercise.equipment.iconResource)
+                .into(binding.ivStartedTrainingExEquipmentIcon)
+
+            Glide.with(binding.root.context)
+                .load(trainingExercise.exercise.muscularGroup.iconResource)
+                .into(binding.ivStartedTrainingExMuscularGIcon)
+
+            val image = trainingExercise.exercise.image.ifBlank {
+                R.drawable.logo
+            }
+
+            Glide.with(binding.root.context).setImageRoundedBorders(image, binding.ivStartedTrainingExerciseImage)
 
             manageItemSelected(trainingExercise)
 

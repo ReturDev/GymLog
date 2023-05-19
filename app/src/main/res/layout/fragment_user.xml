@@ -70,13 +70,16 @@
 
     <Button
         android:id="@+id/btnUserLogOut"
+        style="@style/Widget.Material3.Button.IconButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/log_out"
+        app:icon="@drawable/ic_log_out"
+        android:scaleY="1.5"
+        android:scaleX="1.5"
         app:layout_constraintEnd_toStartOf="@+id/glUserEnd"
         app:layout_constraintTop_toTopOf="@+id/glUserTop" />
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/userSetsCard"
         android:layout_width="0dp"
         android:layout_height="@dimen/user_characteristics_card_height"
@@ -108,9 +111,9 @@
                 android:textAlignment="textEnd" />
 
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/userRepetitionsCard"
         android:layout_width="0dp"
         android:layout_height="@dimen/user_characteristics_card_height"
@@ -141,9 +144,9 @@
                 android:layout_weight="0"
                 android:textAlignment="textEnd" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/userWeightCard"
         android:layout_width="0dp"
         android:layout_height="@dimen/user_characteristics_card_height"
@@ -173,6 +176,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
