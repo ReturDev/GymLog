@@ -3,8 +3,10 @@ package com.sergio.gymlog.ui.main.home.selector.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sergio.gymlog.R
+import com.sergio.gymlog.data.model.exercise.MuscularGroup
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.databinding.TrainingItemBinding
 
@@ -41,18 +43,20 @@ class DailyTrainingSelectorAdapter(
     inner class DailyTrainingSelectorHolder(view : View) : RecyclerView.ViewHolder(view){
 
         private val binding = TrainingItemBinding.bind(view)
+        private lateinit var iconAdapter : IconAdapter
 
         fun bind(training : Training){
 
             binding.tvTrainingName.text = training.name
-            binding.tvMucularGroups.text = training.muscularGroups.toString()
-            binding.tvExercisesNumber.text = binding.root.context.getString(R.string.number_of_exercises)
+            binding.tvExercisesNumber.text = binding.root.context.getString(R.string.number_of_exercises, training.exercises.size)
 
             if (selectedTrainingPos != layoutPosition){
                 binding.ivDailyTrainingSelected.visibility = View.GONE
             }else{
                 binding.ivDailyTrainingSelected.visibility = View.VISIBLE
             }
+
+            initIconRecycler(training.muscularGroups)
 
             binding.root.setOnClickListener {
 
@@ -61,6 +65,16 @@ class DailyTrainingSelectorAdapter(
                 onClickTraining()
             }
 
+        }
+
+        private fun initIconRecycler(muscularGroups: List<MuscularGroup>) {
+            iconAdapter = IconAdapter(muscularGroups)
+            binding.rvTrainingItemMuscularIcons.adapter = iconAdapter
+            binding.rvTrainingItemMuscularIcons.layoutManager = LinearLayoutManager(
+                binding.root.context,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
         }
 
         private fun onClickTraining(){

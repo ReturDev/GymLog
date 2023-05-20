@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/trainingCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,57 +10,37 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/trainingRoot"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/training_card_height">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_card">
 
         <TextView
             android:id="@+id/tvTrainingName"
             style="@style/TrainingNameTextStyle"
-            android:layout_width="0dp"
+            android:layout_width="379dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/horizontal_min_margin"
-            android:layout_marginTop="@dimen/vertical_min_margin"
-            android:layout_marginEnd="@dimen/horizontal_min_margin"
-            app:layout_constraintBottom_toTopOf="@+id/tvMuscularLabel"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="spread_inside" />
-
-        <TextView
-            android:id="@+id/tvMuscularLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/horizontal_min_margin"
-            android:text="@string/muscular_groups"
-            app:layout_constraintBottom_toTopOf="@+id/tvExercisesNumber"
-            app:layout_constraintEnd_toStartOf="@+id/tvMucularGroups"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTrainingName" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvExercisesNumber"
+            style="@style/CardTextStyle"
+            android:textSize="15sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/number_of_exercises"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/tvTrainingName"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/tvTrainingName"
-            app:layout_constraintTop_toBottomOf="@+id/tvMuscularLabel" />
-
-        <TextView
-            android:id="@+id/tvMucularGroups"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/horizontal_min_margin"
-            android:layout_marginEnd="@dimen/horizontal_min_margin"
-            app:layout_constraintBottom_toBottomOf="@+id/tvMuscularLabel"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tvMuscularLabel"
-            app:layout_constraintTop_toTopOf="@+id/tvMuscularLabel" />
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTrainingItemMuscularIcons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/tvExercisesNumber"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTrainingName" />
 
         <ImageView
             android:id="@+id/ivDailyTrainingSelected"

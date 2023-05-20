@@ -3,10 +3,13 @@ package com.sergio.gymlog.ui.main.training.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sergio.gymlog.R
+import com.sergio.gymlog.data.model.exercise.MuscularGroup
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.databinding.TrainingItemBinding
+import com.sergio.gymlog.ui.main.home.selector.adapter.IconAdapter
 
 class TrainingAdapter(
     var trainingList : List<Training>,
@@ -34,12 +37,11 @@ class TrainingAdapter(
     inner class TrainingHolder(view : View) : RecyclerView.ViewHolder(view){
 
         private val binding = TrainingItemBinding.bind(view)
+        private lateinit var iconAdapter : IconAdapter
 
         fun bind(training : Training){
 
             binding.tvTrainingName.text = training.name
-            val textMuscularGroups = training.muscularGroups.map { ex -> binding.root.context.getString(ex.stringResource)}.toString()
-            binding.tvMucularGroups.text = textMuscularGroups.substring(startIndex = 1, endIndex = textMuscularGroups.length-1)
             binding.tvExercisesNumber.text = binding.root.context.getString(R.string.number_of_exercises,training.exercises.size)
 
 
@@ -49,9 +51,19 @@ class TrainingAdapter(
                 true
             }
 
+            initIconRecycler(training.muscularGroups)
 
         }
 
+        private fun initIconRecycler(muscularGroups: List<MuscularGroup>) {
+            iconAdapter = IconAdapter(muscularGroups)
+            binding.rvTrainingItemMuscularIcons.adapter = iconAdapter
+            binding.rvTrainingItemMuscularIcons.layoutManager = LinearLayoutManager(
+                binding.root.context,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+        }
 
 
     }

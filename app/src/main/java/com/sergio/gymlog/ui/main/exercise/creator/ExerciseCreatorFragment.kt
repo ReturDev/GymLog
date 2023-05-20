@@ -129,7 +129,7 @@ class ExerciseCreatorFragment : Fragment() {
 
         binding.btnExerciseCreatorCreate.setOnClickListener {
 
-            if (binding.etExerciseCreatorName.text.isBlank()){
+            if (binding.etExerciseCreatorName.text!!.isBlank()){
 
                 requireActivity().toast(R.string.exercise_name_required)
 

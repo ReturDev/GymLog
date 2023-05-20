@@ -7,20 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.exercise.creator.ExerciseCreatorFragment">
 
-    <EditText
-        android:id="@+id/etExerciseCreatorName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/vertical_max_margin"
-        android:ems="10"
-        android:hint="@string/name_hint"
-        android:inputType="text"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toStartOf="@+id/glExerciseCreatorEnd"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/glExerciseCreatorStart"
-        app:layout_constraintTop_toBottomOf="@+id/btnExerciseCreatorCancel" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glExerciseCreatorBottom"
         android:layout_width="wrap_content"
@@ -49,18 +35,42 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/horizontal_margin_guideline" />
 
-    <EditText
-        android:id="@+id/etExerciseCreatorDescription"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilExerciseCreatorName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/vertical_max_margin"
-        android:ems="10"
+        android:layout_marginTop="@dimen/vertical_margin"
+        app:errorEnabled="true"
+        app:counterEnabled="true"
+        app:counterMaxLength="50"
+        android:hint="@string/name_hint"
+        app:layout_constraintEnd_toStartOf="@+id/glExerciseCreatorEnd"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/glExerciseCreatorStart"
+        app:layout_constraintTop_toBottomOf="@+id/btnExerciseCreatorCancel" >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etExerciseCreatorName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilExerciseCreatorDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:hint="@string/description_hint"
-        android:inputType="text"
-        android:minHeight="48dp"
+        android:layout_marginTop="@dimen/vertical_min_margin"
+        app:errorEnabled="true"
+        app:counterEnabled="true"
+        app:counterMaxLength="250"
         app:layout_constraintEnd_toStartOf="@+id/glExerciseCreatorEnd"
         app:layout_constraintStart_toStartOf="@+id/glExerciseCreatorStart"
-        app:layout_constraintTop_toBottomOf="@+id/etExerciseCreatorName" />
+        app:layout_constraintTop_toBottomOf="@+id/tilExerciseCreatorName">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etExerciseCreatorDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnExerciseCreatorEquipment"
@@ -68,8 +78,8 @@
         android:layout_height="@dimen/exercise_creator_selector_btn_height"
         android:layout_marginTop="@dimen/vertical_max_margin"
         app:layout_constraintEnd_toStartOf="@+id/glExerciseCreatorEnd"
-        app:layout_constraintStart_toStartOf="@+id/glExerciseCreatorStart"
-        app:layout_constraintTop_toBottomOf="@+id/etExerciseCreatorDescription" />
+        app:layout_constraintStart_toEndOf="@+id/tvExerciseCreatorEquipment"
+        app:layout_constraintTop_toBottomOf="@+id/tilExerciseCreatorDescription" />
 
     <Button
         android:id="@+id/btnExerciseCreatorMuscularG"
