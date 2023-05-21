@@ -37,11 +37,11 @@
     <style name="TrainingNameTextStyle" parent="TextAppearance.Material3.HeadlineSmall">
         <item name="android:textAlignment">center</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">?attr/colorOnPrimaryContainer</item>
+        <item name="android:textColor">?attr/colorSecondary</item>
     </style>
 
-    <style name="HomeTrainingNameStyle" parent="TextAppearance.Material3.HeadlineSmall">
-        <item name="android:textColor">?attr/colorSecondary</item>
+    <style name="HomeTrainingNameStyle" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textColor">?attr/colorPrimary</item>
         <item name="fontFamily">@font/amaranth_bold</item>
     </style>
 
@@ -65,17 +65,17 @@
     </style>
 
     <style name="NestedCardStyle" parent="CardViewStyle">
-        <item name="cardBackgroundColor">?attr/colorTertiaryContainer</item>
+        <item name="cardBackgroundColor">?attr/colorSecondaryContainer</item>
     </style>
 
     <style name="NestedCardIconButtonStyle" parent="Widget.Material3.Button.IconButton">
-        <item name="iconTint">?attr/colorOnTertiaryContainer</item>
+        <item name="iconTint">?attr/colorOnSecondaryContainer</item>
         <item name="android:scaleX">1.5</item>
         <item name="android:scaleY">1.5</item>
     </style>
 
     <style name="NestedCardTextStyle" parent="TextAppearance.Material3.BodyMedium">
-        <item name="android:textColor">?attr/colorOnTertiaryContainer</item>
+        <item name="android:textColor">?attr/colorOnSecondaryContainer</item>
         <item name="android:textAlignment">center</item>
     </style>
 

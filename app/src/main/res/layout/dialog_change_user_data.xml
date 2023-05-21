@@ -4,50 +4,51 @@
     android:id="@+id/changeUDataRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/dialog_root_padding">
+    android:padding="@dimen/vertical_margin">
 
-    <EditText
-        android:id="@+id/etChangeUDataValue"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilChangeUDataValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="3"
-        android:inputType="number"
-        android:minHeight="48dp"
-        android:textAlignment="center"
+        android:maxEms="6"
+        android:minEms="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etChangeUDataValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="textEnd"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnChangeUDataCancel"
+        style="@style/Widget.Material3.Button.TextButton.Dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vertical_margin"
+        android:text="@string/cancel"
+        app:layout_constraintEnd_toStartOf="@+id/btnChangeUDataAccept"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilChangeUDataValue" />
+
+    <Button
+        android:id="@+id/btnChangeUDataAccept"
+        style="@style/Widget.Material3.Button.TextButton.Dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/accept"
+        app:layout_constraintBottom_toBottomOf="@+id/btnChangeUDataCancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/btnChangeUDataCancel"
+        app:layout_constraintTop_toTopOf="@+id/btnChangeUDataCancel" />
 
-    <TextView
-        android:id="@+id/tvChangeUDataKg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/kg"
-        android:visibility="gone"
-        app:layout_constraintBaseline_toBaselineOf="@+id/etChangeUDataValue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/etChangeUDataValue" />
-
-    <ImageView
-        android:id="@+id/ivChangeUDataCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etChangeUDataValue"
-        app:srcCompat="@drawable/ic_cancel_training" />
-
-    <ImageView
-        android:id="@+id/ivChangeUDataAccept"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivChangeUDataCancel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ivChangeUDataCancel"
-        app:srcCompat="@drawable/ic_checked_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,44 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/changeUsernameRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/dialog_root_padding">
+    android:padding="@dimen/vertical_margin">
 
-    <ImageView
-        android:id="@+id/ivChangeUsernameAccept"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilChangeUsernameValue"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/horizontal_max_margin"
-        app:layout_constraintBottom_toBottomOf="@+id/ivChangeUsernameCancel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ivChangeUsernameCancel"
-        app:srcCompat="@drawable/ic_checked_item" />
-
-    <ImageView
-        android:id="@+id/ivChangeUsernameCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/horizontal_max_margin"
-        android:layout_marginTop="@dimen/vertical_min_margin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etChangeUsernameValue"
-        app:srcCompat="@drawable/ic_cancel_training" />
-
-    <EditText
-        android:id="@+id/etChangeUsernameValue"
-        android:hint="@string/user_name_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="13"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:textAlignment="center"
+        app:counterEnabled="true"
+        app:counterMaxLength="50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etChangeUsernameValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/btnChangeUsernameCancel"
+        style="@style/Widget.Material3.Button.TextButton.Dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vertical_min_margin"
+        android:text="@string/cancel"
+        app:layout_constraintEnd_toStartOf="@+id/btnChangeUsernameAccept"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilChangeUsernameValue" />
+
+    <Button
+        android:id="@+id/btnChangeUsernameAccept"
+        style="@style/Widget.Material3.Button.TextButton.Dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/accept"
+        app:layout_constraintBottom_toBottomOf="@+id/btnChangeUsernameCancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnChangeUsernameCancel"
+        app:layout_constraintTop_toTopOf="@+id/btnChangeUsernameCancel" />
 </androidx.constraintlayout.widget.ConstraintLayout>

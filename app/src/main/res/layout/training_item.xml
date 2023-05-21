@@ -25,21 +25,23 @@
         <TextView
             android:id="@+id/tvExercisesNumber"
             style="@style/CardTextStyle"
-            android:textSize="15sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/number_of_exercises"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/rvTrainingItemMuscularIcons"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rvTrainingItemMuscularIcons" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvTrainingItemMuscularIcons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/tvExercisesNumber"
+            android:layout_marginStart="@dimen/vertical_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/tvExercisesNumber"
             app:layout_constraintTop_toBottomOf="@+id/tvTrainingName" />
 
         <ImageView

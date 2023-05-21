@@ -74,8 +74,27 @@ class LogDetailsDialog (
 
         binding.tvLogDetailsDialogTitle.text = format.format(trainingLog.date!!.toDate())
         binding.tvLogDetailsDialogTrainingName.text = trainingLog.training!!.training!!.name
-        binding.tvLogDetailsDialogTrainingDesc.text = trainingLog.training.training!!.description
-        binding.tvLogDetailsDialogTrainingRemarks.text = trainingLog.training.remarks
+
+        if (trainingLog.training.remarks.isNotBlank()){
+
+            binding.tvLogDetailsDialogTrainingRemarks.text = trainingLog.training.remarks
+            binding.tvLogDetailsDialogTrainingRemarks.visibility = View.VISIBLE
+
+        }else{
+
+            binding.tvLogDetailsDialogTrainingRemarks.visibility = View.GONE
+
+        }
+
+        if (trainingLog.training.training!!.description.isNotBlank()){
+            binding.tvLogDetailsDialogTrainingDesc.text = trainingLog.training.training.description
+            binding.tvLogDetailsDialogTrainingDesc.visibility = View.VISIBLE
+        }else {
+            binding.tvLogDetailsDialogTrainingDesc.visibility = View.GONE
+        }
+
+
+
         binding.tvLogDetailsDialogExercisesNumber.text = getString(R.string.number_of_exercises, trainingLog.training.training.exercises.size)
     }
 

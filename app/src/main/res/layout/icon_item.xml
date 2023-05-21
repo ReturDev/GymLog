@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/iconItemCard"
     style="@style/NestedCardStyle"
+    app:cardBackgroundColor="?attr/colorTertiaryContainer"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_card">

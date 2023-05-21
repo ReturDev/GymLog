@@ -10,47 +10,81 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/selectionExerciseRoot"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_card">
 
         <TextView
             android:id="@+id/tvExerciseName"
             style="@style/CardTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/horizontal_min_margin"
-            app:layout_constraintBottom_toTopOf="@+id/tvExerciseEquipment"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/exerciseEquipmentRoot"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivExerciseImage"
-            app:layout_constraintTop_toTopOf="@+id/ivExerciseImage" />
+            app:layout_constraintTop_toTopOf="@+id/ivExerciseImage"
+            app:layout_constraintVertical_chainStyle="spread" />
 
-        <TextView
-            android:id="@+id/tvExerciseMuscularGroup"
-            style="@style/CardTextStyle"
+
+        <LinearLayout
+            android:id="@+id/exerciseEquipmentRoot"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/ivExerciseImage"
-            app:layout_constraintEnd_toEndOf="@+id/tvExerciseEquipment"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tvExerciseEquipment"
-            app:layout_constraintTop_toBottomOf="@+id/tvExerciseEquipment" />
-
-        <TextView
-            android:id="@+id/tvExerciseEquipment"
-            style="@style/CardTextStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/horizontal_min_margin"
-            app:layout_constraintBottom_toTopOf="@+id/tvExerciseMuscularGroup"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/exerciseMuscularGroupRoot"
             app:layout_constraintEnd_toStartOf="@+id/ivExerciseSelected"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tvExerciseName"
-            app:layout_constraintTop_toBottomOf="@+id/tvExerciseName" />
+            app:layout_constraintTop_toBottomOf="@+id/tvExerciseName">
+
+            <ImageView
+                android:id="@+id/ivExerciseEquipmentIcon"
+                android:layout_width="@dimen/items_icon_size"
+                android:layout_height="@dimen/items_icon_size"
+                android:layout_marginEnd="@dimen/margin_card"
+                app:tint="?attr/colorOnPrimaryContainer" />
+
+            <TextView
+                android:id="@+id/tvExerciseEquipment"
+                style="@style/CardTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:lines="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/exerciseMuscularGroupRoot"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@+id/ivExerciseImage"
+            app:layout_constraintEnd_toEndOf="@+id/exerciseEquipmentRoot"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/exerciseEquipmentRoot"
+            app:layout_constraintTop_toBottomOf="@+id/exerciseEquipmentRoot"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/ivExerciseMuscularGIcon"
+                android:layout_width="@dimen/items_icon_size"
+                android:layout_height="@dimen/items_icon_size"
+                android:layout_marginEnd="@dimen/horizontal_min_margin"
+                app:tint="?attr/colorOnPrimaryContainer" />
+
+            <TextView
+                android:id="@+id/tvExerciseMuscularGroup"
+                style="@style/CardTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
 
         <ImageView
             android:id="@+id/ivExerciseImage"
             android:layout_width="@dimen/exercise_image_size"
             android:layout_height="@dimen/exercise_image_size"
-            android:layout_marginStart="@dimen/horizontal_min_margin"
             android:layout_marginTop="@dimen/vertical_min_margin"
             android:layout_marginEnd="@dimen/vertical_min_margin"
             android:layout_marginBottom="@dimen/vertical_min_margin"

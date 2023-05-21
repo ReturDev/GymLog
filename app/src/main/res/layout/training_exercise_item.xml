@@ -39,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            app:layout_constraintBottom_toTopOf="@+id/tvTrainingExMuscularGIcon"
+            app:layout_constraintBottom_toTopOf="@+id/trainingExMuscularGRoot"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/tvTrainingExerciseName"
@@ -62,7 +62,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/tvTrainingExMuscularGIcon"
+            android:id="@+id/trainingExMuscularGRoot"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"

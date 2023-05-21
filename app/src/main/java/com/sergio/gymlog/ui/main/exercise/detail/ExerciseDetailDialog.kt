@@ -15,6 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.databinding.DialogExerciseDetailBinding
+import com.sergio.gymlog.util.extension.setImageRoundedBorders
 
 
 class ExerciseDetailDialog(
@@ -35,41 +36,42 @@ class ExerciseDetailDialog(
 
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog =  super.onCreateDialog(savedInstanceState)
-
-        dialog.setOnShowListener {
-            (it as BottomSheetDialog).let { bottomSheetDialog ->
-                (bottomSheetDialog.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout).let { frameLayout ->
-                    BottomSheetBehavior.from(frameLayout).peekHeight = Resources.getSystem().displayMetrics.heightPixels
-                    BottomSheetBehavior.from(frameLayout).state = BottomSheetBehavior.STATE_EXPANDED
-                }
-
-            }
-        }
-
-        return dialog
-
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bind()
     }
 
     private fun bind() {
-        if (exercise.image.isNotBlank()){
-            Glide.with(requireContext())
-                .load(exercise.image)
-                .into(binding.ivExerciseDetailDialogImage)
+
+        val alpha = if (exercise.image.isBlank()){
+            0.75f
         }else{
-            Glide.with(requireContext())
-                .load(R.drawable.logo)
-                .into(binding.ivExerciseDetailDialogImage)
+            1f
         }
 
+        val image = exercise.image.ifBlank {
+            R.drawable.logo
+        }
+
+        Glide.with(binding.root.context).setImageRoundedBorders(image, binding.ivExerciseDetailDialogImage)
+        binding.ivExerciseDetailDialogImage.alpha = alpha
+
+
         binding.tvExerciseDetailDialogName.text = exercise.name
-        binding.tvExerciseDetailDialogDescription.text = exercise.description
+
+
+       if (exercise.description.isNotBlank()){
+
+           binding.tvExerciseDetailDialogDescription.text = exercise.description
+           binding.tvExerciseDetailDialogDescription.visibility = View.VISIBLE
+
+       }else{
+
+           binding.tvExerciseDetailDialogDescription.visibility = View.GONE
+
+       }
+
+
         binding.tvExerciseDetailDialogMuscularG.text = getString(exercise.muscularGroup.stringResource)
         binding.tvExerciseDetailDialogMuscularG.setCompoundDrawablesWithIntrinsicBounds(
             null,
@@ -87,11 +89,5 @@ class ExerciseDetailDialog(
 
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        val sheetContainer = requireView().parent as ViewGroup
-        sheetContainer.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
-    }
 
 }

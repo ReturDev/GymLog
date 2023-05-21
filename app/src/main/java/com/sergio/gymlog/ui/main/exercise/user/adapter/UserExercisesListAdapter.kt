@@ -43,8 +43,26 @@ class UserExercisesListAdapter(
             binding.tvExerciseEquipment.text = binding.root.context.getString(userExercise.equipment.stringResource)
             binding.tvExerciseMuscularGroup.text = binding.root.context.getString(userExercise.muscularGroup.stringResource)
 
+            Glide.with(binding.root.context)
+                .load(userExercise.equipment.iconResource)
+                .into(binding.ivExerciseEquipmentIcon)
 
-            Glide.with(binding.root.context).setImageRoundedBorders(R.drawable.logo, binding.ivExerciseImage)
+            Glide.with(binding.root.context)
+                .load(userExercise.muscularGroup.iconResource)
+                .into(binding.ivExerciseMuscularGIcon)
+
+            val alpha = if (userExercise.image.isBlank()){
+                0.75f
+            }else{
+                1f
+            }
+
+            val image = userExercise.image.ifBlank {
+                R.drawable.logo
+            }
+
+            Glide.with(binding.root.context).setImageRoundedBorders(image, binding.ivExerciseImage)
+            binding.ivExerciseImage.alpha = alpha
 
             setListeners()
 

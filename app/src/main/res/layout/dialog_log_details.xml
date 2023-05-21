@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/vertical_margin"
+    android:scrollbars="none"
     tools:context=".ui.main.record.log.LogDetailsDialog">
 
     <LinearLayout
@@ -20,7 +21,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textStyle="bold"
-            android:textColor="?attr/colorPrimary"/>
+            android:textColor="?attr/colorSecondary"/>
 
         <TextView
             android:id="@+id/tvLogDetailsDialogTrainingName"
@@ -31,6 +32,7 @@
 
         <LinearLayout
             android:id="@+id/logDetailsDialogDescriptionRoot"
+            android:layout_marginTop="@dimen/vertical_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"

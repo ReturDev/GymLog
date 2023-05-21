@@ -19,6 +19,7 @@ import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.Equipment
 import com.sergio.gymlog.data.model.exercise.MuscularGroup
 import com.sergio.gymlog.databinding.FragmentExercisesSelectorBinding
+import com.sergio.gymlog.ui.main.exercise.detail.ExerciseDetailDialog
 import com.sergio.gymlog.ui.main.exercise.selector.adapter.ExercisesSelectorAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -100,7 +101,11 @@ class ExercisesSelectorFragment() : Fragment(), FilterExercisesListener {
     }
 
     private fun initRecyclerView() {
-        adapter = ExercisesSelectorAdapter(exercisesSelectorVM.uiState.value.exercises, onClickElement = {position -> onClickElement(position)})
+        adapter = ExercisesSelectorAdapter(
+            exercisesSelectorVM.uiState.value.exercises,
+            onClickElement = {position -> onClickElement(position)},
+            onLongClickExercise = {position -> onLongClickExercise(position)}
+        )
         val recycler = binding.exercisesListIncluded.rvExercisesList
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false)
@@ -142,7 +147,11 @@ class ExercisesSelectorFragment() : Fragment(), FilterExercisesListener {
 
         }
 
-        //TODO("Acabar")
+    }
+
+    private fun onLongClickExercise(position: Int){
+
+        ExerciseDetailDialog(adapter.exercisesList[position].exercise).show(parentFragmentManager, "exercise_detail_dialog")
 
     }
 

@@ -8,11 +8,12 @@ import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import androidx.core.widget.addTextChangedListener
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.sergio.gymlog.R
 import com.sergio.gymlog.databinding.DialogChangeUserDataBinding
 import com.sergio.gymlog.util.InputFiltersProvider
 
-fun AlertDialog.Builder.userDataChangeDialog(
+fun MaterialAlertDialogBuilder.userDataChangeDialog(
     titleResource : Int,
     currentValue: String,
     units : Boolean,
@@ -26,7 +27,7 @@ fun AlertDialog.Builder.userDataChangeDialog(
 
         it?.let {
 
-            binding.ivChangeUDataAccept.isEnabled = it.isNotBlank()
+            binding.btnChangeUDataAccept.isEnabled = it.isNotBlank()
 
         }
 
@@ -44,14 +45,14 @@ fun AlertDialog.Builder.userDataChangeDialog(
 
     if (units){
         binding.etChangeUDataValue.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
-        binding.tvChangeUDataKg.visibility = View.VISIBLE
+        binding.tilChangeUDataValue.suffixText = context.getString(R.string.kg)
         binding.etChangeUDataValue.filters = arrayOf(InputFiltersProvider.weightFilter(binding.etChangeUDataValue))
     }else{
         binding.etChangeUDataValue.filters = arrayOf(InputFiltersProvider.repetitionsFilter())
     }
 
 
-    binding.ivChangeUDataAccept.setOnClickListener {
+    binding.btnChangeUDataAccept.setOnClickListener {
 
         val newValue = binding.etChangeUDataValue.text.toString()
 
@@ -63,7 +64,7 @@ fun AlertDialog.Builder.userDataChangeDialog(
 
     }
 
-    binding.ivChangeUDataCancel.setOnClickListener {
+    binding.btnChangeUDataCancel.setOnClickListener {
 
         dialog.dismiss()
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/exerciseDetailDialogRoot"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".ui.main.exercise.detail.ExerciseDetailDialog">
 
     <androidx.constraintlayout.widget.Guideline
@@ -37,8 +37,8 @@
 
     <ImageView
         android:id="@+id/ivExerciseDetailDialogImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         app:layout_constraintEnd_toStartOf="@+id/glExerciseDetailDialogEnd"
         app:layout_constraintStart_toStartOf="@+id/glExerciseDetailDialogLeft"
         app:layout_constraintTop_toTopOf="@+id/glExerciseDetailDialogTop"
@@ -46,44 +46,49 @@
 
     <TextView
         android:id="@+id/tvExerciseDetailDialogName"
+        style="@style/HomeTrainingNameStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/vertical_min_margin"
-        android:text="TextView"
+        android:layout_marginTop="@dimen/vertical_margin"
         app:layout_constraintEnd_toStartOf="@+id/glExerciseDetailDialogEnd"
         app:layout_constraintStart_toStartOf="@+id/glExerciseDetailDialogLeft"
         app:layout_constraintTop_toBottomOf="@+id/ivExerciseDetailDialogImage" />
 
     <TextView
         android:id="@+id/tvExerciseDetailDialogDescription"
+        style="@style/DescriptionStyle"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/vertical_min_margin"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/tvExerciseDetailDialogEquipment"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vertical_margin"
         app:layout_constraintEnd_toStartOf="@+id/glExerciseDetailDialogEnd"
         app:layout_constraintStart_toStartOf="@+id/glExerciseDetailDialogLeft"
         app:layout_constraintTop_toBottomOf="@+id/tvExerciseDetailDialogName" />
 
     <TextView
         android:id="@+id/tvExerciseDetailDialogEquipment"
+        android:textColor="?attr/colorSecondary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_marginTop="@dimen/vertical_margin"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/glExerciseDetailDialogBottom"
         app:layout_constraintEnd_toStartOf="@+id/tvExerciseDetailDialogMuscularG"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/glExerciseDetailDialogLeft" />
+        app:layout_constraintStart_toStartOf="@+id/glExerciseDetailDialogLeft"
+        app:layout_constraintTop_toBottomOf="@+id/tvExerciseDetailDialogDescription"
+        app:drawableTint="?attr/colorSecondary" />
 
     <TextView
         android:id="@+id/tvExerciseDetailDialogMuscularG"
+        android:textColor="?attr/colorSecondary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_marginTop="@dimen/vertical_margin"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/glExerciseDetailDialogBottom"
         app:layout_constraintEnd_toStartOf="@+id/glExerciseDetailDialogEnd"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tvExerciseDetailDialogEquipment" />
+        app:layout_constraintStart_toEndOf="@+id/tvExerciseDetailDialogEquipment"
+        app:layout_constraintTop_toBottomOf="@+id/tvExerciseDetailDialogDescription"
+        app:drawableTint="?attr/colorSecondary" />
 </androidx.constraintlayout.widget.ConstraintLayout>

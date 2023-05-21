@@ -13,7 +13,8 @@ import com.sergio.gymlog.util.extension.setImageRoundedBorders
 
 class ExercisesSelectorAdapter(
     var exercisesList : List<ExerciseItem>,
-    private val onClickElement : (Int) -> Unit
+    private val onClickElement : (Int) -> Unit,
+    private val onLongClickExercise : (Int) -> Unit
 ) : RecyclerView.Adapter<ExercisesSelectorAdapter.ExercisesSelectorHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExercisesSelectorHolder {
@@ -41,11 +42,26 @@ class ExercisesSelectorAdapter(
             binding.tvExerciseMuscularGroup.text = binding.root.context.getString(exercise.muscularGroup.stringResource)
             binding.tvExerciseEquipment.text = binding.root.context.getString(exercise.equipment.stringResource)
 
-            val image = exerciseItem.exercise.image.ifBlank {
+            Glide.with(binding.root.context)
+                .load(exercise.equipment.iconResource)
+                .into(binding.ivExerciseEquipmentIcon)
+
+            Glide.with(binding.root.context)
+                .load(exercise.muscularGroup.iconResource)
+                .into(binding.ivExerciseMuscularGIcon)
+
+            val alpha = if (exercise.image.isBlank()){
+                0.75f
+            }else{
+                1f
+            }
+
+            val image = exercise.image.ifBlank {
                 R.drawable.logo
             }
 
             Glide.with(binding.root.context).setImageRoundedBorders(image, binding.ivExerciseImage)
+            binding.ivExerciseImage.alpha = alpha
 
             setListeners()
 
@@ -57,6 +73,11 @@ class ExercisesSelectorAdapter(
 
                 onClickElement(layoutPosition)
 
+            }
+
+            binding.selectionExerciseCard.setOnLongClickListener {
+                onLongClickExercise(layoutPosition)
+                true
             }
 
         }
