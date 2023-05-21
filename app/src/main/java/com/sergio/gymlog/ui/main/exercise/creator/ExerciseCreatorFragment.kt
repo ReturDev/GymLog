@@ -1,11 +1,14 @@
 package com.sergio.gymlog.ui.main.exercise.creator
 
+import android.graphics.drawable.LayerDrawable
+import android.graphics.drawable.ScaleDrawable
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -25,14 +28,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ExerciseCreatorFragment : Fragment() {
+class ExerciseCreatorFragment : Fragment(), ChangeDataListener {
 
     private lateinit var binding : FragmentExerciseCreatorBinding
     private val exerciseCreatorViewModel by viewModels<ExerciseCreatorViewModel>()
-    private val args by navArgs<ExerciseCreatorFragmentArgs>()
 
-    private lateinit var equipment: Equipment
-    private lateinit var muscularGroup: MuscularGroup
+    private var equipment: Equipment = Equipment.NONE
+    private var muscularGroup: MuscularGroup = MuscularGroup.NONE
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,10 +53,6 @@ class ExerciseCreatorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        equipment = args.equipmentSelected
-        muscularGroup = args.muscularGroupSelected
-
-        exerciseCreatorViewModel.loadCreatingExerciseInfo()
         setButtonsSelectors()
 
         setCollector()
@@ -69,27 +67,8 @@ class ExerciseCreatorFragment : Fragment() {
 
                 exerciseCreatorViewModel.uiState.collect{currentState ->
 
-                    if (currentState.creatingExerciseData != null){
-
-                        binding.etExerciseCreatorName.text = SpannableStringBuilder(currentState.creatingExerciseData.name)
-                        binding.etExerciseCreatorDescription.text = SpannableStringBuilder(currentState.creatingExerciseData.description)
-
-                        if (currentState.creatingExerciseData.muscularGroup != MuscularGroup.NONE){
-                            muscularGroup = currentState.creatingExerciseData.muscularGroup
-                        }
-
-                        if (currentState.creatingExerciseData.equipment != Equipment.NONE){
-                            equipment = currentState.creatingExerciseData.equipment
-                        }
-
-
-                        setButtonsSelectors()
-
-                    }
-
                     if (currentState.saved){
 
-                        exerciseCreatorViewModel.resetCreatingExercise()
                         findNavController().popBackStack()
 
                     }
@@ -108,21 +87,18 @@ class ExerciseCreatorFragment : Fragment() {
 
         binding.btnExerciseCreatorEquipment.setOnClickListener {
 
-            exerciseCreatorViewModel.setCreatingExercise(getExerciseInfo())
-            findNavController().navigate(R.id.action_exerciseCreatorFragment_to_exerciseCreatorSelectEquipmentDialog)
+            ExerciseCreatorSelectEquipmentDialog(this).show(parentFragmentManager, "exercise_creator_select_equipment")
 
         }
 
         binding.btnExerciseCreatorMuscularG.setOnClickListener {
 
-            exerciseCreatorViewModel.setCreatingExercise(getExerciseInfo())
-            findNavController().navigate(R.id.action_exerciseCreatorFragment_to_exerciseCreatorSelectMuscularGroupDialog)
+            ExerciseCreatorSelectMuscularGroupDialog(this).show(parentFragmentManager, "exercise_creator_select_muscular_group")
 
         }
 
         binding.btnExerciseCreatorCancel.setOnClickListener {
 
-            exerciseCreatorViewModel.resetCreatingExercise()
             findNavController().popBackStack()
 
         }
@@ -131,23 +107,44 @@ class ExerciseCreatorFragment : Fragment() {
 
             if (binding.etExerciseCreatorName.text!!.isBlank()){
 
-                requireActivity().toast(R.string.exercise_name_required)
+                binding.tilExerciseCreatorName.error = getString(R.string.exercise_name_required)
 
-            }else if (equipment == Equipment.NONE){
+            }
 
-                requireActivity().toast(R.string.exercise_equipment_required)
+            if (equipment == Equipment.NONE){
 
-            }else if (muscularGroup == MuscularGroup.NONE){
+                binding.exerciseCreatorEquipmentErrorRoot.visibility = View.VISIBLE
 
-                requireActivity().toast(R.string.exercise_muscular_group_required)
+            }else{
+
+                binding.exerciseCreatorEquipmentErrorRoot.visibility = View.GONE
+
+            }
+
+            if (muscularGroup == MuscularGroup.NONE){
+
+                binding.exerciseCreatorMuscularGErrorRoot.visibility = View.VISIBLE
 
             }else {
+
+                binding.exerciseCreatorMuscularGErrorRoot.visibility = View.GONE
+
+            }
+
+            if (binding.etExerciseCreatorName.text!!.isNotBlank() && equipment != Equipment.NONE && muscularGroup != MuscularGroup.NONE) {
 
                 exerciseCreatorViewModel.createNewExercise(getExerciseInfo())
 
             }
 
         }
+
+        binding.etExerciseCreatorName.addTextChangedListener {
+            if (binding.tilExerciseCreatorName.error != null){
+                binding.tilExerciseCreatorName.error = null
+            }
+        }
+
     }
 
     private fun getExerciseInfo() = Exercises.UserExercise(
@@ -161,15 +158,45 @@ class ExerciseCreatorFragment : Fragment() {
 
     private fun setButtonsSelectors(){
 
+        setEquipmentData()
+        setMuscularGData()
+
+    }
+
+    private fun setEquipmentData(){
+
         if (equipment != Equipment.NONE){
             binding.btnExerciseCreatorEquipment.text = getString(equipment.stringResource)
-            binding.btnExerciseCreatorEquipment.setCompoundDrawablesWithIntrinsicBounds(null, ResourcesCompat.getDrawable(resources,equipment.iconResource, null), null,null)
+            val icon = ResourcesCompat.getDrawable(resources,equipment.iconResource, null)
+            val layerDrawable = LayerDrawable(arrayOf(icon))
+            layerDrawable.setLayerSize(0,100,100)
+            binding.btnExerciseCreatorEquipment.setCompoundDrawablesWithIntrinsicBounds(null, layerDrawable , null,null)
         }
+
+    }
+
+    private fun setMuscularGData(){
 
         if (muscularGroup != MuscularGroup.NONE){
             binding.btnExerciseCreatorMuscularG.text = getString(muscularGroup.stringResource)
-            binding.btnExerciseCreatorMuscularG.setCompoundDrawablesWithIntrinsicBounds(null, ResourcesCompat.getDrawable(resources,muscularGroup.iconResource, null), null,null)
+            val icon = ResourcesCompat.getDrawable(resources,muscularGroup.iconResource, null)
+            val layerDrawable = LayerDrawable(arrayOf(icon))
+            layerDrawable.setLayerSize(0,100,100)
+            binding.btnExerciseCreatorMuscularG.setCompoundDrawablesWithIntrinsicBounds(null, layerDrawable , null,null)
         }
+
+    }
+
+    override fun changeEquipment(equipment: Equipment) {
+        this.equipment = equipment
+        setEquipmentData()
+        binding.exerciseCreatorEquipmentErrorRoot.visibility = View.GONE
+    }
+
+    override fun changeMuscularGroup(muscularGroup: MuscularGroup) {
+        this.muscularGroup = muscularGroup
+        setMuscularGData()
+        binding.exerciseCreatorMuscularGErrorRoot.visibility = View.GONE
 
     }
 

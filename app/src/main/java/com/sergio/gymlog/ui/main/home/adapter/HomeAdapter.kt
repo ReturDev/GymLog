@@ -54,11 +54,19 @@ private val trainingExercises : MutableList<Exercises.TrainingExercise>
                 .load(trainingExercise.muscularGroup.iconResource)
                 .into(binding.ivTrainingExMuscularGIcon)
 
+            val alpha = if (trainingExercise.image.isBlank()){
+                0.75f
+            }else{
+                1f
+            }
+
             val image = trainingExercise.image.ifBlank {
                 R.drawable.logo
             }
 
             Glide.with(binding.root.context).setImageRoundedBorders(image, binding.ivTrainingExercise)
+            binding.ivTrainingExercise.alpha = alpha
+
         }
 
 

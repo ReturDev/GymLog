@@ -35,7 +35,7 @@ class RecordAdapter(
 
             val format = DateFormat.getDateTimeInstance(
                 DateFormat.LONG,
-                DateFormat.SHORT,
+                DateFormat.NONE,
                 Locale.getDefault()
             )
 

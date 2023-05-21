@@ -18,7 +18,6 @@
             android:id="@+id/ivTrainingExercise"
             android:layout_width="@dimen/exercise_image_size"
             android:layout_height="@dimen/exercise_image_size"
-            android:alpha="0.75"
             android:backgroundTintMode="src_atop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>

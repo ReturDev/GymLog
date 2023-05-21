@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.databinding.DialogExerciseDetailBinding
 
@@ -57,7 +59,13 @@ class ExerciseDetailDialog(
 
     private fun bind() {
         if (exercise.image.isNotBlank()){
-            //TODO Cargar imagen
+            Glide.with(requireContext())
+                .load(exercise.image)
+                .into(binding.ivExerciseDetailDialogImage)
+        }else{
+            Glide.with(requireContext())
+                .load(R.drawable.logo)
+                .into(binding.ivExerciseDetailDialogImage)
         }
 
         binding.tvExerciseDetailDialogName.text = exercise.name

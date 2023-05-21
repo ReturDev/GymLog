@@ -37,6 +37,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilExerciseCreatorName"
+        style="?attr/textInputFilledStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/vertical_margin"
@@ -56,6 +57,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilExerciseCreatorDescription"
+        style="?attr/textInputFilledStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/description_hint"
@@ -74,21 +76,25 @@
 
     <Button
         android:id="@+id/btnExerciseCreatorEquipment"
+        android:background = "@drawable/exercise_creator_button_selector_background"
         android:layout_width="@dimen/exercise_creator_selector_btn_width"
         android:layout_height="@dimen/exercise_creator_selector_btn_height"
-        android:layout_marginTop="@dimen/vertical_max_margin"
+        android:layout_marginTop="@dimen/vertical_margin"
+        android:drawableTint="?attr/colorOnPrimary"
         app:layout_constraintEnd_toStartOf="@+id/glExerciseCreatorEnd"
         app:layout_constraintStart_toEndOf="@+id/tvExerciseCreatorEquipment"
-        app:layout_constraintTop_toBottomOf="@+id/tilExerciseCreatorDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/exerciseCreatorEquipmentErrorRoot" />
 
     <Button
         android:id="@+id/btnExerciseCreatorMuscularG"
+        android:drawableTint="?attr/colorOnPrimary"
+        android:background = "@drawable/exercise_creator_button_selector_background"
         android:layout_width="@dimen/exercise_creator_selector_btn_width"
         android:layout_height="@dimen/exercise_creator_selector_btn_height"
-        android:layout_marginTop="@dimen/vertical_max_margin"
+        android:layout_marginTop="@dimen/vertical_margin"
         app:layout_constraintEnd_toEndOf="@+id/btnExerciseCreatorEquipment"
         app:layout_constraintStart_toStartOf="@+id/btnExerciseCreatorEquipment"
-        app:layout_constraintTop_toBottomOf="@+id/btnExerciseCreatorEquipment" />
+        app:layout_constraintTop_toBottomOf="@+id/exerciseCreatorMuscularGErrorRoot" />
 
     <TextView
         android:id="@+id/tvExerciseCreatorEquipment"
@@ -107,6 +113,67 @@
         app:layout_constraintBottom_toBottomOf="@+id/btnExerciseCreatorMuscularG"
         app:layout_constraintStart_toStartOf="@+id/glExerciseCreatorStart"
         app:layout_constraintTop_toTopOf="@+id/btnExerciseCreatorMuscularG" />
+
+    <LinearLayout
+        android:id="@+id/exerciseCreatorEquipmentErrorRoot"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vertical_margin"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/glExerciseCreatorEnd"
+        app:layout_constraintStart_toStartOf="@+id/glExerciseCreatorStart"
+        app:layout_constraintTop_toBottomOf="@+id/tilExerciseCreatorDescription"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:id="@+id/tvExerciseCreatorEquipmentErrorMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/exercise_equipment_required"
+            android:textColor="?attr/colorError"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/ivExerciseCreatorEquipmentErrorErrorIcon"
+            android:layout_width="@dimen/filter_icons_size"
+            android:layout_height="@dimen/filter_icons_size"
+            app:srcCompat="@drawable/ic_error"
+            app:tint="?attr/colorError" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/exerciseCreatorMuscularGErrorRoot"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vertical_margin"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/glExerciseCreatorEnd"
+        app:layout_constraintStart_toStartOf="@+id/glExerciseCreatorStart"
+        app:layout_constraintTop_toBottomOf="@+id/btnExerciseCreatorEquipment"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:id="@+id/tvExerciseCreatorMuscularGErrorMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/exercise_muscular_group_required"
+            android:textColor="?attr/colorError"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/ivExerciseCreatorMuscularGErrorErrorIcon"
+            android:layout_width="@dimen/filter_icons_size"
+            android:layout_height="@dimen/filter_icons_size"
+            app:srcCompat="@drawable/ic_error"
+            app:tint="?attr/colorError" />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/btnExerciseCreatorCreate"

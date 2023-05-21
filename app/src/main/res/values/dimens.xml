@@ -22,7 +22,7 @@
     <dimen name="horizontal_max_margin">32dp</dimen>
     <dimen name="select_equipment_btn_width">100dp</dimen>
     <dimen name="select_equipment_btn_height">120dp</dimen>
-    <dimen name="exercise_creator_selector_btn_width">120dp</dimen>
+    <dimen name="exercise_creator_selector_btn_width">150dp</dimen>
     <dimen name="exercise_creator_selector_btn_height">100dp</dimen>
     <dimen name="recycler_decoration_bottom_spacing">80dp</dimen>
     <dimen name="description_padding">8dp</dimen>

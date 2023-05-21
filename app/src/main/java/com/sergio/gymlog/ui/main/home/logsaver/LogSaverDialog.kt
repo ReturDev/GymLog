@@ -17,6 +17,7 @@ import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.data.model.training.TrainingOfTrainingLog
 import com.sergio.gymlog.databinding.DialogLogSaverBinding
 import com.sergio.gymlog.ui.main.training.detail.adapter.TrainingDetailsAdapter
+import com.sergio.gymlog.util.InputFiltersProvider
 import com.sergio.gymlog.util.extension.alertDialog
 
 
@@ -84,7 +85,7 @@ class LogSaverDialog(
             override fun onStateChanged(bottomSheet: View, newState: Int) {
 
                 if (newState == BottomSheetBehavior.STATE_EXPANDED){
-                    if (binding.etLogSaverRemarks.text.isNotBlank()){
+                    if (binding.etLogSaverRemarks.text!!.isNotBlank()){
                         cancelDialog()
                     }
                 }
@@ -95,7 +96,7 @@ class LogSaverDialog(
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
                 if (slideOffset < -0.5){
 
-                    if (binding.etLogSaverRemarks.text.isNotBlank()){
+                    if (binding.etLogSaverRemarks.text!!.isNotBlank()){
 
                         behavior.state = BottomSheetBehavior.STATE_EXPANDED
 
@@ -116,7 +117,13 @@ class LogSaverDialog(
     private fun bind(){
 
         binding.tvLogSaverName.text = training.name
-        binding.tvLogSaverDescription.text = training.description
+
+        if (training.description.isNotBlank()){
+            binding.tvLogSaverDescription.text = training.description
+            binding.tvLogSaverDescription.visibility = View.VISIBLE
+        }else{
+            binding.tvLogSaverDescription.visibility = View.GONE
+        }
 
     }
 
@@ -139,11 +146,13 @@ class LogSaverDialog(
             dismiss()
         }
 
+        binding.etLogSaverRemarks.filters = arrayOf(InputFiltersProvider.remarksFilter())
+
     }
 
     private fun cancelDialog(){
 
-        if (binding.etLogSaverRemarks.text.isNotBlank()){
+        if (binding.etLogSaverRemarks.text!!.isNotBlank()){
 
             AlertDialog.Builder(requireContext()).alertDialog(
                 {alertDialog, _ ->

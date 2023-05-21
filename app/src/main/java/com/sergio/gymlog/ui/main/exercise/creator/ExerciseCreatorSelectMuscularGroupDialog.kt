@@ -9,7 +9,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.sergio.gymlog.data.model.exercise.MuscularGroup
 import com.sergio.gymlog.databinding.DialogSelectMuscularGroupBinding
 
-class ExerciseCreatorSelectMuscularGroupDialog : BottomSheetDialogFragment() {
+class ExerciseCreatorSelectMuscularGroupDialog(
+    private val listener: ChangeDataListener
+) : BottomSheetDialogFragment() {
 
     private lateinit var binding : DialogSelectMuscularGroupBinding
 
@@ -44,8 +46,8 @@ class ExerciseCreatorSelectMuscularGroupDialog : BottomSheetDialogFragment() {
 
     private fun sendEquipmentSelected(muscularGroup : MuscularGroup){
 
-        val action = ExerciseCreatorSelectMuscularGroupDialogDirections.actionExerciseCreatorSelectMuscularGroupDialogToExerciseCreatorFragment(muscularGroupSelected = muscularGroup)
-        findNavController().navigate(action)
+        listener.changeMuscularGroup(muscularGroup)
+        dismiss()
 
     }
 

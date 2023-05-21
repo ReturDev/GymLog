@@ -42,11 +42,18 @@ class TrainingDetailsAdapter(
              binding.tvTrainingExEquipment.text = binding.root.context.getString(trainingExercise.equipment.stringResource)
              binding.tvTrainingExMuscularG.text = binding.root.context.getString(trainingExercise.muscularGroup.stringResource)
 
+             val alpha = if (trainingExercise.image.isBlank()){
+                 0.75f
+             }else{
+                 1f
+             }
+
              val image = trainingExercise.image.ifBlank {
                  R.drawable.logo
              }
 
              Glide.with(binding.root.context).setImageRoundedBorders(image, binding.ivTrainingExercise)
+             binding.ivTrainingExercise.alpha = alpha
 
              Glide.with(binding.root.context)
                  .load(trainingExercise.equipment.iconResource)

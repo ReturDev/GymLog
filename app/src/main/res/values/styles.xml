@@ -41,7 +41,7 @@
     </style>
 
     <style name="HomeTrainingNameStyle" parent="TextAppearance.Material3.HeadlineSmall">
-        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textColor">?attr/colorSecondary</item>
         <item name="fontFamily">@font/amaranth_bold</item>
     </style>
 
@@ -86,6 +86,14 @@
         <item name="android:padding">@dimen/description_padding</item>
         <item name="android:layout_marginRight">@dimen/margin_card</item>
         <item name="android:layout_marginLeft">@dimen/margin_card</item>
+    </style>
+
+    <style name="ButtonSelectorExerciseCreator" parent="ShapeAppearanceOverlay.Material3.Button">
+        <item name="android:background">@drawable/exercise_creator_button_selector_background</item>
+        <item name="drawableTint">?attr/colorOnPrimary</item>
+        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:textSize">15sp</item>
     </style>
 
 

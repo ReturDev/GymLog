@@ -20,30 +20,22 @@ class ExerciseCreatorViewModel @Inject constructor(
 
     private val _uiState = MutableStateFlow(ExerciseCreatorUiState())
     val uiState = _uiState.asStateFlow()
-
-    fun loadCreatingExerciseInfo(){
-
-        viewModelScope.launch {
-
-            _uiState.update { currentState ->
-
-                currentState.copy(
-                    creatingExerciseData = creatingExercise.value
-                )
-
-            }
-
-        }
-
-    }
-
-    fun setCreatingExercise(exerciseInfo: Exercises.UserExercise) {
-        creatingExercise.value = exerciseInfo
-    }
-
-    fun resetCreatingExercise(){
-        creatingExercise.value = null
-    }
+//
+//    fun loadCreatingExerciseInfo(){
+//
+//        viewModelScope.launch {
+//
+//            _uiState.update { currentState ->
+//
+//                currentState.copy(
+//                    creatingExerciseData = creatingExercise.value
+//                )
+//
+//            }
+//
+//        }
+//
+//    }
 
     fun createNewExercise(newExercise: Exercises.UserExercise) {
         viewModelScope.launch {

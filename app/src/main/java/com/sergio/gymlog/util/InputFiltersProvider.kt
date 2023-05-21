@@ -83,4 +83,17 @@ object InputFiltersProvider {
         return@InputFilter null
     }
 
+    fun remarksFilter() = InputFilter { source, start, end, dest, dstart, dend ->
+
+        val sb = StringBuilder(dest)
+        sb.replace(dstart, dend, source.subSequence(start, end).toString())
+        val temp = sb.toString()
+
+        if (temp.length > 300){
+            return@InputFilter ""
+        }
+
+        return@InputFilter null
+    }
+
 }

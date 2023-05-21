@@ -58,9 +58,10 @@
 
         <TextView
             android:id="@+id/tvLogSaverName"
+            style="@style/TrainingNameTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/vertical_min_margin"
+            android:layout_marginTop="@dimen/fragment_vertical_margin"
             android:maxLines="2"
             android:singleLine="false"
             app:layout_constraintEnd_toStartOf="@+id/glLogSaverEnd"
@@ -69,6 +70,7 @@
 
         <TextView
             android:id="@+id/tvLogSaverDescription"
+            style="@style/DescriptionStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/vertical_min_margin"
@@ -77,21 +79,26 @@
             app:layout_constraintStart_toStartOf="@+id/glLogSaverStart"
             app:layout_constraintTop_toBottomOf="@+id/tvLogSaverName" />
 
-        <EditText
-            android:id="@+id/etLogSaverRemarks"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilLogSaverRemarks"
+            style="?attr/textInputFilledStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/vertical_min_margin"
-            android:ems="10"
-            android:gravity="start|top"
             android:hint="@string/remarks"
-            android:inputType="textMultiLine"
-            android:maxLines="7"
-            android:minHeight="48dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="300"
             app:layout_constraintEnd_toStartOf="@+id/glLogSaverEnd"
             app:layout_constraintStart_toStartOf="@+id/glLogSaverStart"
-            app:layout_constraintTop_toBottomOf="@+id/tvLogSaverDescription"
-            android:autofillHints="" />
+            app:layout_constraintTop_toBottomOf="@+id/tvLogSaverDescription">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLogSaverRemarks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:maxLines="7" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvLogSaverExercises"
@@ -101,7 +108,7 @@
             app:layout_constraintBottom_toTopOf="@+id/glLogSaverBottom"
             app:layout_constraintEnd_toStartOf="@+id/glLogSaverEnd"
             app:layout_constraintStart_toStartOf="@+id/glLogSaverStart"
-            app:layout_constraintTop_toBottomOf="@+id/etLogSaverRemarks" />
+            app:layout_constraintTop_toBottomOf="@+id/tilLogSaverRemarks" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

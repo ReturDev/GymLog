@@ -4,10 +4,11 @@
     android:id="@+id/selectEquipmentRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/dialog_root_padding">
+    android:padding="@dimen/fragment_vertical_margin">
 
     <Button
         android:id="@+id/btnSelectEquipmentBarbell"
+        style="@style/ButtonSelectorExerciseCreator"
         android:layout_width="@dimen/select_equipment_btn_width"
         android:layout_height="@dimen/select_equipment_btn_height"
         android:drawableTop="@drawable/ic_barbell"
@@ -19,6 +20,7 @@
 
     <Button
         android:id="@+id/btnSelectEquipmentDumbbells"
+        style="@style/ButtonSelectorExerciseCreator"
         android:layout_width="@dimen/select_equipment_btn_width"
         android:layout_height="@dimen/select_equipment_btn_height"
         android:drawableTop="@drawable/ic_dumbbell"
@@ -31,6 +33,7 @@
 
     <Button
         android:id="@+id/btnSelectEquipmentEzBar"
+        style="@style/ButtonSelectorExerciseCreator"
         android:layout_width="@dimen/select_equipment_btn_width"
         android:layout_height="@dimen/select_equipment_btn_height"
         android:drawableTop="@drawable/ic_ez_bar"
@@ -42,6 +45,7 @@
 
     <Button
         android:id="@+id/btnSelectEquipmentCable"
+        style="@style/ButtonSelectorExerciseCreator"
         android:layout_width="@dimen/select_equipment_btn_width"
         android:layout_height="@dimen/select_equipment_btn_height"
         android:layout_marginTop="@dimen/vertical_min_margin"
@@ -54,6 +58,7 @@
 
     <Button
         android:id="@+id/btnSelectEquipmentBodyWeight"
+        style="@style/ButtonSelectorExerciseCreator"
         android:layout_width="@dimen/select_equipment_btn_width"
         android:layout_height="@dimen/select_equipment_btn_height"
         android:drawableTop="@drawable/ic_bodyweight"

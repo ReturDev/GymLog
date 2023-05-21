@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/trainingRecordItemCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -24,6 +25,7 @@
 
         <TextView
             android:id="@+id/tvTrainingRecordItemDate"
+            style="@style/CardTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/horizontal_min_margin"
@@ -31,14 +33,25 @@
             app:layout_constraintStart_toEndOf="@+id/ivTrainingRecordItemIcon"
             app:layout_constraintTop_toTopOf="@+id/ivTrainingRecordItemIcon" />
 
+        <View
+            android:id="@+id/divider"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/horizontal_min_margin"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvTrainingRecordItemDate"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tvTrainingRecordItemTrainingName"
+            style="@style/CardTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/horizontal_min_margin"
             app:layout_constraintBottom_toBottomOf="@+id/tvTrainingRecordItemDate"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvTrainingRecordItemDate"
+            app:layout_constraintStart_toEndOf="@+id/divider"
             app:layout_constraintTop_toTopOf="@+id/tvTrainingRecordItemDate" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -9,7 +9,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.sergio.gymlog.data.model.exercise.Equipment
 import com.sergio.gymlog.databinding.DialogSelectEquipmentBinding
 
-class ExerciseCreatorSelectEquipmentDialog : BottomSheetDialogFragment(){
+class ExerciseCreatorSelectEquipmentDialog(
+    private val listener: ChangeDataListener
+) : BottomSheetDialogFragment(){
 
     private lateinit var binding : DialogSelectEquipmentBinding
 
@@ -45,8 +47,8 @@ class ExerciseCreatorSelectEquipmentDialog : BottomSheetDialogFragment(){
 
     private fun sendEquipmentSelected(equipment : Equipment){
 
-        val action = ExerciseCreatorSelectEquipmentDialogDirections.actionExerciseCreatorSelectEquipmentDialogToExerciseCreatorFragment(equipmentSelected = equipment)
-        findNavController().navigate(action)
+        listener.changeEquipment(equipment)
+        dismiss()
 
     }
 

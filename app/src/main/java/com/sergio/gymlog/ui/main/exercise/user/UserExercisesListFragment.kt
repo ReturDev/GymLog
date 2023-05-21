@@ -19,6 +19,7 @@ import com.sergio.gymlog.ui.main.exercise.ExerciseDialogListener
 import com.sergio.gymlog.ui.main.exercise.detail.ExerciseDetailDialog
 import com.sergio.gymlog.ui.main.exercise.dialog.ExerciseClickedDialog
 import com.sergio.gymlog.ui.main.exercise.user.adapter.UserExercisesListAdapter
+import com.sergio.gymlog.util.SpacingItemDecorator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -65,7 +66,23 @@ class UserExercisesListFragment : Fragment(), ExerciseDialogListener {
 
                 userExercisesListViewModel.uiState.collect{currentState ->
 
+                    if (currentState.loading) {
+
+                        binding.pbUserExercisesLoading.visibility = View.VISIBLE
+                        binding.userExerciseContentRoot.visibility = View.GONE
+
+                    }
+
                     if (currentState.loaded){
+
+                        binding.pbUserExercisesLoading.visibility = View.GONE
+                        binding.userExerciseContentRoot.visibility = View.VISIBLE
+
+                        if (currentState.userExercises.isEmpty()){
+                            binding.tvUserExercisesEmptyList.visibility = View.VISIBLE
+                        }else{
+                            binding.tvUserExercisesEmptyList.visibility = View.GONE
+                        }
 
                         adapter.userExercises.addAll(currentState.userExercises)
                         adapter.notifyDataSetChanged()
@@ -105,6 +122,7 @@ class UserExercisesListFragment : Fragment(), ExerciseDialogListener {
         val recycler = binding.rvUserExercisesList
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        recycler.addItemDecoration(SpacingItemDecorator(80))
 
     }
 

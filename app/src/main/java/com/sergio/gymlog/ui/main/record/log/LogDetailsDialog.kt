@@ -2,6 +2,7 @@ package com.sergio.gymlog.ui.main.record.log
 
 import android.app.Dialog
 import android.content.res.Resources
+import android.icu.text.DateFormat
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.training.TrainingLog
 import com.sergio.gymlog.databinding.DialogLogDetailsBinding
 import com.sergio.gymlog.ui.main.training.detail.adapter.TrainingDetailsAdapter
+import java.util.Locale
 
 
 class LogDetailsDialog (
@@ -63,7 +65,14 @@ class LogDetailsDialog (
     }
 
     private fun bind() {
-        binding.tvLogDetailsDialogTitle.text = trainingLog.date!!.toDate().toString()
+
+        val format = DateFormat.getDateTimeInstance(
+            DateFormat.LONG,
+            DateFormat.SHORT,
+            Locale.getDefault()
+        )
+
+        binding.tvLogDetailsDialogTitle.text = format.format(trainingLog.date!!.toDate())
         binding.tvLogDetailsDialogTrainingName.text = trainingLog.training!!.training!!.name
         binding.tvLogDetailsDialogTrainingDesc.text = trainingLog.training.training!!.description
         binding.tvLogDetailsDialogTrainingRemarks.text = trainingLog.training.remarks

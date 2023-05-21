@@ -23,10 +23,21 @@ class UserExercisesListViewModel @Inject constructor(
     fun loadUserExercises(){
 
         viewModelScope.launch {
+
+
+            _uiState.update {currentState ->
+
+                currentState.copy(
+                    loading = false
+                )
+
+            }
+
             _uiState.update {currentState ->
 
                 currentState.copy(
                     userExercises = getUserExercisesUseCase(),
+                    loading = false,
                     loaded = true
                 )
 

@@ -55,11 +55,18 @@ class TrainingEditorAdapter(
             binding.rvTrainingEditorExSets.visibility = if (layoutPosition != itemShowingExerciseSetsPos) View.GONE else View.VISIBLE
 
 
+            val alpha = if (trainingExercise.image.isBlank()){
+                0.75f
+            }else{
+                1f
+            }
+
             val image = trainingExercise.image.ifBlank {
                 R.drawable.logo
             }
 
             Glide.with(binding.root.context).setImageRoundedBorders(image, binding.ivTrainingEditorExImage)
+            binding.ivTrainingEditorExImage.alpha = alpha
 
             initNestedRecycler(trainingExercise)
 

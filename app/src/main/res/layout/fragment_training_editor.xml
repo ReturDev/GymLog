@@ -99,7 +99,6 @@
                 android:hint="@string/description_hint"
                 app:counterEnabled="true"
                 app:counterMaxLength="250"
-                app:errorEnabled="true"
                 app:layout_constraintEnd_toStartOf="@+id/glTrainingEditorEnd"
                 app:layout_constraintStart_toStartOf="@+id/glTrainingEditorStart"
                 app:layout_constraintTop_toBottomOf="@+id/tilEditorName">

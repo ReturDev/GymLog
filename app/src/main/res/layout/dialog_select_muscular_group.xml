@@ -5,10 +5,11 @@
     android:id="@+id/selectMuscularGroupRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/dialog_root_padding">
+    android:padding="@dimen/fragment_vertical_margin">
 
     <Button
         android:id="@+id/btnSelectMuscularGBack"
+        style="@style/ButtonSelectorExerciseCreator"
         android:layout_width="@dimen/select_equipment_btn_width"
         android:layout_height="@dimen/select_equipment_btn_height"
         android:drawableTop="@drawable/ic_back"
@@ -21,8 +22,10 @@
 
     <Button
         android:id="@+id/btnSelectMuscularGChest"
+        style="@style/ButtonSelectorExerciseCreator"
         android:layout_width="@dimen/select_equipment_btn_width"
         android:layout_height="@dimen/select_equipment_btn_height"
+        android:background="@drawable/exercise_creator_button_selector_background"
         android:drawableTop="@drawable/ic_chest"
         android:singleLine="true"
         android:text="@string/chest_muscle"
@@ -33,8 +36,10 @@
 
     <Button
         android:id="@+id/btnSelectMuscularGShoulders"
+        style="@style/ButtonSelectorExerciseCreator"
         android:layout_width="@dimen/select_equipment_btn_width"
         android:layout_height="@dimen/select_equipment_btn_height"
+        android:background="@drawable/exercise_creator_button_selector_background"
         android:drawableTop="@drawable/ic_shoulders"
         android:singleLine="true"
         android:text="@string/shoulders_muscle"
@@ -46,13 +51,31 @@
 
     <Button
         android:id="@+id/btnSelectMuscularGLegs"
+        style="@style/ButtonSelectorExerciseCreator"
         android:layout_width="@dimen/select_equipment_btn_width"
         android:layout_height="@dimen/select_equipment_btn_height"
         android:layout_marginTop="@dimen/vertical_min_margin"
+        android:background="@drawable/exercise_creator_button_selector_background"
         android:drawableTop="@drawable/ic_leg"
         android:singleLine="true"
         android:text="@string/legs_muscle"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnSelectMuscularGArms"
+        app:layout_constraintTop_toBottomOf="@+id/btnSelectMuscularGBack" />
+
+    <Button
+        android:id="@+id/btnSelectMuscularGArms"
+        style="@style/ButtonSelectorExerciseCreator"
+        android:layout_width="@dimen/select_equipment_btn_width"
+        android:layout_height="@dimen/select_equipment_btn_height"
+        android:layout_marginTop="@dimen/vertical_min_margin"
+        android:background="@drawable/exercise_creator_button_selector_background"
+        android:drawableTop="@drawable/ic_arms"
+        android:singleLine="true"
+        android:text="@string/arms"
+        app:layout_constraintEnd_toStartOf="@+id/btnSelectMuscularGLegs"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSelectMuscularGBack" />
 
