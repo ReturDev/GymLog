@@ -48,8 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/vertical_min_margin"
             android:hint="@string/password_text"
-            app:endIconMode="password_toggle"
-            >
+            app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etLoginPassword"
@@ -58,15 +57,15 @@
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tvLoginPasswordForgotten"
+        <Button
+            android:id="@+id/btnLoginPasswordForgotten"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:textSize="15sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/vertical_max_margin"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
             android:text="@string/password_forgotten"
-            android:textAlignment="center" />
+            android:layout_marginBottom="@dimen/vertical_max_margin"/>
+
 
         <Button
             android:id="@+id/btnLogin"
@@ -100,10 +99,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:background="@android:color/white"
-            android:paddingStart="4dp"
-            android:paddingTop="2dp"
-            android:paddingEnd="4dp"
+            android:background="?attr/colorSurface"
+            android:paddingBottom="4dp"
             android:text="@string/dividerText" />
 
     </RelativeLayout>
@@ -122,7 +119,9 @@
             android:id="@+id/btnLoginGoogle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login_google_btn" />
+            android:text="@string/login_google_btn"
+            app:iconTint = "@null"
+            app:icon="@drawable/google_logo" />
 
     </LinearLayout>
 

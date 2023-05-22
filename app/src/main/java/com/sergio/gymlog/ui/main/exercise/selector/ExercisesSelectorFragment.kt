@@ -2,6 +2,7 @@ package com.sergio.gymlog.ui.main.exercise.selector
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,9 +19,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.Equipment
 import com.sergio.gymlog.data.model.exercise.MuscularGroup
+import com.sergio.gymlog.databinding.DialogExercisesFilterBinding
 import com.sergio.gymlog.databinding.FragmentExercisesSelectorBinding
 import com.sergio.gymlog.ui.main.exercise.detail.ExerciseDetailDialog
+import com.sergio.gymlog.ui.main.exercise.filter.ExercisesFilterDialogFragment
 import com.sergio.gymlog.ui.main.exercise.selector.adapter.ExercisesSelectorAdapter
+import com.sergio.gymlog.util.SpacingItemDecorator
+import com.sergio.gymlog.util.helper.CreatedExercise
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -31,7 +36,41 @@ class ExercisesSelectorFragment() : Fragment(), FilterExercisesListener {
     private lateinit var binding : FragmentExercisesSelectorBinding
     private lateinit var adapter: ExercisesSelectorAdapter
     private lateinit var bottomMenu : BottomNavigationView
-    override var filterNumbers: Int = 0
+    private var createExercise = false
+    private var equipmentFilter : Equipment = Equipment.NONE
+    set(value) {
+        if (field == Equipment.NONE && value != Equipment.NONE) {
+            filterNumbers++
+        }else if (field != Equipment.NONE && value == Equipment.NONE){
+            filterNumbers--
+        }
+
+        field = value
+    }
+    private var muscularGroupFilter : MuscularGroup = MuscularGroup.NONE
+        set(value) {
+            if (field == MuscularGroup.NONE && value != MuscularGroup.NONE) {
+                filterNumbers++
+            }else if (field != MuscularGroup.NONE && value == MuscularGroup.NONE){
+                filterNumbers--
+            }
+
+            field = value
+
+        }
+    private var customExercisesFilter : Boolean = false
+        set(value) {
+            if (value && !field){
+                filterNumbers++
+            }else if (field && !value){
+                filterNumbers--
+            }
+
+            field = value
+
+        }
+    private var filterNumbers: Int = 0
+
 
     private val exercisesSelectorVM  by viewModels<ExercisesSelectorViewModel>()
     private val args : ExercisesSelectorFragmentArgs by navArgs()
@@ -51,6 +90,12 @@ class ExercisesSelectorFragment() : Fragment(), FilterExercisesListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (createExercise){
+            exercisesSelectorVM.loadNewExercise()
+            createExercise = false
+        }
+
         initRecyclerView()
         setCollector()
         setListeners()
@@ -70,8 +115,8 @@ class ExercisesSelectorFragment() : Fragment(), FilterExercisesListener {
                         adapter.notifyDataSetChanged()
                         binding.btnAddES.text = getString(R.string.add_quantity, currentState.exercisesSelectedQuantity)
                         binding.exercisesListIncluded.tvExercisesListNumberLabel.text = getString(R.string.number_of_exercises, currentState.exercises.size)
-                        val filterButtonText = if (filterNumbers == 0) R.string.filter else R.string.number_of_filters
-                        binding.exercisesListIncluded.btnExerciseListFilter.text = getString(filterButtonText)
+                        val filterButtonText = if (filterNumbers == 0) getString(R.string.filter) else getString(R.string.number_of_filters, filterNumbers)
+                        binding.exercisesListIncluded.btnExerciseListFilter.text = filterButtonText
                         exercisesSelectorVM.exerciseStatusChanged()
 
                     }
@@ -89,6 +134,10 @@ class ExercisesSelectorFragment() : Fragment(), FilterExercisesListener {
                                 currentState.idExercisesToAdd.toTypedArray()
                             )
                         findNavController().navigate(action)
+                        exercisesSelectorVM.exerciseStatusChanged()
+                    }
+                    if (currentState.clearFilters){
+                        clearFilters()
                         exercisesSelectorVM.exerciseStatusChanged()
                     }
 
@@ -125,12 +174,31 @@ class ExercisesSelectorFragment() : Fragment(), FilterExercisesListener {
         binding.exercisesListIncluded.btnExercisesListCreateExercise.setOnClickListener{
 
             val action = ExercisesSelectorFragmentDirections.actionGlobalExerciseCreatorFragment()
+            createExercise = true
+            CreatedExercise.value = null
             findNavController().navigate(action)
 
         }
 
+        binding.exercisesListIncluded.btnExerciseListFilter.setOnClickListener {
+            ExercisesFilterDialogFragment(
+                this,
+                equipmentFilter = equipmentFilter,
+                muscularGroupFilter = muscularGroupFilter,
+                customExercisesFilter = customExercisesFilter
+            ).show(
+                parentFragmentManager,
+                "exercises_filter_dialog"
+            )
+        }
+
         binding.exercisesListIncluded.etExerciseListSearcher.doOnTextChanged { text, _ , _ , _ ->
-            exercisesSelectorVM.filter(text.toString())
+            exercisesSelectorVM.filter(
+                text = text.toString(),
+                userExercises = customExercisesFilter,
+                equipment = equipmentFilter,
+                muscularGroup = muscularGroupFilter
+            )
         }
 
     }
@@ -155,11 +223,39 @@ class ExercisesSelectorFragment() : Fragment(), FilterExercisesListener {
 
     }
 
-    override fun filter(filterNumbers: Int, userExercises : Boolean, equipments : List<Equipment>, muscularGroups : List<MuscularGroup>) {
-        super.filter(filterNumbers, userExercises, equipments, muscularGroups)
+    private fun clearFilters() {
 
-        exercisesSelectorVM.filter()
+        exercisesSelectorVM.clearFilters()
+        binding.exercisesListIncluded.btnExerciseListFilter.text = getString(R.string.filter)
+        binding.exercisesListIncluded.etExerciseListSearcher.text!!.clear()
+        filterNumbers = 0
 
+    }
+
+    override fun filter(
+        userExercises: Boolean,
+        equipments: Equipment,
+        muscularGroups: MuscularGroup
+    ) {
+
+        equipmentFilter = equipments
+        muscularGroupFilter = muscularGroups
+        customExercisesFilter = userExercises
+
+        exercisesSelectorVM.filter(
+            text = binding.exercisesListIncluded.etExerciseListSearcher.text.toString(),
+            userExercises = customExercisesFilter,
+            equipment = equipmentFilter,
+            muscularGroup = muscularGroupFilter
+        )
+
+    }
+
+    override fun resetFilters() {
+        equipmentFilter = Equipment.NONE
+        muscularGroupFilter = MuscularGroup.NONE
+        customExercisesFilter = false
+        exercisesSelectorVM.clearFilters()
     }
 
 }

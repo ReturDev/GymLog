@@ -42,6 +42,7 @@
         android:layout_marginTop="@dimen/vertical_max_margin"
         android:textAlignment="center"
         android:textColor="?attr/colorPrimary"
+        android:textSize="24dp"
         app:layout_constraintEnd_toStartOf="@+id/glUserEnd"
         app:layout_constraintStart_toStartOf="@+id/glUserBegin"
         app:layout_constraintTop_toBottomOf="@+id/btnUserLogOut" />

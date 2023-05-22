@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.sergio.gymlog.data.model.exercise.Exercises
 import com.sergio.gymlog.data.model.temporal.CreatingExercise
 import com.sergio.gymlog.domain.exercise.SaveNewUserExerciseUseCase
+import com.sergio.gymlog.util.helper.CreatedExercise
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,28 +21,14 @@ class ExerciseCreatorViewModel @Inject constructor(
 
     private val _uiState = MutableStateFlow(ExerciseCreatorUiState())
     val uiState = _uiState.asStateFlow()
-//
-//    fun loadCreatingExerciseInfo(){
-//
-//        viewModelScope.launch {
-//
-//            _uiState.update { currentState ->
-//
-//                currentState.copy(
-//                    creatingExerciseData = creatingExercise.value
-//                )
-//
-//            }
-//
-//        }
-//
-//    }
+
 
     fun createNewExercise(newExercise: Exercises.UserExercise) {
         viewModelScope.launch {
             _uiState.update {currentState ->
 
                 saveNewUserExerciseUseCase(newExercise)
+                CreatedExercise.value = newExercise
 
                 currentState.copy(
                     saved = true

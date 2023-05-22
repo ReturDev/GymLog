@@ -7,36 +7,38 @@ import com.sergio.gymlog.data.model.exercise.MuscularGroup
 
 object FilterExercises {
 
-      fun filter(name : String = "", userExercises : Boolean = false, equipments : List<Equipment> = emptyList(), muscularGroups : List<MuscularGroup> = emptyList(), exercises : List<ExerciseItem>) : List<ExerciseItem> {
+    fun filter(
+        name: String,
+        userExercises: Boolean,
+        equipment : Equipment,
+        muscularGroup : MuscularGroup ,
+        exercises : List<ExerciseItem>
+    ): List<ExerciseItem> {
 
         var filteredExercises = exercises
 
-        if (name.isNotBlank()){
+        if (name.isNotBlank()) {
 
-            filteredExercises = filterExercisesByName(name, exercises)
-
-        }else{
-
-
+            filteredExercises = filterExercisesByName(name, filteredExercises)
 
         }
 
-        if (userExercises){
+        if (userExercises) {
 
 
-            filteredExercises = filterByUserExercises(exercises)
-
-        }
-
-        if (equipments.isNotEmpty()){
-
-            filteredExercises = filterExercisesByEquipment(equipments,exercises)
+            filteredExercises = filterByUserExercises(filteredExercises)
 
         }
 
-        if (equipments.isNotEmpty()){
+        if (equipment != Equipment.NONE) {
 
-            filteredExercises = filterExercisesByMuscularGroup(muscularGroups, exercises)
+            filteredExercises = filterExercisesByEquipment(equipment, filteredExercises)
+
+        }
+
+        if (muscularGroup != MuscularGroup.NONE) {
+
+            filteredExercises = filterExercisesByMuscularGroup(muscularGroup, filteredExercises)
 
         }
 
@@ -48,28 +50,9 @@ object FilterExercises {
 
         val filteredExercises = mutableListOf<ExerciseItem>()
 
-        for (exercise in exercises){
+        for (exercise in exercises) {
 
-            if (exercise.exercise is Exercises.UserExercise){
-
-                filteredExercises.add(exercise)
-
-            }
-
-        }
-
-        return filteredExercises
-
-    }
-
-
-    private fun filterExercisesByName(name : String, exercises: List<ExerciseItem>) : List<ExerciseItem>{
-
-        val filteredExercises = mutableListOf<ExerciseItem>()
-
-        for (exercise in exercises){
-
-            if (exercise.exercise.name.contains(name)){
+            if (exercise.exercise is Exercises.UserExercise) {
 
                 filteredExercises.add(exercise)
 
@@ -81,19 +64,19 @@ object FilterExercises {
 
     }
 
-    private fun filterExercisesByEquipment(equipments : List<Equipment>, exercises: List<ExerciseItem>) : List<ExerciseItem>{
+
+    private fun filterExercisesByName(
+        name: String,
+        exercises: List<ExerciseItem>
+    ): List<ExerciseItem> {
 
         val filteredExercises = mutableListOf<ExerciseItem>()
 
-        for (exercise in exercises){
+        for (exercise in exercises) {
 
-            for (equipment in equipments){
+            if (exercise.exercise.name.lowercase().contains(name.lowercase())) {
 
-                if (exercise.exercise.equipment  == equipment){
-
-                    filteredExercises.add(exercise)
-
-                }
+                filteredExercises.add(exercise)
 
             }
 
@@ -103,20 +86,40 @@ object FilterExercises {
 
     }
 
-    private fun filterExercisesByMuscularGroup(muscularGroups: List<MuscularGroup>, exercises: List<ExerciseItem>) : List<ExerciseItem>{
+    private fun filterExercisesByEquipment(
+        equipment : Equipment,
+        exercises: List<ExerciseItem>
+    ): List<ExerciseItem> {
+
+        val filteredExercises = mutableListOf<ExerciseItem>()
+
+        for (exercise in exercises) {
+
+            if (exercise.exercise.equipment == equipment) {
+
+                filteredExercises.add(exercise)
+
+            }
+
+        }
+
+        return filteredExercises
+
+    }
+
+    private fun filterExercisesByMuscularGroup(
+        muscularGroup : MuscularGroup,
+        exercises: List<ExerciseItem>
+    ): List<ExerciseItem> {
 
 
         val filteredExercises = mutableListOf<ExerciseItem>()
 
-        for (exercise in exercises){
+        for (exercise in exercises) {
 
-            for (muscularG in muscularGroups){
+            if (exercise.exercise.muscularGroup == muscularGroup) {
 
-                if (exercise.exercise.muscularGroup  == muscularG){
-
-                    filteredExercises.add(exercise)
-
-                }
+                filteredExercises.add(exercise)
 
             }
 

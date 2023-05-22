@@ -29,8 +29,13 @@
         <item name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</item>
 
 
-        <!--Components-->
         <item name="materialCardViewStyle">@style/CardViewStyle</item>
+
+        <item name="android:statusBarColor">?attr/colorSurface</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <item name="fontFamily">@font/amaranth</item>
+        <item name="android:textSize">@dimen/default_text_size</item>
 
     </style>
 </resources>

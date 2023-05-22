@@ -78,19 +78,19 @@ class LogDetailsDialog (
         if (trainingLog.training.remarks.isNotBlank()){
 
             binding.tvLogDetailsDialogTrainingRemarks.text = trainingLog.training.remarks
-            binding.tvLogDetailsDialogTrainingRemarks.visibility = View.VISIBLE
+            binding.logDetailsDialogRemarksRoot.visibility = View.VISIBLE
 
         }else{
 
-            binding.tvLogDetailsDialogTrainingRemarks.visibility = View.GONE
+            binding.logDetailsDialogRemarksRoot.visibility = View.GONE
 
         }
 
         if (trainingLog.training.training!!.description.isNotBlank()){
             binding.tvLogDetailsDialogTrainingDesc.text = trainingLog.training.training.description
-            binding.tvLogDetailsDialogTrainingDesc.visibility = View.VISIBLE
+            binding.logDetailsDialogDescriptionRoot.visibility = View.VISIBLE
         }else {
-            binding.tvLogDetailsDialogTrainingDesc.visibility = View.GONE
+            binding.logDetailsDialogDescriptionRoot.visibility = View.GONE
         }
 
 

@@ -41,6 +41,7 @@ class ExerciseCreatorSelectMuscularGroupDialog(
         binding.btnSelectMuscularGChest.setOnClickListener { sendEquipmentSelected(MuscularGroup.CHEST) }
         binding.btnSelectMuscularGShoulders.setOnClickListener { sendEquipmentSelected(MuscularGroup.SHOULDERS) }
         binding.btnSelectMuscularGLegs.setOnClickListener { sendEquipmentSelected(MuscularGroup.LEGS) }
+        binding.btnSelectMuscularGArms.setOnClickListener { sendEquipmentSelected(MuscularGroup.ARMS) }
 
     }
 

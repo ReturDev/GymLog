@@ -58,16 +58,12 @@ class SignUpFragment : Fragment() {
 
                    if (currentState.loading){
 
-                       binding.btnSignUp.isEnabled = false
-                       binding.btnSignUpGoogle.isEnabled = false
-                       binding.tvSingUpLogin.isEnabled = false
+                       changeEnabledComponents(false)
 
                    }
                    if (currentState.loaded){
 
-                       binding.btnSignUp.isEnabled = true
-                       binding.btnSignUpGoogle.isEnabled = true
-                       binding.tvSingUpLogin.isEnabled = true
+                        changeEnabledComponents(true)
 
                    }
 
@@ -117,6 +113,16 @@ class SignUpFragment : Fragment() {
             accessViewModel.signUpWithGoogle(task)
 
         }
+
+    }
+
+    private fun changeEnabledComponents(enabled : Boolean){
+
+        binding.btnSignUp.isEnabled = enabled
+        binding.btnSignUpGoogle.isEnabled = enabled
+        binding.tvSingUpLogin.isEnabled = enabled
+        binding.etSignUpEmail.isEnabled = enabled
+        binding.etSignUpPassword.isEnabled = enabled
 
     }
 

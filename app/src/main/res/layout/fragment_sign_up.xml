@@ -34,8 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/vertical_min_margin"
-            android:hint="@string/email_text"
-            app:errorEnabled="true">
+            android:hint="@string/email_text">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etSignUpEmail"
@@ -51,7 +50,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/vertical_min_margin"
             android:hint="@string/password_text"
-            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:helperText="@string/sign_up_password_helper"
             app:endIconMode="password_toggle"
             >
 
@@ -67,6 +67,7 @@
             android:id="@+id/btnSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:text="@string/sign_up_action" />
 
     </LinearLayout>
@@ -95,10 +96,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:background="@android:color/white"
-            android:paddingStart="4dp"
-            android:paddingTop="2dp"
-            android:paddingEnd="4dp"
+            android:background="?attr/colorSurface"
+            android:paddingBottom="4dp"
             android:text="@string/dividerText" />
 
     </RelativeLayout>
@@ -109,6 +108,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_google_btn"
+        app:iconTint = "@null"
+        app:icon="@drawable/google_logo"
         app:layout_constraintBottom_toTopOf="@+id/tvSignUpQuestionAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

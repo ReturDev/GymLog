@@ -8,6 +8,7 @@ data class ExercisesSelectorUiState(
     val exercises : List<ExerciseItem> = emptyList(),
     val idExercisesToAdd : List<String> = emptyList(),
     val exercisesSelectedQuantity : Int = 0,
-    val exerciseChangedPosition : Int = -1
+    val exerciseChangedPosition : Int = -1,
+    val clearFilters : Boolean = false
 
     )

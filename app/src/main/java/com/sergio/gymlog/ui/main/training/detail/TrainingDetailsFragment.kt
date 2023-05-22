@@ -92,7 +92,7 @@ class TrainingDetailsFragment : Fragment(), DeleteTrainingListener {
 
     private fun setListeners() {
 
-        binding.btnDeleteTraining.setOnClickListener { //TODO Insertar opción para eliminar entrenamiento.
+        binding.btnDeleteTraining.setOnClickListener {
             DeleteExerciseDialog(
                 listener = this,
                 elementPosition = -1,
@@ -104,7 +104,7 @@ class TrainingDetailsFragment : Fragment(), DeleteTrainingListener {
          }
 
         binding.btnModifyTraining.setOnClickListener {
-            val action = TrainingDetailsFragmentDirections.actionGlobalTrainingEditorFragment(idTraining = trainingDetailViewModel.uiState.value.training!!.id, idsExercises = emptyArray<String>())
+            val action = TrainingDetailsFragmentDirections.actionGlobalTrainingEditorFragment(idTraining = trainingDetailViewModel.uiState.value.training!!.id, idsExercises = emptyArray())
             findNavController().navigate(action)
         }
 

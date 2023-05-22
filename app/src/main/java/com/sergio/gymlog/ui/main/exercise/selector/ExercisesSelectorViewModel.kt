@@ -6,6 +6,7 @@ import com.sergio.gymlog.data.model.exercise.Equipment
 import com.sergio.gymlog.data.model.exercise.ExerciseItem
 import com.sergio.gymlog.data.model.exercise.MuscularGroup
 import com.sergio.gymlog.domain.exercise.GetExercisesAsExerciseItemsUseCase
+import com.sergio.gymlog.util.helper.CreatedExercise
 import com.sergio.gymlog.util.helper.FilterExercises
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -42,7 +43,7 @@ class ExercisesSelectorViewModel @Inject constructor(
 
                     currentState.copy(
 
-                        exercises = allExerciseItems,
+                        exercises = allExerciseItems.sortedBy { ex -> ex.exercise.name.lowercase()},
                         refresh = true,
                         exercisesSelectedQuantity = 0
 
@@ -103,12 +104,13 @@ class ExercisesSelectorViewModel @Inject constructor(
             currentState.copy(
                 refresh = false,
                 exerciseChangedPosition = -1,
-                idExercisesToAdd = emptyList()
+                idExercisesToAdd = emptyList(),
+                clearFilters = false
             )
         }
     }
 
-    fun filter(text : String = "", userExercises : Boolean = false, equipments : List<Equipment> = emptyList(), muscularGroups : List<MuscularGroup> = emptyList()){
+    fun filter(text : String = "", userExercises : Boolean = false, equipment : Equipment = Equipment.NONE, muscularGroup : MuscularGroup = MuscularGroup.NONE){
 
         viewModelScope.launch {
 
@@ -119,9 +121,9 @@ class ExercisesSelectorViewModel @Inject constructor(
                     exercises = FilterExercises.filter(
                         name = text,
                         userExercises = userExercises,
-                        equipments = equipments,
-                        muscularGroups = muscularGroups,
-                        exercises = allExerciseItems
+                        equipment = equipment,
+                        muscularGroup = muscularGroup,
+                        exercises = allExerciseItems.sortedBy { ex -> ex.exercise.name.lowercase() }
                     )
                 )
 
@@ -148,6 +150,34 @@ class ExercisesSelectorViewModel @Inject constructor(
 
     }
 
+    fun loadNewExercise() {
+
+        CreatedExercise.value?.let {
+
+            allExerciseItems = allExerciseItems.plus(ExerciseItem(it))
+
+        }
+
+        CreatedExercise.value = null
+
+        clearFilters()
+
+    }
+
+    fun clearFilters() {
+
+        _uiState.update { currentState ->
+
+            currentState.copy(
+                exercises = allExerciseItems,
+                clearFilters= true,
+                refresh = true
+
+            )
+
+        }
+
+    }
 
 
 }

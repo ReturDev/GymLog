@@ -122,7 +122,7 @@ class UserExercisesListFragment : Fragment(), ExerciseDialogListener {
         val recycler = binding.rvUserExercisesList
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        recycler.addItemDecoration(SpacingItemDecorator(80))
+        recycler.addItemDecoration(SpacingItemDecorator(200))
 
     }
 

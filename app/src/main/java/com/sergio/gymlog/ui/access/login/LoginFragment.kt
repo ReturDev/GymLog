@@ -59,17 +59,13 @@ class LoginFragment : Fragment() {
 
                     if (currentState.loading){
 
-                        binding.btnLogin.isEnabled = false
-                        binding.btnLoginGoogle.isEnabled = false
-                        binding.tvLoginSignUp.isEnabled = false
+                        changeEnabledComponents(false)
 
                     }
 
                     if (currentState.loaded){
 
-                        binding.btnLogin.isEnabled = true
-                        binding.btnLoginGoogle.isEnabled = true
-                        binding.tvLoginSignUp.isEnabled = true
+                        changeEnabledComponents(true)
 
                     }
 
@@ -105,6 +101,15 @@ class LoginFragment : Fragment() {
     }
 
 
+    private fun changeEnabledComponents(enabled : Boolean){
+
+        binding.btnLogin.isEnabled = enabled
+        binding.btnLoginGoogle.isEnabled = enabled
+        binding.tvLoginSignUp.isEnabled = enabled
+        binding.etLoginEmail.isEnabled = enabled
+        binding.etLoginPassword.isEnabled = enabled
+
+    }
 
 
 

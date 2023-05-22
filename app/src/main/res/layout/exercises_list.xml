@@ -46,49 +46,53 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilExerciseListSearcher"
+        style="@style/NestedCardLayoutEditTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/NestedCardLayoutEditTextStyle"
         android:hint="@string/search"
+        app:startIconDrawable="@drawable/ic_search"
+        app:startIconMinSize="20dp"
         app:layout_constraintEnd_toStartOf="@+id/btnExerciseListFilter"
         app:layout_constraintStart_toStartOf="@+id/glExercisesListEnd"
-        app:layout_constraintTop_toTopOf="@+id/glExercisesListTop"
-        >
+        app:layout_constraintTop_toTopOf="@+id/glExercisesListTop">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etExerciseListSearcher"
-            android:inputType="textPersonName"
-            android:layout_marginEnd="@dimen/horizontal_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            android:layout_marginEnd="@dimen/horizontal_margin"
+            android:inputType="textPersonName" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
-
     <Button
+        android:backgroundTint="?attr/colorSecondaryContainer"
+        android:textColor="?attr/colorOnSecondaryContainer"
+        app:iconTint ="?attr/colorOnSecondaryContainer"
         android:id="@+id/btnExerciseListFilter"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="@string/filter"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tilExerciseListSearcher"
+        app:icon="@drawable/ic_filter"
+        app:layout_constraintBottom_toBottomOf="@+id/tilExerciseListSearcher"
         app:layout_constraintEnd_toStartOf="@+id/glExercisesListStart"
-        app:layout_constraintStart_toEndOf="@+id/tilExerciseListSearcher" />
+        app:layout_constraintStart_toEndOf="@+id/tilExerciseListSearcher"
+        app:layout_constraintTop_toTopOf="@+id/glExercisesListTop" />
 
     <TextView
         android:id="@+id/tvExercisesListNumberLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
         android:layout_marginTop="@dimen/vertical_min_margin"
         android:text="@string/number_of_exercises"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/glExercisesListEnd"
         app:layout_constraintTop_toBottomOf="@+id/tilExerciseListSearcher" />
 
     <Button
-        style="@style/Widget.Material3.Button.TextButton"
         android:id="@+id/btnExercisesListCreateExercise"
+        style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_user_exercise"

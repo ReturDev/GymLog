@@ -24,6 +24,7 @@ import com.sergio.gymlog.data.model.exercise.MuscularGroup
 import com.sergio.gymlog.databinding.FragmentExerciseCreatorBinding
 import com.sergio.gymlog.util.InputFiltersProvider
 import com.sergio.gymlog.util.extension.toast
+import com.sergio.gymlog.util.helper.CreatedExercise
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
