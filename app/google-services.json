@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "54302931135-b3bnu9ko1fvvr6fb8eebvjqi9gugdvla.apps.googleusercontent.com",
+          "client_id": "54302931135-fh5f9ie05hhsqboghhbvt0qjs7cub9vt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.sergio.gymlog",
-            "certificate_hash": "fc3c4f7383fa9b0fe5c6b832a944c248bc1c8c61"
+            "certificate_hash": "e3939b9f702d1df8ec224ba38ef2333d7eeca604"
           }
         },
         {

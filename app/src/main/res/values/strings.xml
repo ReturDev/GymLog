@@ -103,5 +103,6 @@
     <string name="number_of_filters">Filtros(%d)</string>
     <string name="create_your_first_exercise">¡Crea ya tu primer ejercicio!</string>
     <string name="sign_up_password_helper">La contraseña debe contener mínimo 6 caracteres.</string>
+    <string name="insert_username_hint">Introduce un nombre de usuario</string>
 
 </resources>

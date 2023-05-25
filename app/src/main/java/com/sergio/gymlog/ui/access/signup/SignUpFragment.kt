@@ -16,6 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.sergio.gymlog.R
 import com.sergio.gymlog.databinding.FragmentSignUpBinding
+import com.sergio.gymlog.ui.access.AccessActivity
 import com.sergio.gymlog.ui.access.AccessViewModel
 import com.sergio.gymlog.util.extension.buttonActivationOnTextChanged
 import dagger.hilt.android.AndroidEntryPoint
@@ -101,8 +102,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun signUpWithGoogle() {
-        val signInIntent = googleSignInClient.signInIntent
-        launcher.launch(signInIntent)
+        (requireActivity() as AccessActivity).googleAccess()
     }
 
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->

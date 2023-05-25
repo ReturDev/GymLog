@@ -73,6 +73,7 @@ class AccessActivity : AppCompatActivity() {
 
                     if (currentState.errorResource != null){
 
+
                         binding.root.createTopSnackBar(binding.root, currentState.errorResource, Snackbar.LENGTH_LONG)
                         accessViewModel.errorMessageShown()
 

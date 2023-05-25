@@ -1,5 +1,6 @@
 package com.sergio.gymlog.util.helper
 
+import android.util.Log
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuthException
@@ -30,6 +31,8 @@ class LoginAndSignUpHelper @Inject constructor(){
         val resource = accessMethod()
 
         if (resource is FirebaseResource.Failure){
+
+            Log.e("FFF", resource.exception.toString())
 
             if (resource.exception is FirebaseAuthException){
 
