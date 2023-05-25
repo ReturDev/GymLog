@@ -105,16 +105,6 @@ class SignUpFragment : Fragment() {
         (requireActivity() as AccessActivity).googleAccess()
     }
 
-    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
-
-        if (result.resultCode == Activity.RESULT_OK){
-
-            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-            accessViewModel.signUpWithGoogle(task)
-
-        }
-
-    }
 
     private fun changeEnabledComponents(enabled : Boolean){
 

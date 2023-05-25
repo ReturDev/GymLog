@@ -3,6 +3,7 @@ package com.sergio.gymlog.ui.access
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -22,6 +23,7 @@ import com.sergio.gymlog.ui.main.MainActivity
 import com.sergio.gymlog.util.extension.createTopSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -102,7 +104,10 @@ class AccessActivity : AppCompatActivity() {
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
 
         val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-        accessViewModel.loginWithGoogle(task)
+
+        if (task.result != null){
+            accessViewModel.loginWithGoogle(task)
+        }
 
 
     }

@@ -32,8 +32,6 @@ class LoginAndSignUpHelper @Inject constructor(){
 
         if (resource is FirebaseResource.Failure){
 
-            Log.e("FFF", resource.exception.toString())
-
             if (resource.exception is FirebaseAuthException){
 
                 userLoginError(resource.exception.getErrorMessage(), uiState)
