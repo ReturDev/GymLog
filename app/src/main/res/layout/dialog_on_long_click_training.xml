@@ -10,6 +10,6 @@
         android:id="@+id/btnOnLongClickTrainingDialogDelete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dialog_root_padding"
+        android:layout_margin="@dimen/fragment_vertical_margin"
         android:text="@string/delete" />
 </LinearLayout>

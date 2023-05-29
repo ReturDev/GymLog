@@ -7,6 +7,7 @@ enum class Equipment(val stringResource : Int, val iconResource : Int) {
     DUMBBELLS(R.string.dumbbells, R.drawable.ic_dumbbell),
     EZ_BAR(R.string.ez_bar, R.drawable.ic_ez_bar),
     CABLE(R.string.cable, R.drawable.ic_cable),
+    MACHINE(R.string.machine, R.drawable.ic_machine),
     BODY_WEIGHT(R.string.body_weight, R.drawable.ic_bodyweight),
     NONE(-1, 0)
 }

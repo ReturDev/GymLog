@@ -39,7 +39,7 @@
                 android:id="@+id/etLoginEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"/>
+                android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -60,11 +60,12 @@
         <Button
             android:id="@+id/btnLoginPasswordForgotten"
             style="@style/Widget.Material3.Button.TextButton"
-            android:textSize="15sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/vertical_max_margin"
             android:text="@string/password_forgotten"
-            android:layout_marginBottom="@dimen/vertical_max_margin"/>
+            android:textSize="15sp"
+            android:visibility="gone" />
 
 
         <Button
@@ -120,8 +121,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/login_google_btn"
-            app:iconTint = "@null"
-            app:icon="@drawable/google_logo" />
+            app:icon="@drawable/google_logo"
+            app:iconTint="@null" />
 
     </LinearLayout>
 
@@ -137,11 +138,11 @@
 
     <TextView
         android:id="@+id/tvLoginSignUp"
+        style="@style/ChangerAccessLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/horizontal_min_margin"
         android:text="@string/sign_up_action"
-        style="@style/ChangerAccessLabel"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvLoginQuestionAccount"
         app:layout_constraintEnd_toEndOf="@+id/loginButtonsContainer"
         app:layout_constraintHorizontal_bias="0.5"

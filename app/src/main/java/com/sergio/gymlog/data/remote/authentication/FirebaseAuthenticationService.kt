@@ -42,4 +42,8 @@ class FirebaseAuthenticationService @Inject constructor(
 
     }
 
+    override fun sendPasswordRecoveryEmail(email: String): Task<Void> {
+        return firebaseAuth.sendPasswordResetEmail(email)
+    }
+
 }

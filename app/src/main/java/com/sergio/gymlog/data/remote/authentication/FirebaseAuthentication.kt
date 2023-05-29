@@ -10,4 +10,5 @@ interface FirebaseAuthentication {
     suspend fun loginWithGoogleAccount(task : Task<GoogleSignInAccount>)
     fun logout()
 
+    fun sendPasswordRecoveryEmail(email: String): Task<Void>
 }

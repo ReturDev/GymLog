@@ -8,6 +8,7 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -18,9 +19,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.sergio.gymlog.R
 import com.sergio.gymlog.databinding.ActivityAccessBinding
 import com.sergio.gymlog.ui.main.MainActivity
 import com.sergio.gymlog.util.extension.createTopSnackBar
+import com.sergio.gymlog.util.helper.SplashInitialization
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -39,6 +42,41 @@ class AccessActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        var notChecked = true
+
+        if (!SplashInitialization.initialized){
+
+            val splashScreen = installSplashScreen()
+            splashScreen.setKeepOnScreenCondition { notChecked }
+            SplashInitialization.initialized = true
+
+        }else{
+
+            this.setTheme(R.style.Theme_GymLog)
+            SplashInitialization.initialized = true
+        }
+
+        binding = ActivityAccessBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+//        if(auth.currentUser != null){
+//
+//            userLogged()
+//
+//        }else{
+//
+//            auth.addAuthStateListener {
+//
+//                it.currentUser?.let {
+//
+//                    userLogged()
+//
+//                }
+//
+//            }
+//
+//        }
+
         auth.addAuthStateListener {
 
             it.currentUser?.let {
@@ -47,9 +85,11 @@ class AccessActivity : AppCompatActivity() {
 
             }
 
+            notChecked = false
+
         }
-        binding = ActivityAccessBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+
+
 
         setCollector()
     }

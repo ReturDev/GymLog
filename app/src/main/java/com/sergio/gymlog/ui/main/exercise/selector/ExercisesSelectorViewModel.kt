@@ -37,13 +37,13 @@ class ExercisesSelectorViewModel @Inject constructor(
             viewModelScope.launch {
 
 
-                allExerciseItems = getExercisesAsExerciseItemsUseCase(exercisesExcluded)
+                allExerciseItems = getExercisesAsExerciseItemsUseCase(exercisesExcluded).sortedBy { ex -> ex.exercise.name.lowercase() }
 
                 _uiState.update { currentState ->
 
                     currentState.copy(
 
-                        exercises = allExerciseItems.sortedBy { ex -> ex.exercise.name.lowercase()},
+                        exercises = allExerciseItems,
                         refresh = true,
                         exercisesSelectedQuantity = 0
 
@@ -123,7 +123,7 @@ class ExercisesSelectorViewModel @Inject constructor(
                         userExercises = userExercises,
                         equipment = equipment,
                         muscularGroup = muscularGroup,
-                        exercises = allExerciseItems.sortedBy { ex -> ex.exercise.name.lowercase() }
+                        exercises = allExerciseItems
                     )
                 )
 
@@ -155,10 +155,13 @@ class ExercisesSelectorViewModel @Inject constructor(
         CreatedExercise.value?.let {
 
             allExerciseItems = allExerciseItems.plus(ExerciseItem(it))
+            allExerciseItems.sortedBy { ex -> ex.exercise.name.lowercase() }
 
         }
 
         CreatedExercise.value = null
+
+
 
         clearFilters()
 

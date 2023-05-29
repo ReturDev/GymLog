@@ -50,7 +50,7 @@ class TrainingFragment : Fragment(), DeleteTrainingListener {
         val recycler = binding.rvTrainings
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        recycler.addItemDecoration(SpacingItemDecorator(R.dimen.recycler_decoration_bottom_spacing))
+        recycler.addItemDecoration(SpacingItemDecorator(250))
 
     }
 

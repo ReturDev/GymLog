@@ -74,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/vertical_min_margin"
-                android:nestedScrollingEnabled="true"></androidx.recyclerview.widget.RecyclerView>
+                android:nestedScrollingEnabled="true" />
         </androidx.core.widget.NestedScrollView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -108,41 +108,6 @@
                 app:layout_constraintTop_toTopOf="@+id/fabHomeDiscardTraining" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--        <TextView-->
-<!--            android:id="@+id/tvHomeTrainingName"-->
-<!--            style="@style/TrainingNameTextStyle"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textAlignment="center"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/tvHomeTrainingDescription"-->
-<!--            style="@style/DescriptionStyle"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="@dimen/vertical_min_margin"-->
-<!--            android:singleLine="false"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/tvHomeTrainingName" />-->
-
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/rvHomeTrainingExercises"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_marginTop="@dimen/vertical_min_margin"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/tvHomeTrainingDescription">-->
-
-<!--        </androidx.recyclerview.widget.RecyclerView>-->
-
-
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

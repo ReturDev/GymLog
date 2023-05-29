@@ -41,6 +41,19 @@ class LoginRepository @Inject constructor(
 
     }
 
+    suspend fun sendPasswordRecoveryEmail(email : String): FirebaseResource<String> {
+
+        return try {
+
+            firebaseAuthenticationService.sendPasswordRecoveryEmail(email).await()
+            FirebaseResource.Success("")
+
+        }catch (exception : Exception){
+            FirebaseResource.Failure(exception)
+        }
+
+    }
+
     fun logout() {
 
 

@@ -42,6 +42,7 @@ class ExerciseCreatorSelectEquipmentDialog(
         binding.btnSelectEquipmentCable.setOnClickListener { sendEquipmentSelected(Equipment.CABLE) }
         binding.btnSelectEquipmentEzBar.setOnClickListener { sendEquipmentSelected(Equipment.EZ_BAR) }
         binding.btnSelectEquipmentBodyWeight.setOnClickListener { sendEquipmentSelected(Equipment.BODY_WEIGHT) }
+        binding.btnSelectEquipmentMachine.setOnClickListener { sendEquipmentSelected(Equipment.MACHINE) }
 
     }
 

@@ -10,7 +10,10 @@ private val authErrors : Map<String, Int> = mapOf(
     "ERROR_WRONG_PASSWORD" to R.string.firebase_error_wrong_password,
     "ERROR_EMAIL_ALREADY_IN_USE" to  R.string.firebase_error_email_in_use,
     "ERROR_USER_NOT_FOUND" to R.string.firebase_error_login_user_not_found,
-    "ERROR_WEAK_PASSWORD" to R.string.firebase_error_weak_password
+    "ERROR_WEAK_PASSWORD" to R.string.firebase_error_weak_password,
+    "ERROR_NETWORK" to R.string.firebase_error_network,
+    "ERROR_TOO_MANY_REQUESTS" to R.string.too_many_requests
+
 //    "ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL" to R.string.error_login_accounts_exits_with_different_credential,
 //    "ERROR_CREDENTIAL_ALREADY_IN_USE" to R.string.error_login_credential_already_in_use,
 //    "ERROR_USER_DISABLED" to R.string.error_login_user_disabled,

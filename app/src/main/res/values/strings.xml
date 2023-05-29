@@ -104,5 +104,9 @@
     <string name="create_your_first_exercise">¡Crea ya tu primer ejercicio!</string>
     <string name="sign_up_password_helper">La contraseña debe contener mínimo 6 caracteres.</string>
     <string name="insert_username_hint">Introduce un nombre de usuario</string>
+    <string name="recovery_password">Recuperar contraseña</string>
+    <string name="recovery_password_instructions">Introduce el email para recuperar tu contraseña.</string>
+    <string name="too_many_requests">Has excedido el limite de correos. Intentalo más tarde.</string>
+    <string name="machine">Máquina</string>
 
 </resources>

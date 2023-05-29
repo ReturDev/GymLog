@@ -39,4 +39,10 @@
         <item name="android:textSize">@dimen/default_text_size</item>
 
     </style>
+
+    <style name="SplashTheme" parent="Theme.SplashScreen">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="postSplashScreenTheme">@style/Theme.GymLog</item>
+    </style>
+
 </resources>

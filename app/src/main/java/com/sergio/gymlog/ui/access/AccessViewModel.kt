@@ -51,12 +51,6 @@ class AccessViewModel @Inject constructor(
 
     }
 
-    fun signUpWithGoogle(task : Task<GoogleSignInAccount>){
-
-        signUp { signUpRepository.signUpWithGoogleAccount(task) }
-
-    }
-
     private fun signUp( signUpMethod : suspend () -> FirebaseResource<Any>){
 
         viewModelScope.launch {
