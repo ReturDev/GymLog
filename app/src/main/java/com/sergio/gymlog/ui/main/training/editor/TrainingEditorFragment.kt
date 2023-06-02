@@ -1,7 +1,9 @@
 package com.sergio.gymlog.ui.main.training.editor
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.SpannableStringBuilder
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.MuscularGroup
 import com.sergio.gymlog.data.model.exercise.TrainingExerciseSet
+import com.sergio.gymlog.data.model.temporal.EditingTraining
 import com.sergio.gymlog.data.model.training.Training
 import com.sergio.gymlog.databinding.FragmentTrainingEditorBinding
 import com.sergio.gymlog.ui.main.training.editor.adapter.TrainingEditorAdapter
@@ -37,19 +40,12 @@ class TrainingEditorFragment : Fragment() {
     private val args by navArgs<TrainingEditorFragmentArgs>()
     private var argsGet : Boolean = false
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
         binding = FragmentTrainingEditorBinding.inflate(layoutInflater, container, false)
-
-        if (!argsGet){
-            trainingEditorViewModel.loadTrainingData(args.idTraining, args.idsExercises)
-            argsGet = true
-        }
 
         bottomMenu = requireActivity().findViewById(R.id.bottomNavigationView)
         bottomMenu?.visibility = View.GONE
@@ -62,6 +58,10 @@ class TrainingEditorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (!argsGet){
+            trainingEditorViewModel.loadTrainingData(args.idTraining, args.idsExercises)
+            argsGet = true
+        }
         initRecyclerView()
         setListeners()
         setCollectors()
@@ -133,10 +133,12 @@ class TrainingEditorFragment : Fragment() {
 
                 trainingEditorViewModel.uiState.collect{ currentState ->
 
+
                     if (currentState.loading){
 
                         binding.editorElementsRoot.visibility = View.GONE
                         binding.pbTrainingEditorLoading.visibility = View.VISIBLE
+
 
                     }
 
@@ -176,10 +178,13 @@ class TrainingEditorFragment : Fragment() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun bindTrainingData(training: Training) {
 
         binding.etEditorName.text = SpannableStringBuilder(training.name)
         binding.etEditorDescription.text = SpannableStringBuilder(training.description)
+        adapter.trainingExercises = training.exercises.toMutableList()
+        adapter.notifyDataSetChanged()
 
     }
 
@@ -295,7 +300,7 @@ class TrainingEditorFragment : Fragment() {
 
                     trainingEditorViewModel.resetEditingTraining()
                     findNavController().popBackStack()
-
+                    trainingEditorViewModel.resetEditingTraining()
 
                 }
                 dialog.show(parentFragmentManager, "bottom_dialog")
@@ -303,6 +308,7 @@ class TrainingEditorFragment : Fragment() {
 
             }else{
                 findNavController().popBackStack()
+                trainingEditorViewModel.resetEditingTraining()
             }
 
         }

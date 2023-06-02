@@ -2,7 +2,6 @@ package com.sergio.gymlog.ui.main.exercise.selector
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,12 +18,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.Equipment
 import com.sergio.gymlog.data.model.exercise.MuscularGroup
-import com.sergio.gymlog.databinding.DialogExercisesFilterBinding
 import com.sergio.gymlog.databinding.FragmentExercisesSelectorBinding
 import com.sergio.gymlog.ui.main.exercise.detail.ExerciseDetailDialog
-import com.sergio.gymlog.ui.main.exercise.filter.ExercisesFilterDialogFragment
+import com.sergio.gymlog.ui.main.exercise.filter.ExercisesFilterDialog
 import com.sergio.gymlog.ui.main.exercise.selector.adapter.ExercisesSelectorAdapter
-import com.sergio.gymlog.util.SpacingItemDecorator
 import com.sergio.gymlog.util.helper.CreatedExercise
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -91,14 +88,15 @@ class ExercisesSelectorFragment() : Fragment(), FilterExercisesListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initRecyclerView()
+        setCollector()
+        setListeners()
+
         if (createExercise){
             exercisesSelectorVM.loadNewExercise()
             createExercise = false
         }
 
-        initRecyclerView()
-        setCollector()
-        setListeners()
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -181,7 +179,7 @@ class ExercisesSelectorFragment() : Fragment(), FilterExercisesListener {
         }
 
         binding.exercisesListIncluded.btnExerciseListFilter.setOnClickListener {
-            ExercisesFilterDialogFragment(
+            ExercisesFilterDialog(
                 this,
                 equipmentFilter = equipmentFilter,
                 muscularGroupFilter = muscularGroupFilter,

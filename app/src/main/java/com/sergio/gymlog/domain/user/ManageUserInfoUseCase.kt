@@ -18,7 +18,6 @@ class ManageUserInfoUseCase @Inject constructor(
 
         val currentUserData = auth.currentUser!!
         var userInfo = getUserInfoUseCase()
-        Log.e("FFF", "UserObtenido")
         if (userInfo.id.isEmpty()){
             userInfo = UserInfo(
                 id = currentUserData.uid,

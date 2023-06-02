@@ -16,6 +16,7 @@
         android:orientation="vertical">
 
         <TextView
+            tools:text="Fecha y hora"
             android:id="@+id/tvLogDetailsDialogTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,6 +25,7 @@
             android:textColor="?attr/colorSecondary"/>
 
         <TextView
+            tools:text="Nombre Entrenamiento"
             android:id="@+id/tvLogDetailsDialogTrainingName"
             style="@style/HomeTrainingNameStyle"
             android:layout_width="wrap_content"
@@ -48,6 +50,7 @@
 
                 android:text="@string/description_hint" />
             <TextView
+                tools:text="Descripcion si la tiene"
                 android:id="@+id/tvLogDetailsDialogTrainingDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,6 +76,7 @@
                 android:textColor="?attr/colorTertiary"
                 android:text="@string/remarks" />
             <TextView
+                tools:text="Observaciones si las tiene"
                 android:id="@+id/tvLogDetailsDialogTrainingRemarks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -2,13 +2,10 @@ package com.sergio.gymlog.ui.main.exercise.filter
 
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.Equipment
 import com.sergio.gymlog.data.model.exercise.MuscularGroup
 import com.sergio.gymlog.databinding.DialogExercisesFilterBinding
@@ -18,7 +15,7 @@ import com.sergio.gymlog.ui.main.exercise.creator.ExerciseCreatorSelectMuscularG
 import com.sergio.gymlog.ui.main.exercise.selector.FilterExercisesListener
 
 
-class ExercisesFilterDialogFragment(
+class ExercisesFilterDialog(
     private val listener : FilterExercisesListener,
     private var equipmentFilter : Equipment,
     private var muscularGroupFilter : MuscularGroup,

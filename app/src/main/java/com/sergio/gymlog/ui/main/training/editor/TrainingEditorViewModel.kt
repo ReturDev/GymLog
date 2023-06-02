@@ -2,6 +2,7 @@ package com.sergio.gymlog.ui.main.training.editor
 
 
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sergio.gymlog.data.model.exercise.Equipment
@@ -16,6 +17,8 @@ import com.sergio.gymlog.domain.training.GetTrainingByIdUseCase
 import com.sergio.gymlog.domain.training.ModifyTrainingUseCase
 import com.sergio.gymlog.domain.user.GetUserInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -38,15 +41,18 @@ class TrainingEditorViewModel @Inject constructor(
 
     fun loadTrainingData(idTraining : String, idExercises: Array<String>){
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
 
             _uiState.update {currentState ->
 
                 currentState.copy(
                     loading = true
+
                 )
 
             }
+
+                delay(500)
 
             val training = editingTraining.value
             if (training != null){
@@ -66,6 +72,8 @@ class TrainingEditorViewModel @Inject constructor(
     private suspend fun loadTraining(idTraining: String){
 
         _uiState.update { currentState ->
+
+
 
             currentState.copy(
                 loading = false,
@@ -94,7 +102,7 @@ class TrainingEditorViewModel @Inject constructor(
 
     fun removeExercise(exercise: Exercises.TrainingExercise, position: Int) {
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             _uiState.update { currentState ->
 
                 val training = currentState.training
@@ -114,7 +122,7 @@ class TrainingEditorViewModel @Inject constructor(
 
     fun saveTrainingData(training: Training){
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
 
             if (training.id.isBlank()){
 
@@ -131,7 +139,7 @@ class TrainingEditorViewModel @Inject constructor(
     }
 
     fun deleteExerciseSet(exercisePosition: Int, exerciseID: String, trainingSetPosition: Int) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
 
             _uiState.update {currentState ->
 

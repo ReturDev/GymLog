@@ -57,24 +57,24 @@
         app:layout_constraintTop_toTopOf="@+id/glTrainingDetailsTop" />
 
     <TextView
+        tools:text="Nombre del entrenamiento"
         android:id="@+id/tvTrainingDetailName"
         style="@style/HomeTrainingNameStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/vertical_max_margin"
-        android:text="TextView"
         android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/glTrainingDetailsEnd"
         app:layout_constraintStart_toStartOf="@+id/glTrainingDetailsStart"
         app:layout_constraintTop_toBottomOf="@+id/btnDeleteTraining" />
 
     <TextView
+        tools:text="Descripcion"
         android:id="@+id/tvTrainingDescription"
         style="@style/DescriptionStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/vertical_min_margin"
-        android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/glTrainingDetailsEnd"
         app:layout_constraintStart_toStartOf="@+id/glTrainingDetailsStart"
         app:layout_constraintTop_toBottomOf="@+id/tvTrainingDetailName" />

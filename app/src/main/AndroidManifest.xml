@@ -12,7 +12,7 @@
         android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SplashScreen"
+        android:theme="@style/Theme.GymLog"
         tools:targetApi="31">
 
         <activity
@@ -28,7 +28,6 @@
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
-            android:theme="@style/Theme.GymLog"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="sensorPortrait"
             />

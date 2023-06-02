@@ -81,6 +81,8 @@
         android:layout_height="@dimen/exercise_creator_selector_btn_height"
         android:layout_marginTop="@dimen/vertical_margin"
         android:drawableTint="?attr/colorOnPrimary"
+        tools:drawableTop="@drawable/ic_back"
+        tools:text="@string/back_muscle"
         app:layout_constraintEnd_toStartOf="@+id/glExerciseCreatorEnd"
         app:layout_constraintStart_toEndOf="@+id/tvExerciseCreatorEquipment"
         app:layout_constraintTop_toBottomOf="@+id/exerciseCreatorEquipmentErrorRoot" />
@@ -88,6 +90,8 @@
     <Button
         android:id="@+id/btnExerciseCreatorMuscularG"
         android:drawableTint="?attr/colorOnPrimary"
+        tools:drawableTop="@drawable/ic_machine"
+        tools:text="@string/machine"
         android:background = "@drawable/exercise_creator_button_selector_background"
         android:layout_width="@dimen/exercise_creator_selector_btn_width"
         android:layout_height="@dimen/exercise_creator_selector_btn_height"

@@ -5,7 +5,7 @@
     android:id="@+id/exercisesFilterRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ui.main.exercise.filter.ExercisesFilterDialogFragment">
+    tools:context=".ui.main.exercise.filter.ExercisesFilterDialog">
 
     <Button
         android:id="@+id/btnExercisesFilterReset"
@@ -42,7 +42,7 @@
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            app:srcCompat="@drawable/ic_training" />
 
         <TextView
             android:id="@+id/tvEquipmentFilterName"
@@ -96,7 +96,7 @@
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            app:srcCompat="@drawable/image_muscular_group" />
 
         <TextView
             android:id="@+id/tvMuscularGroupFilterName"

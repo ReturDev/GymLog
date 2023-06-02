@@ -16,7 +16,7 @@ import com.sergio.gymlog.databinding.TrainingEditorExerciseItemBinding
 import com.sergio.gymlog.util.extension.setImageRoundedBorders
 
 class TrainingEditorAdapter(
-    val trainingExercises : MutableList<Exercises.TrainingExercise>,
+    var trainingExercises : MutableList<Exercises.TrainingExercise>,
     private val onRemoveExercise : (exercisePos : Int) -> Unit,
     private val onAddExerciseSet : (exercisePos : Int) -> Unit,
     private val onDeleteExerciseSet : (exercisePos : Int, exerciseSetPos : Int) -> Unit,

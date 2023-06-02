@@ -48,16 +48,6 @@
         app:layout_constraintStart_toStartOf="@+id/glUserBegin"
         app:layout_constraintTop_toBottomOf="@+id/btnUserLogOut" />
 
-    <ImageView
-        android:id="@+id/ivUserImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/vertical_margin"
-        app:layout_constraintEnd_toStartOf="@+id/glUserEnd"
-        app:layout_constraintStart_toStartOf="@+id/glUserBegin"
-        app:layout_constraintTop_toBottomOf="@+id/tvUserName"
-        tools:src="@tools:sample/avatars" />
-
     <Button
         android:id="@+id/btnUserExercises"
         android:layout_width="0dp"
@@ -84,10 +74,10 @@
         android:id="@+id/userSetsCard"
         android:layout_width="0dp"
         android:layout_height="@dimen/user_characteristics_card_height"
-        android:layout_marginTop="@dimen/vertical_min_margin"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toStartOf="@+id/glUserEnd"
         app:layout_constraintStart_toStartOf="@+id/glUserBegin"
-        app:layout_constraintTop_toBottomOf="@+id/ivUserImage">
+        app:layout_constraintTop_toBottomOf="@+id/tvUserName">
 
         <LinearLayout
             android:id="@+id/userSetsRoot"
@@ -99,21 +89,21 @@
 
             <TextView
                 android:id="@+id/tvUserSetsLabel"
+                style="@style/CardTextStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                style="@style/CardTextStyle"
                 android:layout_marginStart="@dimen/horizontal_min_margin"
+                android:layout_weight="1"
                 android:text="@string/exercise_sets" />
 
             <TextView
                 android:id="@+id/tvUserSetsQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
                 android:layout_marginEnd="@dimen/horizontal_min_margin"
-                android:textColor="?attr/colorPrimary"
-                android:textAlignment="textEnd" />
+                android:layout_weight="0"
+                android:textAlignment="textEnd"
+                android:textColor="?attr/colorPrimary" />
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
