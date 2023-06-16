@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -53,7 +56,15 @@ class ExerciseDetailDialog(
             R.drawable.logo
         }
 
-        Glide.with(binding.root.context).setImageRoundedBorders(image, binding.ivExerciseDetailDialogImage)
+        Glide.with(binding.root.context)
+            .load(image)
+            .transform(
+                MultiTransformation(
+                    CenterCrop(),
+                    RoundedCorners(20)
+                )
+            )
+            .into(binding.ivExerciseDetailDialogImage)
         binding.ivExerciseDetailDialogImage.alpha = alpha
 
 

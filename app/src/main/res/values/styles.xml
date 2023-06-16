@@ -25,7 +25,6 @@
         <item name="boxStrokeColor">@color/nested_textfield_stroke_color</item>
         <item name="android:textColorHint">@color/nested_textfield_label_color</item>
         <item name="hintTextColor">@color/nested_textfield_label_color</item>
-        <item name="iconTint">#FFF000</item>
 
     </style>
 

@@ -6,6 +6,9 @@ import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.sergio.gymlog.R
 import com.sergio.gymlog.data.model.exercise.ExerciseItem
 import com.sergio.gymlog.databinding.ExerciseItemBinding
@@ -60,8 +63,15 @@ class ExercisesSelectorAdapter(
                 R.drawable.logo
             }
 
-            Glide.with(binding.root.context).setImageRoundedBorders(image, binding.ivExerciseImage)
-            binding.ivExerciseImage.alpha = alpha
+            Glide.with(binding.root.context)
+                .load(image)
+                .transform(
+                    MultiTransformation(
+                        CenterCrop(),
+                        RoundedCorners(20)
+                    )
+                )
+                .into(binding.ivExerciseImage)
 
             setListeners()
 
