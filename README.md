@@ -95,9 +95,8 @@ Historial                                                                 | Deta
 En la ventana "Usuario" el usuario tendrá la capacidad de visualizar y ajustar los datos necesarios para facilitar la creación de entrenamientos. Esto incluye las repeticiones y series predeterminadas que se generarán al seleccionar un ejercicio durante la creación de un entrenamiento. También podrá especificar el peso del usuario para los ejercicios que involucren el peso corporal.
 Además de esto, al hacer clic en el botón "Mis ejercicios", podrá ver los ejercicios que ha creado, así como crear nuevos ejercicios o eliminar los existentes según sea necesario.
 
-<img src="images/usuario.png" width="300" alt="Ventana de usuario"/>
 
-Ejercicios usuario                                                                 |
-:--------------------------------------------------------------------------------: | 
-<img src="images/ejercicios_usuario.png" width="300" alt="Ejercicios usuario"/>    |
 
+Ventana de usuario                                                   | Ejercicios usuario 
+:------------------------------------------------------------------: | :-----:
+<img src="images/usuario.png" width="300" alt="Ventana de usuario"/> | <img src="images/ejercicios_usuario.png" width="300" alt="Ejercicios usuario"/> 
