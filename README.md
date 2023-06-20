@@ -32,11 +32,11 @@ En la página de inicio, se muestra el entrenamiento diario seleccionado, el cua
 
 En caso de que el usuario no tenga ningún entrenamiento creado, aparecerá un mensaje con la opción de hacer clic para crear uno. Si ya existen entrenamientos creados, se mostrarán todos los entrenamientos disponibles, siendo resaltado aquel que esté actualmente seleccionado.
 
-Sin entrenamiento diario seleccionado                         |Con entrenamiento diario seleccionado
-:-----------------------------------------------------------: |:-----:
-<img src="images/inicio.png" width="300" alt="Inicio vacío"/> |<img src="images/inicio_entrenamiento_seleccionado.png" width="300" alt="Inicio con entrenamiento diario"/>
-Sin entrenamientos                                                                            | Con entrenamientos
-<img src="images/inicio_sin_entrenamientos.png" width="300" alt="Inicio sin entrenamientos"/> | <img src="images/inicio_con_entrenamientos.png" width="300" alt="Inicio con entrenamientos"/>
+Sin entrenamiento diario seleccionado                                                                    | Con entrenamiento diario seleccionado
+:------------------------------------------------------------------------------------------------------: |:-----:
+<img src="images/inicio.png" width="300" alt="Inicio vacío"/>                                            |<img src="images/inicio_entrenamiento_seleccionado.png" width="300" alt="Ventana de inicio con entrenamiento diario"/>
+Sin entrenamientos                                                                                       | Con entrenamientos
+<img src="images/inicio_sin_entrenamientos.png" width="300" alt="Ventana de inicio sin entrenamientos"/> | <img src="images/inicio_con_entrenamientos.png" width="300" alt="Ventana de inicio con entrenamientos"/>
 
 
 Si el usuario selecciona el botón con el icono *play*, se mostrará la siguiente secuencia de ventanas a medida que avanza:
@@ -58,7 +58,7 @@ Una vez completado el proceso, el entrenamiento diario volverá a estar vacío, 
 ### 3. Entrenamientos
 En la ventana de "Entrenamientos", los usuarios verán una lista de los entrenamientos previamente creados, junto con un botón para crear nuevos entrenamientos.
 
-<img src="images/entrenamientos.png" width="300" alt="Entrenamientos"/>
+<img src="images/entrenamientos.png" width="300" alt="Ventana de entrenamientos"/>
 
 Al pulsar el botón de crear nuevos entrenamientos, los usuarios serán redirigidos al "Editor de Entrenamientos".
 
@@ -70,6 +70,34 @@ En este editor, podrán introducir todos los datos necesarios para configurar un
 Al pulsar en "Añadir ejercicios" en el editor de entrenamientos, se abrirá la ventana de "Selección de ejercicios". En esta ventana, se mostrarán los ejercicios disponibles para que el usuario pueda seleccionar aquellos que desea añadir a su entrenamiento.
 
 #### Selección de ejercicios
-En esta se representan los ejercicios disponibles para que el usuario pueda seleccionarlos para su entrenamiento, además esta ventana cuenta con varios filtros, por nombre, grupo muscular involucrado, equipamento utilizado y por personalizados.
+En esta se representan los ejercicios disponibles para que el usuario pueda seleccionarlos para su entrenamiento. En el caso de que el ejercicio que requiere el usuario no se encuentre en la lista de los ejercicos, el usuario podrá crear un nuevo ejercicio pulsando en "Crear ejercicio". Además, esta ventana cuenta con varios filtros, por nombre, grupo muscular involucrado, equipamento utilizado y por personalizados.
 
-<img src="images/selector_ejercicios.png" width="300" alt="Editor entrenamiento"/>
+
+<img src="images/selector_ejercicios.png" width="300" alt="Editor entrenamiento"/> | <img src="images/filtrar_ejercicios.png" width="300" alt="Editor entrenamiento"/>
+---------------------------------------------------------------------------------- | -----
+
+#### Creación de ejercicios
+En la creación de ejercicios, se podrán introducir todos los datos necesarios para la creación de un nuevo ejercicio.
+<img src="images/crear_ejercicio.png" width="300" alt="Creación de ejercicio"/>
+
+Selección de equipamiento                                                               | Selección de grupo muscular
+:----------------------------------------------------------------------------------:    | :-----:
+<img src="images/dialogo_equipamiento.png" width="300" alt="Dialogo de equipamiento"/>  | <img src="images/dialogo_grupo_muscular.png" width="300" alt="Dialogo de grupo muscular"/>
+
+### 4. Historial
+En la ventana del "Historial", encontrarás un registro de todos los entrenamientos completados. Estos estarán organizados en una lista ordenada del día más próximo hasta el más antiguo, y además podrás filtrarlos por día utilizando un calendario y seleccionando una fecha específica. También tendrás la opción de ver los detalles de cada uno de estos entrenamientos realizados.
+
+Historial                                                                 | Detalles entrenamiento completado
+:-----------------------------------------------------------------------: | :-----:
+<img src="images/historial.png" width="300" alt="Ventana de historial"/>  | <img src="images/detalles_historial.png" width="300" alt="Detalles de registro del historial"/>
+
+### 5. Usuario
+En la ventana "Usuario" el usuario tendrá la capacidad de visualizar y ajustar los datos necesarios para facilitar la creación de entrenamientos. Esto incluye las repeticiones y series predeterminadas que se generarán al seleccionar un ejercicio durante la creación de un entrenamiento. También podrá especificar el peso del usuario para los ejercicios que involucren el peso corporal.
+Además de esto, al hacer clic en el botón "Mis ejercicios", podrá ver los ejercicios que ha creado, así como crear nuevos ejercicios o eliminar los existentes según sea necesario.
+
+<img src="images/usuario.png" width="300" alt="Ventana de usuario"/>
+
+Ejercicios usuario                                                                 |
+:--------------------------------------------------------------------------------: | 
+<img src="images/ejercicios_usuario.png" width="300" alt="Ejercicios usuario"/>    |
+
