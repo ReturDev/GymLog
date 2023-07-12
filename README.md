@@ -1,16 +1,15 @@
-# :medal_sports: ¿Qué es GymLog? :medal_sports:
-**GymLog** es una aplicación que te ayuda a llevar un registro detallado de tus entrenamientos en el gimnasio. Con esta aplicación, puedes crear planes de entrenamiento personalizados mediante una selección de ejercicios ya incluidos en la aplicación o incluso agregar tus propios ejercicios. Además, puedes establecer la cantidad de trabajo deseado para cada sesión y programar entrenamientos diarios.
-Cada sesión completada se guardará automáticamente en un historial que puedes filtrar por fecha para hacer un seguimiento de tu progreso. 
+# :medal_sports: ¿What is GymLog? :medal_sports:
+**GymLog** is an application that helps you keep a detailed record of your workouts at the gym. With this application, you can create personalized training plans by selecting exercises already included in the app or even adding your own exercises. Additionally, you can set the desired amount of work for each session and schedule daily workouts. Each completed session is automatically saved in a history that you can filter by date to track your progress.
 
-### :iphone: Tecnologías utilizadas :iphone:
-Esta aplicación se ha desarrollado utilizando **Android y Kotlin**, siguiendo una arquitectura **MVVM**. Además, se han utilizado los siguientes recursos para su creación:
+## :iphone: echnologies Used  :iphone:
+This application has been developed using **Android and Kotlin**, following an **MVVM** architecture. In addition, the following resources have been used for its creation:
 + Dagger Hilt
 + Glide
 + Firebase Authentication
 + Firestore
 + Material 3
 
-## Funcionamiento
+<!--## Funcionamiento
 El primer paso para los usuarios es registrarse e iniciar sesión. Una vez iniciada la sesión con una cuenta, serán redirigidos a una ventana principal que contará con un menú inferior. A través de este menú, los usuarios podrán navegar por las secciones principales de la aplicación:
 1. Home
 2. Entrenamientos
@@ -94,6 +93,7 @@ Historial                                                                 | Deta
 ### 5. Usuario
 En la ventana "Usuario" el usuario tendrá la capacidad de visualizar y ajustar los datos necesarios para facilitar la creación de entrenamientos. Esto incluye las repeticiones y series predeterminadas que se generarán al seleccionar un ejercicio durante la creación de un entrenamiento. También podrá especificar el peso del usuario para los ejercicios que involucren el peso corporal.
 Además de esto, al hacer clic en el botón "Mis ejercicios", podrá ver los ejercicios que ha creado, así como crear nuevos ejercicios o eliminar los existentes según sea necesario.
+-->
 
 
 
