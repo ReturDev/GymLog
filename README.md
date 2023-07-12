@@ -1,7 +1,7 @@
 # :medal_sports: ¿What is GymLog? :medal_sports:
 **GymLog** is an application that helps you keep a detailed record of your workouts at the gym. With this application, you can create personalized training plans by selecting exercises already included in the app or even adding your own exercises. Additionally, you can set the desired amount of work for each session and schedule daily workouts. Each completed session is automatically saved in a history that you can filter by date to track your progress.
 
-## :iphone: echnologies Used  :iphone:
+## :iphone: Technologies Used  :iphone:
 This application has been developed using **Android and Kotlin**, following an **MVVM** architecture. In addition, the following resources have been used for its creation:
 + Dagger Hilt
 + Glide
