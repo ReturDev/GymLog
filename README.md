@@ -7,6 +7,8 @@ This application has been developed using **Android and Kotlin**, following an *
 + Glide
 + Firebase Authentication
 + Firestore
++ Coroutines
++ Flows
 + Material 3
 
 <!--## Funcionamiento
